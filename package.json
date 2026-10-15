@@ -1,6 +1,6 @@
 {
   "name": "rea-reconstruction-companion",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Portable, evidence-based reconstruction workflows that cooperate with REA.",
   "type": "module",
   "license": "MIT",
