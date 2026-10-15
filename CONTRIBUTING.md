@@ -23,6 +23,8 @@ Use the [behavioral evaluation kit](evals/README.md) to assess instruction chang
 
 The [Pocket Tasks procedure](evals/reference/README.md) adds a shipped local reference app and process-level reconstruction checks. Keep candidate evidence separate from the reviewer corpus, preserve artifact hashes and failed trial records, and review generated code before execution. Run `node evals/reference/check.mjs --reference` for the reference self-check; this is not a completed REA or model trial. Change hand-authored expectations only for an explicitly revised target/contract, never to accommodate a candidate defect.
 
+The [worked reconstruction](evals/reference/reconstruction/README.md) is a disclosed maintainer-informed example. Run its fixed local validator after changing the candidate or evidence; preserve failures and update its captured report only from actual output after review. Its hash regression test prevents quietly retaining a report for changed source bytes. Keep this answer material outside new candidate packets and avoid presenting its successful comparisons as a blind evaluation or release approval.
+
 The no-additional-charges rule applies to development and indirect work too. The included CI jobs skip private repositories and use standard public-repository runners; do not add paid runners, model APIs, cloud jobs, cache/artifact storage, or billing changes. Verify the actual environment before triggering remote checks; a copied workflow or free-tier label alone is not a guarantee. GitHub documents the distinction in [Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions). Do not represent Markdown instructions or passing tests as a billing sandbox.
 
 ## Security scanning
