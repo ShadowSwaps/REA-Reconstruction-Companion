@@ -202,6 +202,60 @@ test('concurrent checks serialize and future timestamps do not flood the network
   assert.equal((await check(f, { ...context, now: now - 1 })).status, 'clock-skew'); assert.equal(calls, 1);
 });
 
+for (const action of ['defer', 'skip']) {
+  test(`clock rollback during ${action} cannot shorten the weekly cooldown`, async t => {
+    const f = fixture(t); await enable(f); const n = transport(f), offer = await check(f, n.context);
+    const before = fs.readFileSync(path.join(f.installed.companion, 'SKILL.md'));
+    const result = await runUpdate(action, { approvalId: offer.approvalId }, { ...n.context, now: now - WEEK });
+    assert.equal(result.status, action === 'defer' ? 'deferred' : 'skipped');
+    assert.equal((await check(f, { ...n.context, now: now - 1 })).status, 'clock-skew');
+    assert.equal((await check(f, { ...n.context, now: now + 1 })).status, 'not-due');
+    assert.equal((await check(f, { ...n.context, now: now + WEEK - 1 })).status, 'not-due');
+    assert.equal(n.calls.length, 1);
+    const state = JSON.parse(fs.readFileSync(f.location.file));
+    assert.equal(state.pending, null);
+    assert.equal(state.skippedVersion, action === 'skip' ? future : null);
+    assert.equal(state.lastAttempt, now);
+    assert.equal(state.lastSuccess, now);
+    assert.deepEqual(fs.readFileSync(path.join(f.installed.companion, 'SKILL.md')), before);
+    assert.equal((await check(f, { ...n.context, now: now + WEEK })).status, action === 'skip' ? 'skipped' : 'update-available');
+    assert.equal(n.calls.length, 2);
+  });
+}
+
+test('clock rollback during approved apply cannot shorten the weekly cooldown', async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f), offer = await check(f, n.context);
+  const result = await runUpdate('apply', { approvalId: offer.approvalId, allowFreeNetwork: true }, { ...n.context, now: now - WEEK });
+  assert.equal(result.status, 'updated'); assert.equal(result.verification, 'verified');
+  assert.equal(n.calls.length, 3);
+  assert.equal((await check(f, { ...n.context, now: now - 1 })).status, 'clock-skew');
+  assert.equal((await check(f, { ...n.context, now: now + 1 })).status, 'not-due');
+  assert.equal((await check(f, { ...n.context, now: now + WEEK - 1 })).status, 'not-due');
+  assert.equal(n.calls.length, 3);
+  const state = JSON.parse(fs.readFileSync(f.location.file));
+  assert.equal(state.lastAttempt, now); assert.equal(state.lastSuccess, now);
+  assert.equal(state.pending, null); assert.equal(state.version, future);
+  assert.ok(fs.existsSync(result.backupDirectory));
+  assert.equal((await check(f, { ...n.context, now: now + WEEK })).status, 'up-to-date');
+  assert.equal(n.calls.length, 4);
+});
+
+test('forward-time decisions and approved apply start a fresh weekly cooldown', async t => {
+  for (const action of ['defer', 'skip', 'apply']) {
+    const f = fixture(t); await enable(f); const n = transport(f), offer = await check(f, n.context);
+    const decidedAt = now + 1000;
+    const result = await runUpdate(action, { approvalId: offer.approvalId, allowFreeNetwork: true }, { ...n.context, now: decidedAt });
+    assert.equal(result.status, action === 'apply' ? 'updated' : action === 'skip' ? 'skipped' : 'deferred');
+    const state = JSON.parse(fs.readFileSync(f.location.file));
+    assert.equal(state.lastAttempt, decidedAt);
+    assert.equal(state.lastSuccess, action === 'apply' ? decidedAt : now);
+    assert.equal((await check(f, { ...n.context, now: now + WEEK })).status, 'not-due');
+    assert.equal(n.calls.length, action === 'apply' ? 3 : 1);
+    assert.equal((await check(f, { ...n.context, now: decidedAt + WEEK })).status, action === 'apply' ? 'up-to-date' : action === 'skip' ? 'skipped' : 'update-available');
+    assert.equal(n.calls.length, action === 'apply' ? 4 : 2);
+  }
+});
+
 test('corrupt state is not silently reset or used for a network request', async t => {
   const f = fixture(t); await enable(f); const n = transport(f);
   fs.writeFileSync(f.location.file, '{bad'); await assert.rejects(check(f, n.context)); assert.equal(n.calls.length, 0);
