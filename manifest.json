@@ -22,7 +22,7 @@
     "integration/rea-companion.md": "d8ed7df3be4516ba9061c331a50e1a0519aaf3cc05f5b9bf2876f1afaa10b424",
     "scripts/build_release.py": "6cf91979bd4083ea6d6699d21cd2955434c946c2a6c9490e2b2b7c89283de1be",
     "scripts/manifest.mjs": "c90e48ac011342351d6631e08ce9cfd412ad4866a64bd5f4364372d112b3eddd",
-    "tests/install.test.mjs": "ada31892021a6033d962642664f7fffb9fe92a9777287ce3322dbed02a07591d",
+    "tests/install.test.mjs": "e04543a020fef59a91599c37f7e31d341fc293b9e2e37268960c19582fb21ac8",
     ".github/workflows/test.yml": "e061baa02a6d754f2514b21cf8559282d376d9edbacd8fefc1b60a9ed4765487",
     "assets/discord-banner.png": "4f25d6a75a9b0203ca9ebc217f815e46fb1783a244d81b763b5681173c24a1f6"
   }

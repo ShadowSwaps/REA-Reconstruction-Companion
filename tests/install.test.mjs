@@ -216,7 +216,8 @@ test('Claude Code uses its configured profile and explicit skills directories ta
   const options = { client: 'claude-code', integration: 'on' };
   const result = applyInstall(planInstall(options, context));
   assert.equal(result.companion, path.join(skillsDir, NAME));
-  assert.equal(result.reaSkill, reaSkill);
+  // Windows may expose the temporary directory through an 8.3 path alias.
+  assert.equal(fs.realpathSync.native(result.reaSkill), fs.realpathSync.native(reaSkill));
   assert.equal(applyInstall(planInstall({ ...options, check: true }, context)).status, 'verified');
   assert.ok(!fs.existsSync(path.join(f.directory, '.claude')));
   assert.equal(locations({ ...options, integration: 'off', skillsDir: f.skillsDir }, context).skillsDir, f.skillsDir);
