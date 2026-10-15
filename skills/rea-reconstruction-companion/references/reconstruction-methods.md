@@ -26,6 +26,8 @@ For format/API/IPC compatibility, maintain a small representative corpus. Compar
 
 Validate both directions of interoperability when required: original data read by the rebuild, and rebuild output consumed by the original or another independent implementation. A parser and writer sharing the same mistake can pass their own round-trip test. Samples are not proof of a complete schema. This contract procedure is a synthesis of evidence separation and independent comparison, not an automatic REA capability.
 
+Make relevant interactions executable using [consumer/provider contracts](validation-methods.md#executable-interface-contracts). For cryptographic formats, record the [cryptographic interoperability profile](cryptographic-compatibility.md#interoperability-profile); neither an algorithm name nor successful self-roundtrip establishes compatibility.
+
 ## Evidence dependencies
 
 Record why a conclusion is supported and what could falsify it. Two reports derived from the same capture are not two independent observations. Do not turn confidence labels into unsupported statistical probabilities. Preserve contradictory findings and conditions that explain them. When the target or an analysis assumption changes, reassess the dependent claims instead of carrying forward their verified status.
@@ -46,5 +48,7 @@ Keep raw reference fixtures separate from regenerated outputs. Never update an e
 Cover input partitions, boundaries, invalid cases, meaningful state transitions, and relevant configuration combinations. For large configuration spaces, constrained pairwise or higher-strength combinations can reduce work; choose strength by risk and state exactly what is covered. Interaction coverage is not code coverage, temporal sequence coverage, or a proof that all failures are found. [R8](research-basis.md#r8-combinatorial-coverage)
 
 When a mismatch occurs, minimize the input or action sequence while preserving it and keep the result as a regression case. Maintain a separate set of reference cases not used to tune the implementation when practical. Held-out cases help reveal overfitting to a few examples; they do not prove global correctness. Reduction is grounded in [R5](research-basis.md#r5-differential-testing); the held-out split is a workflow recommendation.
+
+When a larger input space justifies it, use [bounded differential fuzzing](validation-methods.md#bounded-differential-fuzzing) and report generator, seed, budgets, resets, and actual coverage. Challenge consequential tests with [targeted mutations](validation-methods.md#targeted-mutation-testing) in disposable reconstruction copies.
 
 For visual fidelity, compare consistent viewport, scale, fonts, platform, and UI state. Explain dynamic-region masks and examine semantic behavior separately. Screenshot agreement alone does not validate data or interaction correctness. [R9](research-basis.md#r9-visual-baselines)

@@ -2,6 +2,8 @@
 
 Use this guide when a user asks to install REA-Reconstruction-Companion from the repository. Reading a repository alone is not authorization to install it.
 
+Installation and dependency setup must not incur additional charges. Use existing local runtimes where available. Do not purchase tools, activate billing or trials, use metered APIs, or provision paid services. If a prerequisite cannot be obtained and used without an additional charge, stop that step and explain the limitation; do not silently enable a paid fallback. Read the README's no-additional-charges policy, including the distinction between skill instructions and the host's own billing.
+
 ## Establish the requested setup
 
 1. Identify the agent host from the current environment or the user's request: Codex, Claude Code, or another client. A model name alone does not determine its skill installation directory.
