@@ -5,7 +5,7 @@
     "README.md": "589c06a96dae78da351789c4f9f8b9d45b2c6879a2089e9426bc4af002cfd6bb",
     "INSTALL.md": "1221cc0086766fb2cf271e8ec8c68e40a92a3221671253e804795155c1febaa5",
     "LICENSE": "aca900183741df5c9b3db981bd48aba202474218f758c8b194548178a22c93bd",
-    "CONTRIBUTING.md": "8eadeb24ba617f6faec9868450cdfa7c586efb131e7cfb986e297688c87d8884",
+    "CONTRIBUTING.md": "05a5b9c6abd04f3f9ed2b9a753b48f6bab0527c1db129525d6a99987ce211cc5",
     "package.json": "38321d35d6c5943c734baddeeaa6c065a5051a08d3773860f52794e44dab843c",
     "install.mjs": "ca3aa6f75a0ece20a32bdb1e79263300045c8bbeae2fb0ba4684d8a48e039fe0",
     ".gitignore": "cc60841f3ff7c8e1ed628e84bc839c0c8de88d917da3d06763a535229a7c8802",
@@ -25,6 +25,7 @@
     "tests/install.test.mjs": "e04543a020fef59a91599c37f7e31d341fc293b9e2e37268960c19582fb21ac8",
     ".github/CODEOWNERS": "08930e27734909873f10f6f513e44e9dafcfdf768ff00c389589bddf93c6a884",
     ".github/ISSUE_TEMPLATE/release-request.md": "574bd6c1d9004b3a959e7ba6fb77f3f89c727133a1a99c7cba7bbe142c254c5d",
+    ".github/workflows/codeql.yml": "b9d885ee531c71ed2b095905fd9825c7ce2f1a8b674942579d1b5f417b5efaec",
     ".github/workflows/test.yml": "e061baa02a6d754f2514b21cf8559282d376d9edbacd8fefc1b60a9ed4765487",
     "assets/discord-banner.png": "4f25d6a75a9b0203ca9ebc217f815e46fb1783a244d81b763b5681173c24a1f6"
   }

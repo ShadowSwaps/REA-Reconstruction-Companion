@@ -17,6 +17,14 @@ Run the manifest command after editing any packaged file, including tests. The i
 
 Tests use isolated temporary directories. Add coverage for meaningful behavior changes, especially installation paths, optional integration, backups, and recovery. Do not run tests against a real user's skill directory. Behavioral testing with a real AI host or REA target is separate; record the model/host, target identity, expected result, observed result, and limitations when reporting it.
 
+## Security scanning
+
+The CodeQL workflow checks JavaScript/TypeScript, Python, and GitHub Actions workflows on pull requests (including forks), pushes to `main`, a weekly schedule, and manual runs. It uses GitHub-hosted runners and does not add a dependency for people installing the skill. Review findings alongside the installer tests; CodeQL does not validate the quality of the Markdown instructions or guarantee that all vulnerabilities are found.
+
+Fork submissions use the `pull_request` event with GitHub's restricted token and no repository secrets. A first-time contributor's workflow may wait for the owner's approval to run under the repository's Actions policy; that approval only starts checks and does not approve a merge or release. Keep CodeQL on this event, use pinned action commits, and retain `persist-credentials: false`. Do not use `pull_request_target`, supply a personal token, or grant `contents: write` to scan a fork. Review and update the pinned CodeQL action during maintenance.
+
+The workflow can upload security results but cannot publish releases. Passing a scan does not replace the owner's review and release approval described below.
+
 ## Review and release approval
 
 Anyone may fork the repository and propose changes through a pull request. To propose a release, open a **Release request** issue and link the relevant pull requests, exact commit, validation results, release notes and any built artifact checksums.
