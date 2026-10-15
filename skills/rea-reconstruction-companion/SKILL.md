@@ -1,7 +1,7 @@
 ---
 name: rea-reconstruction-companion
 license: MIT
-description: "Use with reverse-engineer-anything (REA) for app reconstruction blueprints, evidence-based rebuilds, and performance-informed improvements. Infer the target type, requested scope, objective, requirements, and project settings from natural language. Apply product workflows to whole apps and scoped methods to selected features, functions, interfaces, or data. Keep narrow REA explanations, comparisons, and diagnostics narrow; do not expand them into a full product study."
+description: "Use with reverse-engineer-anything (REA) to specify or rebuild software and assess performance improvements. Infer the target and intent from natural language; scale from whole apps to selected features, functions, interfaces, or formats. Ordinary REA explanations, comparisons, and diagnostics do not require a reconstruction blueprint."
 ---
 
 # REA-Reconstruction-Companion
@@ -39,7 +39,7 @@ Bind names/paths/URLs and any selectors (module, qualified symbol, address, endp
 | Runtime session, trace, or crash | Scenario-bound observations and causal hypotheses, related static evidence when useful, and explicit limits on generalizing beyond the recording. |
 | Selected version comparison | Changes in the selected subject and their supported behavioral implications; distinguish static deltas from observed behavior changes. |
 
-If the user has not selected a subject, ask what to investigate. If only a selector is ambiguous, resolve that selector rather than asking the user to fill every field. A narrow explanation/comparison/diagnostic request can finish with the base REA skill. For a requested scoped rebuild or optimization, use only the applicable contract, development, validation, and performance guidance below. Ordinary complete-source analysis still uses normal repository tools.
+If the subject is absent, ask what to investigate; if only a selector is ambiguous, resolve that selector. For a scoped rebuild or optimization, use the contract and validation guidance below. Ordinary complete-source analysis uses normal repository tools.
 
 ## Infer the working brief
 
@@ -66,11 +66,13 @@ Show the resolved brief concisely, then proceed. Do not make its approval a mand
 - **Investigate and build**: explicit requests to implement, rebuild, or create a similar app now. Gather enough evidence for each slice and continue into implementation without a second routine approval gate. A full forensic understanding of every subsystem is not a prerequisite for the first well-specified slice.
 - **Build from specification**: explicit implementation requests with an existing selected specification. Check its evidence and applicability, then investigate gaps that affect the build. Do not restart the whole investigation automatically.
 
-A later user request can change mode or scope. Record that change and preserve useful prior work. Mode controls whether implementation is requested; target scope controls its size. A request to optimize the reconstruction uses the build workflow, while a request to explain the reference's optimization stays investigative. When a user asks a narrow REA question, answer that question with the base REA skill; this companion does not require a full blueprint.
+A later user request can change mode or scope; record the change and preserve useful prior work. Mode controls whether implementation is requested; scope controls its size. Optimizing the reconstruction uses the build workflow; explaining the reference's optimization stays investigative.
 
 ## Investigate and specify
 
-For product investigations or missing specifications, read [the blueprint workflow](references/blueprint.md). It defines the product map, requirements, architecture, evidence ledger, and implementation roadmap.
+For product or feature specifications, read [the blueprint workflow](references/blueprint.md). It defines the product map, requirements, architecture, evidence ledger, and implementation roadmap.
+
+For a function, interface, or format, start with a compact contract: inputs and outputs, types/encoding, preconditions, side effects/state, failure behavior, dependencies, and evidence gaps. Define acceptance cases with an independent source of expected results using [comparison and test oracles](references/reconstruction-methods.md#comparison-and-test-oracles). Read only the applicable blueprint sections if this contract exposes a wider design question; a missing function specification does not require a product map.
 
 Start from the exact target and a prioritized question checklist. Use REA summaries and focused follow-ups to trace priority workflows from trigger through state/data changes to results. Read the base skill's target-specific references only when needed. Reuse matching evidence; a new target or version must not silently inherit another app's conclusions.
 
@@ -94,7 +96,7 @@ Keep the evidence-derived model of the original separate from choices for the ne
 
 ## Preserve useful outputs and stop honestly
 
-Scale documentation to the task: a compact linked report may suffice; split large investigations into focused files. Maintain these logical records without duplicating their content:
+Scale documentation to the task: a compact contract and test record may suffice for a function; split large investigations into focused files. Select the applicable records below without duplicating content or creating empty sections:
 
 - Resolved brief, target identity, scope, and investigation checklist.
 - Product/workflow map, evidence ledger, and unresolved questions.

@@ -127,6 +127,8 @@ node install.mjs --client generic --integration on --skills-dir "/path/to/skills
 
 `--skills-dir` accepts the parent skills directory; the installer creates `rea-reconstruction-companion` beneath it. The REA path must identify the skill actually loaded by that client. An override disables broad automatic lookup. Paths with spaces should be quoted.
 
+Keep the downloaded package or checkout separate from the installation destination. The installer rejects overlapping source/destination directories and a REA file inside the companion destination, including existing paths that differ only by casing on a filesystem that treats them as the same location.
+
 The optional `agents/openai.yaml` adapter is installed only for Codex. The portable core and Claude Code installation do not depend on it. Refresh the host's skills or start a fresh session if the new skill is not visible.
 
 ## Use
@@ -147,7 +149,7 @@ You can explicitly invoke `$rea-reconstruction-companion` in Codex or `/rea-reco
 - Differing companion files require `--replace`; the installer backs up the entire prior companion directory before replacing it.
 - REA edits preserve everything outside the marked integration block. The exact earlier pre-release rule can also be migrated; customized unmarked rules require review.
 - Backups and a receipt are stored in `.rea-reconstruction-companion-installer/` next to the parent skills directory. The installer prints the exact transaction path.
-- Failed commits attempt to restore the original REA file and companion directory. Backups remain available; a concurrent edit is retained and reported rather than overwritten.
+- Failed commits attempt REA and companion recovery independently, so an unreadable or missing REA file does not prevent restoring the prior companion. Backups remain available; a detected concurrent edit is retained and reported rather than overwritten.
 - Updating REA may replace its skill instructions. Rerun the integrated command with `--check`, then rerun installation if the rule needs restoring. Nothing monitors or rewrites REA in the background.
 
 For manual recovery, use the printed receipt to locate the selected paths. Restore `companion-before` to the companion's former location if appropriate. Restore `rea-before.md` only when REA has no later changes you need to retain; otherwise remove or repair just the integration block. If a process was killed and left an `install.lock`, make sure no installer is running before removing that exact lock file and retrying.

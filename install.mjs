@@ -23,6 +23,20 @@ function noLinks(p) {
   }
 }
 
+function containsPath(parent, child) {
+  const root = path.resolve(parent);
+  const identity = exists(root) ? fs.statSync(root, { bigint: true }) : null;
+  for (let current = path.resolve(child); ; current = path.dirname(current)) {
+    if (current === root) return true;
+    // Filesystem identity also catches casing aliases on Windows and macOS.
+    if (identity && identity.ino !== 0n && exists(current)) {
+      const candidate = fs.statSync(current, { bigint: true });
+      if (identity.dev === candidate.dev && identity.ino === candidate.ino) return true;
+    }
+    if (path.dirname(current) === current) return false;
+  }
+}
+
 function utf8(data) {
   const text = data.toString('utf8');
   if (!Buffer.from(text, 'utf8').equals(data)) throw new Error('Expected a UTF-8 text file.');
@@ -96,7 +110,7 @@ export function locations(options, context = {}) {
   }
   noLinks(skillsDir);
   noLinks(reaSkill);
-  if (reaSkill === destination || reaSkill.startsWith(destination + path.sep)) throw new Error('REA must be separate from the companion destination.');
+  if (containsPath(destination, reaSkill)) throw new Error('REA must be separate from the companion destination.');
   return { skillsDir, destination, reaSkill };
 }
 
@@ -146,10 +160,10 @@ function readTree(root) {
 const sameTree = (a, b) => a.size === b.size && [...a].every(([p, data]) => b.has(p) && data.equals(b.get(p)));
 
 export function planInstall(options, context = {}) {
-  const root = context.packageRoot || ROOT;
+  const root = path.resolve(context.packageRoot || ROOT);
   const { manifest, files } = packageFiles(root);
   const selected = locations(options, context);
-  if (selected.destination === root || root.startsWith(selected.destination + path.sep)) throw new Error('Cannot replace the package source directory.');
+  if (containsPath(selected.destination, root) || containsPath(root, selected.destination)) throw new Error('Installation destination must not overlap the package source directory.');
   const original = selected.reaSkill ? fs.readFileSync(selected.reaSkill) : null;
   const replacement = original ? Buffer.from(patchRea(utf8(original), utf8(files.get('integration/rea-companion.md')), utf8(files.get('integration/legacy-rea-companion.md')))) : null;
   const desired = new Map();
@@ -236,12 +250,15 @@ export function applyInstall(plan, writeRea = atomicReplace) {
           if (now.equals(plan.replacement) && !now.equals(plan.original)) atomicReplace(plan.reaSkill, plan.original);
           else if (!now.equals(plan.original)) recovery.push('REA was changed by another writer; retained it.');
         }
+      } catch (rollbackError) { recovery.push(`REA recovery: ${rollbackError.message}`); }
+      // A missing or unreadable REA file must not prevent companion recovery.
+      try {
         if (newMoved) {
           if (!sameTree(readTree(plan.destination), plan.desired)) throw new Error('Companion changed during rollback; retained it.');
           fs.renameSync(plan.destination, path.join(transaction, 'failed-companion'));
         }
         if (oldMoved) fs.renameSync(path.join(transaction, 'companion-before'), plan.destination);
-      } catch (rollbackError) { recovery.push(rollbackError.message); }
+      } catch (rollbackError) { recovery.push(`Companion recovery: ${rollbackError.message}`); }
     }
     throw new Error(`${error.message}${transaction ? ` Backups: ${transaction}.` : ''}${recovery.length ? ` Recovery needs review: ${recovery.join(' ')}` : ''}`);
   } finally {

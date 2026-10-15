@@ -71,7 +71,7 @@ Recommend a stack from the requirements and existing project constraints. Record
 
 Order implementation by dependencies and risk. Define milestones as usable vertical slices, each with requirements, component boundaries, validation, and unresolved prerequisites. Prototype uncertain mechanisms before large dependent work. Distinguish the first useful version from the remaining parity backlog.
 
-Prepare a validation plan for the whole application, including equivalent reference scenarios where possible. Plan controlled initial states, representative fixtures, meaningful failure cases, comparison tolerances, and intentional differences.
+Prepare a validation plan for the selected scope and its relevant integration boundaries, including equivalent reference scenarios where possible. Plan controlled initial states, representative fixtures, meaningful failure cases, comparison tolerances, and intentional differences.
 
 For each critical acceptance criterion, identify an available source of expected results: a recorded reference case, an independent specification/model, or a justified invariant. Mark criteria lacking an oracle as unverified. Choose [comparison and coverage methods](reconstruction-methods.md#comparison-and-test-oracles) before implementation can accidentally define its own expected behavior.
 

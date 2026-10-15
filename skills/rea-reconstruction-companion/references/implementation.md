@@ -4,7 +4,7 @@ Read only when the user requests implementation. Use the existing selected bluep
 
 ## Implement coherent increments
 
-Start with a small vertical slice crossing real boundaries: user interaction or command, domain logic, storage/service interaction, and visible output. Choose a slice that proves a consequential part of the architecture. Keep unrelated original artifacts and installation files separate from the reconstruction codebase.
+For an app or feature, start with a small vertical slice through its real entry point, domain logic, required dependencies, and observable result. For a function, decoder, or interface, start with its smallest complete contract and a test harness using independent reference cases; add only dependencies the contract requires. Do not introduce a UI, service, or storage layer to make a narrow task look like an application. Keep original artifacts and installation files separate from reconstruction code.
 
 For each slice:
 

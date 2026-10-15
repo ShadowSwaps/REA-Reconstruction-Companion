@@ -108,6 +108,53 @@ test('failed replacement restores the previous companion', t => {
   assert.equal(fs.readFileSync(f.reaSkill, 'utf8'), base);
 });
 
+test('companion rollback still runs when the REA file disappears', t => {
+  const f = fixture(t);
+  const destination = path.join(f.skillsDir, NAME);
+  fs.mkdirSync(destination);
+  fs.writeFileSync(path.join(destination, 'keep.txt'), 'original');
+  f.options.replace = true;
+  assert.throws(() => applyInstall(plan(f), () => {
+    fs.unlinkSync(f.reaSkill);
+    throw new Error('REA disappeared during commit');
+  }), /REA disappeared during commit.*Recovery needs review/);
+  assert.deepEqual(fs.readdirSync(destination), ['keep.txt']);
+  assert.equal(fs.readFileSync(path.join(destination, 'keep.txt'), 'utf8'), 'original');
+  assert.ok(!fs.existsSync(f.reaSkill));
+});
+
+test('installation cannot replace source files inside the package', t => {
+  const f = fixture(t, false);
+  const copied = path.join(f.directory, 'package');
+  fs.cpSync(root, copied, { recursive: true, filter: source => !['.git', 'dist', 'node_modules'].includes(path.basename(source)) });
+  const sourceSkill = path.join(copied, 'skills', NAME, 'SKILL.md');
+  const original = fs.readFileSync(sourceSkill);
+  assert.throws(() => planInstall({ client: 'codex', integration: 'off', skillsDir: path.join(copied, 'skills'), replace: true }, { packageRoot: copied }), /package source/);
+  assert.deepEqual(fs.readFileSync(sourceSkill), original);
+  assert.ok(!fs.existsSync(path.join(copied, '.rea-reconstruction-companion-installer')));
+});
+
+test('case aliases cannot replace the package directory', t => {
+  const f = fixture(t, false);
+  const copied = path.join(f.directory, NAME.toUpperCase());
+  fs.cpSync(root, copied, { recursive: true, filter: source => !['.git', 'dist', 'node_modules'].includes(path.basename(source)) });
+  const alias = path.join(f.directory, NAME);
+  if (!fs.existsSync(alias)) { t.skip('Filesystem distinguishes casing'); return; }
+  assert.throws(() => planInstall({ client: 'generic', integration: 'off', skillsDir: f.directory, replace: true }, { packageRoot: copied }), /package source/);
+  assert.ok(fs.existsSync(path.join(copied, 'install.mjs')));
+});
+
+test('REA cannot be inside the destination under another casing', t => {
+  const f = fixture(t, false);
+  const directory = path.join(f.skillsDir, NAME.toUpperCase());
+  fs.mkdirSync(directory, { recursive: true });
+  const reaSkill = path.join(directory, 'SKILL.md');
+  fs.writeFileSync(reaSkill, base);
+  if (!fs.existsSync(path.join(f.skillsDir, NAME))) { t.skip('Filesystem distinguishes casing'); return; }
+  assert.throws(() => planInstall({ ...f.options, reaSkill, replace: true }, f.context), /REA must be separate/);
+  assert.equal(fs.readFileSync(reaSkill, 'utf8'), base);
+});
+
 test('stale plans do not overwrite a concurrent edit', t => {
   const f = fixture(t);
   const p = plan(f);
