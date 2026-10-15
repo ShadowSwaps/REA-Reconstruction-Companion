@@ -201,4 +201,4 @@ The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw ev
 
 ## License
 
-All original code, skill instructions, tests, build scripts, and documentation in this repository are released under the [MIT license](LICENSE). You may use, modify, and redistribute them, including commercially, subject to that license. Upstream REA and linked research remain separate projects; their code and documents are not bundled here. No particular AI provider or proprietary model is required by this project.
+All original code, skill instructions, tests, build scripts, and documentation in this repository are released under the [MIT license](LICENSE). You may use, modify, and redistribute them, including commercially, subject to that license. The evaluation kit includes a small, attributed [Wycheproof test-data subset](evals/fixtures/wycheproof-empty.json) under its bundled [Apache-2.0 license](evals/fixtures/wycheproof-LICENSE.txt); it remains fully open-source. Upstream REA and linked research remain separate projects; no REA code or cryptographic implementation is bundled. No particular AI provider or proprietary model is required by this project.

@@ -7,6 +7,8 @@ export const executableCases = ['function', 'format', 'workflow', 'crypto', 'qui
 // Public synthetic test data: RFC 8439, section 2.8.2 (Nir and Langley).
 // Factual byte transcription, not a copied cipher implementation. See README.
 export const vector = Object.freeze(JSON.parse(fs.readFileSync(new URL('./fixtures/rfc8439.json', import.meta.url), 'utf8')));
+// Small, attributed Apache-2.0 data subset; no upstream implementation is run.
+const emptyVectors = JSON.parse(fs.readFileSync(new URL('./fixtures/wycheproof-empty.json', import.meta.url), 'utf8')).tests;
 
 export function casesFor(id) {
   if (id === 'quirk-parity' || id === 'quirk-improvement') return selectionCases(id);
@@ -99,6 +101,26 @@ export function casesFor(id) {
       }
     }
     for (const [name, input] of Object.entries({ null: null, array: [], number: 1, empty: {} })) add(`invalid-input-${name}`, input, null);
+    for (const v of emptyVectors) {
+      const label = `wycheproof-${v.tcId}`;
+      const fields = { key: v.key, nonce: v.iv, aad: v.aad };
+      const input = { operation: 'decrypt', ...fields, ciphertext: v.ct, tag: v.tag };
+      add(`${label}-encrypt`, { operation: 'encrypt', ...fields, plaintext: v.msg }, { ciphertext: v.ct, tag: v.tag });
+      add(`${label}-decrypt`, input, v.msg);
+      // Negative cases are explicit local one-byte mutations of published valid
+      // vectors, not additional upstream tcIds or generated expected ciphertext.
+      for (const index of [0, 15]) {
+        const changed = Buffer.from(v.tag, 'hex'); changed[index] ^= 1;
+        add(`${label}-wrong-tag-${index}`, { ...input, tag: changed.toString('hex') }, null);
+      }
+      if (v.ct === '') {
+        for (const field of ['key', 'nonce']) {
+          const changed = Buffer.from(input[field], 'hex'); changed[0] ^= 1;
+          add(`${label}-wrong-${field}`, { ...input, [field]: changed.toString('hex') }, null);
+        }
+        add(`${label}-wrong-aad`, { ...input, aad: v.aad + '00' }, null);
+      }
+    }
     // Repeat independent known answer after failures to catch leaked error/state handling.
     add('valid-after-rejections', decrypt, plaintext);
   } else {
