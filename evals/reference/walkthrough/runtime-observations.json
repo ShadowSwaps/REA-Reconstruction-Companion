@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "kind": "maintainer-observation",
+  "target": "Pocket Tasks",
+  "targetVersion": "1.0.0",
+  "targetSha256": "8ad2586a3adb43e19c55ead2999346ccbd416d0559226046aa0738bab188afb7",
+  "companionVersion": "1.3.1",
+  "sourceCommit": "04bcb50b12ba7c1dc272c0c778c98e6d3793bc9f",
+  "nodeVersion": "v24.21.0",
+  "provenance": "Captured from the original artifact in two fresh runs. Source and reviewer tests were already visible to the maintainer. No independent reconstruction or model benchmark.",
+  "repeats": 2,
+  "scenarios": [
+    {
+      "id": "W1",
+      "question": "Draft changes do not survive restart",
+      "initialStore": null,
+      "initialPending": null,
+      "sessions": [
+        {
+          "input": "[{\"op\":\"view\"},{\"op\":\"add\",\"title\":\"  Café 😀  \"},{\"op\":\"view\"}]\n",
+          "exitCode": 0,
+          "stdout": "[{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":null,\"filter\":\"all\",\"dirty\":false}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true},{\"id\":\"t4\",\"title\":\"  Café 😀  \",\"done\":false}],\"selected\":null,\"filter\":\"all\",\"dirty\":true}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true},{\"id\":\"t4\",\"title\":\"  Café 😀  \",\"done\":false}],\"selected\":null,\"filter\":\"all\",\"dirty\":true}}]\n",
+          "stderr": "",
+          "storeAfter": null,
+          "pendingAfter": null
+        },
+        {
+          "input": "[{\"op\":\"view\"}]\n",
+          "exitCode": 0,
+          "stdout": "[{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":null,\"filter\":\"all\",\"dirty\":false}}]\n",
+          "stderr": "",
+          "storeAfter": null,
+          "pendingAfter": null
+        }
+      ]
+    },
+    {
+      "id": "W2",
+      "question": "Save persists content; cancel and restart reset different state",
+      "initialStore": null,
+      "initialPending": null,
+      "sessions": [
+        {
+          "input": "[{\"op\":\"add\",\"title\":\"Delta\"},{\"op\":\"save\"},{\"op\":\"filter\",\"value\":\"done\"},{\"op\":\"select\",\"index\":0},{\"op\":\"toggle\"},{\"op\":\"cancel\"}]\n",
+          "exitCode": 0,
+          "stdout": "[{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true},{\"id\":\"t4\",\"title\":\"Delta\",\"done\":false}],\"selected\":null,\"filter\":\"all\",\"dirty\":true}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true},{\"id\":\"t4\",\"title\":\"Delta\",\"done\":false}],\"selected\":null,\"filter\":\"all\",\"dirty\":false}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":null,\"filter\":\"done\",\"dirty\":false}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":\"t3\",\"filter\":\"done\",\"dirty\":false}},{\"ok\":true,\"view\":{\"items\":[],\"selected\":null,\"filter\":\"done\",\"dirty\":true}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":\"t3\",\"filter\":\"done\",\"dirty\":false}}]\n",
+          "stderr": "",
+          "storeAfter": "{\"schema\":1,\"nextId\":5,\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true},{\"id\":\"t4\",\"title\":\"Delta\",\"done\":false}]}\n",
+          "pendingAfter": null
+        },
+        {
+          "input": "[{\"op\":\"view\"}]\n",
+          "exitCode": 0,
+          "stdout": "[{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true},{\"id\":\"t4\",\"title\":\"Delta\",\"done\":false}],\"selected\":null,\"filter\":\"all\",\"dirty\":false}}]\n",
+          "stderr": "",
+          "storeAfter": "{\"schema\":1,\"nextId\":5,\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true},{\"id\":\"t4\",\"title\":\"Delta\",\"done\":false}]}\n",
+          "pendingAfter": null
+        }
+      ]
+    },
+    {
+      "id": "W3",
+      "question": "Filtering retargets the selected row",
+      "initialStore": null,
+      "initialPending": null,
+      "sessions": [
+        {
+          "input": "[{\"op\":\"select\",\"index\":0},{\"op\":\"filter\",\"value\":\"done\"},{\"op\":\"rename\",\"title\":\"Renamed\"},{\"op\":\"cancel\"},{\"op\":\"filter\",\"value\":\"all\"}]\n",
+          "exitCode": 0,
+          "stdout": "[{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":\"t1\",\"filter\":\"all\",\"dirty\":false}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":\"t3\",\"filter\":\"done\",\"dirty\":false}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t3\",\"title\":\"Renamed\",\"done\":true}],\"selected\":\"t3\",\"filter\":\"done\",\"dirty\":true}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":\"t3\",\"filter\":\"done\",\"dirty\":false}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":\"t1\",\"filter\":\"all\",\"dirty\":false}}]\n",
+          "stderr": "",
+          "storeAfter": null,
+          "pendingAfter": null
+        }
+      ]
+    },
+    {
+      "id": "W4",
+      "question": "Removal and cancel retain the selected row index",
+      "initialStore": null,
+      "initialPending": null,
+      "sessions": [
+        {
+          "input": "[{\"op\":\"select\",\"index\":1},{\"op\":\"remove\"},{\"op\":\"cancel\"}]\n",
+          "exitCode": 0,
+          "stdout": "[{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":\"t2\",\"filter\":\"all\",\"dirty\":false}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":\"t3\",\"filter\":\"all\",\"dirty\":true}},{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Alpha\",\"done\":false},{\"id\":\"t2\",\"title\":\"Beta\",\"done\":false},{\"id\":\"t3\",\"title\":\"Gamma\",\"done\":true}],\"selected\":\"t2\",\"filter\":\"all\",\"dirty\":false}}]\n",
+          "stderr": "",
+          "storeAfter": null,
+          "pendingAfter": null
+        }
+      ]
+    },
+    {
+      "id": "W5",
+      "question": "Empty stores stay empty and invalid commands preserve state",
+      "initialStore": "{\"schema\":1,\"nextId\":1,\"items\":[]}\n",
+      "initialPending": null,
+      "sessions": [
+        {
+          "input": "[{\"op\":\"view\"},{\"op\":\"select\",\"index\":0},{\"op\":\"rename\",\"title\":\" \"},{\"op\":\"rename\",\"title\":\"Valid\"},{\"op\":\"save\"}]\n",
+          "exitCode": 0,
+          "stdout": "[{\"ok\":true,\"view\":{\"items\":[],\"selected\":null,\"filter\":\"all\",\"dirty\":false}},{\"ok\":false,\"error\":\"invalid-selection\",\"view\":{\"items\":[],\"selected\":null,\"filter\":\"all\",\"dirty\":false}},{\"ok\":false,\"error\":\"invalid-title\",\"view\":{\"items\":[],\"selected\":null,\"filter\":\"all\",\"dirty\":false}},{\"ok\":false,\"error\":\"no-selection\",\"view\":{\"items\":[],\"selected\":null,\"filter\":\"all\",\"dirty\":false}},{\"ok\":true,\"view\":{\"items\":[],\"selected\":null,\"filter\":\"all\",\"dirty\":false}}]\n",
+          "stderr": "",
+          "storeAfter": "{\"schema\":1,\"nextId\":1,\"items\":[]}\n",
+          "pendingAfter": null
+        },
+        {
+          "input": "[{\"op\":\"view\"}]\n",
+          "exitCode": 0,
+          "stdout": "[{\"ok\":true,\"view\":{\"items\":[],\"selected\":null,\"filter\":\"all\",\"dirty\":false}}]\n",
+          "stderr": "",
+          "storeAfter": "{\"schema\":1,\"nextId\":1,\"items\":[]}\n",
+          "pendingAfter": null
+        }
+      ]
+    },
+    {
+      "id": "W6",
+      "question": "Malformed store is not silently replaced",
+      "initialStore": "{broken\n",
+      "initialPending": null,
+      "sessions": [
+        {
+          "input": "[{\"op\":\"save\"}]\n",
+          "exitCode": 2,
+          "stdout": "",
+          "stderr": "Pocket Tasks could not complete this request. See --help.\n",
+          "storeAfter": "{broken\n",
+          "pendingAfter": null
+        }
+      ]
+    },
+    {
+      "id": "W7",
+      "question": "Save collision preserves both foreign files and dirty draft",
+      "initialStore": "{\"schema\":1,\"nextId\":1,\"items\":[]}\n",
+      "initialPending": "foreign\n",
+      "sessions": [
+        {
+          "input": "[{\"op\":\"add\",\"title\":\"Draft\"},{\"op\":\"save\"}]\n",
+          "exitCode": 0,
+          "stdout": "[{\"ok\":true,\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Draft\",\"done\":false}],\"selected\":null,\"filter\":\"all\",\"dirty\":true}},{\"ok\":false,\"error\":\"save-failed\",\"view\":{\"items\":[{\"id\":\"t1\",\"title\":\"Draft\",\"done\":false}],\"selected\":null,\"filter\":\"all\",\"dirty\":true}}]\n",
+          "stderr": "",
+          "storeAfter": "{\"schema\":1,\"nextId\":1,\"items\":[]}\n",
+          "pendingAfter": "foreign\n"
+        }
+      ]
+    }
+  ]
+}

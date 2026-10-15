@@ -4,7 +4,7 @@ Pocket Tasks 1.0.0 is a small, original MIT-licensed application for practicing 
 
 The reconstruction interface is JSON over standard input/output. A candidate can use **any already available language** that implements that interface; it need not use Node or a model-specific SDK. Node is needed for the supplied target, packet preparer, and reviewer checker. These files live in the repository/release package; ordinary skill installation does not run or copy the trial into an agent's active workspace.
 
-This is a controlled source-available JavaScript target, not a clean-room exercise, a native-binary benchmark, or evidence that any host/model has successfully used REA. Automated tests below validate the app and checker. Actual REA tool use and instruction following require a separately observed trial.
+This is a controlled source-available JavaScript target, not a clean-room exercise or a native-binary benchmark. Automated tests below validate the app and checker. The [worked investigation](WALKTHROUGH.md) records actual REA analysis and repeatable local probes, with evidence-linked requirements and a quirk decision. It is a maintainer-informed teaching example, not an independent reconstruction or host/model certification. Instruction following and candidate quality still require a separately observed trial.
 
 ## 1. Freeze the trial and prepare evidence
 
@@ -84,7 +84,7 @@ Apply the [rubric](../rubric.md), preserve the report and trace with the review 
 
 For host installation/integration tests, use an explicitly authorized disposable profile or fixture, never a real user's active skill directory. Record Codex, Claude Code, or other hosts as separate trials only when actually tested. Installation tests do not demonstrate successful skill use. Optional update behavior remains governed by the existing opt-in and approval workflow; this trial neither enables update checks nor grants installation consent. A protocol that permits multiple languages does not certify every runtime or model.
 
-Report completed, failed, blocked, and unrun checks separately. Document failures before refining the candidate, then retain both reports and the changed artifact identity. No result approves a merge, release, deployment, or installation. A future walkthrough should cite an actual observed trial rather than presenting these self-tests as one.
+Report completed, failed, blocked, and unrun checks separately. Document failures before refining the candidate, then retain both reports and the changed artifact identity. No result approves a merge, release, deployment, or installation. Keep worked examples tied to their actual observations; do not present self-tests or the investigation-only walkthrough as a completed reconstruction trial.
 
 ## Maintainer regression checks and limits
 
