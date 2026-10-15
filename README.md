@@ -8,7 +8,7 @@ The companion turns reverse-engineering evidence into an actionable specificatio
 
 **Installing through an AI agent? Copy the [installation prompt below](#install-with-an-ai-agent).** It follows [INSTALL.md](INSTALL.md) and lets you choose whether to enable the REA integration rule.
 
-**New in v1.2.0:** the skill includes an optional weekly update check and an update prompt. It checks on use, at most once every seven days, and installs only after you approve the offered release. It is off by default and separate from REA integration. Existing users need one manual update to a published v1.2.0-or-later release to get it. This branch proposes v1.2.0; it is not a release announcement. See [weekly update checks](#optional-weekly-update-checks-since-v120).
+**New in v1.2.0:** the skill includes an optional weekly update check and an update prompt. It checks on use, at most once every seven days, and installs only after you approve the offered release. It is off by default and separate from REA integration. Existing users need one manual update to a published v1.2.0-or-later release to get it. See [weekly update checks](#optional-weekly-update-checks-since-v120).
 
 ## Install with an AI agent
 
