@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "kind": "observed-focused-test-history",
+  "date": "2026-10-16",
+  "candidateSha256": "4f83d52fe7ada849bc2a2b16e43e1526184fa6cef325bb0bbee7515671a881dc",
+  "attempts": [
+    {
+      "command": "node --test tests/reference-reconstruction.test.mjs",
+      "environment": "restricted Windows execution sandbox",
+      "passed": 5,
+      "failed": 4,
+      "failures": [
+        "Worked comparison reported validation-failed while file replacement was restricted.",
+        "Standalone save did not clear dirty state while file replacement was restricted.",
+        "Save retry failed while file replacement was restricted.",
+        "Linked-parent test could not create its directory junction: EPERM."
+      ],
+      "interpretation": "Environment-limited attempt, not evidence of a candidate fix. Private paths and stack traces omitted."
+    },
+    {
+      "command": "node --test tests/reference-reconstruction.test.mjs",
+      "environment": "permitted local execution outside the restricted sandbox",
+      "passed": 9,
+      "failed": 0,
+      "candidateChangedSincePreviousAttempt": false,
+      "interpretation": "The same candidate passed all nine focused tests. No candidate mismatch or code correction was observed."
+    }
+  ],
+  "laterChanges": "Validator gained fresh packet verification; a tenth regression test binds the saved report to current source/evidence hashes. These counts describe the earlier nine-test revision, not the final full-suite count.",
+  "independentEvaluation": false,
+  "humanReview": "pending"
+}

@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "kind": "maintainer-informed-reconstruction-example",
+  "status": "checks-passed",
+  "identities": {
+    "targetSha256": "8ad2586a3adb43e19c55ead2999346ccbd416d0559226046aa0738bab188afb7",
+    "candidateSha256": "4f83d52fe7ada849bc2a2b16e43e1526184fa6cef325bb0bbee7515671a881dc",
+    "observationsSha256": "1a84c5aead20f9a077f62e38051f8f359b649a8a1dc9cd11cc5fa9b8b7babc52",
+    "validatorSha256": "b59d0e353c2a2d3e5168b9e4ee9e02ee25fd61bacf3e8ddf2a2eac44c74ee737",
+    "checkerSha256": "ad685922324deaed4ae73edf5699b9f6940708e3181a3758f4c7aac75a731cd9",
+    "packetToolSha256": "47c86b1190fb74375551e1c3baeab5ae6cbeedd4438f56b1cc5bc19a8765248c"
+  },
+  "evidencePacket": {
+    "before": {
+      "schema": 1,
+      "target": "Pocket Tasks",
+      "version": "1.0.0",
+      "files": {
+        "TASK.md": "a467c0e3ac5c1597452b30df93354c3a0acd20490989d5a0f9bd0832161aee90",
+        "target/pocket-tasks.mjs": "8ad2586a3adb43e19c55ead2999346ccbd416d0559226046aa0738bab188afb7"
+      },
+      "status": "verified",
+      "scope": "reference-evidence-only",
+      "humanReview": "pending",
+      "reaTrial": "unverified"
+    },
+    "after": {
+      "schema": 1,
+      "target": "Pocket Tasks",
+      "version": "1.0.0",
+      "files": {
+        "TASK.md": "a467c0e3ac5c1597452b30df93354c3a0acd20490989d5a0f9bd0832161aee90",
+        "target/pocket-tasks.mjs": "8ad2586a3adb43e19c55ead2999346ccbd416d0559226046aa0738bab188afb7"
+      },
+      "status": "verified",
+      "scope": "reference-evidence-only",
+      "humanReview": "pending",
+      "reaTrial": "unverified"
+    },
+    "scope": "fresh copy integrity; not candidate access isolation"
+  },
+  "comparison": {
+    "schema": 1,
+    "target": "Pocket Tasks",
+    "targetVersion": "1.0.0",
+    "kind": "candidate-comparison",
+    "status": "comparisons-passed",
+    "corpusSha256": "b7855eb49da06722fa94c914d39eb6933a8eec4022742fea4d0b4440d46d0bdc",
+    "sessions": 16,
+    "passed": 16,
+    "failed": 0,
+    "notRun": 0,
+    "humanReview": "pending",
+    "reaTrial": "unverified",
+    "results": [
+      {
+        "label": "startup and unsaved draft: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "startup and unsaved draft: session 2",
+        "status": "passed"
+      },
+      {
+        "label": "startup and unsaved draft: session 3",
+        "status": "passed"
+      },
+      {
+        "label": "save, cancel and restart: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "save, cancel and restart: session 2",
+        "status": "passed"
+      },
+      {
+        "label": "filter changes row selection: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "hidden selection returns: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "removal shifts selection: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "empty store stays empty: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "empty store stays empty: session 2",
+        "status": "passed"
+      },
+      {
+        "label": "cancel restores identifier counter: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "dirty reflects persisted content: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "invalid commands preserve state: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "import existing schema: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "malformed store is preserved: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "invalid batch is rejected before saving: session 1",
+        "status": "passed"
+      }
+    ]
+  },
+  "observationReplay": {
+    "scenarios": 7,
+    "sessions": 10,
+    "passed": 10,
+    "failed": 0,
+    "notRun": 0,
+    "results": [
+      {
+        "label": "W1: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "W1: session 2",
+        "status": "passed"
+      },
+      {
+        "label": "W2: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "W2: session 2",
+        "status": "passed"
+      },
+      {
+        "label": "W3: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "W4: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "W5: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "W5: session 2",
+        "status": "passed"
+      },
+      {
+        "label": "W6: session 1",
+        "status": "passed"
+      },
+      {
+        "label": "W7: session 1",
+        "status": "passed"
+      }
+    ]
+  },
+  "humanReview": "pending",
+  "newLiveReaAnalysis": "not-run; reuses the disclosed historical investigation",
+  "independentEvaluation": false
+}

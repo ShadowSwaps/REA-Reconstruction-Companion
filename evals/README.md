@@ -4,6 +4,8 @@ This kit evaluates outcomes of using the skill, separately from installation. It
 
 For a complete application to investigate with REA, use the [Pocket Tasks reference trial](reference/README.md). It provides an executable local target, a candidate evidence packet, a language-independent process interface for reconstructions, independent expected behavior, and a repeatable human review procedure. Its app and tools also use existing Node.js 20+. The supplied-evidence cases below and the reference trial are distinct; neither automatically invokes a model or establishes live-host compatibility.
 
+The [worked reconstruction example](reference/reconstruction/README.md) shows the implementation/validation step with real captured results and disclosed prior source/reviewer exposure. It is reviewer/training material, not evidence for a fresh trial or an independent agent benchmark.
+
 ## Run an evaluation
 
 1. Establish that the chosen host and tools cannot incur an additional charge. Do not launch metered model trials, extra agents, or paid sandboxes. If no suitable environment is available, run local harness tests only and report live-agent evaluation as unrun.
