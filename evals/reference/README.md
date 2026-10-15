@@ -6,6 +6,8 @@ The reconstruction interface is JSON over standard input/output. A candidate can
 
 This is a controlled source-available JavaScript target, not a clean-room exercise or a native-binary benchmark. Automated tests below validate the app and checker. The [worked investigation](WALKTHROUGH.md) records actual REA analysis and repeatable local probes, with evidence-linked requirements and a quirk decision. It is a maintainer-informed teaching example, not an independent reconstruction or host/model certification. Instruction following and candidate quality still require a separately observed trial.
 
+The [worked reconstruction extension](reconstruction/README.md) demonstrates a separate implementation, requirements-to-test links, captured comparison results and a repeatable validator. It discloses prior source/reviewer exposure and remains teaching material. Keep it outside a fresh candidate's evidence, alongside the reviewer corpus and prior answers.
+
 ## 1. Freeze the trial and prepare evidence
 
 Use existing local tools in an environment where no additional charge can occur. Do not add a paid sandbox, model worker, API call, CI runner, or subscription. If the host may charge for a trial and that cannot be ruled out, stop the live trial; the local tooling can still be checked without invoking a model. These scripts do not enforce another product's billing or isolate arbitrary code.

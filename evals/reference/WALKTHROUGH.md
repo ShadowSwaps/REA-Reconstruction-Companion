@@ -2,6 +2,8 @@
 
 This example shows how the companion turns evidence into a scoped contract before implementation. It uses actual local REA analysis and recorded runs of Pocket Tasks 1.0.0. The maintainer had already seen the source and reviewer tests, so this is a **maintainer-informed investigation example**, not an independent reconstruction, a blind evaluation, or a certification of any AI host. There is no candidate implementation or candidate score here.
 
+For the subsequent implementation step, see the [worked reconstruction and recorded validation](reconstruction/README.md). This investigation remains the historical evidence/requirements checkpoint; the extension does not retroactively change its analysis or review status.
+
 The example is reviewer/training material. Reading it exposes answers. Keep it outside a candidate's permitted evidence during a fresh trial, and disclose prior exposure. The packet preparer still exports only `TASK.md`, the target, and its identity.
 
 ## Scope and identity
