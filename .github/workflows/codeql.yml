@@ -19,6 +19,8 @@ concurrency:
 
 jobs:
   analyze:
+    # Do not consume potentially billable private-repository runner minutes.
+    if: github.event.repository.visibility == 'public'
     name: Analyze (${{ matrix.language }})
     runs-on: ubuntu-latest
     timeout-minutes: 30

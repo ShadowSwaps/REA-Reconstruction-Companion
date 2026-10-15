@@ -7,6 +7,9 @@ permissions:
   contents: read
 jobs:
   test:
+    # Standard public-repository runners only; avoid billable private-fork runs.
+    if: github.event.repository.visibility == 'public'
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:

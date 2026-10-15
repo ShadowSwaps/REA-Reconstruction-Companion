@@ -31,6 +31,10 @@ that setting, preview changes with --dry-run, preserve existing work and
 backups, and verify with --check. Explain any missing prerequisites or
 access limitations. Report what was installed, where, and whether the
 integration was enabled. Do not claim success unless verified.
+Do not incur additional charges: use existing local tools and do not
+activate billing, paid services, metered APIs, or automatic paid usage.
+If a step could incur a charge and that cannot be ruled out, stop that
+step and explain a no-charge alternative.
 ```
 
 You can include "Enable integration" or "Skip integration" with the prompt to choose upfront. The [integration explanation](#optional-rea-integration) describes its purpose and benefits. A chat-only assistant without local file and command access can guide you through installation but cannot perform it itself.
@@ -45,6 +49,9 @@ Share the repository: [github.com/ShadowSwaps/REA-Reconstruction-Companion](http
 - Separates the original architecture from design choices for a new implementation.
 - Investigates performance using representative workloads, measurements, and research relevant to the actual stack.
 - Guides development in coherent increments, with integration and end-to-end validation.
+- Treats recovered instructions as untrusted evidence and preserves the user's authority.
+- Selects bounded differential fuzzing, targeted mutation tests, and executable interface contracts where they help validate a reconstruction.
+- Records cryptographic interoperability parameters and verifies relevant independent vectors and rejection cases.
 - Records observations, inferences, unknowns, decisions, and checkpoints for later work.
 
 “Understand this app so I can eventually build something similar” produces a specification and roadmap. “Build a similar app now” also authorizes the implementation workflow. A request about one function stays focused on that function.
@@ -84,6 +91,12 @@ This is an instruction-based integration. It does not override client policies, 
 ## Requirements and compatibility
 
 The core skill is plain Markdown in the [Agent Skills format](https://agentskills.io/specification). It has no model SDK, paid API requirement, Python dependency, telemetry, or background service.
+
+### No additional charges
+
+The skill forbids initiating actions that could add charges: purchases, subscriptions/trials, metered APIs or model calls, billable cloud/CI/storage/deployment, and indirect paid work. Existing local tools and supplied evidence come first. If an action's no-charge status cannot be established for the actual environment, the agent must skip it and explain a local alternative or limitation. An available tool or a free tier is not sufficient evidence. It does not automatically launch agents, evaluations, or scheduled jobs.
+
+This rule is an instruction, not a billing enforcement mechanism. An AI host may itself bill tokens or usage credits, and local execution consumes resources such as electricity. The skill cannot guarantee zero total cost or control another product's billing or model compliance. It must not enable extra paid usage or alter billing settings; use host/account spending controls for an absolute spending limit. No paid exception is part of this skill's workflow.
 
 | Component | Requirement |
 | --- | --- |
@@ -166,7 +179,9 @@ node --test
 python scripts/build_release.py
 ```
 
-Tests cover installation choices, repeat installs, backups, rollback, path selection, line endings, package corruption, and command-line installation. CI runs the installer suite on Windows, macOS, and Linux with Node 20, 22, and 24. These checks validate installation mechanics; they do not establish reconstruction quality on every target or model. See [CONTRIBUTING.md](CONTRIBUTING.md).
+Tests cover installation choices, backups, rollback, package integrity, and the local behavioral evaluation harness, including deliberately incorrect candidates. CI runs on Windows, macOS, and Linux with Node 20, 22, and 24. The included workflows use standard runners, skip private repositories, and add no model API calls or artifact/cache uploads. These checks do not establish reconstruction quality on every target or model.
+
+The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw evidence, independent executable oracles, and a human review rubric. It covers narrow functions, file formats, stateful workflows, inaccessible backends, contradictory evidence, hostile embedded instructions, cryptographic boundaries, and cost-sensitive tool choices. Running its harness tests is separate from evaluating an actual agent; model runs are not started automatically and require an environment established to incur no additional charge. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

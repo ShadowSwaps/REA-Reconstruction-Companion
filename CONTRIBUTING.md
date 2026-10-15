@@ -17,6 +17,10 @@ Run the manifest command after editing any packaged file, including tests. The i
 
 Tests use isolated temporary directories. Add coverage for meaningful behavior changes, especially installation paths, optional integration, backups, and recovery. Do not run tests against a real user's skill directory. Behavioral testing with a real AI host or REA target is separate; record the model/host, target identity, expected result, observed result, and limitations when reporting it.
 
+Use the [behavioral evaluation kit](evals/README.md) to assess instruction changes. Its executable oracles and harness regression tests are local and dependency-free. They do not call models or certify instruction following. Keep prompts/evidence separate from reviewer expectations, inspect actual artifacts and action traces, and record unrun cases as unrun. Do not run additional agents or metered evaluations to improve a score. Run live evaluations only where no additional charge can occur; otherwise report that validation limit.
+
+The no-additional-charges rule applies to development and indirect work too. The included CI jobs skip private repositories and use standard public-repository runners; do not add paid runners, model APIs, cloud jobs, cache/artifact storage, or billing changes. Verify the actual environment before triggering remote checks; a copied workflow or free-tier label alone is not a guarantee. GitHub documents the distinction in [Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions). Do not represent Markdown instructions or passing tests as a billing sandbox.
+
 ## Security scanning
 
 The CodeQL workflow checks JavaScript/TypeScript, Python, and GitHub Actions workflows on pull requests (including forks), pushes to `main`, a weekly schedule, and manual runs. It uses GitHub-hosted runners and does not add a dependency for people installing the skill. Review findings alongside the installer tests; CodeQL does not validate the quality of the Markdown instructions or guarantee that all vulnerabilities are found.

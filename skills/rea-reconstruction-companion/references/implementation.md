@@ -23,6 +23,8 @@ Preserve independent reference fixtures before adjusting the implementation. Fol
 
 ## Validate at the right boundaries
 
+For risky comparison logic or integration boundaries, use [focused validation methods](validation-methods.md): bounded differential fuzzing to find discrepancies, targeted mutation testing to challenge the tests, and executable interface contracts to verify real interactions. For cryptographic boundaries, use [independent vectors and rejection tests](cryptographic-compatibility.md#independent-vectors-and-rejection-tests). Apply the skill's no-additional-charges constraint before selecting a tool or running a workload.
+
 Select tests based on consequential behavior and risk, avoiding tests that merely mirror the implementation. Depending on scope, exercise:
 
 - Domain rules and data invariants.
