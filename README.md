@@ -16,7 +16,7 @@ The companion turns reverse-engineering evidence into an actionable specificatio
 - Guides development in coherent increments, with integration and end-to-end validation.
 - Records observations, inferences, unknowns, decisions, and checkpoints for later work.
 
-�Understand this app so I can eventually build something similar� produces a specification and roadmap. �Build a similar app now� also authorizes the implementation workflow. A request about one function stays focused on that function.
+“Understand this app so I can eventually build something similar” produces a specification and roadmap. “Build a similar app now” also authorizes the implementation workflow. A request about one function stays focused on that function.
 
 ## How it works with REA
 
@@ -48,7 +48,7 @@ The integration asks the agent to use the companion for understanding a target *
 
 This is an instruction-based integration. It does not override client policies, grant tool permissions, connect MCP servers, guarantee model compliance, or force parallel execution. Without the rule, invoking the companion still tells the agent to use REA. The rule supplies the reverse direction: relevant REA work also loads the companion.
 
-`off` means **do not manage REA**, not �remove a rule already installed.� To disable an earlier integration, remove only the block between `<!-- rea-reconstruction-companion:begin -->` and `<!-- rea-reconstruction-companion:end -->` in the selected REA `SKILL.md`, including the markers. Keep the rest of REA intact.
+`off` means **do not manage REA**, not “remove a rule already installed.” To disable an earlier integration, remove only the block between `<!-- rea-reconstruction-companion:begin -->` and `<!-- rea-reconstruction-companion:end -->` in the selected REA `SKILL.md`, including the markers. Keep the rest of REA intact.
 
 ## Requirements and compatibility
 

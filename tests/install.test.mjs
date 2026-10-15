@@ -12,14 +12,16 @@ const rule = fs.readFileSync(path.join(root, 'integration/rea-companion.md'), 'u
 const legacy = fs.readFileSync(path.join(root, 'integration/legacy-rea-companion.md'), 'utf8');
 const base = '---\nname: reverse-engineer-anything\ndescription: Test fixture\n---\n\n# REA\n\nKeep this introduction.\n\n## Existing workflow\n\nKeep this workflow.\n';
 function fixture(t, includeRea = true) {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'rea-companion-test-'));
+  // macOS exposes its temporary directory through /var, which is a symlink.
+  const temporaryRoot = fs.realpathSync(os.tmpdir());
+  const directory = fs.mkdtempSync(path.join(temporaryRoot, 'rea-companion-test-'));
   t.after(() => {
     const resolved = path.resolve(directory);
-    assert.equal(path.dirname(resolved), path.resolve(os.tmpdir()));
+    assert.equal(path.dirname(resolved), temporaryRoot);
     assert.ok(path.basename(resolved).startsWith('rea-companion-test-'));
     fs.rmSync(resolved, { recursive: true, force: true });
   });
-  const skillsDir = path.join(directory, 'skills with spaces �');
+  const skillsDir = path.join(directory, 'skills with spaces ø');
   const reaSkill = path.join(skillsDir, 'reverse-engineer-anything', 'SKILL.md');
   if (includeRea) { fs.mkdirSync(path.dirname(reaSkill), { recursive: true }); fs.writeFileSync(reaSkill, base); }
   return { directory, skillsDir, reaSkill, options: { client: 'generic', integration: 'on', skillsDir }, context: { packageRoot: root } };
