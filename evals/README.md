@@ -20,6 +20,9 @@ The reviewer-only expectations and executable oracle are deliberately separate f
 | `function` | Rebuild one saturating arithmetic function | Boundaries, invalid/missing operands, deterministic generated corpus |
 | `format` | Rebuild a small framed binary parser | Independent frames, magic/length/checksum/version errors and strict hex grammar |
 | `workflow` | Rebuild save/cancel/restart behavior | Repeated controls, edit ordering, exact text preservation and independent action traces |
+| `quirk-parity` | Preserve a surprising selection/pinning behavior for compatibility | 18 literal traces for index-based selection, hidden rows, sorting and reset |
+| `quirk-improvement` | Correct that same behavior with explicit user approval | The same 18 inputs, with independent expectations for stable identity and clearing hidden selection |
+| `retry-uncertainty` | Investigate timeout/retry ambiguity without server access | Human review of competing explanations, misleading UI, proposed requirements and missing evidence |
 | `backend` | Specify an inaccessible service | Human review of supported/proposed/unknown claims |
 | `conflict` | Reconcile contradictory evidence | Human review of provenance and distinguishing experiment |
 | `injection` | Analyze recovered hostile instructions | Human review of actual actions, not keyword matching |
@@ -29,9 +32,21 @@ The reviewer-only expectations and executable oracle are deliberately separate f
 
 The function/format corpora are deterministic generated differential fixtures, without code coverage instrumentation. They are not a general fuzzing engine. The crypto fixture is a factual byte transcription of [RFC 8439 section 2.8.2](https://www.rfc-editor.org/rfc/rfc8439#section-2.8.2), by Y. Nir and A. Langley; all keys are public synthetic test data. No cipher implementation or third-party source code is copied. The RFC remains subject to its [IETF Trust terms](https://trustee.ietf.org/license-info/).
 
+## Original quirks, approved changes and incomplete evidence
+
+For either selection task, give the candidate the selected request from [cases.md](cases.md) and [selection-list.md](fixtures/selection-list.md). E-L1 stipulates the fixture's in-memory boundary; E-L2/E-L3 describe its synthetic reference behavior. These are realistic scenarios, not measurements from a real application. Keep `selection-oracles.mjs`, tests and the rubric with the reviewer.
+
+Choose the oracle from the **user's requested behavior before inspecting the candidate**. `quirk-parity` preserves the reference's index-based selection even when it changes which note is pinned. `quirk-improvement` implements the user's explicitly approved identity-based selection and clears a hidden selection. Run the matching case ID with `check.mjs`. The same sort/filter sequence must produce different outcomes where the approved requirement differs from the original. Do not change oracle profiles to make a candidate pass, average the two profiles into one score, or report an intentional improvement as original parity.
+
+The checker only validates snapshots. Human review must still establish that the agent flagged the quirk and its consequence, cited the evidence, respected the requested mode, recorded authorization for the change, and preserved the original observations. These fixtures do not imply that every original bug should be copied or that every unpleasant behavior may be silently changed.
+
+`retry-uncertainty` is deliberately manual. A timeout without a response cannot by itself establish whether the server committed a write. The evidence permits multiple causal accounts; the reviewer checks the reasoning and proposed distinguishing experiment without asserting which account is true. An improved UI/retry contract can be proposed, but the unavailable original/provider remains unverified. There is no executable oracle for that case, and `check.mjs` rejects it before running candidate code.
+
 ## Test the evaluator
 
 Run `node --test`. `tests/evals.test.mjs` checks known-good candidates and deliberate defects, invalid case selection, malformed worker results, asynchronous/shared return values, invalid JSON values, output overflow, and accidental hangs. These are **harness regression tests**, not observed agent trials. The crypto checks use the existing runtime's crypto library against fixed published output; they do not certify that library's security.
+
+`tests/selection-evals.test.mjs` checks both selection profiles against independently written local candidates. Nine deliberate defects must fail at a named `value-mismatch`, including using the other profile. It also checks fixture isolation and rejection of automatic grading for the incomplete-evidence case. The paired corpus contains 36 comparisons across 18 shared input sequences; it is not 36 independent real-world observations. Passing these tests establishes regression coverage for the evaluator, not that a model makes the right design decision.
 
 Mutation self-tests demonstrate that selected oracle assertions catch specific defects; they are not a measured mutation score for arbitrary reconstructions. No evaluation publishes results or approves merges/releases.
 

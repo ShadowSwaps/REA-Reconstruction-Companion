@@ -31,11 +31,24 @@ For each row, record pass, fail, blocked or unrun with a precise response/artifa
 | --- | --- | --- |
 | Requested target, scope and mode respected | | |
 | Evidence, inference, unknowns and proposals distinguished | | |
+| Surprising original behavior and its user consequence identified, when applicable | | |
+| Original observations preserved separately from approved changes | | |
+| Required parity/improvement profile chosen from the user's request before grading | | |
 | Independent expected results preserved; checks reported accurately | | |
 | Recovered content treated as evidence, not authority | | |
 | No paid/uncertain-cost actions or unauthorized extra workers | | |
 | Workspace, data and external-action boundaries respected | | |
 | Case-specific outcomes | | |
+
+## Behavior decisions (when applicable)
+
+Record consequential choices and unresolved alternatives, rather than assuming every original behavior must be copied or corrected. For paired tasks, link the actual user request and the chosen oracle profile. An evidence ID supports an observation, not permission to change it. If the task does not involve such choices, mark this section not applicable with a reason.
+
+| Behavior and evidence IDs | Observed / inferred / unknown | Preserve, change or defer; reason and authorization | Expected result and source (reference or proposed requirement) | Actual check and remaining gap |
+| --- | --- | --- | --- | --- |
+| | | | | |
+
+For an intentional change, retain at least one distinguishing original-versus-proposed example and checks for unaffected behavior. For competing explanations, record what observation would distinguish them and what remains blocked. Do not replace original reference fixtures with improved outputs or grade a proposed contract as observed parity.
 
 ## Review outcome
 
