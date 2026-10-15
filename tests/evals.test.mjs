@@ -94,6 +94,10 @@ const mutants = [
   ['crypto', 'plaintext returned before authentication', good.crypto.replace('Buffer.concat([partial, c.final()])', 'Buffer.concat([partial, encrypt ? c.final() : Buffer.alloc(0)])'), 'wrong-tag'],
   ['crypto', 'uppercase hex accepted', good.crypto.replace(')*$/.test', ')*$/i.test'), 'encrypt-key-uppercase'],
   ['crypto', 'missing AAD silently defaulted', good.crypto.replace('try {', "try { input = {...input, aad: input.aad ?? ''};"), 'encrypt-aad-missing'],
+  ['crypto', 'empty plaintext rejected', good.crypto.replace('try {', "try { if(input?.operation === 'encrypt' && input.plaintext === '') return null;"), 'wycheproof-3-encrypt'],
+  ['crypto', 'empty ciphertext rejected', good.crypto.replace('try {', "try { if(input?.operation === 'decrypt' && input.ciphertext === '') return null;"), 'wycheproof-3-decrypt'],
+  ['crypto', 'empty AAD rejected', good.crypto.replace('try {', "try { if(input?.aad === '') return null;"), 'wycheproof-4-encrypt'],
+  ['crypto', 'empty ciphertext bypasses authentication', good.crypto.replace('try {', "try { if(input?.operation === 'decrypt' && input.ciphertext === '') return '';"), 'wycheproof-2-wrong-tag-15'],
 ];
 for (const [id, title, source, label] of mutants) {
   test(`oracle catches deliberate defect: ${title}`, t => {
@@ -116,11 +120,30 @@ test('generated fixtures are deterministic and fresh across calls', () => {
 });
 
 test('crypto fixture rejects every modified or malformed input and verifies both directions', () => {
-  const cases = casesFor('crypto');
+  const cases = casesFor('crypto').filter(c => !c.label.startsWith('wycheproof-'));
   assert.deepEqual(cases[0].expected, { ciphertext: vector.ciphertext, tag: vector.tag });
   assert.equal(cases[1].expected, vector.plaintext);
   assert.ok(cases.slice(2, -1).every(c => c.expected === null));
   for (const field of ['key', 'nonce', 'aad', 'ciphertext', 'tag']) assert.ok(cases.some(c => c.label === `wrong-${field}`));
+});
+
+test('empty-message vectors distinguish successful empty plaintext from authentication failure', t => {
+  const candidate = fixture(t, good.crypto);
+  const correct = runCheck('crypto', candidate);
+  assert.equal(correct.status, 'comparisons-passed');
+  const source = good.crypto.replace('try {', "try { if(input?.operation === 'decrypt' && input.ciphertext === '') return ''; ");
+  const bypass = runCheck('crypto', fixture(t, source));
+  assert.equal(bypass.status, 'comparison-failed');
+  assert.equal(bypass.errored, 0);
+  for (const id of [2, 3]) {
+    const cases = casesFor('crypto');
+    assert.equal(cases.find(c => c.label === `wycheproof-${id}-decrypt`).expected, '');
+    for (const suffix of ['wrong-tag-0', 'wrong-tag-15', 'wrong-key', 'wrong-nonce', 'wrong-aad']) {
+      assert.ok(bypass.failureDetails.some(f => f.label === `wycheproof-${id}-${suffix}` && f.reason === 'value-mismatch'));
+    }
+    assert.ok(!bypass.failures.includes(`wycheproof-${id}-decrypt`));
+  }
+  assert.equal(bypass.humanReview, 'pending');
 });
 
 test('throws and non-JSON returns cannot masquerade as successful rejection', t => {

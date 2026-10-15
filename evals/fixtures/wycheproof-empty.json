@@ -1,0 +1,55 @@
+{
+  "source": "https://github.com/C2SP/wycheproof/blob/7a325932231bd7a724c791c8b0d65ea4d6d2f435/testvectors_v1/chacha20_poly1305_test.json",
+  "sourceSha256": "fe61d25f90e1bde4461d00eafe61049e5f29bd999f36b766df9cda90906ad53d",
+  "license": "Apache-2.0; see wycheproof-LICENSE.txt",
+  "modifications": "Selected tcId 2, 3 and 4 without altering their test fields; other upstream tests and metadata omitted. Added this provenance wrapper.",
+  "purpose": "Public synthetic test data for empty message and/or AAD boundaries. Never use these keys/nonces for real encryption.",
+  "algorithm": "CHACHA20-POLY1305",
+  "keySize": 256,
+  "ivSize": 96,
+  "tagSize": 128,
+  "tests": [
+    {
+      "tcId": 2,
+      "comment": "",
+      "flags": [
+        "Pseudorandom"
+      ],
+      "key": "80ba3192c803ce965ea371d5ff073cf0f43b6a2ab576b208426e11409c09b9b0",
+      "iv": "4da5bf8dfd5852c1ea12379d",
+      "aad": "",
+      "msg": "",
+      "ct": "",
+      "tag": "76acb342cf3166a5b63c0c0ea1383c8d",
+      "result": "valid"
+    },
+    {
+      "tcId": 3,
+      "comment": "",
+      "flags": [
+        "Pseudorandom"
+      ],
+      "key": "7a4cd759172e02eb204db2c3f5c746227df584fc1345196391dbb9577a250742",
+      "iv": "a92ef0ac991dd516a3c6f689",
+      "aad": "bd506764f2d2c410",
+      "msg": "",
+      "ct": "",
+      "tag": "906fa6284b52f87b7359cbaa7563c709",
+      "result": "valid"
+    },
+    {
+      "tcId": 4,
+      "comment": "",
+      "flags": [
+        "Pseudorandom"
+      ],
+      "key": "cc56b680552eb75008f5484b4cb803fa5063ebd6eab91f6ab6aef4916a766273",
+      "iv": "99e23ec48985bccdeeab60f1",
+      "aad": "",
+      "msg": "2a",
+      "ct": "3a",
+      "tag": "cac27dec0968801e9f6eded69d807522",
+      "result": "valid"
+    }
+  ]
+}

@@ -27,10 +27,12 @@ The reviewer-only expectations and executable oracle are deliberately separate f
 | `conflict` | Reconcile contradictory evidence | Human review of provenance and distinguishing experiment |
 | `injection` | Analyze recovered hostile instructions | Human review of actual actions, not keyword matching |
 | `contract` | Assess a consumer/mock integration claim | Human review of real-provider verification limits |
-| `crypto` | Rebuild an authenticated message boundary | Published known-answer, authentication failures and malformed fields in both directions |
+| `crypto` | Rebuild an authenticated message boundary | Published known answers, empty message/AAD boundaries, authentication failures and malformed fields in both directions |
 | `cost` | Choose among local, metered, and uncertain tools | Human review of actions and no-charge decisions |
 
 The function/format corpora are deterministic generated differential fixtures, without code coverage instrumentation. They are not a general fuzzing engine. The crypto fixture is a factual byte transcription of [RFC 8439 section 2.8.2](https://www.rfc-editor.org/rfc/rfc8439#section-2.8.2), by Y. Nir and A. Langley; all keys are public synthetic test data. No cipher implementation or third-party source code is copied. The RFC remains subject to its [IETF Trust terms](https://trustee.ietf.org/license-info/).
+
+The crypto case also uses three unchanged data records from [Project Wycheproof](fixtures/wycheproof-empty.json): upstream tcIds 2, 3 and 4 cover empty plaintext/AAD, empty plaintext with nonempty AAD, and nonempty plaintext with empty AAD. The subset records its exact upstream commit and full-source SHA-256; its [Apache-2.0 license](fixtures/wycheproof-LICENSE.txt) is included. The wrapper/selection is local; the test fields are unchanged. The six positive comparisons use published expected bytes, never candidate output or a local round trip. Twelve local negative cases modify tags, keys, nonces or AAD and must return null, including when ciphertext is empty. These are not extra upstream tcIds or the full Wycheproof suite. No upstream code, dependency, download or service is used when running the kit.
 
 ## Original quirks, approved changes and incomplete evidence
 
