@@ -1,5 +1,7 @@
 # REA-Reconstruction-Companion
 
+![REA Reconstruction Companion — Understand. Rebuild. Validate.](assets/discord-banner.png)
+
 An open-source, model-independent Agent Skill for understanding existing software and planning or building a similar implementation with [REA](https://github.com/morluto/rea).
 
 The companion turns reverse-engineering evidence into an actionable specification, architecture, implementation plan, and validation workflow. It works at the scope the user chooses: a whole application, a feature, a function, an interface, or a data format.
