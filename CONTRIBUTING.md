@@ -21,6 +21,8 @@ The v1.2.0 updater tests use synthetic releases, local ZIP fixtures, a controlle
 
 Use the [behavioral evaluation kit](evals/README.md) to assess instruction changes. Its executable oracles and harness regression tests are local and dependency-free. They do not call models or certify instruction following. Keep prompts/evidence separate from reviewer expectations, inspect actual artifacts and action traces, and record unrun cases as unrun. Do not run additional agents or metered evaluations to improve a score. Run live evaluations only where no additional charge can occur; otherwise report that validation limit.
 
+The [Pocket Tasks procedure](evals/reference/README.md) adds a shipped local reference app and process-level reconstruction checks. Keep candidate evidence separate from the reviewer corpus, preserve artifact hashes and failed trial records, and review generated code before execution. Run `node evals/reference/check.mjs --reference` for the reference self-check; this is not a completed REA or model trial. Change hand-authored expectations only for an explicitly revised target/contract, never to accommodate a candidate defect.
+
 The no-additional-charges rule applies to development and indirect work too. The included CI jobs skip private repositories and use standard public-repository runners; do not add paid runners, model APIs, cloud jobs, cache/artifact storage, or billing changes. Verify the actual environment before triggering remote checks; a copied workflow or free-tier label alone is not a guarantee. GitHub documents the distinction in [Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions). Do not represent Markdown instructions or passing tests as a billing sandbox.
 
 ## Security scanning
