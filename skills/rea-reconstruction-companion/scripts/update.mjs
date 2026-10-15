@@ -145,7 +145,9 @@ export async function runUpdate(action, options = {}, context = {}) {
     if (action === 'defer' || action === 'skip') {
       if (!state.pending || options.approvalId !== state.pending.approvalId) throw new Error('Decision does not match the offered release.');
       if (action === 'skip') state.skippedVersion = state.pending.version;
-      state.pending = null; state.lastAttempt = now; saveState(location, state); return { status: action === 'skip' ? 'skipped' : 'deferred' };
+      // A clock rollback must not shorten the cooldown recorded by the offer.
+      state.pending = null; state.lastAttempt = Math.max(state.lastAttempt ?? 0, now);
+      saveState(location, state); return { status: action === 'skip' ? 'skipped' : 'deferred' };
     }
     if (action === 'check') {
       if (state.lastAttempt !== null && now < state.lastAttempt) return { status: 'clock-skew', message: 'Clock moved backwards; automatic checks deferred.' };
@@ -193,7 +195,9 @@ export async function runUpdate(action, options = {}, context = {}) {
       const check = applyInstall(planInstall({ ...state.options, check: true }, { packageRoot: stage }));
       if (check.status !== 'verified') throw new Error('Updated installation needs manual verification.');
       state.version = fresh.version; state.files = hashes(plan.desired); state.reaBlockHash = blockHash(state.options.reaSkill);
-      state.pending = null; state.lastAttempt = now; state.lastSuccess = now;
+      // Keep recorded timestamps monotonic even if approval follows a clock rollback.
+      state.pending = null; state.lastAttempt = Math.max(state.lastAttempt ?? 0, now);
+      state.lastSuccess = Math.max(state.lastSuccess ?? 0, now);
       saveState(location, state);
       return { status: 'updated', version: state.version, backupDirectory: result.backupDirectory, verification: check.status, message: 'Refresh the host skill or start a fresh session if needed.' };
     } finally {
