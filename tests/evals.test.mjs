@@ -76,18 +76,31 @@ for (const id of executableCases) {
 const mutants = [
   ['function', 'saturation removed', good.function.replace('Math.min(255, a + b)', 'a + b'), '255+1'],
   ['function', 'zero rejected', good.function.replace('x >= 0', 'x > 0'), '0+0'],
-  ['function', 'invalid types coerced', 'export function evaluate({a,b}) { return Math.min(255, Number(a) + Number(b)); }', 'invalid-left'],
+  ['function', 'invalid types coerced', 'export function evaluate({a,b}) { const n = Math.min(255, Number(a) + Number(b)); return Number.isFinite(n) ? n : null; }', 'invalid-left-string'],
+  ['function', 'missing operands default to zero', good.function.replace('{a,b}', '{a=0,b=0}'), 'missing-left'],
   ['format', 'checksum ignored', good.format.replace('return null;\n    return payload;', 'return payload;\n    return payload;'), 'checksum-0'],
   ['format', 'version ignored', good.format.replace('b[1] !== 1 || ', ''), 'version-1'],
+  ['format', 'whitespace silently trimmed', good.format.replace('evaluate(hex) {', "evaluate(hex) { if (typeof hex === 'string') hex = hex.trim();"), 'suffix-space-0'],
   ['workflow', 'save omitted', good.workflow.replace('stored = draft;', 'stored = stored;'), 'save-restart'],
   ['workflow', 'cancel discards saved state', good.workflow.replace('else draft = stored;', "else draft = 'A';"), 'save-edit-cancel'],
+  ['workflow', 'draft text silently trimmed', good.workflow.replace('draft = action.value;', 'draft = action.value.trim();'), 'preserve-text'],
+  ['workflow', 'snapshots alias mutable state', `export function evaluate(actions) {
+    const state = {stored:'A',draft:'A'};
+    return actions.map(a => { if (a.type === 'edit') state.draft = a.value;
+      else if (a.type === 'save') state.stored = state.draft; else state.draft = state.stored;
+      return state; });
+  }`, 'unsaved-restart'],
   ['crypto', 'plaintext returned before authentication', good.crypto.replace('Buffer.concat([partial, c.final()])', 'Buffer.concat([partial, encrypt ? c.final() : Buffer.alloc(0)])'), 'wrong-tag'],
+  ['crypto', 'uppercase hex accepted', good.crypto.replace(')*$/.test', ')*$/i.test'), 'encrypt-key-uppercase'],
+  ['crypto', 'missing AAD silently defaulted', good.crypto.replace('try {', "try { input = {...input, aad: input.aad ?? ''};"), 'encrypt-aad-missing'],
 ];
 for (const [id, title, source, label] of mutants) {
   test(`oracle catches deliberate defect: ${title}`, t => {
     const report = runCheck(id, fixture(t, source));
     assert.equal(report.status, 'comparison-failed');
     assert.ok(report.failures.includes(label), JSON.stringify(report));
+    assert.ok(report.failureDetails.some(f => f.label === label && f.reason === 'value-mismatch'));
+    assert.equal(report.errored, 0);
   });
 }
 
@@ -95,6 +108,7 @@ test('generated fixtures are deterministic and fresh across calls', () => {
   for (const id of executableCases) {
     const first = casesFor(id), second = casesFor(id);
     assert.deepEqual(first, second);
+    assert.equal(new Set(first.map(c => c.label)).size, first.length, `${id} labels must identify one input`);
     first[0].expected = 'changed';
     assert.notDeepEqual(first, casesFor(id));
   }
@@ -109,10 +123,15 @@ test('crypto fixture rejects every modified or malformed input and verifies both
 });
 
 test('throws and non-JSON returns cannot masquerade as successful rejection', t => {
-  for (const body of ['throw new Error("failure")', 'return NaN', 'return undefined', 'return new Date(0)']) {
+  for (const body of ['throw new Error("failure")', 'return NaN', 'return Infinity', 'return undefined', 'return new Date(0)', 'return 1n', 'return {nested:undefined}', 'const v = {}; v.self=v; return v']) {
     const report = runCheck('function', fixture(t, `export function evaluate() { ${body}; }`));
+    assert.equal(report.status, 'candidate-error');
     assert.equal(report.passed, 0);
     assert.equal(report.failed, report.total);
+    assert.equal(report.errored, report.total);
+    assert.equal(report.compared, 0);
+    assert.equal(report.notEvaluated, 0);
+    assert.ok(report.failureDetails.every(f => f.reason === (body.startsWith('throw') ? 'candidate-threw' : 'non-json-result')));
   }
 });
 
@@ -128,6 +147,7 @@ test('missing export, invalid stdout and early exit are harness failures', t => 
     assert.equal(report.status, 'harness-error');
     assert.equal(report.passed, 0);
     assert.equal(report.humanReview, 'pending');
+    assert.equal(report.notEvaluated, report.total);
   }
 });
 
@@ -143,6 +163,54 @@ test('an accidental hang is bounded and never counted as a useful mutation kill'
   assert.equal(report.reason, 'timeout');
   assert.equal(report.passed, 0);
   assert.equal(report.failed, 0);
+  assert.equal(report.notEvaluated, report.total);
+});
+
+test('output overflow is a harness failure without candidate output disclosure', t => {
+  const report = runCheck('function', fixture(t, 'process.stdout.write("private-example".repeat(100000)); export function evaluate() { return null; }'));
+  assert.equal(report.status, 'harness-error');
+  assert.equal(report.reason, 'output-limit');
+  assert.equal(report.notEvaluated, report.total);
+  assert.ok(!JSON.stringify(report).includes('private-example'));
+});
+
+test('malformed result envelopes are harness failures, not rejected inputs', t => {
+  const total = casesFor('function').length;
+  for (const envelope of [{ok:false}, {ok:true}, {ok:'yes',value:null}, {ok:false,reason:'unrecognized'}]) {
+    const source = `process.stdout.write(${JSON.stringify(JSON.stringify(Array.from({length:total}, () => envelope)))}); process.exit(0);`;
+    const report = runCheck('function', fixture(t, source));
+    assert.equal(report.status, 'harness-error');
+    assert.equal(report.reason, 'invalid-worker-result');
+    assert.equal(report.notEvaluated, total);
+  }
+});
+
+test('async results are awaited and shared results are snapshotted per invocation', t => {
+  const source = good.workflow.replace('export function evaluate(actions)', 'async function calculate(actions)') + `
+    const shared = [];
+    export async function evaluate(actions) {
+      shared.length = 0; shared.push(...await calculate(actions)); return shared;
+    }`;
+  const report = runCheck('workflow', fixture(t, source));
+  assert.equal(report.status, 'comparisons-passed');
+  assert.equal(report.compared, report.total);
+  assert.equal(report.errored, 0);
+  assert.equal(report.notEvaluated, 0);
+});
+
+test('reports distinguish numeric mismatches, exceptions and invalid return values', t => {
+  const report = runCheck('function', fixture(t, `export function evaluate({a,b}) {
+    if (a === 0) throw new Error('private-example');
+    if (a === 1) return NaN;
+    return null;
+  }`));
+  assert.equal(report.status, 'candidate-error');
+  assert.ok(report.errored > 0);
+  assert.ok(report.compared > 0);
+  assert.equal(report.compared + report.errored + report.notEvaluated, report.total);
+  assert.equal(report.passed + report.failed + report.notEvaluated, report.total);
+  assert.deepEqual(new Set(report.failureDetails.map(f => f.reason)), new Set(['candidate-threw','non-json-result','value-mismatch']));
+  assert.ok(!JSON.stringify(report).includes('private-example'));
 });
 
 test('CLI reports machine-readable results and correct exit status', t => {

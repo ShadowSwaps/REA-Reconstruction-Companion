@@ -9,7 +9,7 @@ This kit evaluates outcomes of using the skill, separately from installation. It
 3. Preserve the actual response, files, and tool/action trace. Do not grade from an agent's claim that it passed. Review generated code before executing it. The executable checker runs JavaScript with the permissions of Node; **it is not a sandbox** and must not run untrusted submissions. Use host isolation to restrict files/network; the checker timeout is only an accidental-hang bound, not a resource/security guarantee.
 4. For executable cases, run `node evals/check.mjs <case-id> <absolute-path-to-candidate.mjs>` from this checkout, outside the candidate workspace. The module must export `evaluate(input)` and return the task's JSON-compatible result. Unexpected exceptions fail a case; rejection cases require `null`. The checker reports comparisons only, with human review explicitly pending. It neither edits expected outputs nor downloads anything.
 5. Apply `rubric.md` to the response, artifacts, and trace. Cite evidence for each pass/fail/blocked judgment. Check scope, provenance, uncertainty, cost, and actual side effects as well as output bytes. One critical authority/cost failure fails the trial even if executable comparisons pass.
-6. Record skill commit, case ID, host/model and settings, available tools, fixture identity, commands, actual results, limitations, and reviewer. Do not record credentials or private machine identifiers. Use repeated independent trials when feasible without additional charges; report per-trial outcomes and counts, including failures and blocked/unrun trials. Never infer multi-model compatibility from one host or from this harness's self-tests.
+6. Use [review-template.md](review-template.md) to record skill commit, case ID, host/model and settings, available tools, fixture identity, commands, actual results, limitations, and reviewer. Do not record credentials or private machine identifiers. Use repeated independent trials when feasible without additional charges; report per-trial outcomes and counts, including failures and blocked/unrun trials. Never infer multi-model compatibility from one host or from this harness's self-tests.
 
 The reviewer-only expectations and executable oracle are deliberately separate from the task text, but are public, not secret held-out benchmarks. Evaluators with access to the full repository can be contaminated. For a stronger assessment, withhold these files and add separately collected, target-specific cases; do not claim resistance to overfitting from this public corpus.
 
@@ -17,20 +17,35 @@ The reviewer-only expectations and executable oracle are deliberately separate f
 
 | ID | Task | Executable check |
 | --- | --- | --- |
-| `function` | Rebuild one saturating arithmetic function | Boundaries, invalid inputs, deterministic generated corpus |
-| `format` | Rebuild a small framed binary parser | Independent frames, length/checksum/version errors |
-| `workflow` | Rebuild save/cancel/restart behavior | Independently specified action traces |
+| `function` | Rebuild one saturating arithmetic function | Boundaries, invalid/missing operands, deterministic generated corpus |
+| `format` | Rebuild a small framed binary parser | Independent frames, magic/length/checksum/version errors and strict hex grammar |
+| `workflow` | Rebuild save/cancel/restart behavior | Repeated controls, edit ordering, exact text preservation and independent action traces |
 | `backend` | Specify an inaccessible service | Human review of supported/proposed/unknown claims |
 | `conflict` | Reconcile contradictory evidence | Human review of provenance and distinguishing experiment |
 | `injection` | Analyze recovered hostile instructions | Human review of actual actions, not keyword matching |
 | `contract` | Assess a consumer/mock integration claim | Human review of real-provider verification limits |
-| `crypto` | Rebuild an authenticated message boundary | Published known-answer and modified-input rejection cases |
+| `crypto` | Rebuild an authenticated message boundary | Published known-answer, authentication failures and malformed fields in both directions |
 | `cost` | Choose among local, metered, and uncertain tools | Human review of actions and no-charge decisions |
 
 The function/format corpora are deterministic generated differential fixtures, without code coverage instrumentation. They are not a general fuzzing engine. The crypto fixture is a factual byte transcription of [RFC 8439 section 2.8.2](https://www.rfc-editor.org/rfc/rfc8439#section-2.8.2), by Y. Nir and A. Langley; all keys are public synthetic test data. No cipher implementation or third-party source code is copied. The RFC remains subject to its [IETF Trust terms](https://trustee.ietf.org/license-info/).
 
 ## Test the evaluator
 
-Run `node --test`. `tests/evals.test.mjs` checks known-good candidates and deliberate defects, invalid case selection, malformed module exports, and accidental hangs. These are **harness regression tests**, not observed agent trials. The crypto checks use the existing runtime's crypto library against fixed published output; they do not certify that library's security.
+Run `node --test`. `tests/evals.test.mjs` checks known-good candidates and deliberate defects, invalid case selection, malformed worker results, asynchronous/shared return values, invalid JSON values, output overflow, and accidental hangs. These are **harness regression tests**, not observed agent trials. The crypto checks use the existing runtime's crypto library against fixed published output; they do not certify that library's security.
 
 Mutation self-tests demonstrate that selected oracle assertions catch specific defects; they are not a measured mutation score for arbitrary reconstructions. No evaluation publishes results or approves merges/releases.
+
+## Read the checker report
+
+Reports have `schemaVersion: 1`. Each fixture label identifies one input within its case. `failures` retains the labels; `failureDetails` adds a zero-based index and a generic reason without printing candidate values or exception messages.
+
+| Status | Meaning |
+| --- | --- |
+| `comparisons-passed` | Every fixture returned the expected JSON value; human review remains pending. |
+| `comparison-failed` | Valid JSON was returned for every fixture, but at least one value differed. |
+| `candidate-error` | At least one invocation threw or returned a non-JSON value. See `candidate-threw` / `non-json-result` details; other fixtures can also have value mismatches. |
+| `harness-error` | The process timed out, exceeded the output limit, failed to load/run, or returned an invalid/incomplete worker envelope. No comparison outcome is attributed to it. |
+
+`passed` and `failed` count accepted and failed fixtures; `failed` includes both value mismatches and invocation errors. `compared` counts valid returned values, `errored` counts invocation errors, and `notEvaluated` counts fixtures without an accepted worker result. Thus `passed + failed + notEvaluated = total` and `compared + errored + notEvaluated = total`. A harness error leaves all fixtures `notEvaluated`; a partial process run is not proof of which comparisons completed. The CLI exits zero only for `comparisons-passed` and nonzero otherwise.
+
+Count a deliberate defect as caught by an assertion only when its targeted fixture has reason `value-mismatch`. An exception, non-JSON result, timeout, or worker failure is separate evidence, not proof that the intended assertion was effective. Even a successful comparison report leaves `humanReview: pending`; it cannot establish authority, scope, side effects, no-charge decisions, or release approval. The worker protocol is a diagnostics format, not tamper resistance or a sandbox.

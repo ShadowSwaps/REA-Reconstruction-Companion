@@ -18,17 +18,36 @@ export function runCheck(id, candidatePath, { timeout = 10000 } = {}) {
     input: JSON.stringify(cases.map(c => c.input)), encoding: 'utf8', cwd: path.dirname(candidate),
     env: environment, timeout, maxBuffer: 1024 * 1024, windowsHide: true,
   });
-  const report = { case: id, total: cases.length, passed: 0, failed: 0, status: 'harness-error', humanReview: 'pending' };
-  if (child.error || child.status !== 0) return { ...report, reason: child.error?.code === 'ETIMEDOUT' ? 'timeout' : 'candidate-process-failed' };
+  const report = { schemaVersion: 1, case: id, total: cases.length, passed: 0, failed: 0, compared: 0, errored: 0, notEvaluated: cases.length, status: 'harness-error', humanReview: 'pending' };
+  if (child.error || child.status !== 0) {
+    const reason = child.error?.code === 'ETIMEDOUT' ? 'timeout'
+      : child.error?.code === 'ENOBUFS' ? 'output-limit' : 'candidate-process-failed';
+    return { ...report, reason };
+  }
   let results;
   try { results = JSON.parse(child.stdout); } catch { return { ...report, reason: 'invalid-worker-output' }; }
   if (!Array.isArray(results) || results.length !== cases.length) return { ...report, reason: 'incomplete-worker-output' };
+  // Validate the whole envelope before attributing failures to candidate behavior.
+  if (!results.every(r => r !== null && typeof r === 'object' && !Array.isArray(r) && (
+    (r.ok === true && Object.hasOwn(r, 'value') && Object.keys(r).length === 2)
+    || (r.ok === false && ['candidate-threw', 'non-json-result'].includes(r.reason) && Object.keys(r).length === 2)
+  ))) return { ...report, reason: 'invalid-worker-result' };
   const failures = [];
+  const failureDetails = [];
+  report.notEvaluated = 0;
   cases.forEach((c, i) => {
-    if (results[i]?.ok === true && isDeepStrictEqual(results[i].value, c.expected)) report.passed++;
-    else { report.failed++; failures.push(c.label); }
+    const result = results[i];
+    if (result.ok) report.compared++;
+    else report.errored++;
+    if (result.ok && isDeepStrictEqual(result.value, c.expected)) report.passed++;
+    else {
+      report.failed++;
+      failures.push(c.label);
+      failureDetails.push({ index: i, label: c.label, reason: result.ok ? 'value-mismatch' : result.reason });
+    }
   });
-  return { ...report, status: report.failed ? 'comparison-failed' : 'comparisons-passed', failures };
+  const status = report.errored ? 'candidate-error' : report.failed ? 'comparison-failed' : 'comparisons-passed';
+  return { ...report, status, failures, failureDetails };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
