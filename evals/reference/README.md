@@ -17,6 +17,7 @@ From the repository or extracted release, run:
 ```sh
 node evals/reference/check.mjs --reference
 node evals/reference/prepare.mjs "/absolute/path/to/new-trial"
+node evals/reference/prepare.mjs --verify "/absolute/path/to/new-trial"
 ```
 
 Use your actual paths (on Windows, for example, `D:/Trials/pocket-001`). The trial's parent directory must already exist. The destination must be new and outside the checkout/package. Existing files, directories, and links are refused; a failed copy may leave a partial new directory for inspection. Nothing is installed or executed by `prepare.mjs`.
@@ -29,6 +30,10 @@ The candidate packet contains exactly:
 
 Retain the identity with the review and verify the hashes before and after the trial. Treat any target byte change as a different trial; update the target version and expectations together when intentionally changing its behavior. The packet is an allowlist copy, **not access control**. Keep the checkout, reviewer expectations, tests, prior answers, and checker outside the candidate's permitted workspace. If the host cannot limit access, disclose that limitation and record whether those files were seen. Public tests are not a secret held-out benchmark.
 
+The `--verify` command (v1.3.1+) is read-only. Run it from the **same trusted package** used to prepare the packet, both before investigation and after the trial; save its JSON report alongside the behavioral report. It compares `identity.json` and the two fixed evidence files with that package's expected identity and bytes. Changing a packet file and rewriting its local hash does not make it pass. Missing, modified, malformed, oversized or linked evidence fails with exit code `1`; success exits `0` with `scope: reference-evidence-only`. It does not execute or repair anything, read paths declared by an untrusted identity file, or inspect extra trial outputs such as `candidate/` and disposable stores. A packet root, evidence directory or checked file that is a symbolic link is rejected; ordinary parent aliases are resolved.
+
+Use this check to detect drift, not authenticate an untrusted download: hashes and a matching local package are not signatures. Retain the originally reviewed package/identity when repeating an old trial rather than comparing it against an arbitrarily newer package. Verification observes files at check time; it is not a filesystem lock, a defense against concurrent hostile replacement, candidate-code review, or proof that the agent followed the task. Human review and actual REA validation remain pending in the report.
+
 ## 2. Observe the investigation and reconstruction
 
 Give the candidate the packet and access to the companion and an already configured REA installation through the host's supported skill/tool mechanism. Ask it to perform `TASK.md`. The task is provider-independent; it does not prescribe a model, invocation syntax, or separate background agent. Missing REA is a blocked REA trial, not permission to install engines, buy tools, or claim ordinary source reading as REA use.
@@ -38,6 +43,8 @@ Record actual REA tool calls, target hashes, static evidence, and reproducible r
 Before implementation, review the candidate's evidence ledger, requirements, uncertainty, architecture choice, and proposed tests. Each important requirement should identify its observation and proposed acceptance check. In particular, ask whether a surprising result was reproduced, whether it is required for compatibility, and whether an alternative is only proposed. Preserve this checkpoint so a passing reconstruction cannot conceal unsupported requirements.
 
 The candidate then writes an independent implementation in a separate directory. Do not copy, import, call, or wrap the reference implementation. Record any source visibility and oracle exposure honestly. Preserve the implementation, investigation trace, and deviations for review. The tools do not automatically launch a model or advance this checkpoint.
+
+After the trial, rerun `node evals/reference/prepare.mjs --verify "/absolute/path/to/new-trial"` before interpreting a candidate comparison. If it fails, preserve the changed evidence and report; do not silently regenerate the packet or edit hashes to claim the original trial passed. Investigate the difference or begin a separately identified trial.
 
 ## 3. Review code, then compare behavior
 
