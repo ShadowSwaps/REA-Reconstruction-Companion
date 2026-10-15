@@ -201,6 +201,8 @@ The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw ev
 
 **Reference app trial (v1.3.0):** [Pocket Tasks and its repeatable procedure](evals/reference/README.md) add a small local app with real saving, restart behavior, and a selection quirk to investigate. Export a separate evidence packet, document observations and requirements, then compare a reviewed reconstruction through a language-independent JSON process interface. The supplied tools use the existing Node runtime without packages, network calls, or model invocations. Self-tests validate the app/checker; actual host and REA trials remain separately recorded, with human review still required.
 
+**Evidence verification (v1.3.1):** the packet tool adds a read-only `--verify` command to detect missing or changed reference evidence before and after a trial. It checks against the original trusted package, so rewriting the packet's hashes cannot hide a change. See the [reference procedure](evals/reference/README.md#1-freeze-the-trial-and-prepare-evidence) for its scope and limits.
+
 ## License
 
 All original code, skill instructions, tests, build scripts, and documentation in this repository are released under the [MIT license](LICENSE). You may use, modify, and redistribute them, including commercially, subject to that license. The evaluation kit includes a small, attributed [Wycheproof test-data subset](evals/fixtures/wycheproof-empty.json) under its bundled [Apache-2.0 license](evals/fixtures/wycheproof-LICENSE.txt); it remains fully open-source. Upstream REA and linked research remain separate projects; no REA code or cryptographic implementation is bundled. No particular AI provider or proprietary model is required by this project.
