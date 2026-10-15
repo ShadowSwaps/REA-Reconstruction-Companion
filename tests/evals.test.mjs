@@ -63,7 +63,8 @@ function fixture(t, source) {
   return candidate;
 }
 
-for (const id of executableCases) {
+// Selection-profile candidates are exercised in selection-evals.test.mjs.
+for (const id of Object.keys(good)) {
   test(`independent ${id} oracle accepts correct fixture but keeps human review pending`, t => {
     const report = runCheck(id, fixture(t, good[id]));
     assert.equal(report.status, 'comparisons-passed');
