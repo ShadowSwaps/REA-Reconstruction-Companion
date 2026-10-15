@@ -21,9 +21,9 @@ try {
   for (const input of inputs) {
     try {
       const value = await candidate.evaluate(input);
-      results.push(isJson(value) ? { ok: true, value: JSON.parse(JSON.stringify(value)) } : { ok: false });
+      results.push(isJson(value) ? { ok: true, value: JSON.parse(JSON.stringify(value)) } : { ok: false, reason: 'non-json-result' });
     } catch {
-      results.push({ ok: false });
+      results.push({ ok: false, reason: 'candidate-threw' });
     }
   }
   process.stdout.write(JSON.stringify(results));
