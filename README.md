@@ -4,7 +4,36 @@ An open-source, model-independent Agent Skill for understanding existing softwar
 
 The companion turns reverse-engineering evidence into an actionable specification, architecture, implementation plan, and validation workflow. It works at the scope the user chooses: a whole application, a feature, a function, an interface, or a data format.
 
-**Installing through an AI agent? Give it this repository link and ask it to follow [INSTALL.md](INSTALL.md).** Installation offers an explicit choice to enable or skip the REA integration rule.
+**Installing through an AI agent? Copy the [installation prompt below](#install-with-an-ai-agent).** It follows [INSTALL.md](INSTALL.md) and lets you choose whether to enable the REA integration rule.
+
+## Install with an AI agent
+
+Give this prompt to an agent with local file and command access. It identifies your client and asks for your integration preference; you do not need to fill in any placeholders.
+
+```text
+Install REA-Reconstruction-Companion from:
+https://github.com/ShadowSwaps/REA-Reconstruction-Companion
+
+Read README.md and INSTALL.md, identify my AI client and its skills
+directory, and follow the documented installation workflow.
+
+Before making installation changes, explain the optional REA integration
+rule and ask me to choose:
+- Enable: relevant REA reconstruction requests also load the companion,
+  sharing evidence, requirements, and validation work.
+- Skip: install the companion without changing REA; I can invoke it
+  explicitly. This does not remove an integration rule already installed.
+
+Wait for my choice unless I have already provided it. Then install using
+that setting, preview changes with --dry-run, preserve existing work and
+backups, and verify with --check. Explain any missing prerequisites or
+access limitations. Report what was installed, where, and whether the
+integration was enabled. Do not claim success unless verified.
+```
+
+You can include "Enable integration" or "Skip integration" with the prompt to choose upfront. The [integration explanation](#optional-rea-integration) describes its purpose and benefits. A chat-only assistant without local file and command access can guide you through installation but cannot perform it itself.
+
+Share the repository: [github.com/ShadowSwaps/REA-Reconstruction-Companion](https://github.com/ShadowSwaps/REA-Reconstruction-Companion).
 
 ## What it does
 
