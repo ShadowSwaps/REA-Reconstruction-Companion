@@ -8,6 +8,8 @@ The companion turns reverse-engineering evidence into an actionable specificatio
 
 **Installing through an AI agent? Copy the [installation prompt below](#install-with-an-ai-agent).** It follows [INSTALL.md](INSTALL.md) and lets you choose whether to enable the REA integration rule.
 
+**New in v1.2.0:** the skill includes an optional weekly update check and an update prompt. It checks on use, at most once every seven days, and installs only after you approve the offered release. It is off by default and separate from REA integration. Existing users need one manual update to a published v1.2.0-or-later release to get it. This branch proposes v1.2.0; it is not a release announcement. See [weekly update checks](#optional-weekly-update-checks-since-v120).
+
 ## Install with an AI agent
 
 Give this prompt to an agent with local file and command access. It identifies your client and asks for your integration preference; you do not need to fill in any placeholders.
@@ -31,6 +33,9 @@ that setting, preview changes with --dry-run, preserve existing work and
 backups, and verify with --check. Explain any missing prerequisites or
 access limitations. Report what was installed, where, and whether the
 integration was enabled. Do not claim success unless verified.
+Also explain the optional weekly update check (included since v1.2.0)
+and ask whether I want it enabled. Keep it off unless I choose it.
+This checks on skill use and still asks me before installing an update.
 Do not incur additional charges: use existing local tools and do not
 activate billing, paid services, metered APIs, or automatic paid usage.
 If a step could incur a charge and that cannot be ruled out, stop that
@@ -102,6 +107,7 @@ This rule is an instruction, not a billing enforcement mechanism. An AI host may
 | --- | --- |
 | Skill workflow | A capable agent that can read the skill and its references; REA tools or supplied REA evidence for actual investigation. |
 | Included installer | Node.js 20 or newer. Uses only Node's standard library; no `npm install`, PyYAML, or network access. |
+| Optional update helper (v1.2.0+) | Existing Node.js 20+. Uses the standard library and opt-in public GitHub requests; no packages, tokens, model calls or scheduler. |
 | REA | Installed and configured separately for your client. REA and target-specific engines have their own requirements. |
 | Release building | Python 3.10+ standard library, for maintainers only. Not needed to install or use the skill. |
 
@@ -157,6 +163,16 @@ Natural-language examples work across compatible hosts:
 > Continue implementing the app from this project's REA reconstruction specification.
 
 You can explicitly invoke `$rea-reconstruction-companion` in Codex or `/rea-reconstruction-companion` in Claude Code. With integration enabled, a relevant request to REA also instructs the agent to load the companion.
+
+## Optional weekly update checks (since v1.2.0)
+
+Starting with **v1.2.0**, the updater is bundled inside the skill, including installations for Codex, Claude Code and generic clients. Enable it once after installation if you want release notifications. The host calls a small local helper when the skill is used; it contacts GitHub only when seven days have elapsed. An idle skill runs nothing. Earlier versions do not gain this automatically: manually install a published v1.2.0-or-later package first.
+
+When a newer stable release is found, the agent offers **Update now / Remind me next week / Skip this version / Disable checks**. No answer means no update. Approval is tied to the offered release and asset; changed assets require a new offer. Local customizations stop automatic replacement. Successful updates retain backups, verify the result and preserve your selected client and REA integration setting.
+
+Checks are **off by default**, independent of integration, and require existing Node.js 20+. There is no npm dependency, model/API key, paid service, extra model call, background daemon or scheduled AI task. Online operations also require confirmation that the actual network/tool environment cannot add charges. Unknown-cost or unavailable access is skipped; this is not an unconditional zero-resource-cost or billing-enforcement guarantee.
+
+Read the [setup, commands, state location and recovery guide](skills/rea-reconstruction-companion/references/updates.md). Host instruction-following and local command access are required; the helper cannot force every AI host to invoke it or authenticate a human response. Installation refresh behavior depends on the host. The project owner's release approval process remains unchanged.
 
 ## Updates, backups, and recovery
 

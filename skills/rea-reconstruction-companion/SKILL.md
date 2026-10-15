@@ -22,6 +22,8 @@ This is an instruction constraint, not a billing sandbox. The skill cannot inspe
 
 ## Work with REA throughout the task
 
+On activation, if existing Node.js 20+ and local command access are available, run this installed skill's `scripts/update.mjs check` once. This initial call is local only; checks are off unless explicitly enabled. Continue normally for `disabled`, `not-due`, or `busy`. For a due check, an update offer, setup, or an update question, read [optional weekly updates](references/updates.md). Establish no additional charges before any online request; ask the human before applying an offered release. Missing tools or failed optional checks must not block the requested task. Do not create a scheduler or recursively check when loading REA/references.
+
 When the user wants to understand a target for reconstruction, plan a similar implementation, or rebuild selected functionality, apply this skill and `reverse-engineer-anything` together throughout the task. Loading one from the other continues the same investigation; do not recursively reload either skill or start duplicate investigations.
 
 Maintain one resolved brief, question checklist, and evidence ledger. Use REA findings to refine requirements and design. When planning, implementation, or validation exposes an evidence gap, return to a focused REA investigation and reconcile its findings with the affected requirements, design choices, and tests. Share existing evidence and preserve observations, inferences, and unknowns.
