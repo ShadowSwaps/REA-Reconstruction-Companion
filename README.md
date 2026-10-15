@@ -203,6 +203,8 @@ The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw ev
 
 **Evidence verification (v1.3.1):** the packet tool adds a read-only `--verify` command to detect missing or changed reference evidence before and after a trial. It checks against the original trusted package, so rewriting the packet's hashes cannot hide a change. See the [reference procedure](evals/reference/README.md#1-freeze-the-trial-and-prepare-evidence) for its scope and limits.
 
+**Worked investigation:** [follow Pocket Tasks from evidence to requirements](evals/reference/WALKTHROUGH.md). The example includes actual REA analysis, seven recorded runtime scenarios, a replay test, and a decision about preserving or improving an awkward behavior. Source/test exposure and incomplete analysis are disclosed. It stops before candidate implementation and is not a model benchmark or a compatibility certification.
+
 ## License
 
 All original code, skill instructions, tests, build scripts, and documentation in this repository are released under the [MIT license](LICENSE). You may use, modify, and redistribute them, including commercially, subject to that license. The evaluation kit includes a small, attributed [Wycheproof test-data subset](evals/fixtures/wycheproof-empty.json) under its bundled [Apache-2.0 license](evals/fixtures/wycheproof-LICENSE.txt); it remains fully open-source. Upstream REA and linked research remain separate projects; no REA code or cryptographic implementation is bundled. No particular AI provider or proprietary model is required by this project.
