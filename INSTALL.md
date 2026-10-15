@@ -6,7 +6,7 @@ Use this guide when a user asks to install REA-Reconstruction-Companion from the
 
 1. Identify the agent host from the current environment or the user's request: Codex, Claude Code, or another client. A model name alone does not determine its skill installation directory.
 2. Explain the optional integration briefly and use the user's choice. **On** adds a rule to the selected REA skill so relevant reconstruction requests load the companion automatically and share evidence, requirements, and validation work. **Off** installs only the companion and leaves REA untouched; the user invokes it explicitly. If no choice has been given, ask one focused question rather than silently enabling it. Honor an established choice without asking again.
-3. Use the host's documented user or project skills directory. Preserve an explicitly requested scope. Use `--skills-dir` for custom, existing, or project installations.
+3. Use the host's documented user or project skills directory. Preserve an explicitly requested scope. The installer honors `CLAUDE_CONFIG_DIR` for Claude Code and `CODEX_HOME` for Codex when those variables are present in its environment. Use `--skills-dir` for custom, existing, or project installations, or when the installer runs outside the agent's environment; it overrides these defaults.
 4. For integration on, locate the REA skill used by that client. Check its declared skill path and the client's known skill directories, not arbitrary home folders, previous chats, or unrelated repositories. If several copies could apply, obtain an exact selection rather than editing all of them.
 
 ## Prepare and install
@@ -23,7 +23,7 @@ node install.mjs --client claude-code --integration on --dry-run
 
 Replace `claude-code` with `codex` or `generic` as appropriate. Generic mode requires `--skills-dir`. Supply `--rea-skill` when the REA path is nonstandard or ambiguous. For a companion-only installation, use `--integration off`; no REA modification or local REA lookup is performed.
 
-Apply that same command without `--dry-run`. If replacing an existing companion, review the reported difference and use `--replace` only within the user's authorized update scope. The old directory is backed up. Do not replace unrelated configuration or copy the entire repository into a skills directory.
+Apply that same command without `--dry-run`. If replacing an existing companion, review the `companionChanges` lists of added, modified, and removed files and use `--replace` only within the user's authorized update scope. The old directory is backed up, including custom files listed as removed. Do not replace unrelated configuration or copy the entire repository into a skills directory.
 
 Do not use a generic skill-folder downloader as a substitute for this installer when the user chose integration on: a folder copy does not apply the REA rule. A copy-only installer is suitable for the portable core when the user deliberately chose to manage integration separately.
 

@@ -113,11 +113,11 @@ node install.mjs --client codex --integration on
 node install.mjs --client claude-code --integration off
 ```
 
-Use `--dry-run` on any installation command to inspect the paths and changes without writing files. Use the same command with `--check` afterward to verify the selected installation mode. A missing REA skill or ambiguous choice stops integrated installation before the companion is installed.
+Use `--dry-run` on any installation command to inspect the paths and changes without writing files. The `companionChanges` lists identify added, modified, and removed files relative to the companion directory, including local files that a replacement would move into the backup. Use the same command with `--check` afterward to verify the selected installation mode. A missing REA skill or ambiguous choice stops integrated installation before the companion is installed. Differently cased paths to the same REA file are treated as one candidate; genuinely separate installations still require an explicit selection.
 
 Default user locations:
 
-- Claude Code: `~/.claude/skills/rea-reconstruction-companion/`.
+- Claude Code: `~/.claude/skills/rea-reconstruction-companion/`, or `$CLAUDE_CONFIG_DIR/skills/rea-reconstruction-companion/` when a custom configuration directory is set in the installer's environment. See [Claude Code's environment-variable documentation](https://code.claude.com/docs/en/env-vars). REA lookup stays within that selected profile unless `--rea-skill` explicitly selects another location.
 - Codex: `~/.agents/skills/rea-reconstruction-companion/`, or `$CODEX_HOME/skills/rea-reconstruction-companion/` when `CODEX_HOME` is set. The installer also checks the older `~/.codex/skills/` location when locating REA.
 - Generic clients: specify their documented skills directory with `--skills-dir`.
 
@@ -127,7 +127,7 @@ Override paths for an existing installation, a project-scoped skill, or another 
 node install.mjs --client generic --integration on --skills-dir "/path/to/skills" --rea-skill "/path/to/reverse-engineer-anything/SKILL.md"
 ```
 
-`--skills-dir` accepts the parent skills directory; the installer creates `rea-reconstruction-companion` beneath it. The REA path must identify the skill actually loaded by that client. An override disables broad automatic lookup. Paths with spaces should be quoted.
+`--skills-dir` accepts the parent skills directory; the installer creates `rea-reconstruction-companion` beneath it. It takes precedence over client defaults and environment variables. The REA path must identify the skill actually loaded by that client. An override disables broad automatic lookup. Paths with spaces should be quoted. If the installer runs outside the agent's environment, supply that agent's actual directory explicitly.
 
 Keep the downloaded package or checkout separate from the installation destination. The installer rejects overlapping source/destination directories and a REA file inside the companion destination, including existing paths that differ only by casing on a filesystem that treats them as the same location.
 

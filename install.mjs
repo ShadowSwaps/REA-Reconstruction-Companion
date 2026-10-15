@@ -86,7 +86,8 @@ export function locations(options, context = {}) {
   if (!['on', 'off'].includes(options.integration)) throw new Error('Choose --integration on (automatic co-use) or off (companion only).');
   if (options.client === 'generic' && !options.skillsDir) throw new Error('Generic clients require --skills-dir.');
   const codexRoot = env.CODEX_HOME ? path.join(env.CODEX_HOME, 'skills') : path.join(home, '.agents', 'skills');
-  const skillsDir = path.resolve(options.skillsDir || (options.client === 'claude-code' ? path.join(home, '.claude', 'skills') : codexRoot));
+  const claudeRoot = path.join(env.CLAUDE_CONFIG_DIR || path.join(home, '.claude'), 'skills');
+  const skillsDir = path.resolve(options.skillsDir || (options.client === 'claude-code' ? claudeRoot : codexRoot));
   const destination = path.join(skillsDir, NAME);
   noLinks(skillsDir);
   noLinks(destination);
@@ -102,7 +103,11 @@ export function locations(options, context = {}) {
     noLinks(reaSkill);
     if (exists(reaSkill) && fs.statSync(reaSkill).isDirectory()) reaSkill = path.join(reaSkill, 'SKILL.md');
   } else {
-    const matches = [...new Set(candidates)].filter(exists);
+    const matches = [...new Set(candidates.filter(exists).map(file => {
+      noLinks(file);
+      // One file can have differently cased paths on Windows and macOS.
+      return fs.realpathSync.native(file);
+    }))];
     if (matches.length !== 1) throw new Error(matches.length
       ? `Multiple REA skills found. Select the one loaded by your client with --rea-skill:\n${matches.join('\n')}`
       : 'REA skill not found. Install REA for this client first, or pass --rea-skill /path/to/reverse-engineer-anything/SKILL.md.');
@@ -187,9 +192,17 @@ function atomicReplace(file, bytes) {
 }
 
 function summary(plan) {
+  const companionChanges = { added: [], modified: [], removed: [] };
+  for (const [file, data] of plan.desired) {
+    if (!plan.before.has(file)) companionChanges.added.push(file);
+    else if (!data.equals(plan.before.get(file))) companionChanges.modified.push(file);
+  }
+  for (const file of plan.before.keys()) if (!plan.desired.has(file)) companionChanges.removed.push(file);
+  for (const files of Object.values(companionChanges)) files.sort();
   return { client: plan.options.client, version: plan.version, companion: plan.destination, reaSkill: plan.reaSkill,
     integration: plan.options.integration === 'on' ? 'enabled' : 'not-managed; existing REA left untouched',
     skillChangeNeeded: plan.skillChanged, integrationChangeNeeded: plan.ruleChanged,
+    companionChanges,
     replacementFlagNeeded: plan.skillChanged && plan.destinationExisted && !plan.options.replace };
 }
 

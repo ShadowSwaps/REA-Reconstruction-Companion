@@ -205,6 +205,70 @@ test('Codex adapter is added only for Codex', t => {
   assert.ok(fs.existsSync(path.join(result.companion, 'agents', 'openai.yaml')));
 });
 
+test('Claude Code uses its configured profile and explicit skills directories take precedence', t => {
+  const f = fixture(t, false);
+  const configDir = path.join(f.directory, 'claude profile ø');
+  const skillsDir = path.join(configDir, 'skills');
+  const reaSkill = path.join(skillsDir, 'reverse-engineer-anything', 'SKILL.md');
+  fs.mkdirSync(path.dirname(reaSkill), { recursive: true });
+  fs.writeFileSync(reaSkill, base);
+  const context = { ...f.context, home: f.directory, env: { CLAUDE_CONFIG_DIR: configDir } };
+  const options = { client: 'claude-code', integration: 'on' };
+  const result = applyInstall(planInstall(options, context));
+  assert.equal(result.companion, path.join(skillsDir, NAME));
+  assert.equal(result.reaSkill, reaSkill);
+  assert.equal(applyInstall(planInstall({ ...options, check: true }, context)).status, 'verified');
+  assert.ok(!fs.existsSync(path.join(f.directory, '.claude')));
+  assert.equal(locations({ ...options, integration: 'off', skillsDir: f.skillsDir }, context).skillsDir, f.skillsDir);
+});
+
+test('a custom Claude profile never silently falls back to another profile for REA', t => {
+  const f = fixture(t, false);
+  const defaultRea = path.join(f.directory, '.claude', 'skills', 'reverse-engineer-anything', 'SKILL.md');
+  fs.mkdirSync(path.dirname(defaultRea), { recursive: true });
+  fs.writeFileSync(defaultRea, base);
+  const custom = path.join(f.directory, 'other-profile');
+  assert.throws(() => planInstall({ client: 'claude-code', integration: 'on' }, {
+    ...f.context, home: f.directory, env: { CLAUDE_CONFIG_DIR: custom },
+  }), /REA skill not found/);
+  assert.equal(fs.readFileSync(defaultRea, 'utf8'), base);
+  assert.ok(!fs.existsSync(custom));
+});
+
+test('casing aliases of one Codex REA file are not mistaken for separate installations', t => {
+  const f = fixture(t, false);
+  const configDir = path.join(f.directory, '.agents');
+  const reaSkill = path.join(configDir, 'skills', 'reverse-engineer-anything', 'SKILL.md');
+  fs.mkdirSync(path.dirname(reaSkill), { recursive: true });
+  fs.writeFileSync(reaSkill, base);
+  const alias = path.join(f.directory, '.AGENTS');
+  if (!fs.existsSync(alias)) { t.skip('Filesystem distinguishes casing'); return; }
+  const result = locations({ client: 'codex', integration: 'on' }, {
+    home: f.directory, env: { CODEX_HOME: alias },
+  });
+  assert.equal(fs.realpathSync.native(result.reaSkill), fs.realpathSync.native(reaSkill));
+});
+
+test('dry run lists added, modified and removed companion files without replacing them', t => {
+  const f = fixture(t, false);
+  f.options.integration = 'off';
+  const initial = applyInstall(plan(f));
+  const skill = path.join(initial.companion, 'SKILL.md');
+  fs.appendFileSync(skill, '\nLocal customization.\n');
+  fs.unlinkSync(path.join(initial.companion, 'LICENSE'));
+  fs.writeFileSync(path.join(initial.companion, 'personal-note.txt'), 'Keep this in the backup.');
+  const before = fs.readFileSync(skill);
+  const preview = applyInstall(planInstall({ ...f.options, dryRun: true }, f.context));
+  assert.deepEqual(preview.companionChanges, {
+    added: ['LICENSE'], modified: ['SKILL.md'], removed: ['personal-note.txt'],
+  });
+  assert.equal(preview.replacementFlagNeeded, true);
+  assert.equal(preview.writes, 0);
+  assert.deepEqual(fs.readFileSync(skill), before);
+  assert.ok(!fs.existsSync(path.join(initial.companion, 'LICENSE')));
+  assert.equal(fs.readFileSync(path.join(initial.companion, 'personal-note.txt'), 'utf8'), 'Keep this in the backup.');
+});
+
 test('an upstream REA update can be detected and the integration restored', t => {
   const f = fixture(t);
   applyInstall(plan(f));

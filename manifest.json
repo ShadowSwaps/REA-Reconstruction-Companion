@@ -1,13 +1,13 @@
 {
   "name": "rea-reconstruction-companion",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "files": {
-    "README.md": "c1b88111bbbd6cc9382f230062dd885988335469bec5d27976ae515eba9a7d33",
-    "INSTALL.md": "e6cfb3126acf68fb80d77f6a0330a005ed7c2f6ed6eeee68fec5bbb1c0763f06",
+    "README.md": "589c06a96dae78da351789c4f9f8b9d45b2c6879a2089e9426bc4af002cfd6bb",
+    "INSTALL.md": "1221cc0086766fb2cf271e8ec8c68e40a92a3221671253e804795155c1febaa5",
     "LICENSE": "aca900183741df5c9b3db981bd48aba202474218f758c8b194548178a22c93bd",
     "CONTRIBUTING.md": "7f69606a67eb21f3bf0d34213f77eb02e3e1db5302e05036158b123022349ad8",
-    "package.json": "fc88d774ce40404f1b2d61dfd0a88946f09d8461a8859610db9f75f1cddebff6",
-    "install.mjs": "ef4a8da47303775d9a8ce04a8038eecf6f1d6744e4c58dda6dc2a7c06582d94f",
+    "package.json": "38321d35d6c5943c734baddeeaa6c065a5051a08d3773860f52794e44dab843c",
+    "install.mjs": "ca3aa6f75a0ece20a32bdb1e79263300045c8bbeae2fb0ba4684d8a48e039fe0",
     ".gitignore": "cc60841f3ff7c8e1ed628e84bc839c0c8de88d917da3d06763a535229a7c8802",
     ".gitattributes": "74f066599d3fe2817756c3e532a869d370d4294c5c0a188487da2855f9b2378e",
     "skills/rea-reconstruction-companion/LICENSE": "aca900183741df5c9b3db981bd48aba202474218f758c8b194548178a22c93bd",
@@ -22,7 +22,7 @@
     "integration/rea-companion.md": "d8ed7df3be4516ba9061c331a50e1a0519aaf3cc05f5b9bf2876f1afaa10b424",
     "scripts/build_release.py": "6cf91979bd4083ea6d6699d21cd2955434c946c2a6c9490e2b2b7c89283de1be",
     "scripts/manifest.mjs": "c90e48ac011342351d6631e08ce9cfd412ad4866a64bd5f4364372d112b3eddd",
-    "tests/install.test.mjs": "46895c3afcd800f2d431127b293e4488aebf0e26cf741496be7583135b9e29ed",
+    "tests/install.test.mjs": "ada31892021a6033d962642664f7fffb9fe92a9777287ce3322dbed02a07591d",
     ".github/workflows/test.yml": "e061baa02a6d754f2514b21cf8559282d376d9edbacd8fefc1b60a9ed4765487",
     "assets/discord-banner.png": "4f25d6a75a9b0203ca9ebc217f815e46fb1783a244d81b763b5681173c24a1f6"
   }
