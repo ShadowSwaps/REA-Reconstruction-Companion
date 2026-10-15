@@ -198,6 +198,100 @@ test('async results are awaited and shared results are snapshotted per invocatio
   assert.equal(report.notEvaluated, 0);
 });
 
+test('hidden toJSON cannot turn a returned object into the required number or null', t => {
+  const source = good.function.replace('export function evaluate', 'function calculate') + `
+    export function evaluate(input) {
+      return Object.defineProperty({}, 'toJSON', {value: () => calculate(input)});
+    }`;
+  const report = runCheck('function', fixture(t, source));
+  assert.equal(report.status, 'candidate-error');
+  assert.equal(report.passed, 0);
+  assert.equal(report.errored, report.total);
+  assert.ok(report.failureDetails.every(f => f.reason === 'non-json-result'));
+});
+
+test('array serialization hooks cannot supply an accepted parser result', t => {
+  const source = good.format.replace('export function evaluate', 'function calculate') + `
+    export function evaluate(input) {
+      const result = calculate(input);
+      return result === null ? null : Object.defineProperty(result, 'toJSON', {value: () => result});
+    }`;
+  const report = runCheck('format', fixture(t, source));
+  assert.equal(report.status, 'candidate-error');
+  assert.ok(report.failureDetails.some(f => f.label === 'valid-1' && f.reason === 'non-json-result'));
+});
+
+test('changing getters cannot change the value between validation and comparison', t => {
+  const source = good.workflow.replace('export function evaluate', 'function calculate') + `
+    export function evaluate(input) {
+      return calculate(input).map(expected => {
+        let storedReads = 0, draftReads = 0;
+        return {get stored(){return ++storedReads === 1 ? 'wrong' : expected.stored;},
+          get draft(){return ++draftReads === 1 ? 'wrong' : expected.draft;}};
+      });
+    }`;
+  const report = runCheck('workflow', fixture(t, source));
+  assert.equal(report.status, 'candidate-error');
+  assert.equal(report.passed, 1); // The empty action list contains no accessors.
+  assert.ok(report.failureDetails.every(f => f.reason === 'non-json-result'));
+});
+
+test('result capture rejects accessors without invoking their getters', t => {
+  const source = `import fs from 'node:fs';
+    export function evaluate() {
+      return {get stored(){fs.writeFileSync(new URL('./getter-called',import.meta.url),'called'); throw new Error('getter called');}};
+    }`;
+  const candidate = fixture(t, source);
+  const report = runCheck('workflow', candidate);
+  assert.equal(report.errored, report.total);
+  assert.ok(report.failureDetails.every(f => f.reason === 'non-json-result'));
+  assert.equal(fs.existsSync(path.join(path.dirname(candidate), 'getter-called')), false);
+});
+
+test('hidden, symbolic and sparse result data cannot be silently discarded', t => {
+  for (const value of [
+    "Object.defineProperty({}, 'hidden', {value: 1})",
+    "{[Symbol('hidden')]: 1}",
+    'Array(1)',
+    'Object.assign([1], {extra: 1})',
+    'new (class extends Array {})(1,2)',
+  ]) {
+    const report = runCheck('function', fixture(t, `export function evaluate(){return ${value};}`));
+    assert.equal(report.status, 'candidate-error');
+    assert.equal(report.errored, report.total);
+    assert.ok(report.failureDetails.every(f => f.reason === 'non-json-result'));
+  }
+});
+
+test('frozen data and repeated references remain valid JSON results', t => {
+  const source = good.workflow.replace('export function evaluate', 'function calculate') + `
+    export function evaluate(input) {
+      const seen = new Map();
+      return Object.freeze(calculate(input).map(snapshot => {
+        const key = JSON.stringify(snapshot);
+        if (!seen.has(key)) seen.set(key, Object.freeze(snapshot));
+        return seen.get(key);
+      }));
+    }`;
+  const report = runCheck('workflow', fixture(t, source));
+  assert.equal(report.status, 'comparisons-passed');
+  assert.equal(report.compared, report.total);
+});
+
+test('special property names are preserved as data and produce real mismatches', t => {
+  for (const key of ['__proto__', 'toJSON']) {
+    const source = good.workflow.replace('export function evaluate', 'function calculate') + `
+      export function evaluate(input) {
+        return calculate(input).map(snapshot => Object.defineProperty(snapshot, ${JSON.stringify(key)}, {value:'extra',enumerable:true}));
+      }`;
+    const report = runCheck('workflow', fixture(t, source));
+    assert.equal(report.status, 'comparison-failed');
+    assert.equal(report.errored, 0);
+    assert.equal(report.passed, 1);
+    assert.ok(report.failureDetails.every(f => f.reason === 'value-mismatch'));
+  }
+});
+
 test('reports distinguish numeric mismatches, exceptions and invalid return values', t => {
   const report = runCheck('function', fixture(t, `export function evaluate({a,b}) {
     if (a === 0) throw new Error('private-example');
