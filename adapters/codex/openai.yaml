@@ -1,0 +1,13 @@
+interface:
+  display_name: "REA-Reconstruction-Companion"
+  short_description: "Understand REA targets and plan or validate reconstructions"
+  default_prompt: "Use $rea-reconstruction-companion with REA on the target I identify, infer its type, scope, and my objective, and tailor the investigation or reconstruction to my request."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "rea"
+      description: "REA artifact analysis and runtime evidence tools"
+
+policy:
+  allow_implicit_invocation: true

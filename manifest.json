@@ -1,0 +1,28 @@
+{
+  "name": "rea-reconstruction-companion",
+  "version": "1.0.0",
+  "files": {
+    "README.md": "8c5c88ea1b2d93bf2f035d969ff6db58aa603b9dd52aac462c322c1071259f30",
+    "INSTALL.md": "e6cfb3126acf68fb80d77f6a0330a005ed7c2f6ed6eeee68fec5bbb1c0763f06",
+    "LICENSE": "aca900183741df5c9b3db981bd48aba202474218f758c8b194548178a22c93bd",
+    "CONTRIBUTING.md": "7f69606a67eb21f3bf0d34213f77eb02e3e1db5302e05036158b123022349ad8",
+    "package.json": "03ea1fe0d296704fae69664b1f1c094c398ab1a79c0bdef32b2f63cba03d3cb0",
+    "install.mjs": "1d49cd8cd2c48f8508ec47e93fc51165fdadf80cb3294100fc4c8ecdcb855ab8",
+    ".gitignore": "cc60841f3ff7c8e1ed628e84bc839c0c8de88d917da3d06763a535229a7c8802",
+    ".gitattributes": "74f066599d3fe2817756c3e532a869d370d4294c5c0a188487da2855f9b2378e",
+    "skills/rea-reconstruction-companion/LICENSE": "aca900183741df5c9b3db981bd48aba202474218f758c8b194548178a22c93bd",
+    "skills/rea-reconstruction-companion/SKILL.md": "bdd6cec6fcbaf2f9eb17e9810c98afc21f616a69c1e36c1d8912606c6998633c",
+    "skills/rea-reconstruction-companion/references/blueprint.md": "7ebc9c30b06f3287546bc0474f46eee849ac8081ae8b57f893122fa8b21ba0a9",
+    "skills/rea-reconstruction-companion/references/implementation.md": "fe8ec76363de7cc2786bbac45cdc902fb651511558bb45ca9816ce91c57a73e4",
+    "skills/rea-reconstruction-companion/references/performance.md": "1e7fc728f5157d4087b161f0b3a34e34de48e5d97844325d9a6fd71b7644b5a9",
+    "skills/rea-reconstruction-companion/references/reconstruction-methods.md": "ffa9923cd8863e703307cc0ac1b5231bafcd437be2e2fee215ae8c06e6eb914e",
+    "skills/rea-reconstruction-companion/references/research-basis.md": "6e5b9309bafd0d27a4cf9ff09614fb8b05257dc8d2dd57920a4c799c387099a3",
+    "adapters/codex/openai.yaml": "cc47c02f0d57a855372542c1f869546f231d38cd445dd196387327db98c189fc",
+    "integration/legacy-rea-companion.md": "13029d4afd31328f1ae33ad5efec5785e3dc08c315dcb1427210c85db9d73fcc",
+    "integration/rea-companion.md": "d8ed7df3be4516ba9061c331a50e1a0519aaf3cc05f5b9bf2876f1afaa10b424",
+    "scripts/build_release.py": "6cf91979bd4083ea6d6699d21cd2955434c946c2a6c9490e2b2b7c89283de1be",
+    "scripts/manifest.mjs": "d618b7b94992d799d7d9f96203e2af74707d43f99ccd344d367709400e28e735",
+    "tests/install.test.mjs": "92f321f25f3e84e4202ad721420fd89db39b483bc1b786a8f21c379a8a417c05",
+    ".github/workflows/test.yml": "e061baa02a6d754f2514b21cf8559282d376d9edbacd8fefc1b60a9ed4765487"
+  }
+}

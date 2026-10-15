@@ -1,0 +1,14 @@
+{
+  "name": "rea-reconstruction-companion",
+  "version": "1.0.0",
+  "description": "Portable, evidence-based reconstruction workflows that cooperate with REA.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test",
+    "manifest": "node scripts/manifest.mjs",
+    "build": "python scripts/build_release.py"
+  },
+  "repository": { "type": "git", "url": "https://github.com/ShadowSwaps/REA-Reconstruction-Companion.git" }
+}
