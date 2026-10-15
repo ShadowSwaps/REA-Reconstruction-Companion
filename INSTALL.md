@@ -38,3 +38,11 @@ Report the display name, installed location, selected integration choice, backup
 Integration off does not remove a rule from an earlier install. If the user asks to disable an existing rule, remove only the marked block described in README.md after checking the selected REA file. Preserve subsequent unrelated REA edits.
 
 An agent without local filesystem or execution access can explain these steps but cannot claim to have performed them. A hosted ZIP upload does not automatically patch a different local installation.
+
+## Optional weekly update checks (v1.2.0 onward)
+
+The helper and instructions are included inside the skill from **v1.2.0**. Existing users must manually update to a published release containing the feature once. Ask separately whether the user wants weekly checks; preserve an established choice, and keep checks off without opt-in. Enabling integration does not enable updates.
+
+After a verified installation, follow [optional weekly updates](skills/rea-reconstruction-companion/references/updates.md) using the installed helper and this package's path. `enable` verifies the installed package and records its client, paths and integration choice; it does not contact GitHub. Existing Node.js 20+ is sufficient. Do not add a scheduler, daemon, paid service or model call.
+
+The skill's first on-use check is local only. A due online check requires establishing that actual network/tool access cannot add charges. Finding a release prompts the user; installation requires that user's approval of the exact offer. Report whether checks were enabled, disabled, or unavailable separately from the REA integration status. A host without execution access retains manual updates. After manual upgrades or changed installation settings, re-enable from the newly verified package to refresh the baseline; do not silently reset opt-in or adopt customized files as a verified baseline.
