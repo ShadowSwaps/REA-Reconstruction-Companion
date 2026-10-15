@@ -2,6 +2,8 @@
 
 This kit evaluates outcomes of using the skill, separately from installation. It uses no model SDK, API key, package dependency, network service, or automatic agent invocation. Node.js 20+ is needed only for the executable oracle checks. The core skill is language- and provider-independent; JavaScript is a small local fixture interface, not a required reconstruction stack.
 
+For a complete application to investigate with REA, use the [Pocket Tasks reference trial](reference/README.md). It provides an executable local target, a candidate evidence packet, a language-independent process interface for reconstructions, independent expected behavior, and a repeatable human review procedure. Its app and tools also use existing Node.js 20+. The supplied-evidence cases below and the reference trial are distinct; neither automatically invokes a model or establishes live-host compatibility.
+
 ## Run an evaluation
 
 1. Establish that the chosen host and tools cannot incur an additional charge. Do not launch metered model trials, extra agents, or paid sandboxes. If no suitable environment is available, run local harness tests only and report live-agent evaluation as unrun.
