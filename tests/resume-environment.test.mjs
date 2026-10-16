@@ -12,6 +12,12 @@ const runner = path.join(root, 'run.mjs');
 const hash = value => createHash('sha256').update(value).digest('hex');
 const read = (dir, name) => JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8'));
 const snapshot = dir => Object.fromEntries(fs.readdirSync(dir).map(n => [n, fs.readFileSync(path.join(dir, n))]));
+function mutateFixture(copy, name, transform) {
+  const file = path.join(copy, 'fixtures', name), source = fs.readFileSync(file, 'utf8'), changed = transform(source);
+  assert.notEqual(changed, source); fs.writeFileSync(file, changed);
+  const identity = read(path.join(copy, 'fixtures'), 'identity.json'); identity.files[name] = hash(fs.readFileSync(file));
+  fs.writeFileSync(path.join(copy, 'fixtures/identity.json'), JSON.stringify(identity));
+}
 function temporary(t) {
   const parent = fs.realpathSync.native(os.tmpdir()), dir = fs.mkdtempSync(path.join(parent, 'rea-environment-'));
   t.after(() => {
@@ -151,4 +157,85 @@ test('simulated unavailable local probe preserves unknown through a complete con
   assert.deepEqual(read(dir,'triage.json').checks,{score:'unknown',format:'unknown',integration:'unknown'});
   for (const row of Object.values(value.requirements)) assert.equal(row.verification,'unknown-environment');
   for (const row of Object.values(read(dir,'fresh-report.json').checks)) assert.equal(row.bindings.runtime,null);
+});
+test('observed mismatches remain failed even with an unknown simulated runtime', t => {
+  const copy = path.join(temporary(t), 'runner'); fs.cpSync(root, copy, { recursive: true });
+  mutateFixture(copy, 'candidate.mjs', source => source.replace('value > cap ? cap : value', 'value > 100 ? 100 : value'));
+  const script = path.join(copy, 'run.mjs');
+  fs.writeFileSync(script, fs.readFileSync(script, 'utf8').replace('decodeRuntime(child(runtimeProgram))', 'decodeRuntime({ status: 1 })'));
+  const dir = prepare(t, script), result = cli(['continue', dir], script), value = JSON.parse(result.stdout);
+  assert.equal(result.status, 1); assert.equal(value.failed, 10);
+  assert.equal(value.requirements.score.verification, 'failed');
+  assert.equal(value.requirements.integration.verification, 'failed');
+  assert.equal(value.requirements.format.verification, 'unknown-environment');
+});
+for (const output of ['undefined', 'NaN', 'Infinity']) {
+  test(`invalid target ${output} output cannot become an expected null through JSON serialization`, t => {
+    const copy = path.join(temporary(t), 'runner'); fs.cpSync(root, copy, { recursive: true });
+    mutateFixture(copy, 'target.mjs', source => source.replace(': null;', `: (cap === 100 ? null : ${output});`));
+    const script = path.join(copy, 'run.mjs'), dir = prepare(t, script), result = cli(['continue', dir], script);
+    assert.equal(result.status, 1, result.stderr);
+    const value = JSON.parse(result.stdout), fresh = read(dir, 'fresh-report.json');
+    assert.equal(fresh.target.comparisons.failed, 8); assert.equal(value.failed, 8);
+    assert.equal(value.requirements.score.verification, 'blocked-target-mismatch');
+    assert.equal(value.requirements.integration.verification, 'blocked-target-mismatch');
+    assert.equal(value.requirements.format.verification, 'verified-listed-corpus-only');
+  });
+}
+for (const output of ['undefined', 'NaN', '1n', "({secret:'must-not-appear'})"]) {
+  test(`invalid candidate ${output.split(':')[0]} output remains a comparison failure`, t => {
+    const copy = path.join(temporary(t), 'runner'); fs.cpSync(root, copy, { recursive: true });
+    mutateFixture(copy, 'candidate.mjs', source => source.replace('return null;', `return cap === 100 ? null : ${output};`));
+    const script = path.join(copy, 'run.mjs'), dir = prepare(t, script), result = cli(['continue', dir], script);
+    assert.equal(result.status, 1, result.stderr);
+    const value = JSON.parse(result.stdout), fresh = read(dir, 'fresh-report.json');
+    assert.equal(fresh.checks.score.comparisons.failed, 8); assert.equal(fresh.checks.integration.comparisons.failed, 8);
+    assert.equal(value.failed, 16); assert.equal(value.requirements.score.verification, 'failed');
+    assert.equal(JSON.stringify(fresh).includes('must-not-appear'), false);
+  });
+}
+test('target reassessment failures block dependent verification while retaining independent format reuse', t => {
+  const copy = path.join(temporary(t), 'runner'); fs.cpSync(root, copy, { recursive: true });
+  mutateFixture(copy, 'target.mjs', source => source.replace('Math.min(value, cap)', 'Math.min(value, 100)'));
+  const script = path.join(copy, 'run.mjs'), dir = prepare(t, script), result = cli(['continue', dir], script);
+  assert.equal(result.status, 1, result.stderr);
+  const value = JSON.parse(result.stdout), fresh = read(dir, 'fresh-report.json');
+  assert.equal(fresh.target.comparisons.failed, 5); assert.equal(fresh.checks.score.comparisons.failed, 0);
+  assert.equal(value.requirements.score.verification, 'blocked-target-mismatch');
+  assert.equal(value.requirements.integration.verification, 'blocked-target-mismatch');
+  assert.equal(value.requirements.format.verification, 'verified-listed-corpus-only');
+  assert.deepEqual(value.reused.map(row => row.id), ['format']);
+});
+test('fresh measured execution resolves unknown historical runtime without reusing its reports', t => {
+  const copy = path.join(temporary(t), 'runner'); fs.cpSync(root, copy, { recursive: true });
+  const script = path.join(copy, 'run.mjs'), source = fs.readFileSync(script, 'utf8');
+  const simulated = source.replace('decodeRuntime(child(runtimeProgram))', "decodeRuntime(process.argv[2] === 'prepare' ? { status: 1 } : child(runtimeProgram))");
+  assert.notEqual(simulated, source); fs.writeFileSync(script, simulated);
+  const dir = prepare(t, script), before = snapshot(dir), result = cli(['continue', dir, 'same'], script);
+  assert.equal(result.status, 0, result.stderr);
+  const value = JSON.parse(result.stdout); assert.deepEqual(value.reused, []);
+  assert.deepEqual(value.executed, ['score', 'format', 'integration']);
+  for (const row of Object.values(value.requirements)) assert.equal(row.verification, 'verified-listed-corpus-only');
+  assert.equal(read(dir, 'environment.json').runtime.status, 'unknown');
+  assert.equal(read(dir, 'current-environment.json').runtime.status, 'known');
+  for (const [name, bytes] of Object.entries(before)) assert.deepEqual(fs.readFileSync(path.join(dir, name)), bytes);
+});
+test('committed worked result is bound to the current fixtures, harness and recorded runtime', () => {
+  const worked = read(root, 'worked-result.json'), report = worked.driftReport;
+  const digest = value => hash(JSON.stringify(value, null, 2) + '\n');
+  const runtime = decodeRuntime({ status: 0, stderr: '', stdout: JSON.stringify(worked.runtime.value) });
+  assert.deepEqual(runtime, worked.runtime); assert.equal(runtime.status, 'known');
+  const current = { target: hash(fs.readFileSync(path.join(root, 'fixtures/target.mjs'))),
+    candidate: hash(fs.readFileSync(path.join(root, 'fixtures/candidate.mjs'))),
+    formatter: hash(fs.readFileSync(path.join(root, 'fixtures/format.mjs'))),
+    corpus: hash(fs.readFileSync(path.join(root, 'fixtures/corpus.json'))),
+    formatCorpus: digest([null,0,100,200]), runtime: digest(runtime.value), cap: digest({cap:200}),
+    harness: hash(fs.readFileSync(runner)) };
+  for (const row of [report.target, ...Object.values(report.checks)]) {
+    for (const [key, value] of Object.entries(row.bindings)) assert.equal(value, current[key], key);
+    assert.equal(row.comparisons.failed, 0);
+  }
+  assert.deepEqual(worked.same.executed, []); assert.deepEqual(worked.drift.executed, ['score','integration']);
+  assert.deepEqual(worked.drift.reused.map(row => row.id), ['format']);
+  assert.deepEqual(report.checks.score.comparisons.actual, [0,99,100,101,199,200,200,200,...Array(8).fill(null)]);
 });

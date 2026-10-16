@@ -78,10 +78,17 @@ function execute(files, cap, executed) {
     const target = await import(${JSON.stringify(moduleURL('target.mjs'))});
     const candidate = await import(${JSON.stringify(moduleURL('candidate.mjs'))});
     const {format} = await import(${JSON.stringify(moduleURL('format.mjs'))});
-    const score = executed.some(id => id === 'score' || id === 'integration') ? corpus.map(v => candidate.score(v,cap)) : [];
-    process.stdout.write(JSON.stringify({target:corpus.map(v=>target.score(v,cap)),score,
-      format:executed.includes('format') ? [null,0,100,200].map(format) : [],
-      integration:executed.includes('integration') ? score.map(format) : []}));`;
+    // JSON would silently convert undefined/NaN/Infinity array entries to null.
+    // Retain a bounded type marker instead, so invalid outputs cannot pass as
+    // expected nulls or expose arbitrary object contents in shared reports.
+    const number = value => value === null || (typeof value === 'number' && Number.isFinite(value)) ? value
+      : {invalidOutput: typeof value === 'number' ? 'non-finite-number' : typeof value};
+    const text = value => typeof value === 'string' ? value : {invalidOutput: typeof value};
+    const score = executed.some(id => id === 'score' || id === 'integration') ? corpus.map(v => number(candidate.score(v,cap))) : [];
+    process.stdout.write(JSON.stringify({target:corpus.map(v=>number(target.score(v,cap))),score,
+      format:executed.includes('format') ? [null,0,100,200].map(v=>text(format(v))) : [],
+      integration:executed.includes('integration') ? score.map(v=>v !== null && typeof v === 'object'
+        ? {invalidInput:'score-output'} : text(format(v))) : []}));`;
   const result = child(program, JSON.stringify({ cap, corpus: JSON.parse(files['corpus.json']), executed }));
   ensure(!result.error && result.status === 0 && !result.signal && result.stderr === '');
   return JSON.parse(result.stdout);
@@ -144,8 +151,9 @@ export function run(phase, directory, scenario = 'drift') {
   const result = { status: failed ? 'comparison-failed' : !validRuntime(runtime) ? 'environment-unknown' : 'environment-demo-passed', scenario, executed,
     reused: Object.keys(dependencies).filter(id => triage[id] === 'current').map(id => ({ id, source: 'baseline.json', sha256: hash(json(baseline.checks[id])) })),
     failed, requirements: Object.fromEntries(Object.keys(dependencies).map(id => [id, {
-      implementation: 'retained-identical-bytes', verification: !validRuntime(runtime) ? 'unknown-environment'
-        : (fresh.checks[id] ?? baseline.checks[id]).comparisons.failed ? 'failed' : 'verified-listed-corpus-only',
+      implementation: 'retained-identical-bytes', verification: (fresh.checks[id] ?? baseline.checks[id]).comparisons.failed ? 'failed'
+        : id !== 'format' && fresh.target.comparisons.failed ? 'blocked-target-mismatch'
+        : !validRuntime(runtime) ? 'unknown-environment' : 'verified-listed-corpus-only',
     }])),
     preservation: Object.fromEntries(Object.entries(before).map(([n, bytes]) => [n, hash(bytes)])),
     overallParity: 'unverified', crossVersionDrift: 'not-tested', crossHostCompatibility: 'unverified', humanReview: 'pending' };

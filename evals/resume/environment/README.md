@@ -71,6 +71,11 @@ execution exercises the formatter again, without duplicating its standalone
 report. Reused records name the historical report and its SHA-256. Requirements
 keep implementation and verification separate. Unknown runtime evidence remains
 `unknown-environment` even if comparisons pass; overall parity stays unverified.
+An observed mismatch remains `failed` when the runtime is unknown. A failed target
+reassessment blocks otherwise passing score/integration verification as
+`blocked-target-mismatch`, while independent formatter verification can remain
+applicable. Unsupported score output types and non-finite numbers are retained as
+bounded type markers before JSON serialization; they cannot become expected nulls.
 
 The runner checks trusted fixture hashes before execution, validates the receipt
 and reconstructs expected historical report data without rerunning old conditions.
@@ -86,6 +91,9 @@ changes, missing identities, malformed and unavailable probe simulations, stale
 integration selection, damaged history, commands in modified evidence, and a
 deliberately wrong cap-100 candidate. That candidate passes preparation but fails
 five score and five integration comparisons after drift; failures remain visible.
+Additional negative tests combine failed comparisons with an unknown probe, reject
+JSON-coerced nulls, and check target-mismatch propagation. Unsupported output
+objects contribute type markers, never their arbitrary contents, to reports.
 The tests do not certify unsupported runtime/OS combinations or full parity.
 
 [worked-result.json](worked-result.json) retains an actual local same/drift run,
