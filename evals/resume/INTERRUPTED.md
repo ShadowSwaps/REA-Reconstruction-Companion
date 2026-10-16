@@ -24,8 +24,21 @@ node evals/resume/interrupted.mjs resume "./failed-attempt" "./build-2-attempt" 
 
 Use `changed-target` as the first argument when the source was prepared for build
 2. There is no implicit target selection from output claims. Missing or damaged
-prepared inputs still block this command; use [evidence recovery](RECOVERY.md)
-instead. An incomplete preparation is not a completed checkpoint.
+prepared inputs still block this command. If there are no continuation outputs,
+use [evidence recovery](RECOVERY.md). That command also deliberately refuses
+workspaces containing continuation outputs. If prepared inputs are damaged and
+continuation outputs exist, retain the entire attempt and start a separately
+recorded trusted run:
+
+```sh
+node evals/resume/walkthrough.mjs prepare resume "./trusted-restart"
+node evals/resume/walkthrough.mjs continue resume "./trusted-restart"
+```
+
+Choose the case explicitly and a fresh destination. Record the original attempt
+and reason separately; this restart does not reuse its reports or certify their
+preservation. Do not remove outputs or edit identities to get past rejection.
+An incomplete preparation is not a completed checkpoint.
 
 The command checks original inputs against hash-verified package fixtures and
 allows only named walkthrough outputs. Direct links, non-files, unreadable files,
@@ -50,6 +63,10 @@ partial-candidate execution, with the missing proof recorded in
 preserved and never converted to passes. Target changes invalidate dependent
 reuse. Runtime/corpus/harness drift also prevents reuse. Fields or ordering that
 cannot be validated conservatively can trigger rerunning even if harmless.
+Unverifiable JSON structure, including excessive nesting within the byte limit,
+also falls back to fresh execution. The recovery record retains the initial plan
+that final validation is required; the destination `result.json` records that
+final execution actually completed, with its comparison outcome kept separately.
 
 The completion is regenerated from trusted source and always tested fresh; old
 `candidate-after.mjs`, `after-report.json`, triage and completion claims never
@@ -58,7 +75,10 @@ are checked again before writing the destination `result.json`. No original byte
 are overwritten, repaired or deleted. Existing destinations are refused. If
 recovery itself stops after preparation, retain its wrapper and retry using its
 `working/` directory as the source with another fresh destination. If preparation
-stopped partway, use evidence recovery on that working directory first.
+stopped partway before continuation outputs, use evidence recovery on that
+working directory first. If prepared inputs are damaged and continuation outputs exist,
+retain the wrapper and working directory and use the separately recorded restart
+above.
 
 Exit 0 means the fresh listed comparisons passed, 1 means fresh candidate
 comparisons failed, and 2 means invocation, integrity, filesystem or execution

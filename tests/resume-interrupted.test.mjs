@@ -203,6 +203,7 @@ test('a deliberately broken fresh completion exits 1 and preserves failed compar
     { encoding: 'utf8', windowsHide: true, timeout: 20000 });
   assert.equal(result.status, 1, result.stderr);
   assert.equal(read(destination, 'result.json').status, 'comparison-failed');
+  assert.equal(read(destination, 'result.json').execution.after, 'fresh-execution');
   assert.equal(read(path.join(destination, 'working'), 'after-report.json').comparisons.failed, 901);
   assert.equal(read(path.join(destination, 'working'), 'after-report.json').verification, 'failed');
   assert.deepEqual(snapshot(source), prior);
@@ -228,4 +229,118 @@ test('validated reuse actually skips only partial-candidate execution; unknown e
     t.mock.restoreAll();
     syncBuiltinESMExports();
   }
+});
+
+test('deeply nested valid JSON is unproven evidence and reruns instead of aborting recovery', t => {
+  const { source, destination } = fixture(t);
+  // Well below the input byte bound; JSON.parse accepts it, but serialization
+  // can exceed the JavaScript stack. It is not a completed fixture report.
+  const nested = '['.repeat(20000) + '0' + ']'.repeat(20000);
+  assert.doesNotThrow(() => JSON.parse(nested));
+  fs.writeFileSync(path.join(source, 'before-report.json'), nested);
+  const original = snapshot(source);
+  const result = recoverInterrupted('resume', source, destination);
+  assert.equal(result.status, 'walkthrough-passed');
+  assert.equal(result.execution.before, 'fresh-execution');
+  assert.ok(result.execution.missingProof);
+  assert.deepEqual(snapshot(source), original);
+});
+
+test('completed recovery distinguishes performed final execution from the retained pending plan', t => {
+  const { source, destination } = fixture(t);
+  const result = recoverInterrupted('resume', source, destination);
+  assert.equal(result.execution.after, 'fresh-execution');
+  assert.equal(read(destination, 'result.json').execution.after, 'fresh-execution');
+  assert.equal(read(path.join(destination, 'working'), 'execution-recovery.json').after, 'fresh-execution-required');
+});
+
+for (const name of ['checkpoint.json', 'input-report.json', 'target.mjs', 'candidate-before.mjs', 'prepared.json']) {
+  for (const damage of ['missing', 'modified']) {
+    test(`${damage} prepared ${name} with retained outputs blocks without creating a destination`, t => {
+      const { source, destination } = fixture(t);
+      fs.writeFileSync(path.join(source, 'triage.json'), '{');
+      if (damage === 'missing') fs.unlinkSync(path.join(source, name));
+      else fs.appendFileSync(path.join(source, name), '\nchanged');
+      const original = snapshot(source);
+      assert.throws(() => recoverInterrupted('resume', source, destination), /Prepared evidence changed/);
+      assert.throws(() => inspect('resume', source), /Unexpected/);
+      assert.equal(fs.existsSync(destination), false);
+      assert.deepEqual(snapshot(source), original);
+    });
+  }
+}
+
+for (const operation of ['lstatSync', 'readFileSync']) {
+  test(`unreadable retained output (${operation}) blocks recovery before creating files`, t => {
+    const { source, destination } = fixture(t);
+    fs.writeFileSync(path.join(source, 'before-report.json'), '{}');
+    const original = snapshot(source), file = path.join(source, 'before-report.json');
+    const method = fs[operation];
+    t.mock.method(fs, operation, function (selected, ...args) {
+      if (selected === file) throw Object.assign(new Error('private access details'), { code: 'EACCES' });
+      return method.call(this, selected, ...args);
+    });
+    assert.throws(() => recoverInterrupted('resume', source, destination), { code: 'EACCES' });
+    assert.equal(fs.existsSync(destination), false);
+    t.mock.restoreAll();
+    assert.deepEqual(snapshot(source), original);
+  });
+}
+
+test('actual harness changes invalidate the old report, while unavailable trusted fixtures block', t => {
+  const { source, destination, dir } = fixture(t);
+  interrupt(source, 'before-report.json');
+  const original = snapshot(source), copy = path.join(dir, 'changed harness');
+  fs.cpSync(path.dirname(runner), copy, { recursive: true });
+  fs.appendFileSync(path.join(copy, 'walkthrough.mjs'), '\n// harmless actual harness change\n');
+  const result = spawnSync(process.execPath, [path.join(copy, 'interrupted.mjs'), 'resume', source, destination],
+    { encoding: 'utf8', windowsHide: true, timeout: 20000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(read(destination, 'result.json').execution.before, 'fresh-execution');
+  fs.appendFileSync(path.join(copy, 'fixtures/partial-candidate.mjs'), '\n// corrupt trusted fixture');
+  const blocked = path.join(dir, 'blocked');
+  const failure = spawnSync(process.execPath, [path.join(copy, 'interrupted.mjs'), 'resume', source, blocked],
+    { encoding: 'utf8', windowsHide: true, timeout: 20000 });
+  assert.equal(failure.status, 2);
+  assert.equal(failure.stdout, '');
+  assert.equal(failure.stderr.includes(dir), false);
+  assert.equal(fs.existsSync(blocked), false);
+  assert.deepEqual(snapshot(source), original);
+});
+
+test('retained candidate output is history and cannot execute or certify the regenerated candidate', t => {
+  const { source, destination, dir } = fixture(t);
+  const marker = path.join(dir, 'must-not-execute');
+  fs.writeFileSync(path.join(source, 'candidate-after.mjs'),
+    `import fs from 'node:fs'; fs.writeFileSync(${JSON.stringify(marker)}, 'ran'); export const evaluate = () => null;`);
+  fs.writeFileSync(path.join(source, 'after-report.json'), JSON.stringify({ verification: 'verified-listed-corpus-only', comparisons: { failed: 0 } }));
+  const original = snapshot(source);
+  const result = recoverInterrupted('resume', source, destination);
+  assert.equal(fs.existsSync(marker), false);
+  assert.equal(result.afterFailures, 0);
+  assert.equal(read(path.join(destination, 'working'), 'after-report.json').comparisons.passed, 1014);
+  assert.notDeepEqual(fs.readFileSync(path.join(destination, 'working/candidate-after.mjs')), original['candidate-after.mjs']);
+  assert.deepEqual(snapshot(source), original);
+});
+
+test('fresh execution error stays distinct from a comparison failure and cannot produce completion', t => {
+  const { source, destination, dir } = fixture(t);
+  const copy = path.join(dir, 'execution error');
+  fs.cpSync(path.dirname(runner), copy, { recursive: true });
+  const copied = path.join(copy, 'walkthrough.mjs'), original = fs.readFileSync(copied, 'utf8');
+  const wrong = original.replace('return Math.min(value, ${cap});', 'return undefined;');
+  assert.notEqual(wrong, original);
+  fs.writeFileSync(copied, wrong);
+  const prior = snapshot(source);
+  const result = spawnSync(process.execPath, [path.join(copy, 'interrupted.mjs'), 'resume', source, destination],
+    { encoding: 'utf8', windowsHide: true, timeout: 20000 });
+  assert.equal(result.status, 2);
+  assert.equal(result.stdout, '');
+  assert.equal(result.stderr.includes(dir), false);
+  assert.equal(fs.existsSync(path.join(destination, 'result.json')), false);
+  assert.equal(fs.existsSync(path.join(destination, 'working/result.json')), false);
+  assert.equal(fs.existsSync(path.join(destination, 'working/after-report.json')), false);
+  assert.equal(read(path.join(destination, 'working'), 'before-report.json').comparisons.failed, 900);
+  assert.equal(read(path.join(destination, 'working'), 'execution-recovery.json').after, 'fresh-execution-required');
+  assert.deepEqual(snapshot(source), prior);
 });

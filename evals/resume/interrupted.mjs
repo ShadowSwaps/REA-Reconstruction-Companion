@@ -48,7 +48,10 @@ export function recoverInterrupted(caseId, directory, destination, selectedCase 
   assert(JSON.stringify(identities(capture(source, originals))) === JSON.stringify(before), 'Source history changed');
   assert(JSON.stringify(identities(evidence(caseId))) === JSON.stringify(identities(originals)), 'Package changed');
   const completed = { schema: 1, status: result.status, sourcePreservation: 'verified-existing-file-hashes-and-set',
-    sourceFiles: before, execution: JSON.parse(fs.readFileSync(path.join(working, 'execution-recovery.json'), 'utf8')),
+    sourceFiles: before, execution: {
+      ...JSON.parse(fs.readFileSync(path.join(working, 'execution-recovery.json'), 'utf8')),
+      after: 'fresh-execution', // Only recorded after walkthrough returned a completed comparison.
+    },
     beforeFailures: result.beforeFailures, afterFailures: result.afterFailures,
     freshResult: 'working/result.json', overallParity: 'unverified', humanReview: 'pending', reaTrial: 'not-run' };
   put('result.json', completed);

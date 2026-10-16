@@ -125,8 +125,12 @@ export function walkthrough(phase, caseId, directory, options = {}) {
   // fresh target behavior, and every execution dependency; labels cannot bless it.
   const expectedBefore = { ...common, candidateSha256: beforeSha256,
     comparisons: comparison(corpus.map(value => expected(value, 1000)), oracle), overallParity: 'unverified' };
-  const reused = options.priorBefore !== undefined &&
-    JSON.stringify(options.priorBefore) === JSON.stringify(expectedBefore);
+  const expectedReport = JSON.stringify(expectedBefore);
+  let reused = false;
+  if (options.priorBefore !== undefined) {
+    try { reused = JSON.stringify(options.priorBefore) === expectedReport; }
+    catch { /* Unverifiable report structure is missing proof, not an execution error. */ }
+  }
   const before = reused ? expectedBefore.comparisons : comparison(execute(path.join(dir, 'candidate-before.mjs')), oracle);
   put('before-report.json', { ...common, candidateSha256: beforeSha256, comparisons: before, overallParity: 'unverified' });
   if (options.recordRecovery) put('execution-recovery.json', {
