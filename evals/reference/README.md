@@ -6,6 +6,8 @@ The reconstruction interface is JSON over standard input/output. A candidate can
 
 This is a controlled source-available JavaScript target, not a clean-room exercise or a native-binary benchmark. Automated tests below validate the app and checker. The [worked investigation](WALKTHROUGH.md) records actual REA analysis and repeatable local probes, with evidence-linked requirements and a quirk decision. It is a maintainer-informed teaching example, not an independent reconstruction or host/model certification. Instruction following and candidate quality still require a separately observed trial.
 
+A separate [observed browser-app trial](OBSERVED-BROWSER-TRIAL.md) records three workflows exercised through an actual browser, a source-available reconstruction, harness failures and coverage limits. Its private fixture and browser harness are distinct from the command-line Pocket Tasks packet below; it is not an additional public checker mode.
+
 The [worked reconstruction extension](reconstruction/README.md) demonstrates a separate implementation, requirements-to-test links, captured comparison results and a repeatable validator. It discloses prior source/reviewer exposure and remains teaching material. Keep it outside a fresh candidate's evidence, alongside the reviewer corpus and prior answers.
 
 ## 1. Freeze the trial and prepare evidence
