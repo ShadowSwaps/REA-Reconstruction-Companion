@@ -1,0 +1,50 @@
+{
+  "status": "selective-passed",
+  "reused": [
+    {
+      "id": "V-format",
+      "reportSha256": "fc410b1d23a7a2481c9b96c84cbefe9e8a95e71d32582b9f3e903f5a22f25c05",
+      "source": "baseline.json"
+    }
+  ],
+  "executed": [
+    "V-score",
+    "V-interface",
+    "V-integration"
+  ],
+  "afterFailures": 0,
+  "beforeFailures": {
+    "score": 5,
+    "integration": 5
+  },
+  "requirements": {
+    "score": {
+      "implementation": "candidate-v2.mjs",
+      "verification": "verified-listed-corpus-only"
+    },
+    "format": {
+      "implementation": "retained",
+      "verification": "verified-listed-corpus-only"
+    }
+  },
+  "preservation": {
+    "score-v1.mjs": "0a3e872b347f99518bf3b1c3d38a9f3c99536d4060063ab5a70faa8d49907f2c",
+    "score-v2.mjs": "d812028dc638f5a2990b8872fb5b0635a2ea0c8222984d1e798f26facdffd228",
+    "candidate-v1.mjs": "0f26a435d101fa4bbd31367e771f4fb2d8cb3a4277bb478462a7256bbac7a90d",
+    "candidate-v2.mjs": "a19823d72b6dd72567d3c111f4596a2edf6a62954b47023519d2ddadf375c76a",
+    "format.mjs": "9e7fa924c620f5c21dfbbf0f4ff29474e20cf44c022cb1f281767a52cb792dea",
+    "pipeline.mjs": "08c842610e5e8336e168c5b69e7c47b40509d3da01363821e509a63934501cb6",
+    "interface.json": "2b3de54d589bfeeea76051fc942cef00eea0641d97e70871dffa0183d2e15bca",
+    "corpus.json": "294bf9dafdbf9807d40740f5e01648d59b1e3304e686fa2c12d688d027958ced",
+    "format-corpus.json": "8bd24c4b94fffd389683b7ab6819772b8c919107309e2497cec453d1b848540f",
+    "environment.json": "8844829aa1d2dd9424f9b643fa293296802f769c99f5c09f41549dee676f4596",
+    "graph.json": "17904b8b91d12051315097bc8a685ef7dc6c872200b92dfcd93795da35ebbfb9",
+    "baseline.json": "ec565d84e710ea12789695e57ba6069909f96f7ff8e24e4ec54c5dadd19fe55d",
+    "prepared.json": "65d618a94457c2364b4aeb43807dce59cd3dd8d978bf26e116abf691ab87912f"
+  },
+  "overallParity": "unverified",
+  "humanReview": "pending",
+  "actualAgentActions": "unverified",
+  "reaTrial": "not-run",
+  "crossHostContinuation": "unverified"
+}

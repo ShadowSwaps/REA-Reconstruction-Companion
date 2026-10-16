@@ -38,6 +38,15 @@ Distinguish these situations:
 
 Invalidate by dependency and scope. A change to one artifact need not invalidate an independent artifact's findings or the user's unchanged scope decision. Conversely, identical observations from a small corpus do not prove that an unseen changed target is equivalent. Preserve explicit unknowns when impact cannot yet be narrowed.
 
+For multiple components, bind each reused finding, requirement verification and
+report to the artifacts, interfaces, corpus and relevant environment it actually
+used. Follow indirect dependencies too: an integration result can become stale
+when either component changes even if the other component's own report remains
+applicable. Retain the unaffected implementation and scoped evidence, then
+recheck affected shared interfaces and end-to-end behavior. Missing or ambiguous
+dependency evidence stays unknown. A short dependency list is enough; no global
+schema or service is required. Record fresh results separately from history.
+
 Record the old claim, its original target and why it is stale separately from any newly supported replacement. Reassess the contract before adapting the candidate; retain independent expectations and preserve failures. Reusing the old output, editing its hash, switching the requested behavior, or overwriting the old report cannot establish current parity.
 
 Resume ordinary implementation once the next slice has sufficient evidence. Do not add a routine approval gate for a valid local continuation. An unresolved consequential choice, new scope or external action still follows the actual user's authorization and host policy. Apply the existing no-additional-charges constraint throughout.
