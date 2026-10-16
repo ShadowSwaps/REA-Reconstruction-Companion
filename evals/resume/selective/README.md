@@ -38,7 +38,10 @@ The reconstruction is a fixed maintainer completion, not an inferred agent patch
 Each node records the leaf hashes supporting its claim. The fixed evaluator
 checks declared edges against this fixture's independent dependency map before
 following them. Missing/extra/ambiguous edges, cycles and unavailable identities
-produce **unknown**, including through transitive dependencies. They never mean
+produce **unknown**, including through transitive dependencies. Each child must
+have complete string-valued SHA-256 bindings consistent with its parent's
+snapshot; a flattened parent record cannot repair missing or contradictory child
+evidence. These conditions never mean
 unchanged. Known differing identities produce **stale**. An unrelated finding or
 implementation is retained. Changing the A corpus alone does not invalidate the
 standalone B report. Shared interface or relevant runtime changes have wider
@@ -67,7 +70,8 @@ Inspect these new records after continuation:
 
 - `triage.json`: selected identities and applicability, with old implementation
   retained and score verification stale. Overall parity stays unverified.
-- `reassessment.json`: 16 target comparisons against the cap-200 expectations.
+- `reassessment.json`: 16 target comparisons against the cap-200 expectations,
+  bound to the target, interface, corpus, runtime and harness identities.
 - `before-report.json`: **five score and five end-to-end mismatches**, demonstrating
   why the old integration result cannot validate the changed task.
 - `fresh-report.json`: 16 score, 23 interface and 16 end-to-end comparisons,

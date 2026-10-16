@@ -51,6 +51,11 @@ test('process boundary retains independent B evidence and implementation, repair
   assert.deepEqual(value.reused, [{ id: 'V-format', reportSha256: hash(JSON.stringify(reused, null, 2) + '\n'), source: 'baseline.json' }]);
   assert.deepEqual(value.beforeFailures, { score: 5, integration: 5 });
   assert.equal(value.afterFailures, 0);
+  const reassessment = read(dir, 'reassessment.json');
+  assert.deepEqual(reassessment.bindings, Object.fromEntries(['targetA', 'interface', 'corpus', 'environment', 'harness'].map(key => [key, triage.selected[key]])));
+  assert.equal(reassessment.bindings.corpus, hash(before['corpus.json']));
+  assert.equal(reassessment.bindings.harness, hash(fs.readFileSync(runner)));
+  assert.equal(reassessment.comparisons.failed, 0);
   assert.deepEqual(read(dir, 'before-report.json').comparisons.integration.failures.map(row => row.index), [3,4,5,6,7]);
   // Literal expectations are independent of the runner's oracle and dependency labels.
   assert.deepEqual(fresh['V-score'].comparisons.actual, [0,99,100,101,199,200,200,200,null,null,null,null,null,null,null,null]);
@@ -116,6 +121,24 @@ test('corpus, runtime, shared interface, candidate and pipeline drift affect onl
   }
 });
 
+test('unknown or contradictory child identities propagate through every dependent result', t => {
+  const dir = prepare(t), original = read(dir, 'graph.json'), current = original['V-integration'].bindings;
+  for (const mutate of [
+    graph => delete graph['F-score'].bindings.targetA,
+    graph => graph['F-score'].bindings.targetA = 'c'.repeat(64),
+    graph => graph['F-score'].bindings.extra = 'c'.repeat(64),
+    graph => graph['F-score'].bindings.targetA = [current.targetA],
+  ]) {
+    const graph = structuredClone(original); mutate(graph);
+    const result = assess(graph, current);
+    for (const id of ['V-score', 'R-score', 'V-interface', 'V-integration']) assert.equal(result[id].applicability, 'unknown', id);
+    for (const id of ['F-format', 'V-format', 'R-format']) assert.equal(result[id].applicability, 'current', id);
+  }
+  for (const malformed of [[current.targetA], { hash: current.targetA }, true, 123]) {
+    assert.equal(assess(original, { ...current, targetA: malformed })['V-integration'].applicability, 'unknown');
+  }
+});
+
 for (const name of ['score-v2.mjs', 'candidate-v1.mjs', 'format.mjs', 'baseline.json', 'graph.json', 'environment.json', 'prepared.json']) {
   test(`changed ${name} is rejected before fresh execution without repairing history`, t => {
     const dir = prepare(t); fs.appendFileSync(path.join(dir, name), '\n ');
@@ -130,7 +153,7 @@ test('altered evidence cannot bless itself with a new receipt or execute embedde
   graph.command = [process.execPath, '-e', `require('fs').writeFileSync(${JSON.stringify(marker)},'ran')`];
   fs.writeFileSync(path.join(dir, 'graph.json'), JSON.stringify(graph));
   const receipt = read(dir, 'prepared.json'); receipt.files['graph.json'] = hash(fs.readFileSync(path.join(dir, 'graph.json')));
-  fs.writeFileSync(path.join(dir, 'prepared.json'), JSON.stringify(receipt));
+  fs.writeFileSync(path.join(dir, 'prepared.json'), JSON.stringify(receipt, null, 2) + '\n');
   assert.equal(cli(['continue', dir]).status, 2); assert.equal(fs.existsSync(marker), false);
   assert.equal(fs.existsSync(path.join(dir, 'triage.json')), false);
 });
@@ -159,6 +182,17 @@ test('fixture drift prevents preparation without silently rebaselining trusted b
   fs.appendFileSync(path.join(copy, 'fixtures/format.mjs'), '\n// drift');
   assert.equal(cli(['prepare', path.join(dir, 'case')], path.join(copy, 'run.mjs')).status, 2);
   assert.equal(fs.existsSync(path.join(dir, 'case')), false);
+});
+
+test('rebased receipt cannot authorize execution of a modified module', t => {
+  const dir = prepare(t), marker = path.join(path.dirname(dir), 'must-not-run');
+  const candidate = path.join(dir, 'candidate-v1.mjs');
+  fs.writeFileSync(candidate, `import fs from 'node:fs'; fs.writeFileSync(${JSON.stringify(marker)}, 'ran');`);
+  const receipt = read(dir, 'prepared.json'); receipt.files['candidate-v1.mjs'] = hash(fs.readFileSync(candidate));
+  fs.writeFileSync(path.join(dir, 'prepared.json'), JSON.stringify(receipt, null, 2) + '\n');
+  const before = snapshot(dir);
+  assert.equal(cli(['continue', dir]).status, 2);
+  assert.equal(fs.existsSync(marker), false); assert.deepEqual(snapshot(dir), before);
 });
 
 test('wrong repaired behavior retains actual failures and cannot claim integration success', t => {

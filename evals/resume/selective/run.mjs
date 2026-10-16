@@ -61,12 +61,23 @@ function graphFor(bindings, cap = 100) {
   for (const id of Object.keys(graph)) graph[id].bindings = Object.fromEntries(closure(id, graph).map(key => [key, bindings[key]]));
   return graph;
 }
+function historicalBindings(id, graph) {
+  const leaves = closure(id, graph), prior = graph[id].bindings;
+  ensure(prior && !Array.isArray(prior) && equal(Object.keys(prior).sort(), leaves), 'Incomplete identity evidence');
+  ensure(leaves.every(key => typeof prior[key] === 'string' && /^[a-f0-9]{64}$/.test(prior[key])), 'Unknown historical identity');
+  for (const child of dependencies[id].filter(key => Object.hasOwn(dependencies, key))) {
+    // A parent's flattened snapshot cannot substitute for missing child evidence
+    // or silently combine reports made against contradictory artifact identities.
+    const childBindings = historicalBindings(child, graph);
+    ensure(Object.entries(childBindings).every(([key, value]) => prior[key] === value), 'Conflicting dependency evidence');
+  }
+  return prior;
+}
 export function assess(graph, current) {
   return Object.fromEntries(Object.keys(dependencies).map(id => {
     try {
-      const leaves = closure(id, graph), prior = graph[id].bindings;
-      ensure(equal(Object.keys(prior).sort(), leaves), 'Incomplete identity evidence');
-      ensure(leaves.every(key => /^[a-f0-9]{64}$/.test(prior[key]) && /^[a-f0-9]{64}$/.test(current[key])), 'Unknown identity');
+      const prior = historicalBindings(id, graph), leaves = Object.keys(prior).sort();
+      ensure(leaves.every(key => typeof current[key] === 'string' && /^[a-f0-9]{64}$/.test(current[key])), 'Unknown identity');
       return [id, { applicability: leaves.some(key => prior[key] !== current[key]) ? 'stale' : 'current', dependencies: leaves }];
     } catch { return [id, { applicability: 'unknown', dependencies: null }]; }
   }));
@@ -133,7 +144,9 @@ function execute(dir, candidate, target, mode, corpus) {
   const env = Object.fromEntries(['SystemRoot', 'WINDIR', 'TEMP', 'TMP'].filter(k => process.env[k] !== undefined).map(k => [k, process.env[k]]));
   const result = spawnSync(process.execPath, ['--input-type=module', '--eval', program,
     ...[target ?? candidate, 'format.mjs', 'pipeline.mjs'].map(name => pathToFileURL(path.join(dir, name)).href), mode], {
-    input: JSON.stringify({ corpus, inputs: JSON.parse(read(path.join(dir, 'format-corpus.json'))) }), encoding: 'utf8', shell: false, windowsHide: true,
+    input: JSON.stringify({ corpus: mode === 'format' ? [] : corpus,
+      inputs: ['format', 'interface'].includes(mode) ? JSON.parse(read(path.join(dir, 'format-corpus.json'))) : [] }),
+    encoding: 'utf8', shell: false, windowsHide: true,
     timeout: 5000, maxBuffer: 1024 * 1024, env, cwd: dir,
   });
   ensure(!result.error && result.status === 0 && !result.signal && result.stderr === '', 'Execution error');
@@ -191,7 +204,9 @@ export function run(phase, directory) {
       format: { implementation: 'retained', verification: triage['R-format'].applicability } }, overallParity: 'unverified' });
   const expected = expectations(corpus, 200, formatCorpus);
   const target = compare(execute(dir, null, 'score-v2.mjs', 'score', corpus), expected.score);
-  put(dir, 'reassessment.json', { targetA: current.targetA, comparisons: target, expectationSource: 'independent-domain-and-cap-oracle' });
+  put(dir, 'reassessment.json', { targetA: current.targetA,
+    bindings: Object.fromEntries(['targetA', 'interface', 'corpus', 'environment', 'harness'].map(key => [key, current[key]])),
+    comparisons: target, coverage: 'listed synthetic corpus only', expectationSource: 'independent-domain-and-cap-oracle' });
   ensure(target.failed === 0, 'Changed target disagrees with expectations');
   const failed = {};
   for (const mode of ['score', 'integration']) failed[mode] = compare(execute(dir, 'candidate-v1.mjs', null, mode, corpus), expected[mode]);
