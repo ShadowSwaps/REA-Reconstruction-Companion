@@ -23,7 +23,10 @@ engine, model worker, paid API/service or installed-skill update was initiated.
 ## Evidence and reconstruction
 
 Reference SHA-256 identities were recorded before browser observation and checked
-unchanged afterward:
+unchanged afterward. The hashes were recorded in tool output; the frozen brief's
+promised standalone `identity.json` was not created. The later requirement
+checkpoint and audit consolidated identities. This procedural deviation remains
+visible; a later receipt cannot be backdated into a pre-observation manifest.
 
 - HTML: `686e977381dd33880dc9be478062053418077761107a7e364d04193161c999a3`.
 - JavaScript: `ed392ef1d7c581bf40af3dbfb12bc157902580992c6aad052931aeb0369c7335`.
@@ -75,15 +78,50 @@ An initial checker also rejected identical semantic values because serialized
 object keys differed in order. A retry retained an older checker binding in the
 persistent session. Both failed reports were kept; the repaired binding compared
 objects by fields while preserving array order. Three local guard regressions
-confirmed key-order tolerance, meaningful ordering/selection differences, and
-rejection of absent or failed results. The guide now distinguishes incidental
-serialization order from semantic state. No candidate behavior change was needed.
+passed, but their failed/absent-result example exercised a separate illustrative
+comparator, not the executed browser helper. It did not establish integrated
+action-failure coverage. The guide distinguishes incidental serialization order
+from semantic state. No candidate behavior change was needed.
 
 The private audit retains frozen scope, source/candidate bytes, setup/server,
 browser harness, raw accessibility and semantic captures, original failures,
 screenshots, REA bundle and hash-linked comparison report. Replay requires those
 retained inputs and the supported browser interface; this sanitized report alone
 is not a turnkey public benchmark. The existing CLI checker remains separate.
+
+## Review follow-up
+
+A same-agent review found that the saved browser helper retained only 28 of the
+30 checkpoint routines; the two separately executed keyboard checkpoints had
+captures but no saved replay routine. The original auditor also trusted stored
+pass flags and silently collapsed duplicate successful labels. A reduced
+reproduction accepted matching wrong states with forged flags and a duplicate
+checkpoint. These are audit/replay weaknesses, not demonstrated product defects.
+
+Read-only review verified all 18 originally recorded artifact hashes, recomputed
+expected fields for the 60 original successful captures and confirmed all 30
+pairs. A stricter verifier rejected matching wrong states, duplicates, missing
+checkpoints, missing capture fields and nonboolean pass flags. Original files,
+reports and failures were preserved.
+
+A complete review helper then replayed all 30 checkpoints per target and retained
+the keyboard routines and checkbox/Save focus checks. All 60 fresh captured states
+matched their historical counterparts. Four additional cases per target covered
+saving a changed existing title while preserving completion, its reload,
+cancelling an invalid edit, and selection with sparse imported IDs. All 68 fresh
+checkpoints passed, with 34 paired semantic-state matches. The capture projection
+contains rows/selection, empty/filter/editor/title/done/status/alerts and focus tag;
+it does not represent every browser or persistent-state detail.
+
+Two actual hidden-Save actions, one on each target, exceeded the declared short
+selector deadline. The review action wrapper retained both errors and rejected
+the captures even though their unchanged UI matched the expected baseline and
+each other. This establishes failure handling for that review path and probe;
+it does not retroactively validate the illustrative guard or every failure mode.
+The implementation guide now requires recomputed expectations, unique complete
+checkpoint sets, complete replay routines and tests of the actual harness path.
+The private review supplement binds its new scripts/captures with hashes. This
+follow-up is additional source-exposed review, not a second independent trial.
 
 Browser-process restart, storage-quota/permission save failure, concurrent tabs,
 power-loss durability, responsive layouts, performance, security, other browsers,
