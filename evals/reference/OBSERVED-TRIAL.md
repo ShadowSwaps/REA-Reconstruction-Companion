@@ -11,13 +11,16 @@ checks are maintainer validation, not additional reconstruction trials.
 
 The requested host settings were Sol, Medium reasoning and Standard speed. No
 settings were changed. Existing Node `v24.21.0` and configured local REA tools
-were used; no dependencies, extra agents, paid APIs, installations or account
-changes were initiated. Other models, hosts and runtime versions were unrun.
+were used; no dependencies, extra agents, paid APIs, active skill updates or
+account changes were initiated. Installer regression checks used disposable
+fixtures. Other live reconstruction models, hosts and runtime versions were unrun.
 
 ## Evidence and outcomes
 
 The frozen target file SHA-256 was
 `8ad2586a3adb43e19c55ead2999346ccbd416d0559226046aa0738bab188afb7`.
+The candidate file SHA-256 was
+`2a045a9a92e1e34fd8fcc98293118998107e7ffd98054ecfd08f8ea94549a8ac`.
 Packet verification passed before investigation and after reconstruction against
 the unchanged trusted package. The original packet and private audit outputs
 remain separate from this repository; the later task wording change does not
@@ -43,10 +46,13 @@ boundary before execution; human review remains pending.
 Thirty differential cases passed: the four recorded sequences, six boundary or
 invalid-input cases, and twenty deterministic 48-command sequences (LCG seed
 `0x102016`). This is bounded comparison coverage, not exhaustive parity. A real
-candidate process was terminated while waiting for EOF after receiving partial
-JSON. It produced no completed result and left the previously saved store hash
-unchanged. A fresh resume saved a subsequent edit. This controlled interruption
-does not establish power-loss or crash-durability recovery.
+candidate process was terminated before the parent sent EOF, after the parent
+wrote partial JSON to its input pipe. It produced no completed result and left
+the previously saved store hash unchanged. The trial did not establish how far
+the child had read or whether its command loop had started. A fresh invocation
+against that store saved a subsequent edit. This controlled interruption does
+not establish interrupted validation recovery, host-context restoration,
+power-loss recovery or crash durability.
 
 A separate disposable version 1.0.1 changed the startup seed title Alpha to
 Delta. The old candidate mismatch was retained before adapting the candidate.
@@ -72,6 +78,16 @@ revalidated; original version 1.0.0 evidence was preserved as history.
 
 The comparison corpus hash was
 `b7855eb49da06722fa94c914d39eb6933a8eec4022742fea4d0b4440d46d0bdc`.
+Review found that the private differential runner compared exit statuses without
+requiring each case's expected status, so matching process failures could have
+been counted as agreement. Inspection of the saved cases confirmed the expected
+statuses and response counts in all thirty; a guarded follow-up replay is
+recorded separately in the private audit. This does not change the original
+reports or constitute a new blind trial. The reference's original restricted-temp
+self-check and reduced rename diagnostic were captured in the tool trace, rather
+than saved as standalone report files; fresh evidence must not be relabeled as
+those original observations.
+
 The private audit preserves original and fresh reports, candidate bytes,
 probe inputs, pre-implementation checkpoint, interruption and component-change
 records. No benchmark score, clean-room result, cross-model certification,
