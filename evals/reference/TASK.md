@@ -20,7 +20,7 @@ Preserve observed behavior for this compatibility trial, including awkward behav
 
 1. A short target/scope brief and an evidence ledger: target hash, actual REA calls/results, runtime probes, observations, inferences, unknowns and trace references.
 2. A scoped contract and build plan, linking requirements to evidence and proposed checks. Keep architecture choices for your implementation distinct from observations about the reference.
-3. A reconstruction under a separate `candidate` directory, with launch instructions and no dependency on the reference artifact at runtime. Ask the human to review it before any checker executes it.
+3. A reconstruction under a separate `candidate` directory, with launch instructions and no dependency on the reference artifact at runtime. Inspect the generated code and exact launch command before any checker executes it. Follow the current user's authorization and host-required approval boundaries; request human review when those boundaries require it. Record who reviewed the code; an agent inspection is not human approval.
 4. A behavior-decision record and validation report. Preserve failed probes and unexplained differences. Mark real host/REA checks unrun or blocked unless actually observed; a passing comparison script cannot prove instruction following or approve a release.
 
 Record a checkpoint between investigation and implementation so a reviewer can inspect the evidence and contract. Follow any host-required approval boundaries. Do not read the checkout's `reviewer`, tests, checker, or completed reports during the trial; disclose any accidental exposure. These files are public, so this separation is a procedure, not enforced secrecy or protection from benchmark contamination.
