@@ -2,6 +2,10 @@
 
 These two synthetic supplied-evidence cases test a narrow resume decision: reuse a partial checkpoint when its target is unchanged, or mark artifact-dependent findings and verification stale when the selected target changes. The task stops before new investigation, implementation or execution. It does not add an approval gate to ordinary reconstruction work.
 
+For a separate deterministic local demonstration that verifies preserved files,
+completes a working candidate and captures fresh behavior after a process boundary,
+see the [executable walkthrough](WALKTHROUGH.md). It does not change this triage-only task or certify agent actions.
+
 The portable skill's [checkpoint guide](../../skills/rea-reconstruction-companion/references/checkpoints.md) describes the general method. This evaluation's small JSON format is only a fixture interface. It requires no AI SDK, memory service, package installation, network call or background worker. Existing Node.js 20+ runs the local reviewer checker. The core instructions and records can be used by other compatible hosts; these tests do not certify any host/model handoff.
 
 ## Evidence and the two decisions
