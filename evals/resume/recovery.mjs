@@ -23,12 +23,15 @@ function snapshot(directory, expected) {
     let stat;
     try { stat = fs.lstatSync(file); } catch (error) {
       if (error.code === 'ENOENT') return [name, { state: 'missing', expectedSha256, actualSha256: null }];
-      throw error;
+      return [name, { state: 'unverified', reason: 'unreadable', expectedSha256, actualSha256: null }];
     }
     if (!stat.isFile() || stat.isSymbolicLink() || stat.size > 65536) {
       return [name, { state: 'unverified', expectedSha256, actualSha256: null }];
     }
-    const actual = fs.readFileSync(file);
+    let actual;
+    try { actual = fs.readFileSync(file); } catch {
+      return [name, { state: 'unverified', reason: 'unreadable', expectedSha256, actualSha256: null }];
+    }
     assert(actual.length <= 65536, 'Oversized evidence');
     const actualSha256 = hash(actual);
     return [name, { state: actual.equals(bytes) ? 'matching' : 'modified', expectedSha256, actualSha256 }];

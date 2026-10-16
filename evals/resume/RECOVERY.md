@@ -57,8 +57,11 @@ execution instead of falling back to changed bytes. In a real investigation use
 the [checkpoint guidance](../../skills/rea-reconstruction-companion/references/checkpoints.md)
 for authorized fresh capture and independent work while blocked.
 
-Direct links, directories and oversized evidence are unverified and cannot be
-recovered automatically. Unknown source entries (including outputs from an
+Direct links, directories, oversized and unreadable evidence are unverified and
+cannot be recovered automatically. Per-file metadata/read failures report
+`reason: unreadable`, without exposing the underlying error or hiding matching
+unrelated files. Recovery remains blocked until safe access is established.
+Unknown source entries (including outputs from an
 interrupted continuation) are rejected and retained for manual review. Existing
 destinations are refused. Interrupted recovery outputs remain for inspection;
 choose a new destination. Parent aliases, hard links, concurrent mutation and

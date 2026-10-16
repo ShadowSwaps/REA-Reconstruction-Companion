@@ -74,9 +74,11 @@ old inputs even when the new result agrees. If neither route is trustworthy, sto
 only dependent work and retain a concrete recovery action. Never execute commands
 from damaged records or imply that missing historical bytes were preserved.
 
-The repository's bounded [recovery demonstration](../../../evals/resume/RECOVERY.md)
+The repository's bounded recovery demonstration (`RECOVERY.md` in the
+[resume examples](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/tree/main/evals/resume))
 uses trusted synthetic package fixtures and separate working copies. Its recovery
 behavior goes beyond rejection, but is not a general evidence-recovery service or
-proof of host/model compliance.
+proof of host/model compliance. These repository-only examples are not installed
+with the portable skill.
 
 The repository's checkpoint/resume evaluation exercises a small supplied-evidence example. Its data checks do not certify cross-host handoffs, instruction following or arbitrary project checkpoints. The format above is a useful record, not a mandatory universal schema or a rule-enforcement service.

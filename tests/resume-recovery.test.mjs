@@ -73,6 +73,32 @@ test('missing report blocks its verification only, retaining matching contract a
   assert.deepEqual(result.retained, ['scope:score-function', 'goal:original-parity', 'R-cap:not-started/unrun']);
 });
 
+for (const operation of ['lstatSync', 'readFileSync']) {
+  test(`an evidence ${operation} failure stays unverified without hiding unrelated files`, t => {
+    const { source, destination } = fixture(t);
+    const before = snapshot(source), file = path.join(source, 'input-report.json');
+    const original = fs[operation];
+    t.mock.method(fs, operation, function (selected, ...args) {
+      if (selected === file) throw Object.assign(new Error('private details must not escape'), { code: 'EACCES' });
+      return original.call(this, selected, ...args);
+    });
+    const result = inspect('resume', source);
+    assert.equal(result.files['input-report.json'].state, 'unverified');
+    assert.equal(result.files['input-report.json'].reason, 'unreadable');
+    assert.equal(result.files['input-report.json'].actualSha256, null);
+    assert.deepEqual(result.affected, ['R-input.prior-verification']);
+    for (const name of ['target.mjs', 'candidate-before.mjs', 'checkpoint.json', 'prepared.json']) {
+      assert.equal(result.files[name].state, 'matching');
+      assert.equal(result.files[name].actualSha256, result.files[name].expectedSha256);
+    }
+    assert.equal(JSON.stringify(result).includes('private details'), false);
+    assert.throws(() => recover('restore', 'resume', source, destination), /Unverified/);
+    assert.equal(fs.existsSync(destination), false);
+    t.mock.restoreAll();
+    assert.deepEqual(snapshot(source), before);
+  });
+}
+
 test('explicit supersession captures build 2 separately and reassesses before fresh testing', t => {
   const { source, destination } = fixture(t);
   // Even a replacement that happens to be the legitimate new target must not
