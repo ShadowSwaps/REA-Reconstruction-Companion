@@ -187,6 +187,8 @@ For manual recovery, use the printed receipt to locate the selected paths. Resto
 
 ## Source and development
 
+For stopped local validation, see the bounded [interrupted-run recovery example](evals/resume/INTERRUPTED.md): preserve the failed attempt, validate eligible completed evidence, and rerun unfinished checks in a fresh destination.
+
 The full source is included: skill and research references, installer, optional adapter, tests, manifest generator, and release builder. There are no hidden components or npm dependencies.
 
 ```sh

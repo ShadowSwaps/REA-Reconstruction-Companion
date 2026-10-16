@@ -82,6 +82,22 @@ uses unchanged fixture bytes, two controlled cap settings and a minimal real-loc
 Node probe. It demonstrates selective revalidation without a compatibility engine;
 cross-version and cross-host claims remain unverified.
 
+## Interrupted validation
+
+Retain the failed attempt and its outputs as history. A partial file, completion
+marker or passing status label does not prove a check completed. Establish which
+results are complete using trusted inputs, actual dependencies and independent
+behavioral evidence. Reuse only the scope whose target, candidate, corpus,
+relevant environment and harness still apply. If proof is missing, record why
+and rerun dependent work. Keep failed comparisons separate from execution errors
+and unknown/unrun checks. Resume in a fresh destination without overwriting the
+attempt; recheck preserved history and capture fresh final verification.
+
+The bounded repository-only
+[interrupted walkthrough example](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/tree/main/evals/resume/INTERRUPTED.md)
+demonstrates validated reuse and rerunning unfinished checks with trusted fixed
+fixtures. It is not a general checkpoint engine or crash-consistency guarantee.
+
 ## Missing or modified evidence
 
 Separate evidence availability from target change. A missing report does not prove
