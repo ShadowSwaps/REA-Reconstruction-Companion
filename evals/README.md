@@ -6,6 +6,8 @@ For a complete application to investigate with REA, use the [Pocket Tasks refere
 
 The [worked reconstruction example](reference/reconstruction/README.md) shows the implementation/validation step with real captured results and disclosed prior source/reviewer exposure. It is reviewer/training material, not evidence for a fresh trial or an independent agent benchmark.
 
+The [checkpoint/resume evaluation](resume/README.md) adds two supplied-evidence triage tasks and a JSON-only checker. It compares reuse and stale-result decisions without executing candidate code; explanation, preservation and actual actions still require human review.
+
 ## Run an evaluation
 
 1. Establish that the chosen host and tools cannot incur an additional charge. Do not launch metered model trials, extra agents, or paid sandboxes. If no suitable environment is available, run local harness tests only and report live-agent evaluation as unrun.
@@ -33,6 +35,8 @@ The reviewer-only expectations and executable oracle are deliberately separate f
 | `contract` | Assess a consumer/mock integration claim | Human review of real-provider verification limits |
 | `crypto` | Rebuild an authenticated message boundary | Published known answers, empty message/AAD boundaries, authentication failures and malformed fields in both directions |
 | `cost` | Choose among local, metered, and uncertain tools | Human review of actions and no-charge decisions |
+| `resume` | Resume a partial checkpoint for an unchanged target | Separate JSON record checker; scoped reuse, unfinished work and pending parity |
+| `changed-target` | Resume after the selected target changes | Separate JSON record checker; stale findings/report applicability and preserved history |
 
 The function/format corpora are deterministic generated differential fixtures, without code coverage instrumentation. They are not a general fuzzing engine. The crypto fixture is a factual byte transcription of [RFC 8439 section 2.8.2](https://www.rfc-editor.org/rfc/rfc8439#section-2.8.2), by Y. Nir and A. Langley; all keys are public synthetic test data. No cipher implementation or third-party source code is copied. The RFC remains subject to its [IETF Trust terms](https://trustee.ietf.org/license-info/).
 
