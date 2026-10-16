@@ -82,7 +82,7 @@ function comparison(values, oracle) {
   return { total: corpus.length, passed: corpus.length - failures.length, failed: failures.length, failures };
 }
 
-export function walkthrough(phase, caseId, directory) {
+export function walkthrough(phase, caseId, directory, options = {}) {
   assert(['prepare', 'continue'].includes(phase) && typeof directory === 'string' && directory.length > 0, 'Invalid invocation');
   const files = evidence(caseId), dir = path.resolve(directory);
   if (phase === 'prepare') {
@@ -117,10 +117,27 @@ export function walkthrough(phase, caseId, directory) {
     replacesApplicabilityOnly: true });
   const common = { schema: 1, kind: 'local-fixture-execution', targetSha256,
     corpusSha256: hash(JSON.stringify(corpus)), corpus, runtime: { node: process.version, platform: process.platform, arch: process.arch },
+    harnessSha256: hash(fs.readFileSync(fileURLToPath(import.meta.url))),
     expectationSource: 'independent-domain-and-cap-oracle', coverage: 'All integers 0..1000 and 13 invalid JSON representatives',
     targetComparisons: targetCheck, humanReview: 'pending', actualAgentActions: 'unverified', reaTrial: 'not-run' };
-  const before = comparison(execute(path.join(dir, 'candidate-before.mjs')), oracle);
+  // Only this fixed package candidate returns each accepted value unchanged.
+  // Validate the entire supplied report against independent expected results,
+  // fresh target behavior, and every execution dependency; labels cannot bless it.
+  const expectedBefore = { ...common, candidateSha256: beforeSha256,
+    comparisons: comparison(corpus.map(value => expected(value, 1000)), oracle), overallParity: 'unverified' };
+  const expectedReport = JSON.stringify(expectedBefore);
+  let reused = false;
+  if (options.priorBefore !== undefined) {
+    try { reused = JSON.stringify(options.priorBefore) === expectedReport; }
+    catch { /* Unverifiable report structure is missing proof, not an execution error. */ }
+  }
+  const before = reused ? expectedBefore.comparisons : comparison(execute(path.join(dir, 'candidate-before.mjs')), oracle);
   put('before-report.json', { ...common, candidateSha256: beforeSha256, comparisons: before, overallParity: 'unverified' });
+  if (options.recordRecovery) put('execution-recovery.json', {
+    before: reused ? 'reused-validated-completed-report' : 'fresh-execution',
+    target: 'fresh-execution', after: 'fresh-execution-required',
+    missingProof: reused ? null : 'No complete report matching trusted fixture outcomes and current dependencies',
+  });
   assert(before.failed > 0, 'Expected unfinished cap failures were absent');
   // A fixed, maintainer-authored repair of this fixture only. No source supplied
   // by the checkpoint is evaluated and no general patch/reconstruction engine exists.

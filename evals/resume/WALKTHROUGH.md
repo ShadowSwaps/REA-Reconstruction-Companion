@@ -22,7 +22,9 @@ node evals/resume/walkthrough.mjs continue changed-target "./changed-example"
 Use a directory outside the checkout for retained local results, or remove these
 example directories before packaging/committing. The runner never deletes a run
 or overwrites files; choose a new directory for another attempt. An interrupted
-run with output files is retained for inspection and cannot be continued again.
+run with output files is retained for inspection and cannot be continued again
+in place. Use the separate [interrupted-run recovery](INTERRUPTED.md) command
+to validate eligible completed evidence and rerun unfinished work in a fresh destination.
 Each command starts a separate process. The second command reads the prepared
 files, not in-memory state left by the first. This is a local process boundary,
 not a demonstrated cross-host or conversational handoff.
