@@ -16,7 +16,7 @@ function read(file) {
   assert(bytes.length <= 65536, 'Oversized evidence file');
   return bytes;
 }
-function evidence(caseId) {
+export function evidence(caseId) {
   assert(['resume', 'changed-target'].includes(caseId), 'Unknown case');
   const identities = JSON.parse(read(path.join(fixtures, 'identity.json')));
   const fixed = {};

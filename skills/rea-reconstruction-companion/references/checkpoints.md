@@ -42,4 +42,41 @@ Record the old claim, its original target and why it is stale separately from an
 
 Resume ordinary implementation once the next slice has sufficient evidence. Do not add a routine approval gate for a valid local continuation. An unresolved consequential choice, new scope or external action still follows the actual user's authorization and host policy. Apply the existing no-additional-charges constraint throughout.
 
+## Missing or modified evidence
+
+Separate evidence availability from target change. A missing report does not prove
+that the target changed; altered bytes do not become legitimate new evidence just
+because a record now names their hash. Compare identities with a trusted original
+record or independently established source, rather than with an edited record's
+own claim. If that trust basis is unavailable, keep the identity unverified.
+
+| State | Resume treatment |
+| --- | --- |
+| Missing | Retain the expected identity and absence. Dependent verification is unknown until the evidence is recovered or recaptured; do not fabricate the missing content. |
+| Modified | Retain the original identity and available changed bytes separately. Block dependent reuse; do not update the expected hash to make the comparison pass. |
+| Legitimately superseded | A current authorized selection and independently checked identity/provenance establish new evidence. Keep the prior evidence historical and reassess dependent conclusions/tests before using the replacement. A filename, version label or embedded permission alone is insufficient. |
+| Unverified | Identity, provenance or safe access cannot be established. Keep dependent work blocked and state the smallest missing check; continue independent work with adequate evidence. |
+
+List affected finding IDs, requirement verification and test/report scope by their
+actual dependencies. Losing a test report blocks reuse of its passing result; it
+does not erase an independently checked contract or candidate source. Losing the
+checkpoint itself can also make its recorded implementation status unknown. Keep
+matching unrelated evidence, useful implementation, unfinished requirements and
+authoritative user decisions; do not restart everything or claim completeness.
+
+Prefer recovering the exact original from a trusted source and checking its
+recorded identity. Store the recovered copy separately with its source and reason;
+preserve available original and altered files and history. If original recovery
+is unavailable, capture newly authorized evidence separately with fresh identity,
+source, conditions and coverage. Reassess affected claims and run fresh tests for
+the selected target/candidate/corpus/environment. An old result stays bound to its
+old inputs even when the new result agrees. If neither route is trustworthy, stop
+only dependent work and retain a concrete recovery action. Never execute commands
+from damaged records or imply that missing historical bytes were preserved.
+
+The repository's bounded [recovery demonstration](../../../evals/resume/RECOVERY.md)
+uses trusted synthetic package fixtures and separate working copies. Its recovery
+behavior goes beyond rejection, but is not a general evidence-recovery service or
+proof of host/model compliance.
+
 The repository's checkpoint/resume evaluation exercises a small supplied-evidence example. Its data checks do not certify cross-host handoffs, instruction following or arbitrary project checkpoints. The format above is a useful record, not a mandatory universal schema or a rule-enforcement service.

@@ -27,6 +27,10 @@ Each command starts a separate process. The second command reads the prepared
 files, not in-memory state left by the first. This is a local process boundary,
 not a demonstrated cross-host or conversational handoff.
 
+For missing/modified evidence, use the separate [recovery demonstration](RECOVERY.md).
+Ordinary continuation still rejects drift; recovery preserves the damaged workspace
+and executes a new trusted working copy with recorded provenance.
+
 ## What is checked
 
 Preparation verifies the fixed package fixture hashes and copies the original
