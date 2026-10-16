@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "kind": "maintainer-authored-record-comparisons",
+  "checkerSha256": "42514f6e659b57b6bee3c6270afe7cba1165d42045dd605113409bc35187ba31",
+  "independentAgentEvaluation": false,
+  "humanReview": "pending",
+  "reports": [
+    {
+      "schema": 1,
+      "case": "resume",
+      "kind": "checkpoint-record-comparison",
+      "status": "comparisons-passed",
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "results": [
+        {
+          "label": "record-shape",
+          "status": "passed"
+        },
+        {
+          "label": "schema",
+          "status": "passed"
+        },
+        {
+          "label": "target-identity",
+          "status": "passed"
+        },
+        {
+          "label": "mode",
+          "status": "passed"
+        },
+        {
+          "label": "scope",
+          "status": "passed"
+        },
+        {
+          "label": "behavior-goal",
+          "status": "passed"
+        },
+        {
+          "label": "candidate-identity",
+          "status": "passed"
+        },
+        {
+          "label": "preserved-history",
+          "status": "passed"
+        },
+        {
+          "label": "input-finding-applicability",
+          "status": "passed"
+        },
+        {
+          "label": "cap-finding-applicability",
+          "status": "passed"
+        },
+        {
+          "label": "input-implementation-and-verification",
+          "status": "passed"
+        },
+        {
+          "label": "unfinished-cap",
+          "status": "passed"
+        },
+        {
+          "label": "prior-report-applicability",
+          "status": "passed"
+        },
+        {
+          "label": "overall-parity-unverified",
+          "status": "passed"
+        },
+        {
+          "label": "next-action",
+          "status": "passed"
+        }
+      ],
+      "submissionSha256": "782b36b9d9d81562159bdf19916569377c50afa711f05f8033c80b9b236b8888",
+      "fixtureIdentitySha256": "f00f5fc73fc5f870c702067d3ce86962339803e30c4bbcb79b53a8f6ae5b4fad",
+      "humanReview": "pending",
+      "preservationOnDisk": "unverified",
+      "actualAgentActions": "unverified",
+      "reaTrial": "not-run"
+    },
+    {
+      "schema": 1,
+      "case": "changed-target",
+      "kind": "checkpoint-record-comparison",
+      "status": "comparisons-passed",
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "results": [
+        {
+          "label": "record-shape",
+          "status": "passed"
+        },
+        {
+          "label": "schema",
+          "status": "passed"
+        },
+        {
+          "label": "target-identity",
+          "status": "passed"
+        },
+        {
+          "label": "mode",
+          "status": "passed"
+        },
+        {
+          "label": "scope",
+          "status": "passed"
+        },
+        {
+          "label": "behavior-goal",
+          "status": "passed"
+        },
+        {
+          "label": "candidate-identity",
+          "status": "passed"
+        },
+        {
+          "label": "preserved-history",
+          "status": "passed"
+        },
+        {
+          "label": "input-finding-applicability",
+          "status": "passed"
+        },
+        {
+          "label": "cap-finding-applicability",
+          "status": "passed"
+        },
+        {
+          "label": "input-implementation-and-verification",
+          "status": "passed"
+        },
+        {
+          "label": "unfinished-cap",
+          "status": "passed"
+        },
+        {
+          "label": "prior-report-applicability",
+          "status": "passed"
+        },
+        {
+          "label": "overall-parity-unverified",
+          "status": "passed"
+        },
+        {
+          "label": "next-action",
+          "status": "passed"
+        }
+      ],
+      "submissionSha256": "a178f67aa1a62876c1fd088ffc520072843bbc0d91a028f725a1df7f4ed2d834",
+      "fixtureIdentitySha256": "f00f5fc73fc5f870c702067d3ce86962339803e30c4bbcb79b53a8f6ae5b4fad",
+      "humanReview": "pending",
+      "preservationOnDisk": "unverified",
+      "actualAgentActions": "unverified",
+      "reaTrial": "not-run"
+    }
+  ]
+}
