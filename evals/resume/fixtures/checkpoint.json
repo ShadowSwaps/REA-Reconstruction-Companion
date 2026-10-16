@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "id": "checkpoint-v1",
+  "mode": "build-from-specification",
+  "scope": "score-function",
+  "behaviorGoal": "original-parity",
+  "target": {
+    "version": "1.0.0",
+    "sha256": "976decf4ae63f2333a5a1c3f4b2a6b3f1a383db044e5eca2b53eeb80293d5aa3"
+  },
+  "candidateSha256": "9724d08af1b52829f31124998edba6483ebad638d31d0c4b8836a45ed74c55f0",
+  "findings": {
+    "F-input": {
+      "claim": "Integer values 0..1000 accepted; other JSON values rejected with null.",
+      "source": "target-v1.mjs:3",
+      "targetSha256": "976decf4ae63f2333a5a1c3f4b2a6b3f1a383db044e5eca2b53eeb80293d5aa3"
+    },
+    "F-cap": {
+      "claim": "Accepted scores are capped at 100.",
+      "source": "target-v1.mjs:4",
+      "targetSha256": "976decf4ae63f2333a5a1c3f4b2a6b3f1a383db044e5eca2b53eeb80293d5aa3"
+    }
+  },
+  "requirements": {
+    "R-input": {
+      "finding": "F-input",
+      "implementation": "implemented",
+      "verification": "verified-input-cases",
+      "report": "input-report-v1"
+    },
+    "R-cap": {
+      "finding": "F-cap",
+      "implementation": "not-started",
+      "verification": "unrun"
+    }
+  },
+  "validation": {
+    "report": "input-report-v1",
+    "reportSha256": "59d9fd3cbf5d9dcacb882b04a91faae873a0b7127da93e56b1e53a3e88d581fe",
+    "overallParity": "unverified"
+  },
+  "unknowns": [
+    "Cap implementation and full candidate comparisons remain unfinished."
+  ],
+  "nextAction": "implement-cap-and-test",
+  "provenance": "Synthetic maintainer-authored checkpoint; six input-only comparisons were actually run. No live agent or REA trial."
+}

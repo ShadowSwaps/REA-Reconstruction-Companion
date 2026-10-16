@@ -25,6 +25,8 @@ The [Pocket Tasks procedure](evals/reference/README.md) adds a shipped local ref
 
 The [worked reconstruction](evals/reference/reconstruction/README.md) is a disclosed maintainer-informed example. Run its fixed local validator after changing the candidate or evidence; preserve failures and update its captured report only from actual output after review. Its hash regression test prevents quietly retaining a report for changed source bytes. Keep this answer material outside new candidate packets and avoid presenting its successful comparisons as a blind evaluation or release approval.
 
+The [resume evaluation](evals/resume/README.md) checks two fixed JSON checkpoint records. Keep its authored examples and expected comparisons outside fresh agent evidence. Review actual actions and preserved bytes separately; a status label cannot prove preservation or authorization. Fixture or checker changes require reassessing the expected decisions and recapturing worked results from a real local check, without silently rewriting historical evidence to claim current parity.
+
 The no-additional-charges rule applies to development and indirect work too. The included CI jobs skip private repositories and use standard public-repository runners; do not add paid runners, model APIs, cloud jobs, cache/artifact storage, or billing changes. Verify the actual environment before triggering remote checks; a copied workflow or free-tier label alone is not a guarantee. GitHub documents the distinction in [Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions). Do not represent Markdown instructions or passing tests as a billing sandbox.
 
 ## Security scanning

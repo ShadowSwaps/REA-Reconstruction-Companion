@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "target": {
+    "version": "1.0.0",
+    "sha256": "976decf4ae63f2333a5a1c3f4b2a6b3f1a383db044e5eca2b53eeb80293d5aa3"
+  },
+  "mode": "build-from-specification",
+  "scope": "score-function",
+  "behaviorGoal": "original-parity",
+  "candidateSha256": "9724d08af1b52829f31124998edba6483ebad638d31d0c4b8836a45ed74c55f0",
+  "history": {
+    "checkpointSha256": "3f49ebb55dfc064cea75cba5a69bca3ddd76e1b225b20c0d735e8731c1436e91",
+    "reportSha256": "59d9fd3cbf5d9dcacb882b04a91faae873a0b7127da93e56b1e53a3e88d581fe",
+    "preserved": true
+  },
+  "findings": {
+    "F-input": "current",
+    "F-cap": "current"
+  },
+  "requirements": {
+    "R-input": {
+      "implementation": "implemented",
+      "verification": "verified-input-cases"
+    },
+    "R-cap": {
+      "implementation": "not-started",
+      "verification": "unrun"
+    }
+  },
+  "validation": {
+    "reportApplicability": "current-input-cases-only",
+    "overallParity": "unverified"
+  },
+  "nextAction": "implement-cap-and-test"
+}

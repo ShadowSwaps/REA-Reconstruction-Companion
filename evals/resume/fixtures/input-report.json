@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "id": "input-report-v1",
+  "kind": "local-fixture-comparison",
+  "targetSha256": "976decf4ae63f2333a5a1c3f4b2a6b3f1a383db044e5eca2b53eeb80293d5aa3",
+  "candidateSha256": "9724d08af1b52829f31124998edba6483ebad638d31d0c4b8836a45ed74c55f0",
+  "corpusSha256": "145bd0d54e2c803892cdd5d0f51006fac98c071cac6dab45aba45b28ae23bfce",
+  "scope": "Six supplied input-only cases; cap not tested",
+  "status": "comparisons-passed",
+  "passed": 6,
+  "failed": 0,
+  "corpus": [
+    {
+      "input": 0,
+      "expected": 0
+    },
+    {
+      "input": 25,
+      "expected": 25
+    },
+    {
+      "input": -1,
+      "expected": null
+    },
+    {
+      "input": 1001,
+      "expected": null
+    },
+    {
+      "input": "5",
+      "expected": null
+    },
+    {
+      "input": 0.5,
+      "expected": null
+    }
+  ],
+  "overallParity": "unverified",
+  "humanReview": "pending",
+  "reaTrial": "not-run"
+}
