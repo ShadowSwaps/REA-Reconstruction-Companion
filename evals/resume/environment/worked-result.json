@@ -1,0 +1,211 @@
+{
+  "disclosure": "Maintainer-authored fixtures, actual local execution; no live agent/REA or cross-host certification.",
+  "runtime": {
+    "kind": "measured-local",
+    "status": "known",
+    "value": {
+      "node": "v24.21.0",
+      "v8": "13.6.233.17-node.53",
+      "platform": "win32",
+      "arch": "x64"
+    }
+  },
+  "same": {
+    "status": "environment-demo-passed",
+    "scenario": "same",
+    "executed": [],
+    "reused": [
+      {
+        "id": "score",
+        "source": "baseline.json",
+        "sha256": "f921de9e341b5330a3eed620e642ecaaf4e2c5361893e9c706e56c93eef73c57"
+      },
+      {
+        "id": "format",
+        "source": "baseline.json",
+        "sha256": "0f22137c97e8e088df80dee32a40b63de448ae4b9f73214b3a758f6df8d69939"
+      },
+      {
+        "id": "integration",
+        "source": "baseline.json",
+        "sha256": "83c43453ddcfdd1ec7e106d7ec2ccbd75d76f32f77a42747ddd1edee73e3ca5a"
+      }
+    ],
+    "failed": 0,
+    "requirements": {
+      "score": {
+        "implementation": "retained-identical-bytes",
+        "verification": "verified-listed-corpus-only"
+      },
+      "format": {
+        "implementation": "retained-identical-bytes",
+        "verification": "verified-listed-corpus-only"
+      },
+      "integration": {
+        "implementation": "retained-identical-bytes",
+        "verification": "verified-listed-corpus-only"
+      }
+    },
+    "preservation": {
+      "target.mjs": "7d5c04e0f3b616ee1b3c20fa60acb8b5913f418d3e003f673559b5f06a523d2c",
+      "candidate.mjs": "18b2b04aa4c26ac5c2fc57c4ab2b3b3b0d043e2523226c5e96278aff86cb6a5e",
+      "format.mjs": "b96dfa168ca9c97ad6214aa15416b3e3df532c6236bba86f5bda5b495f5a5731",
+      "corpus.json": "9b4477a1a4ab0ef420cd97fffeb22fd0518e3952b6253cb801ef5fd95f2632ec",
+      "environment.json": "652482471893ee349712d58ee6d97f21733082cb7a23af111678aeae4057dc56",
+      "baseline.json": "a1083f72c38d5acc69ea902c21bd7be67c134c82c992818c976ed40760636f54",
+      "prepared.json": "f4f5d80c2986904a14d6299e64dbbfe7f7b3edcc42b9c4058b2d3dcb55c2e474"
+    },
+    "overallParity": "unverified",
+    "crossVersionDrift": "not-tested",
+    "crossHostCompatibility": "unverified",
+    "humanReview": "pending"
+  },
+  "drift": {
+    "status": "environment-demo-passed",
+    "scenario": "drift",
+    "executed": [
+      "score",
+      "integration"
+    ],
+    "reused": [
+      {
+        "id": "format",
+        "source": "baseline.json",
+        "sha256": "0f22137c97e8e088df80dee32a40b63de448ae4b9f73214b3a758f6df8d69939"
+      }
+    ],
+    "failed": 0,
+    "requirements": {
+      "score": {
+        "implementation": "retained-identical-bytes",
+        "verification": "verified-listed-corpus-only"
+      },
+      "format": {
+        "implementation": "retained-identical-bytes",
+        "verification": "verified-listed-corpus-only"
+      },
+      "integration": {
+        "implementation": "retained-identical-bytes",
+        "verification": "verified-listed-corpus-only"
+      }
+    },
+    "preservation": {
+      "target.mjs": "7d5c04e0f3b616ee1b3c20fa60acb8b5913f418d3e003f673559b5f06a523d2c",
+      "candidate.mjs": "18b2b04aa4c26ac5c2fc57c4ab2b3b3b0d043e2523226c5e96278aff86cb6a5e",
+      "format.mjs": "b96dfa168ca9c97ad6214aa15416b3e3df532c6236bba86f5bda5b495f5a5731",
+      "corpus.json": "9b4477a1a4ab0ef420cd97fffeb22fd0518e3952b6253cb801ef5fd95f2632ec",
+      "environment.json": "652482471893ee349712d58ee6d97f21733082cb7a23af111678aeae4057dc56",
+      "baseline.json": "a1083f72c38d5acc69ea902c21bd7be67c134c82c992818c976ed40760636f54",
+      "prepared.json": "f4f5d80c2986904a14d6299e64dbbfe7f7b3edcc42b9c4058b2d3dcb55c2e474"
+    },
+    "overallParity": "unverified",
+    "crossVersionDrift": "not-tested",
+    "crossHostCompatibility": "unverified",
+    "humanReview": "pending"
+  },
+  "driftReport": {
+    "target": {
+      "bindings": {
+        "target": "7d5c04e0f3b616ee1b3c20fa60acb8b5913f418d3e003f673559b5f06a523d2c",
+        "corpus": "9b4477a1a4ab0ef420cd97fffeb22fd0518e3952b6253cb801ef5fd95f2632ec",
+        "runtime": "9b29de2551019f9000e4b8356b7568162d14492f76ec8d52e4093f298cb0e0b4",
+        "cap": "7962454dfd02f23d5e024c44c4f0658081e4b107f6c4feeeddc024460c14a355",
+        "harness": "dd3aad4b6d03ba0744bc06f72095e806a82d90542b4f9f693a7eed45cb8ebd30"
+      },
+      "comparisons": {
+        "actual": [
+          0,
+          99,
+          100,
+          101,
+          199,
+          200,
+          200,
+          200,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "total": 16,
+        "failed": 0
+      },
+      "scope": "listed-synthetic-corpus-only",
+      "expectationSource": "independent-domain-and-cap-oracle"
+    },
+    "checks": {
+      "score": {
+        "bindings": {
+          "target": "7d5c04e0f3b616ee1b3c20fa60acb8b5913f418d3e003f673559b5f06a523d2c",
+          "candidate": "18b2b04aa4c26ac5c2fc57c4ab2b3b3b0d043e2523226c5e96278aff86cb6a5e",
+          "corpus": "9b4477a1a4ab0ef420cd97fffeb22fd0518e3952b6253cb801ef5fd95f2632ec",
+          "runtime": "9b29de2551019f9000e4b8356b7568162d14492f76ec8d52e4093f298cb0e0b4",
+          "cap": "7962454dfd02f23d5e024c44c4f0658081e4b107f6c4feeeddc024460c14a355",
+          "harness": "dd3aad4b6d03ba0744bc06f72095e806a82d90542b4f9f693a7eed45cb8ebd30"
+        },
+        "comparisons": {
+          "actual": [
+            0,
+            99,
+            100,
+            101,
+            199,
+            200,
+            200,
+            200,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "total": 16,
+          "failed": 0
+        },
+        "scope": "listed-synthetic-corpus-only"
+      },
+      "integration": {
+        "bindings": {
+          "target": "7d5c04e0f3b616ee1b3c20fa60acb8b5913f418d3e003f673559b5f06a523d2c",
+          "candidate": "18b2b04aa4c26ac5c2fc57c4ab2b3b3b0d043e2523226c5e96278aff86cb6a5e",
+          "corpus": "9b4477a1a4ab0ef420cd97fffeb22fd0518e3952b6253cb801ef5fd95f2632ec",
+          "runtime": "9b29de2551019f9000e4b8356b7568162d14492f76ec8d52e4093f298cb0e0b4",
+          "cap": "7962454dfd02f23d5e024c44c4f0658081e4b107f6c4feeeddc024460c14a355",
+          "harness": "dd3aad4b6d03ba0744bc06f72095e806a82d90542b4f9f693a7eed45cb8ebd30",
+          "formatter": "b96dfa168ca9c97ad6214aa15416b3e3df532c6236bba86f5bda5b495f5a5731",
+          "formatCorpus": "dffc9e0d6408d269016b2cfc4024dad1895fa6d0cb6e17db2bebb1c652c0f8dd"
+        },
+        "comparisons": {
+          "actual": [
+            "score:0",
+            "score:99",
+            "score:100",
+            "score:101",
+            "score:199",
+            "score:200",
+            "score:200",
+            "score:200",
+            "invalid",
+            "invalid",
+            "invalid",
+            "invalid",
+            "invalid",
+            "invalid",
+            "invalid",
+            "invalid"
+          ],
+          "total": 16,
+          "failed": 0
+        },
+        "scope": "listed-synthetic-corpus-only"
+      }
+    }
+  }
+}
