@@ -1,0 +1,50 @@
+{
+  "status": "selective-passed",
+  "reused": [
+    {
+      "id": "V-format",
+      "reportSha256": "98477455dc26f4436d15ada957945430fc6c135dcaa046f2e261c3c08d99dca0",
+      "source": "baseline.json"
+    }
+  ],
+  "executed": [
+    "V-score",
+    "V-interface",
+    "V-integration"
+  ],
+  "afterFailures": 0,
+  "beforeFailures": {
+    "score": 5,
+    "integration": 5
+  },
+  "requirements": {
+    "score": {
+      "implementation": "candidate-v2.mjs",
+      "verification": "verified-listed-corpus-only"
+    },
+    "format": {
+      "implementation": "retained",
+      "verification": "verified-listed-corpus-only"
+    }
+  },
+  "preservation": {
+    "score-v1.mjs": "0a3e872b347f99518bf3b1c3d38a9f3c99536d4060063ab5a70faa8d49907f2c",
+    "score-v2.mjs": "d812028dc638f5a2990b8872fb5b0635a2ea0c8222984d1e798f26facdffd228",
+    "candidate-v1.mjs": "0f26a435d101fa4bbd31367e771f4fb2d8cb3a4277bb478462a7256bbac7a90d",
+    "candidate-v2.mjs": "a19823d72b6dd72567d3c111f4596a2edf6a62954b47023519d2ddadf375c76a",
+    "format.mjs": "9e7fa924c620f5c21dfbbf0f4ff29474e20cf44c022cb1f281767a52cb792dea",
+    "pipeline.mjs": "08c842610e5e8336e168c5b69e7c47b40509d3da01363821e509a63934501cb6",
+    "interface.json": "2b3de54d589bfeeea76051fc942cef00eea0641d97e70871dffa0183d2e15bca",
+    "corpus.json": "294bf9dafdbf9807d40740f5e01648d59b1e3304e686fa2c12d688d027958ced",
+    "format-corpus.json": "8bd24c4b94fffd389683b7ab6819772b8c919107309e2497cec453d1b848540f",
+    "environment.json": "8844829aa1d2dd9424f9b643fa293296802f769c99f5c09f41549dee676f4596",
+    "graph.json": "3005cb5eb1487575e185ba1bd2338a024ba16054f2519df756bf6b140e2d7dd9",
+    "baseline.json": "396694368cfa7ec398b453c37b8c02722f93f23c9e12a0b0f947be0575c63e5c",
+    "prepared.json": "c3c5a6410a789d7b9d54cf5b947dd4e094aa794a2067c0697106fd275c7d5a42"
+  },
+  "overallParity": "unverified",
+  "humanReview": "pending",
+  "actualAgentActions": "unverified",
+  "reaTrial": "not-run",
+  "crossHostContinuation": "unverified"
+}

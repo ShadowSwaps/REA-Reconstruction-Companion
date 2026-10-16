@@ -1,0 +1,5 @@
+{
+  "scoreOutput": "finite integer 0..200 or null",
+  "formatInput": "finite integer 0..200 or null",
+  "formatOutput": "score:<integer> or invalid"
+}
