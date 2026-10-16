@@ -125,6 +125,8 @@ Use stable local IDs and traceability: **feature -> evidence -> requirement -> c
 
 Maintain a checkpoint in the task outputs with current mode, target identity, decisions, evidence locations, completed work, blockers, and next concrete actions. Read only task-relevant records when resuming; do not load another chat's state without the user's request.
 
+When resuming work or reassessing a changed target, use [portable checkpoints and evidence applicability](references/checkpoints.md) to preserve useful progress while distinguishing current results from historical ones.
+
 When an artifact, environment, analysis assumption, or interface changes, mark affected findings and dependent requirements/tests stale until reassessed. Preserve the prior result and explain the revision. Stop digging into a mechanism once the selected behavior and design decision have adequate support; keep unanswered questions visible and prioritize those that could change the next implementation step.
 
 In product specification mode, finish when the selected workflows have actionable requirements, a proposed design, a build sequence, validation criteria, and explicit remaining gaps. For narrower subjects, finish when the selected question or scoped contract is adequately answered with evidence and limits. In build mode, judge completion against the selected acceptance criteria and actual integration results. Report open required questions as partial or unresolved; never claim global equivalence or complete understanding from limited coverage.
