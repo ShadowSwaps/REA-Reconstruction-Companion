@@ -5,6 +5,8 @@ These two synthetic supplied-evidence cases test a narrow resume decision: reuse
 For a separate deterministic local demonstration that verifies preserved files,
 completes a working candidate and captures fresh behavior after a process boundary,
 see the [executable walkthrough](WALKTHROUGH.md). It does not change this triage-only task or certify agent actions.
+The separate [evidence recovery demonstration](RECOVERY.md) continues from trusted
+copies after missing/modified evidence, with explicit supersession and fresh tests.
 
 The portable skill's [checkpoint guide](../../skills/rea-reconstruction-companion/references/checkpoints.md) describes the general method. This evaluation's small JSON format is only a fixture interface. It requires no AI SDK, memory service, package installation, network call or background worker. Existing Node.js 20+ runs the local reviewer checker. The core instructions and records can be used by other compatible hosts; these tests do not certify any host/model handoff.
 
@@ -54,4 +56,4 @@ The tests reproduce the six input-only comparisons, show the reference/candidate
 
 Apply [rubric.md](../rubric.md) and [review-template.md](../review-template.md). A passing JSON claim that history was preserved does not prove any file was preserved. Reports therefore always retain `humanReview: pending`, `preservationOnDisk: unverified`, `actualAgentActions: unverified` and `reaTrial: not-run`. Inspect actual file identities and action traces, reasoning, evidence citations, current user intent, scope/cost boundaries and the absence of prohibited actions. Reading an embedded permission or writing the expected labels is not authorization or verified compliance.
 
-This example exercises an unchanged and a changed target at a resume boundary. Candidate changes are represented by identity mismatch tests; runtime/environment drift, missing evidence, multi-artifact dependency selection and full cross-host continuation remain separate future evaluations. A new live evaluation or later implementation must record its own results. Passing this checker does not approve a merge, release, installation or publication.
+This triage example exercises an unchanged and a changed target at a resume boundary. Candidate changes are represented by identity mismatch tests; missing/modified evidence has a separate local recovery demonstration linked above. Runtime/environment drift, multi-artifact dependency selection and full cross-host continuation remain separate future evaluations. A new live evaluation or later implementation must record its own results. Passing this checker does not approve a merge, release, installation or publication.

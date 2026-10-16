@@ -35,6 +35,13 @@ test('fresh integrated install, backup and repeated install are correct', t => {
   assert.equal(fs.readFileSync(path.join(result.backupDirectory, 'rea-before.md'), 'utf8'), base);
   assert.ok(fs.readFileSync(f.reaSkill, 'utf8').includes(BEGIN));
   assert.ok(fs.existsSync(path.join(result.companion, 'references', 'performance.md')));
+  // Installed skills omit repository-only evals. Relative guide links must
+  // resolve in the actual installation, not merely in the source checkout.
+  const guide = path.join(result.companion, 'references', 'checkpoints.md');
+  for (const [, target] of fs.readFileSync(guide, 'utf8').matchAll(/\]\(([^\s)]+)\)/g)) {
+    if (/^(https?:|#)/.test(target)) continue;
+    assert.ok(fs.existsSync(path.resolve(path.dirname(guide), target.split('#')[0])), `Broken installed checkpoint link: ${target}`);
+  }
   assert.ok(!fs.existsSync(path.join(result.companion, 'agents')));
   assert.equal(applyInstall(plan(f)).status, 'already-installed');
   assert.equal(fs.readFileSync(f.reaSkill, 'utf8').split(BEGIN).length, 2);
