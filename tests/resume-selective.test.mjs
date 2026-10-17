@@ -1,3 +1,4 @@
+import { fixtureLink } from '../scripts/test-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -166,13 +167,13 @@ test('missing, linked, oversized and unexpected evidence cannot trigger continua
     if (mode === 'extra') fs.writeFileSync(path.join(dir, 'fresh-report.json'), 'keep');
     if (mode === 'link') {
       const outside = path.join(path.dirname(dir), 'outside'); fs.mkdirSync(outside);
-      fs.unlinkSync(file); fs.symlinkSync(outside, file, process.platform === 'win32' ? 'junction' : 'dir');
+      fs.unlinkSync(file); fixtureLink(outside, file, process.platform === 'win32' ? 'junction' : 'dir');
     }
     assert.equal(cli(['continue', dir]).status, 2); assert.equal(fs.existsSync(path.join(dir, 'triage.json')), false);
     if (mode === 'link') fs.unlinkSync(file);
   }
   const dir = prepare(t), alias = path.join(path.dirname(dir), 'alias');
-  fs.symlinkSync(dir, alias, process.platform === 'win32' ? 'junction' : 'dir');
+  fixtureLink(dir, alias, process.platform === 'win32' ? 'junction' : 'dir');
   assert.equal(cli(['continue', alias]).status, 2); fs.unlinkSync(alias);
   for (const args of [[], ['prepare', dir], ['bless', dir], ['continue', dir, 'extra']]) assert.equal(cli(args).status, 2);
 });

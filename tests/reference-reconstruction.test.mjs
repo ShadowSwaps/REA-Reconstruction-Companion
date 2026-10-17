@@ -1,3 +1,4 @@
+import { fixtureLink } from '../scripts/test-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -121,7 +122,7 @@ test('foreign pending files survive and save can be retried after their removal'
 
 test('linked parents and relative store paths fail without writing', t => {
   const dir = fixture(t), outside = path.join(dir, 'outside'); fs.mkdirSync(outside);
-  const linked = path.join(dir, 'linked'); fs.symlinkSync(outside, linked, process.platform === 'win32' ? 'junction' : 'dir');
+  const linked = path.join(dir, 'linked'); fixtureLink(outside, linked, process.platform === 'win32' ? 'junction' : 'dir');
   assert.equal(run(dir, [{ op: 'save' }], path.join(linked, 'tasks.json')).status, 2);
   assert.deepEqual(fs.readdirSync(outside), []);
   assert.equal(run(dir, [{ op: 'save' }], 'tasks.json').status, 2);

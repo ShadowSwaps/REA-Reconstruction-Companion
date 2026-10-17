@@ -27,7 +27,7 @@ jobs:
         run: |
           node scripts/manifest.mjs
           git diff --exit-code -- manifest.json
-      - run: node --test
+      - run: node scripts/test.mjs
       - name: Verify and test the release archive
         run: |
           python scripts/build_release.py

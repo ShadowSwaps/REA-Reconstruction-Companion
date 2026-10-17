@@ -1,3 +1,4 @@
+import { fixtureLink } from '../scripts/test-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -311,7 +312,7 @@ test('an upstream REA update can be detected and the integration restored', t =>
 test('symlinked REA paths are rejected rather than modifying their target', t => {
   const f = fixture(t);
   const alias = path.join(f.directory, 'linked-rea');
-  fs.symlinkSync(path.dirname(f.reaSkill), alias, process.platform === 'win32' ? 'junction' : 'dir');
+  fixtureLink(path.dirname(f.reaSkill), alias, process.platform === 'win32' ? 'junction' : 'dir');
   assert.throws(() => planInstall({ ...f.options, reaSkill: path.join(alias, 'SKILL.md') }, f.context), /symbolic link or junction/);
   assert.equal(fs.readFileSync(f.reaSkill, 'utf8'), base);
 });
