@@ -86,6 +86,8 @@ For a function, interface, or format, start with a compact contract: inputs and 
 
 For file import/export reconstruction, use the [file compatibility procedure](references/file-compatibility.md) to freeze version/schema and encoding decisions, test both interoperability directions beyond round trips, and verify that rejection or failed persistence preserves prior state. Keep caught-write recovery separate from crash durability and concurrency claims.
 
+For adapting a saved reconstruction to another selected version, use the [version-change procedure](references/version-changes.md) to establish actual behavioral changes, select dependent revalidation and verify migration/recovery against frozen expectations.
+
 Start from the exact target and a prioritized question checklist. Use REA summaries and focused follow-ups to trace priority workflows from trigger through state/data changes to results. Read the base skill's target-specific references only when needed. Reuse matching evidence; a new target or version must not silently inherit another app's conclusions.
 
 Distinguish **observed facts**, **inferences**, **unknowns**, and **proposed design choices** throughout. Static analysis does not establish runtime behavior, strings do not establish active features, and client/network evidence does not reveal an inaccessible backend's complete implementation. Use bounded experiments to resolve uncertainties that could change the design.

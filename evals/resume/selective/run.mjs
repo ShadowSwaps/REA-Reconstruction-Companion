@@ -43,12 +43,12 @@ export const dependencies = {
   'V-interface': ['F-score', 'F-format', 'candidateA', 'candidateB', 'corpus', 'formatCorpus', 'environment', 'harness'],
   'V-integration': ['V-score', 'V-format', 'V-interface', 'pipeline'],
 };
-function closure(id, graph, active = new Set()) {
+function closure(id, graph, active = new Set(), map = dependencies) {
   ensure(!active.has(id), 'Cyclic dependencies');
-  if (!Object.hasOwn(dependencies, id)) return [id];
-  ensure(equal(graph[id]?.dependencies, dependencies[id]), 'Missing or ambiguous dependencies');
+  if (!Object.hasOwn(map, id)) return [id];
+  ensure(equal(graph[id]?.dependencies, map[id]), 'Missing or ambiguous dependencies');
   const next = new Set(active).add(id);
-  return [...new Set(dependencies[id].flatMap(child => closure(child, graph, next)))].sort();
+  return [...new Set(map[id].flatMap(child => closure(child, graph, next, map)))].sort();
 }
 function graphFor(bindings, cap = 100) {
   const graph = Object.fromEntries(Object.entries(dependencies).map(([id, deps]) => [id, { dependencies: deps }]));
@@ -61,22 +61,23 @@ function graphFor(bindings, cap = 100) {
   for (const id of Object.keys(graph)) graph[id].bindings = Object.fromEntries(closure(id, graph).map(key => [key, bindings[key]]));
   return graph;
 }
-function historicalBindings(id, graph) {
-  const leaves = closure(id, graph), prior = graph[id].bindings;
+function historicalBindings(id, graph, map) {
+  const leaves = closure(id, graph, new Set(), map), prior = graph[id].bindings;
   ensure(prior && !Array.isArray(prior) && equal(Object.keys(prior).sort(), leaves), 'Incomplete identity evidence');
   ensure(leaves.every(key => typeof prior[key] === 'string' && /^[a-f0-9]{64}$/.test(prior[key])), 'Unknown historical identity');
-  for (const child of dependencies[id].filter(key => Object.hasOwn(dependencies, key))) {
+  for (const child of map[id].filter(key => Object.hasOwn(map, key))) {
     // A parent's flattened snapshot cannot substitute for missing child evidence
     // or silently combine reports made against contradictory artifact identities.
-    const childBindings = historicalBindings(child, graph);
+    const childBindings = historicalBindings(child, graph, map);
     ensure(Object.entries(childBindings).every(([key, value]) => prior[key] === value), 'Conflicting dependency evidence');
   }
   return prior;
 }
-export function assess(graph, current) {
-  return Object.fromEntries(Object.keys(dependencies).map(id => {
+// A caller can supply a separately trusted fixture map, never submitted edges.
+export function assess(graph, current, map = dependencies) {
+  return Object.fromEntries(Object.keys(map).map(id => {
     try {
-      const prior = historicalBindings(id, graph), leaves = Object.keys(prior).sort();
+      const prior = historicalBindings(id, graph, map), leaves = Object.keys(prior).sort();
       ensure(leaves.every(key => typeof current[key] === 'string' && /^[a-f0-9]{64}$/.test(current[key])), 'Unknown identity');
       return [id, { applicability: leaves.some(key => prior[key] !== current[key]) ? 'stale' : 'current', dependencies: leaves }];
     } catch { return [id, { applicability: 'unknown', dependencies: null }]; }
@@ -84,8 +85,8 @@ export function assess(graph, current) {
 }
 // Reviewer comparison for this fixture's decisions; behavior and preservation
 // still require the separate executable checks below.
-export function checkSelection(graph, current, selection) {
-  const expected = assess(graph, current);
+export function checkSelection(graph, current, selection, map = dependencies) {
+  const expected = assess(graph, current, map);
   const failures = Object.entries(expected).flatMap(([id, row]) => {
     const actual = selection?.[id];
     if (actual === row.applicability) return [];
