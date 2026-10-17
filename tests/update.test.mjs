@@ -72,26 +72,190 @@ function transport(f, data = release(), zip = archive) {
 }
 const check = (f, context = f.context) => runUpdate('check', { allowFreeNetwork: true }, context);
 
+for (const scenario of ['missing', 'disabled', 'not-due', 'clock-skew', 'warning', 'no-network']) {
+  test(`read-only ${scenario}: zero writes, locks, mkdir or networking even with denied writes`, async t => {
+    const f = fixture(t, 'on');
+    if (scenario !== 'missing') await enable(f);
+    if (scenario !== 'missing') {
+      const s = JSON.parse(fs.readFileSync(f.location.file));
+      if (scenario === 'disabled') s.enabled = false;
+      if (scenario === 'not-due' || scenario === 'clock-skew') s.lastAttempt = now;
+      fs.writeFileSync(f.location.file, JSON.stringify(s));
+    }
+    if (scenario === 'warning') fs.writeFileSync(f.reaSkill, baseRea);
+    const before = scenario === 'missing' ? null : fs.readFileSync(f.location.file);
+    const spies = [];
+    for (const method of ['mkdirSync', 'writeFileSync', 'renameSync', 'unlinkSync', 'rmSync', 'mkdtempSync']) {
+      spies.push(t.mock.method(fs, method, () => { assert.fail(`Unexpected ${method}`); }));
+    }
+    const open = fs.openSync;
+    spies.push(t.mock.method(fs, 'openSync', (file, flags, ...args) => {
+      assert.equal(typeof flags, 'number'); assert.equal(flags & (fs.constants.O_CREAT | fs.constants.O_WRONLY | fs.constants.O_RDWR), 0);
+      return open(file, flags, ...args);
+    }));
+    let result;
+    try {
+      result = await runUpdate('check', { allowFreeNetwork: scenario !== 'no-network' }, { ...f.context, now: scenario === 'clock-skew' ? now - 1 : now, fetcher: () => assert.fail('Unexpected network') });
+    } finally { for (const spy of spies) spy.mock.restore(); }
+    assert.equal(result.status, { missing: 'disabled', disabled: 'disabled', 'not-due': 'not-due', 'clock-skew': 'clock-skew', warning: 'integration-needs-attention', 'no-network': 'network-not-authorized' }[scenario]);
+    if (before) assert.deepEqual(fs.readFileSync(f.location.file), before);
+    else assert.equal(fs.existsSync(f.location.directory), false);
+  });
+}
+
+for (const change of ['disable', 'cooldown', 'offer', 'integration-off', 'integration-edit', 'companion-edit', 'corrupt', 'missing-state']) {
+  test(`locked reread handles intervening ${change} without networking or overwriting decisions`, async t => {
+    const f = fixture(t, 'on'); await enable(f); const n = transport(f);
+    const original = fs.openSync; let changed = false, editedState;
+    const spy = t.mock.method(fs, 'openSync', (file, ...args) => {
+      if (file === path.join(f.location.directory, 'update.lock') && args[0] === 'wx') {
+        changed = true;
+        const s = JSON.parse(fs.readFileSync(f.location.file));
+        if (change === 'disable') s.enabled = false;
+        if (change === 'cooldown') s.lastAttempt = now;
+        if (change === 'offer') s.pending = releaseCandidate(release());
+        if (change === 'integration-off') s.options.integration = 'off';
+        if (change === 'integration-edit') fs.writeFileSync(f.reaSkill, baseRea);
+        if (change === 'companion-edit') fs.appendFileSync(path.join(f.installed.companion, 'SKILL.md'), '\nLocal change.');
+        if (change === 'missing-state') fs.unlinkSync(f.location.file);
+        else { editedState = change === 'corrupt' ? '{bad json' : JSON.stringify(s); fs.writeFileSync(f.location.file, editedState); }
+      }
+      return original(file, ...args);
+    });
+    let result;
+    try {
+      if (change === 'companion-edit') await assert.rejects(check(f, n.context), /Local companion files changed/);
+      else if (change === 'corrupt') await assert.rejects(check(f, n.context), SyntaxError);
+      else result = await check(f, n.context);
+    } finally { spy.mock.restore(); }
+    assert.equal(changed, true); assert.equal(n.calls.length, 0);
+    if (result) assert.equal(result.status, { disable: 'disabled', cooldown: 'not-due', offer: 'local-check-unavailable', 'integration-off': 'local-check-unavailable', 'integration-edit': 'integration-needs-attention', 'missing-state': 'disabled' }[change]);
+    if (editedState) assert.equal(fs.readFileSync(f.location.file, 'utf8'), editedState);
+  });
+}
+
+for (const change of ['replace', 'grow', 'invalid-utf8', 'directory']) test(`state evidence rejects ${change} with zero writes/network`, async t => {
+  const f = fixture(t); await enable(f); const n = transport(f);
+  if (change === 'invalid-utf8') fs.writeFileSync(f.location.file, Buffer.from([0xff]));
+  if (change === 'directory') { fs.unlinkSync(f.location.file); fs.mkdirSync(f.location.file); }
+  let stateFd, armed = true;
+  const originalOpen = fs.openSync, originalRead = fs.readSync;
+  const open = t.mock.method(fs, 'openSync', (file, ...args) => {
+    const fd = originalOpen(file, ...args); if (file === f.location.file) stateFd = fd; return fd;
+  });
+  const read = t.mock.method(fs, 'readSync', (fd, ...args) => {
+    const count = originalRead(fd, ...args);
+    if (armed && fd === stateFd && ['replace', 'grow'].includes(change)) {
+      armed = false;
+      if (change === 'replace') { const text = fs.readFileSync(f.location.file); fs.renameSync(f.location.file, f.location.file + '.before'); fs.writeFileSync(f.location.file, text); }
+      else fs.appendFileSync(f.location.file, ' ');
+    }
+    return count;
+  });
+  try {
+    if (['replace', 'grow'].includes(change)) assert.equal((await check(f, n.context)).reason, 'changing-evidence');
+    else await assert.rejects(check(f, n.context), /UTF-8|regular/);
+  } finally { open.mock.restore(); read.mock.restore(); }
+  assert.equal(n.calls.length, 0); assert.equal(fs.existsSync(path.join(f.location.directory, 'update.lock')), false);
+});
+
+test('a lock appearing during local inspection returns busy without deleting it', async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f);
+  const original = fs.closeSync; let armed = true;
+  const spy = t.mock.method(fs, 'closeSync', fd => {
+    original(fd);
+    if (armed) { armed = false; fs.writeFileSync(path.join(f.location.directory, 'update.lock'), 'concurrent'); }
+  });
+  try { assert.equal((await check(f, n.context)).status, 'busy'); } finally { spy.mock.restore(); }
+  assert.equal(fs.readFileSync(path.join(f.location.directory, 'update.lock'), 'utf8'), 'concurrent'); assert.equal(n.calls.length, 0);
+});
+
+test('disabled state enabled during its read is changing evidence, never a trusted disabled result', async t => {
+  const f = fixture(t); await enable(f); await runUpdate('disable', {}, f.context);
+  const original = fs.closeSync; let armed = true;
+  const spy = t.mock.method(fs, 'closeSync', fd => {
+    original(fd);
+    if (armed) { armed = false; const s = JSON.parse(fs.readFileSync(f.location.file)); s.enabled = true; fs.writeFileSync(f.location.file, JSON.stringify(s)); }
+  });
+  try { assert.equal((await runUpdate('check', {}, f.context)).reason, 'changing-evidence'); } finally { spy.mock.restore(); }
+  assert.equal(JSON.parse(fs.readFileSync(f.location.file)).enabled, true);
+  assert.equal(fs.existsSync(path.join(f.location.directory, 'update.lock')), false);
+});
+
+for (const change of ['removed-directory', 'replaced-directory', 'replaced-lock']) test(`lock boundary preserves ${change} evidence without networking`, async t => {
+  const f = fixture(t); await enable(f); const n = transport(f), original = fs.openSync;
+  const lock = path.join(f.location.directory, 'update.lock'); let changed = false;
+  const spy = t.mock.method(fs, 'openSync', (file, ...args) => {
+    if (file !== lock || args[0] !== 'wx') return original(file, ...args);
+    changed = true;
+    if (change !== 'replaced-lock') {
+      fs.renameSync(f.location.directory, f.location.directory + '.before');
+      if (change === 'replaced-directory') { fs.mkdirSync(f.location.directory); fs.copyFileSync(path.join(f.location.directory + '.before', 'state.json'), f.location.file); }
+    }
+    const fd = original(file, ...args);
+    if (change === 'replaced-lock') { fs.renameSync(lock, lock + '.before'); fs.writeFileSync(lock, 'another process'); }
+    return fd;
+  });
+  try {
+    if (change === 'removed-directory') assert.equal((await check(f, n.context)).reason, 'changing-evidence');
+    else await assert.rejects(check(f, n.context), { code: 'EUPDATESNAPSHOT' });
+  } finally { spy.mock.restore(); }
+  assert.equal(changed, true); assert.equal(n.calls.length, 0);
+  if (change === 'removed-directory') assert.equal(fs.existsSync(f.location.directory), false);
+  if (change === 'replaced-lock') assert.equal(fs.readFileSync(lock, 'utf8'), 'another process');
+});
+
+test('locked check samples the clock again after a backwards change', async t => {
+  const f = fixture(t); await enable(f); const s = JSON.parse(fs.readFileSync(f.location.file)); s.lastAttempt = now - WEEK; fs.writeFileSync(f.location.file, JSON.stringify(s));
+  const before = fs.readFileSync(f.location.file), original = fs.openSync; let clock = now;
+  const date = t.mock.method(Date, 'now', () => clock);
+  const open = t.mock.method(fs, 'openSync', (file, ...args) => { if (file === path.join(f.location.directory, 'update.lock')) clock = now - WEEK - 1; return original(file, ...args); });
+  try { assert.equal((await runUpdate('check', { allowFreeNetwork: true }, { skillRoot: f.installed.companion, fetcher: () => assert.fail('Unexpected network') })).status, 'clock-skew'); }
+  finally { open.mock.restore(); date.mock.restore(); }
+  assert.deepEqual(fs.readFileSync(f.location.file), before);
+});
+
+test('an offer replaced during approved apply is preserved and cannot authorize an asset download', async t => {
+  const f = fixture(t); await enable(f); const n = transport(f), offer = await check(f, n.context);
+  let calls = 0, changed;
+  await assert.rejects(runUpdate('apply', { approvalId: offer.approvalId, allowFreeNetwork: true }, { ...f.context, fetcher: async () => {
+    assert.equal(++calls, 1);
+    const s = JSON.parse(fs.readFileSync(f.location.file)); s.pending.approvalId = 'different-offer'; changed = JSON.stringify(s); fs.writeFileSync(f.location.file, changed);
+    return new Response(JSON.stringify(release()));
+  } }), { code: 'EUPDATESNAPSHOT' });
+  assert.equal(calls, 1); assert.equal(fs.readFileSync(f.location.file, 'utf8'), changed);
+});
+
+test('a lock replaced during an online check prevents offer writes and is never deleted', async t => {
+  const f = fixture(t); await enable(f); const lock = path.join(f.location.directory, 'update.lock'); let attempt;
+  await assert.rejects(check(f, { ...f.context, fetcher: async () => {
+    attempt = fs.readFileSync(f.location.file);
+    fs.renameSync(lock, lock + '.before'); fs.writeFileSync(lock, 'replacement');
+    return new Response(JSON.stringify(release()));
+  } }), { code: 'EUPDATESNAPSHOT' });
+  assert.deepEqual(fs.readFileSync(f.location.file), attempt); assert.equal(fs.readFileSync(lock, 'utf8'), 'replacement');
+});
+
 test('disabled by default: on-use check writes nothing and makes no request', async t => {
   const f = fixture(t); const n = transport(f);
   assert.equal((await check(f, n.context)).status, 'disabled'); assert.equal(n.calls.length, 0); assert.ok(!fs.existsSync(f.location.directory));
 });
 
 test('optional setup denial reports unknown availability and health without state, network or installation changes', async t => {
-  for (const code of ['EPERM', 'EACCES']) for (const stage of ['resolve-state', 'inspect-state', 'prepare-directory', 'acquire-lock']) {
+  for (const code of ['EPERM', 'EACCES']) for (const stage of ['resolve-state', 'inspect-state', 'read-state', 'acquire-lock']) {
     const f = fixture(t, 'on'); await enable(f); const n = transport(f);
     // Preserve an existing offer, skip decision and cooldown even when setup fails.
     const saved = JSON.parse(fs.readFileSync(f.location.file));
-    saved.pending = releaseCandidate(release()); saved.skippedVersion = future; saved.lastAttempt = now;
+    saved.pending = releaseCandidate(release()); saved.skippedVersion = future; saved.lastAttempt = now - WEEK;
     fs.writeFileSync(f.location.file, JSON.stringify(saved));
     const before = fs.readFileSync(f.location.file), rea = fs.readFileSync(f.reaSkill);
     const payload = new Map(Object.keys(saved.files).map(p => [p, fs.readFileSync(path.join(f.installed.companion, p))]));
-    const method = { 'resolve-state': 'lstatSync', 'inspect-state': 'lstatSync', 'prepare-directory': 'mkdirSync', 'acquire-lock': 'openSync' }[stage];
-    const target = { 'resolve-state': f.installed.companion, 'inspect-state': f.location.file, 'prepare-directory': f.location.directory, 'acquire-lock': path.join(f.location.directory, 'update.lock') }[stage];
+    const method = { 'resolve-state': 'lstatSync', 'inspect-state': 'lstatSync', 'read-state': 'openSync', 'acquire-lock': 'openSync' }[stage];
+    const target = { 'resolve-state': f.installed.companion, 'inspect-state': f.location.file, 'read-state': f.location.file, 'acquire-lock': path.join(f.location.directory, 'update.lock') }[stage];
     const original = fs[method]; let attempts = 0;
     fs[method] = function(file, ...args) {
       if (file === target) { attempts++; throw Object.assign(new Error('Injected setup denial'), { code }); }
-      assert.notEqual(file, f.reaSkill, 'denied setup cannot inspect integration');
+      if (stage !== 'acquire-lock') assert.notEqual(file, f.reaSkill, 'denied evidence cannot inspect integration');
       return original.call(fs, file, ...args);
     };
     let result;
@@ -118,7 +282,7 @@ test('setup errors stay explicit for other actions and non-permission failures',
     };
     try {
       for (const action of ['enable', 'disable', 'status', 'defer', 'skip', 'apply', ...(['EIO', 'ENOSPC'].includes(code) ? ['check'] : [])]) {
-        await assert.rejects(runUpdate(action, {}, n.context), { code });
+        await assert.rejects(runUpdate(action, { allowFreeNetwork: action === 'check' }, n.context), { code });
       }
     } finally { fs.openSync = original; }
     assert.equal(n.calls.length, 0);
@@ -128,18 +292,18 @@ test('setup errors stay explicit for other actions and non-permission failures',
 test('permission errors after locking and during lock cleanup are not setup-unavailable results', async t => {
   for (const code of ['EPERM', 'EACCES']) for (const phase of ['read-state', 'save-state', 'cleanup']) {
     const f = fixture(t); await enable(f); const n = transport(f);
-    const method = { 'read-state': 'readFileSync', 'save-state': 'writeFileSync', cleanup: 'unlinkSync' }[phase];
+    const method = { 'read-state': 'readSync', 'save-state': 'writeFileSync', cleanup: 'unlinkSync' }[phase];
     const original = fs[method];
     fs[method] = function(file, ...args) {
-      if ((phase === 'read-state' && file === f.location.file) ||
+      if ((phase === 'read-state' && fs.existsSync(path.join(f.location.directory, 'update.lock'))) ||
           (phase === 'save-state' && path.dirname(file) === f.location.directory && path.basename(file).endsWith('.tmp')) ||
           (phase === 'cleanup' && file === path.join(f.location.directory, 'update.lock'))) {
         throw Object.assign(new Error('Injected post-lock failure'), { code });
       }
       return original.call(fs, file, ...args);
     };
-    try { await assert.rejects(runUpdate('check', { allowFreeNetwork: phase !== 'cleanup' }, n.context), { code }); } finally { fs[method] = original; }
-    assert.equal(n.calls.length, 0);
+    try { await assert.rejects(runUpdate('check', { allowFreeNetwork: true }, n.context), { code }); } finally { fs[method] = original; }
+    assert.equal(n.calls.length, phase === 'cleanup' ? 1 : 0);
     assert.equal(fs.existsSync(path.join(f.location.directory, 'update.lock')), phase === 'cleanup');
   }
 });
