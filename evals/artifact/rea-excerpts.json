@@ -1,0 +1,2062 @@
+{
+  "schema": 1,
+  "kind": "Sanitized selected excerpts; not canonical REA Evidence",
+  "transformation": "Selected fields retained, absolute artifact path replaced by $ARTIFACT. Original IDs identify private retained originals; IDs are not recomputed or presented as hashes of these transformed excerpts. No runtime REA Evidence exists.",
+  "records": [
+    {
+      "original_evidence_id": "ev_ecb15eb301fd42aeca006ea30085f84abb2c0761aa65cff18c4e2d7d7688d660",
+      "operation": "inspect_managed_artifact",
+      "provider": {
+        "id": "rea-dotnet-static",
+        "name": "REA managed static analysis provider",
+        "version": "1"
+      },
+      "authority": "shipped-artifact",
+      "confidence": "observed",
+      "limitations": [
+        "Static inspection did not load the assembly, resolve dependencies through a CLR, decompile C#, or execute target code."
+      ],
+      "selected_result": {
+        "artifact": {
+          "byte_length": 5120,
+          "format": "pe",
+          "path": "$ARTIFACT",
+          "sha256": "6f4e7e1d49e03f60adf9deb4929aafbe3fdd6babb628881807c63efb3ee089b4"
+        },
+        "assembly": {
+          "culture": null,
+          "flags": 0,
+          "hash_algorithm": 32772,
+          "name": "Parcel",
+          "public_key": {
+            "byte_length": 0,
+            "kind": "none",
+            "sha256": null,
+            "token": null
+          },
+          "row_offset": 1758,
+          "token": "0x20000001",
+          "version": "1.0.0.0"
+        },
+        "attributes": [
+          {
+            "constructor_token": "0x0a000002",
+            "decoded_fixed_string": null,
+            "parent_token": "0x20000001",
+            "row_offset": 1740,
+            "token": "0x0c000001",
+            "type_name": "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
+            "value_length": 8,
+            "value_sha256": "e37a02053d377bad23ea19b7443bffd15fc0b9b45cf9d88a2b2464838374009b"
+          },
+          {
+            "constructor_token": "0x0a000003",
+            "decoded_fixed_string": null,
+            "parent_token": "0x20000001",
+            "row_offset": 1746,
+            "token": "0x0c000002",
+            "type_name": "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
+            "value_length": 30,
+            "value_sha256": "4611a48823d62972173df33a4677daf48b4c4a5e8bd71f94914052aa56c7c2e0"
+          }
+        ],
+        "classification": {
+          "container": "pe",
+          "evidence": [
+            {
+              "code": "cli-header-observed",
+              "detail": "A file-backed PE CLI header and metadata root were admitted.",
+              "file_offset": 520
+            },
+            {
+              "code": "managed-architecture-derived",
+              "detail": "Managed architecture anycpu is derived from PE machine and CLI flags.",
+              "file_offset": 536
+            }
+          ],
+          "implementation": "cil",
+          "managed_architecture": "anycpu",
+          "runtime_family": "unknown",
+          "status": "managed"
+        },
+        "coverage": {
+          "issues": [],
+          "state": "complete"
+        },
+        "limitations": [
+          "Static inspection did not load the assembly, resolve dependencies through a CLR, decompile C#, or execute target code."
+        ],
+        "metadata": {
+          "status": "complete",
+          "stream_names": [
+            "#Blob",
+            "#GUID",
+            "#Strings",
+            "#US",
+            "#~"
+          ],
+          "table_row_counts": {
+            "Assembly": 1,
+            "AssemblyRef": 2,
+            "CustomAttribute": 2,
+            "ManifestResource": 1,
+            "MemberRef": 21,
+            "MethodDef": 4,
+            "Module": 1,
+            "Param": 4,
+            "StandAloneSig": 3,
+            "TypeDef": 2,
+            "TypeRef": 16
+          },
+          "version": "v4.0.30319"
+        },
+        "module": {
+          "enc_base_id": null,
+          "enc_id": null,
+          "generation": 0,
+          "mvid": "9f72da28-6f8e-49b8-b861-7e2eb7cf8fec",
+          "name": "Parcel.exe",
+          "row_offset": 1400,
+          "token": "0x00000001"
+        },
+        "pe": {
+          "architecture": "x86",
+          "characteristics": 258,
+          "cli": {
+            "entry_point": {
+              "kind": "metadata-token",
+              "value": "0x06000004"
+            },
+            "flag_names": [
+              "il-only"
+            ],
+            "flags": 1,
+            "header_offset": 520,
+            "header_size": 72,
+            "managed_native_header_rva": 0,
+            "managed_native_header_size": 0,
+            "metadata_rva": 8904,
+            "metadata_size": 1572,
+            "ready_to_run_signature": false,
+            "resources_rva": 8800,
+            "resources_size": 102,
+            "runtime_version": "2.5",
+            "strong_name_rva": 0,
+            "strong_name_size": 0
+          },
+          "machine": 332,
+          "machine_hex": "0x014c",
+          "optional_header": "pe32",
+          "section_count": 3
+        },
+        "references": [
+          {
+            "culture": null,
+            "flags": 0,
+            "hash_value_length": 0,
+            "hash_value_sha256": null,
+            "name": "mscorlib",
+            "public_key_or_token": {
+              "byte_length": 8,
+              "kind": "public-key-token",
+              "sha256": "1b960802b155541df3837ade50790da7e91762d14b8e011fa8223424ff75acdb",
+              "token": "b77a5c561934e089"
+            },
+            "row_offset": 1780,
+            "token": "0x23000001",
+            "version": "4.0.0.0"
+          },
+          {
+            "culture": null,
+            "flags": 0,
+            "hash_value_length": 0,
+            "hash_value_sha256": null,
+            "name": "System",
+            "public_key_or_token": {
+              "byte_length": 8,
+              "kind": "public-key-token",
+              "sha256": "1b960802b155541df3837ade50790da7e91762d14b8e011fa8223424ff75acdb",
+              "token": "b77a5c561934e089"
+            },
+            "row_offset": 1800,
+            "token": "0x23000002",
+            "version": "4.0.0.0"
+          }
+        ],
+        "resources": [
+          {
+            "data_length": 98,
+            "data_sha256": "61f6a443e10532dba0eeb06958b8cd5432cd60c6f4993c8506688993f8a18797",
+            "declared_offset": 0,
+            "embedded": true,
+            "flags": 1,
+            "implementation_token": null,
+            "name": "legacy-note.txt",
+            "row_offset": 1820,
+            "token": "0x28000001",
+            "visibility": "public"
+          }
+        ],
+        "target_frameworks": []
+      }
+    },
+    {
+      "original_evidence_id": "ev_f53b5f9bd880c1067a16482a306a61bc0d9a4779e9c5701665bf6421c7e3ca6e",
+      "operation": "inspect_managed_members",
+      "provider": {
+        "id": "rea-dotnet-static",
+        "name": "REA managed static analysis provider",
+        "version": "1"
+      },
+      "authority": "shipped-artifact",
+      "confidence": "observed",
+      "limitations": [
+        "Metadata tokens are build-local coordinates and are only meaningful with the reported artifact SHA-256 and MVID.",
+        "CIL instruction anchors are decoded from file-backed method bodies only; no target assembly is loaded or executed.",
+        "Exported types are reported from ExportedType rows as declared; forwarded types are not resolved in their implementing assemblies.",
+        "User strings are the #US literals loaded by ldstr in the inspected method bodies, with their own coverage; instruction anchors and normalized CIL digests keep their build-local tokens.",
+        "Member signatures decode ECMA-335 primitive, class, valuetype, generic instantiation, generic variable, pointer, byref, single-dimension and general array, function pointer, custom modifier, and typed reference forms; class and valuetype operands keep their encoded TypeDefOrRefOrSpec values, and unsupported forms such as vararg sentinels retain raw signature hashes.",
+        "Types, fields, methods, call edges, field accesses, and user strings cover only the selected declaring types; coverage describes that selection. Edge targets outside it keep their names but are not described."
+      ],
+      "selected_result": {
+        "artifact": {
+          "byte_length": 5120,
+          "format": "pe",
+          "path": "$ARTIFACT",
+          "sha256": "6f4e7e1d49e03f60adf9deb4929aafbe3fdd6babb628881807c63efb3ee089b4"
+        },
+        "module": {
+          "enc_base_id": null,
+          "enc_id": null,
+          "generation": 0,
+          "mvid": "9f72da28-6f8e-49b8-b861-7e2eb7cf8fec",
+          "name": "Parcel.exe",
+          "row_offset": 1400,
+          "token": "0x00000001"
+        },
+        "selection": {
+          "type_names": [
+            "Parcel"
+          ],
+          "unmatched_type_names": []
+        },
+        "methods": [
+          {
+            "body": {
+              "anchors": [
+                {
+                  "il_offset": 2,
+                  "opcode": "newarr",
+                  "operand": "0x01000005",
+                  "operand_kind": "type"
+                },
+                {
+                  "il_offset": 10,
+                  "opcode": "ldc.i4.s",
+                  "operand": "32",
+                  "operand_kind": "constant"
+                },
+                {
+                  "il_offset": 15,
+                  "opcode": "ldc.i4.s",
+                  "operand": "9",
+                  "operand_kind": "constant"
+                },
+                {
+                  "il_offset": 19,
+                  "opcode": "callvirt",
+                  "operand": "0x0a000004",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 24,
+                  "opcode": "starg.s",
+                  "operand": "0",
+                  "operand_kind": "variable"
+                },
+                {
+                  "il_offset": 27,
+                  "opcode": "callvirt",
+                  "operand": "0x0a000005",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 33,
+                  "opcode": "blt.s",
+                  "operand": "57",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 36,
+                  "opcode": "callvirt",
+                  "operand": "0x0a000005",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 42,
+                  "opcode": "bgt.s",
+                  "operand": "57",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 45,
+                  "opcode": "ldstr",
+                  "operand": "0x70000001",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 50,
+                  "opcode": "call",
+                  "operand": "0x0a000006",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 55,
+                  "opcode": "brtrue.s",
+                  "operand": "68",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 57,
+                  "opcode": "ldstr",
+                  "operand": "0x70000025",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 62,
+                  "opcode": "newobj",
+                  "operand": "0x0a000007",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 68,
+                  "opcode": "ldstr",
+                  "operand": "0x7000002d",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 74,
+                  "opcode": "callvirt",
+                  "operand": "0x0a000008",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 79,
+                  "opcode": "call",
+                  "operand": "0x0a000009",
+                  "operand_kind": "method"
+                }
+              ],
+              "decoded_instruction_count": 35,
+              "exception_regions": [],
+              "file_offset": 592,
+              "header_format": "fat",
+              "il_sha256": "e3e818b3743b12a2b3572b32ce9946bd68349090ec5b6bc60a4a6e94394a68ba",
+              "il_size": 85,
+              "init_locals": true,
+              "instruction_count": 35,
+              "issue": null,
+              "local_var_sig_token": "0x11000001",
+              "max_stack": 4,
+              "normalized_il_sha256": "f191d1a0c246ee8c2f51fc13ec66cb4fed6dc4a06524a840eadc4fad3a064b58",
+              "opcode_counts": {
+                "bgt.s": 1,
+                "blt.s": 1,
+                "brtrue.s": 1,
+                "call": 2,
+                "callvirt": 4,
+                "ldarg.0": 5,
+                "ldc.i4.0": 1,
+                "ldc.i4.1": 2,
+                "ldc.i4.2": 1,
+                "ldc.i4.8": 1,
+                "ldc.i4.s": 2,
+                "ldloc.0": 3,
+                "ldstr": 3,
+                "newarr": 1,
+                "newobj": 1,
+                "ret": 1,
+                "starg.s": 1,
+                "stelem.i2": 2,
+                "stloc.0": 1,
+                "throw": 1
+              },
+              "rva": 8272,
+              "status": "present",
+              "truncated_instructions": 0
+            },
+            "declaring_type": "Parcel",
+            "declaring_type_token": "0x02000002",
+            "flags": 145,
+            "impl_flags": 0,
+            "name": "Key",
+            "row_offset": 1534,
+            "rva": 8272,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "string"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 4,
+              "raw_sha256": "f4fc6e914c3f39dea20cedc5015dcee8a18aa00ee5a983e7ff0527dc64dc3028",
+              "return_type": "string"
+            },
+            "token": "0x06000001"
+          },
+          {
+            "body": {
+              "anchors": [
+                {
+                  "il_offset": 1,
+                  "opcode": "ldstr",
+                  "operand": "0x70000037",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 6,
+                  "opcode": "call",
+                  "operand": "0x0a000006",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 11,
+                  "opcode": "brtrue.s",
+                  "operand": "24",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 13,
+                  "opcode": "ldstr",
+                  "operand": "0x70000067",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 18,
+                  "opcode": "newobj",
+                  "operand": "0x0a000007",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 25,
+                  "opcode": "call",
+                  "operand": "0x0a00000a",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 30,
+                  "opcode": "call",
+                  "operand": "0x0a00000b",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 37,
+                  "opcode": "ldc.i4",
+                  "operand": "1000",
+                  "operand_kind": "constant"
+                },
+                {
+                  "il_offset": 42,
+                  "opcode": "ble.s",
+                  "operand": "55",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 44,
+                  "opcode": "ldstr",
+                  "operand": "0x70000067",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 49,
+                  "opcode": "newobj",
+                  "operand": "0x0a000007",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 56,
+                  "opcode": "brfalse.s",
+                  "operand": "73",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 63,
+                  "opcode": "call",
+                  "operand": "0x0a00000c",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 71,
+                  "opcode": "br.s",
+                  "operand": "74",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 75,
+                  "opcode": "ldstr",
+                  "operand": "0x7000006f",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 80,
+                  "opcode": "ldloca.s",
+                  "operand": "1",
+                  "operand_kind": "variable"
+                },
+                {
+                  "il_offset": 82,
+                  "opcode": "call",
+                  "operand": "0x0a00000a",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 87,
+                  "opcode": "call",
+                  "operand": "0x0a00000d",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 92,
+                  "opcode": "call",
+                  "operand": "0x0a000009",
+                  "operand_kind": "method"
+                }
+              ],
+              "decoded_instruction_count": 37,
+              "exception_regions": [],
+              "file_offset": 692,
+              "header_format": "fat",
+              "il_sha256": "a900a388077911b8b370d5df37a3d1d10d339e0c233ade7723d8ea93c7d40cef",
+              "il_size": 98,
+              "init_locals": true,
+              "instruction_count": 37,
+              "issue": null,
+              "local_var_sig_token": "0x11000002",
+              "max_stack": 4,
+              "normalized_il_sha256": "dfabb1f114f4f7db4a740ab2bd0575cc644d44a14102c4fd0ae6f31e713cde0b",
+              "opcode_counts": {
+                "add": 1,
+                "ble.s": 1,
+                "br.s": 1,
+                "brfalse.s": 1,
+                "brtrue.s": 1,
+                "call": 7,
+                "ldarg.0": 2,
+                "ldc.i4": 1,
+                "ldc.i4.0": 2,
+                "ldc.i4.2": 1,
+                "ldc.i4.3": 1,
+                "ldc.i4.5": 1,
+                "ldloc.0": 3,
+                "ldloca.s": 1,
+                "ldstr": 4,
+                "mul": 1,
+                "newobj": 2,
+                "ret": 1,
+                "stloc.0": 1,
+                "stloc.1": 1,
+                "sub": 1,
+                "throw": 2
+              },
+              "rva": 8372,
+              "status": "present",
+              "truncated_instructions": 0
+            },
+            "declaring_type": "Parcel",
+            "declaring_type_token": "0x02000002",
+            "flags": 145,
+            "impl_flags": 0,
+            "name": "Fee",
+            "row_offset": 1548,
+            "rva": 8372,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "string"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 4,
+              "raw_sha256": "f4fc6e914c3f39dea20cedc5015dcee8a18aa00ee5a983e7ff0527dc64dc3028",
+              "return_type": "string"
+            },
+            "token": "0x06000002"
+          },
+          {
+            "body": {
+              "anchors": [
+                {
+                  "il_offset": 1,
+                  "opcode": "callvirt",
+                  "operand": "0x0a000005",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 6,
+                  "opcode": "ldc.i4.s",
+                  "operand": "16",
+                  "operand_kind": "constant"
+                },
+                {
+                  "il_offset": 8,
+                  "opcode": "bgt.s",
+                  "operand": "33",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 11,
+                  "opcode": "callvirt",
+                  "operand": "0x0a000005",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 18,
+                  "opcode": "brtrue.s",
+                  "operand": "33",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 21,
+                  "opcode": "ldstr",
+                  "operand": "0x70000079",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 26,
+                  "opcode": "call",
+                  "operand": "0x0a000006",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 31,
+                  "opcode": "brtrue.s",
+                  "operand": "44",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 33,
+                  "opcode": "ldstr",
+                  "operand": "0x7000009b",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 38,
+                  "opcode": "newobj",
+                  "operand": "0x0a000007",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 48,
+                  "opcode": "br.s",
+                  "operand": "86",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 54,
+                  "opcode": "callvirt",
+                  "operand": "0x0a00000e",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 59,
+                  "opcode": "ldc.i4",
+                  "operand": "515",
+                  "operand_kind": "constant"
+                },
+                {
+                  "il_offset": 64,
+                  "opcode": "call",
+                  "operand": "0x0a00000a",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 69,
+                  "opcode": "call",
+                  "operand": "0x0a00000f",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 75,
+                  "opcode": "ldc.i4",
+                  "operand": "255",
+                  "operand_kind": "constant"
+                },
+                {
+                  "il_offset": 88,
+                  "opcode": "callvirt",
+                  "operand": "0x0a000005",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 93,
+                  "opcode": "blt.s",
+                  "operand": "50",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 95,
+                  "opcode": "ldstr",
+                  "operand": "0x700000a7",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 100,
+                  "opcode": "ldloca.s",
+                  "operand": "0",
+                  "operand_kind": "variable"
+                },
+                {
+                  "il_offset": 102,
+                  "opcode": "ldstr",
+                  "operand": "0x700000b1",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 107,
+                  "opcode": "call",
+                  "operand": "0x0a00000a",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 112,
+                  "opcode": "call",
+                  "operand": "0x0a000010",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 117,
+                  "opcode": "call",
+                  "operand": "0x0a000009",
+                  "operand_kind": "method"
+                }
+              ],
+              "decoded_instruction_count": 48,
+              "exception_regions": [],
+              "file_offset": 804,
+              "header_format": "fat",
+              "il_sha256": "7628ce690caf239f4f0bc077a94793ef08b9866348c343f4b105eaadad45ab40",
+              "il_size": 123,
+              "init_locals": true,
+              "instruction_count": 48,
+              "issue": null,
+              "local_var_sig_token": "0x11000002",
+              "max_stack": 4,
+              "normalized_il_sha256": "d23f50df5ac1f819d29dcddff0e560193357f591d3c87cd5da58604025da5d3f",
+              "opcode_counts": {
+                "add": 2,
+                "and": 1,
+                "bgt.s": 1,
+                "blt.s": 1,
+                "br.s": 1,
+                "brtrue.s": 2,
+                "call": 6,
+                "callvirt": 4,
+                "ldarg.0": 5,
+                "ldc.i4": 2,
+                "ldc.i4.0": 2,
+                "ldc.i4.2": 3,
+                "ldc.i4.s": 1,
+                "ldloc.0": 1,
+                "ldloc.1": 3,
+                "ldloca.s": 1,
+                "ldstr": 4,
+                "newobj": 1,
+                "rem": 1,
+                "ret": 1,
+                "stloc.0": 2,
+                "stloc.1": 2,
+                "throw": 1
+              },
+              "rva": 8484,
+              "status": "present",
+              "truncated_instructions": 0
+            },
+            "declaring_type": "Parcel",
+            "declaring_type_token": "0x02000002",
+            "flags": 145,
+            "impl_flags": 0,
+            "name": "Check",
+            "row_offset": 1562,
+            "rva": 8484,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "string"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 4,
+              "raw_sha256": "f4fc6e914c3f39dea20cedc5015dcee8a18aa00ee5a983e7ff0527dc64dc3028",
+              "return_type": "string"
+            },
+            "token": "0x06000003"
+          },
+          {
+            "body": {
+              "anchors": [
+                {
+                  "il_offset": 4,
+                  "opcode": "beq.s",
+                  "operand": "17",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 6,
+                  "opcode": "ldstr",
+                  "operand": "0x700000b7",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 11,
+                  "opcode": "newobj",
+                  "operand": "0x0a000007",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 22,
+                  "opcode": "brfalse.s",
+                  "operand": "98",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 25,
+                  "opcode": "ldstr",
+                  "operand": "0x70000025",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 30,
+                  "opcode": "call",
+                  "operand": "0x0a000011",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 35,
+                  "opcode": "brtrue.s",
+                  "operand": "65",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 38,
+                  "opcode": "ldstr",
+                  "operand": "0x70000067",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 43,
+                  "opcode": "call",
+                  "operand": "0x0a000011",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 48,
+                  "opcode": "brtrue.s",
+                  "operand": "76",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 51,
+                  "opcode": "ldstr",
+                  "operand": "0x7000009b",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 56,
+                  "opcode": "call",
+                  "operand": "0x0a000011",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 61,
+                  "opcode": "brtrue.s",
+                  "operand": "87",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 63,
+                  "opcode": "br.s",
+                  "operand": "98",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 68,
+                  "opcode": "call",
+                  "operand": "0x06000001",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 74,
+                  "opcode": "br.s",
+                  "operand": "109",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 79,
+                  "opcode": "call",
+                  "operand": "0x06000002",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 85,
+                  "opcode": "br.s",
+                  "operand": "109",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 90,
+                  "opcode": "call",
+                  "operand": "0x06000003",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 96,
+                  "opcode": "br.s",
+                  "operand": "109",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 98,
+                  "opcode": "ldstr",
+                  "operand": "0x700000b7",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 103,
+                  "opcode": "newobj",
+                  "operand": "0x0a000007",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 110,
+                  "opcode": "call",
+                  "operand": "0x0a000012",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 117,
+                  "opcode": "leave.s",
+                  "operand": "150",
+                  "operand_kind": "branch"
+                },
+                {
+                  "il_offset": 120,
+                  "opcode": "call",
+                  "operand": "0x0a000013",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 125,
+                  "opcode": "ldstr",
+                  "operand": "0x700000c3",
+                  "operand_kind": "string"
+                },
+                {
+                  "il_offset": 131,
+                  "opcode": "callvirt",
+                  "operand": "0x0a000014",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 136,
+                  "opcode": "call",
+                  "operand": "0x0a000009",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 141,
+                  "opcode": "callvirt",
+                  "operand": "0x0a000015",
+                  "operand_kind": "method"
+                },
+                {
+                  "il_offset": 148,
+                  "opcode": "leave.s",
+                  "operand": "150",
+                  "operand_kind": "branch"
+                }
+              ],
+              "decoded_instruction_count": 65,
+              "exception_regions": [
+                {
+                  "class_token": "0x01000008",
+                  "filter_offset": null,
+                  "flags": 0,
+                  "handler_length": 31,
+                  "handler_offset": 119,
+                  "try_length": 119,
+                  "try_offset": 0
+                }
+              ],
+              "file_offset": 940,
+              "header_format": "fat",
+              "il_sha256": "c6d39a5f45ddc5596ec360fcc5f12baa74df65837d474f78d23789c8191fcee7",
+              "il_size": 152,
+              "init_locals": true,
+              "instruction_count": 65,
+              "issue": null,
+              "local_var_sig_token": "0x11000003",
+              "max_stack": 3,
+              "normalized_il_sha256": "1968033aa463b1273a4c29278208e3bc1062f9e0c7b97a51a8e8c2807a3a070a",
+              "opcode_counts": {
+                "beq.s": 1,
+                "br.s": 4,
+                "brfalse.s": 1,
+                "brtrue.s": 3,
+                "call": 9,
+                "callvirt": 2,
+                "conv.i4": 1,
+                "dup": 1,
+                "ldarg.0": 5,
+                "ldc.i4.0": 2,
+                "ldc.i4.1": 3,
+                "ldc.i4.2": 2,
+                "ldelem.ref": 4,
+                "ldlen": 1,
+                "ldloc.0": 1,
+                "ldloc.1": 1,
+                "ldloc.2": 1,
+                "ldloc.3": 3,
+                "ldstr": 6,
+                "leave.s": 2,
+                "newobj": 2,
+                "ret": 1,
+                "stloc.0": 3,
+                "stloc.1": 1,
+                "stloc.2": 2,
+                "stloc.3": 1,
+                "throw": 2
+              },
+              "rva": 8620,
+              "status": "present",
+              "truncated_instructions": 0
+            },
+            "declaring_type": "Parcel",
+            "declaring_type_token": "0x02000002",
+            "flags": 145,
+            "impl_flags": 0,
+            "name": "Main",
+            "row_offset": 1576,
+            "rva": 8620,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "string[]"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 5,
+              "raw_sha256": "e07dc610db519349c7ffc4b882a33aa5861d26f2c07a29d5df701c174e42e5a0",
+              "return_type": "i4"
+            },
+            "token": "0x06000004"
+          }
+        ],
+        "call_edges": [
+          {
+            "caller": "Parcel.Key",
+            "caller_token": "0x06000001",
+            "opcode": "callvirt",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "Trim",
+            "target_token": "0x0a000004"
+          },
+          {
+            "caller": "Parcel.Key",
+            "caller_token": "0x06000001",
+            "opcode": "callvirt",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "get_Length",
+            "target_token": "0x0a000005"
+          },
+          {
+            "caller": "Parcel.Key",
+            "caller_token": "0x06000001",
+            "opcode": "callvirt",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "get_Length",
+            "target_token": "0x0a000005"
+          },
+          {
+            "caller": "Parcel.Key",
+            "caller_token": "0x06000001",
+            "opcode": "call",
+            "target_declaring_type": "System.Text.RegularExpressions.Regex",
+            "target_kind": "member-ref",
+            "target_name": "IsMatch",
+            "target_token": "0x0a000006"
+          },
+          {
+            "caller": "Parcel.Key",
+            "caller_token": "0x06000001",
+            "opcode": "newobj",
+            "target_declaring_type": "System.ArgumentException",
+            "target_kind": "member-ref",
+            "target_name": ".ctor",
+            "target_token": "0x0a000007"
+          },
+          {
+            "caller": "Parcel.Key",
+            "caller_token": "0x06000001",
+            "opcode": "callvirt",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "ToUpperInvariant",
+            "target_token": "0x0a000008"
+          },
+          {
+            "caller": "Parcel.Key",
+            "caller_token": "0x06000001",
+            "opcode": "call",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "Concat",
+            "target_token": "0x0a000009"
+          },
+          {
+            "caller": "Parcel.Fee",
+            "caller_token": "0x06000002",
+            "opcode": "call",
+            "target_declaring_type": "System.Text.RegularExpressions.Regex",
+            "target_kind": "member-ref",
+            "target_name": "IsMatch",
+            "target_token": "0x0a000006"
+          },
+          {
+            "caller": "Parcel.Fee",
+            "caller_token": "0x06000002",
+            "opcode": "newobj",
+            "target_declaring_type": "System.ArgumentException",
+            "target_kind": "member-ref",
+            "target_name": ".ctor",
+            "target_token": "0x0a000007"
+          },
+          {
+            "caller": "Parcel.Fee",
+            "caller_token": "0x06000002",
+            "opcode": "call",
+            "target_declaring_type": "System.Globalization.CultureInfo",
+            "target_kind": "member-ref",
+            "target_name": "get_InvariantCulture",
+            "target_token": "0x0a00000a"
+          },
+          {
+            "caller": "Parcel.Fee",
+            "caller_token": "0x06000002",
+            "opcode": "call",
+            "target_declaring_type": "System.Int32",
+            "target_kind": "member-ref",
+            "target_name": "Parse",
+            "target_token": "0x0a00000b"
+          },
+          {
+            "caller": "Parcel.Fee",
+            "caller_token": "0x06000002",
+            "opcode": "newobj",
+            "target_declaring_type": "System.ArgumentException",
+            "target_kind": "member-ref",
+            "target_name": ".ctor",
+            "target_token": "0x0a000007"
+          },
+          {
+            "caller": "Parcel.Fee",
+            "caller_token": "0x06000002",
+            "opcode": "call",
+            "target_declaring_type": "System.Math",
+            "target_kind": "member-ref",
+            "target_name": "Max",
+            "target_token": "0x0a00000c"
+          },
+          {
+            "caller": "Parcel.Fee",
+            "caller_token": "0x06000002",
+            "opcode": "call",
+            "target_declaring_type": "System.Globalization.CultureInfo",
+            "target_kind": "member-ref",
+            "target_name": "get_InvariantCulture",
+            "target_token": "0x0a00000a"
+          },
+          {
+            "caller": "Parcel.Fee",
+            "caller_token": "0x06000002",
+            "opcode": "call",
+            "target_declaring_type": "System.Int32",
+            "target_kind": "member-ref",
+            "target_name": "ToString",
+            "target_token": "0x0a00000d"
+          },
+          {
+            "caller": "Parcel.Fee",
+            "caller_token": "0x06000002",
+            "opcode": "call",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "Concat",
+            "target_token": "0x0a000009"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "callvirt",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "get_Length",
+            "target_token": "0x0a000005"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "callvirt",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "get_Length",
+            "target_token": "0x0a000005"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "call",
+            "target_declaring_type": "System.Text.RegularExpressions.Regex",
+            "target_kind": "member-ref",
+            "target_name": "IsMatch",
+            "target_token": "0x0a000006"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "newobj",
+            "target_declaring_type": "System.ArgumentException",
+            "target_kind": "member-ref",
+            "target_name": ".ctor",
+            "target_token": "0x0a000007"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "callvirt",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "Substring",
+            "target_token": "0x0a00000e"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "call",
+            "target_declaring_type": "System.Globalization.CultureInfo",
+            "target_kind": "member-ref",
+            "target_name": "get_InvariantCulture",
+            "target_token": "0x0a00000a"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "call",
+            "target_declaring_type": "System.Int32",
+            "target_kind": "member-ref",
+            "target_name": "Parse",
+            "target_token": "0x0a00000f"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "callvirt",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "get_Length",
+            "target_token": "0x0a000005"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "call",
+            "target_declaring_type": "System.Globalization.CultureInfo",
+            "target_kind": "member-ref",
+            "target_name": "get_InvariantCulture",
+            "target_token": "0x0a00000a"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "call",
+            "target_declaring_type": "System.Int32",
+            "target_kind": "member-ref",
+            "target_name": "ToString",
+            "target_token": "0x0a000010"
+          },
+          {
+            "caller": "Parcel.Check",
+            "caller_token": "0x06000003",
+            "opcode": "call",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "Concat",
+            "target_token": "0x0a000009"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "newobj",
+            "target_declaring_type": "System.ArgumentException",
+            "target_kind": "member-ref",
+            "target_name": ".ctor",
+            "target_token": "0x0a000007"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "call",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "op_Equality",
+            "target_token": "0x0a000011"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "call",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "op_Equality",
+            "target_token": "0x0a000011"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "call",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "op_Equality",
+            "target_token": "0x0a000011"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "call",
+            "target_declaring_type": "Parcel",
+            "target_kind": "method-def",
+            "target_name": "Key",
+            "target_token": "0x06000001"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "call",
+            "target_declaring_type": "Parcel",
+            "target_kind": "method-def",
+            "target_name": "Fee",
+            "target_token": "0x06000002"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "call",
+            "target_declaring_type": "Parcel",
+            "target_kind": "method-def",
+            "target_name": "Check",
+            "target_token": "0x06000003"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "newobj",
+            "target_declaring_type": "System.ArgumentException",
+            "target_kind": "member-ref",
+            "target_name": ".ctor",
+            "target_token": "0x0a000007"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "call",
+            "target_declaring_type": "System.Console",
+            "target_kind": "member-ref",
+            "target_name": "WriteLine",
+            "target_token": "0x0a000012"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "call",
+            "target_declaring_type": "System.Console",
+            "target_kind": "member-ref",
+            "target_name": "get_Error",
+            "target_token": "0x0a000013"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "callvirt",
+            "target_declaring_type": "System.Exception",
+            "target_kind": "member-ref",
+            "target_name": "get_Message",
+            "target_token": "0x0a000014"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "call",
+            "target_declaring_type": "System.String",
+            "target_kind": "member-ref",
+            "target_name": "Concat",
+            "target_token": "0x0a000009"
+          },
+          {
+            "caller": "Parcel.Main",
+            "caller_token": "0x06000004",
+            "opcode": "callvirt",
+            "target_declaring_type": "System.IO.TextWriter",
+            "target_kind": "member-ref",
+            "target_name": "WriteLine",
+            "target_token": "0x0a000015"
+          }
+        ],
+        "member_refs": [
+          {
+            "name": ".ctor",
+            "parent_name": "System.Reflection.AssemblyVersionAttribute",
+            "parent_token": "0x01000002",
+            "row_offset": 1614,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "string"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 4,
+              "raw_sha256": "c65dc7d303e94729245de0fa4db4b80ac687af6d0bb38c5c884bc9c11f01e005",
+              "return_type": "void"
+            },
+            "token": "0x0a000001"
+          },
+          {
+            "name": ".ctor",
+            "parent_name": "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
+            "parent_token": "0x01000003",
+            "row_offset": 1620,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "i4"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 4,
+              "raw_sha256": "c889396c66b535112cb33472b6ecf61ad5f09860a1ea642fb8c31a4ed004296a",
+              "return_type": "void"
+            },
+            "token": "0x0a000002"
+          },
+          {
+            "name": ".ctor",
+            "parent_name": "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
+            "parent_token": "0x01000004",
+            "row_offset": 1626,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 0,
+              "parameter_types": [],
+              "parse_status": "decoded",
+              "raw_length": 3,
+              "raw_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+              "return_type": "void"
+            },
+            "token": "0x0a000003"
+          },
+          {
+            "name": "Trim",
+            "parent_name": "System.String",
+            "parent_token": "0x01000006",
+            "row_offset": 1632,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "char[]"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 5,
+              "raw_sha256": "0c8ae3e816ccf1ccfd7c9947e5bea2ef3b204997de4df3f2bdb209725786b388",
+              "return_type": "string"
+            },
+            "token": "0x0a000004"
+          },
+          {
+            "name": "get_Length",
+            "parent_name": "System.String",
+            "parent_token": "0x01000006",
+            "row_offset": 1638,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 0,
+              "parameter_types": [],
+              "parse_status": "decoded",
+              "raw_length": 3,
+              "raw_sha256": "19e1bd1daf2ae492b895802f55c905ef2d25aea509c6010868e218adb408c010",
+              "return_type": "i4"
+            },
+            "token": "0x0a000005"
+          },
+          {
+            "name": "IsMatch",
+            "parent_name": "System.Text.RegularExpressions.Regex",
+            "parent_token": "0x01000007",
+            "row_offset": 1644,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 2,
+              "parameter_types": [
+                "string",
+                "string"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 5,
+              "raw_sha256": "9506c899776ebdee1b3bf56b29306d76d73cc7e93ea1d0338b497f684f6eef38",
+              "return_type": "bool"
+            },
+            "token": "0x0a000006"
+          },
+          {
+            "name": ".ctor",
+            "parent_name": "System.ArgumentException",
+            "parent_token": "0x01000008",
+            "row_offset": 1650,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "string"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 4,
+              "raw_sha256": "c65dc7d303e94729245de0fa4db4b80ac687af6d0bb38c5c884bc9c11f01e005",
+              "return_type": "void"
+            },
+            "token": "0x0a000007"
+          },
+          {
+            "name": "ToUpperInvariant",
+            "parent_name": "System.String",
+            "parent_token": "0x01000006",
+            "row_offset": 1656,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 0,
+              "parameter_types": [],
+              "parse_status": "decoded",
+              "raw_length": 3,
+              "raw_sha256": "df29f5ab2554df47369dafce3bc8630f16eabc3f72c21bbd24c5e73c286f650f",
+              "return_type": "string"
+            },
+            "token": "0x0a000008"
+          },
+          {
+            "name": "Concat",
+            "parent_name": "System.String",
+            "parent_token": "0x01000006",
+            "row_offset": 1662,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 2,
+              "parameter_types": [
+                "string",
+                "string"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 5,
+              "raw_sha256": "e25b82e7e909d55b3ee4778b8dc964ae5cbe58b51c92839f74e3d560fbe3037d",
+              "return_type": "string"
+            },
+            "token": "0x0a000009"
+          },
+          {
+            "name": "get_InvariantCulture",
+            "parent_name": "System.Globalization.CultureInfo",
+            "parent_token": "0x01000009",
+            "row_offset": 1668,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 0,
+              "parameter_types": [],
+              "parse_status": "decoded",
+              "raw_length": 4,
+              "raw_sha256": "2feb83791d355ef94a816bc33c78b8d07fffba44882d44817b09f501e8e46d8d",
+              "return_type": "class:37"
+            },
+            "token": "0x0a00000a"
+          },
+          {
+            "name": "Parse",
+            "parent_name": "System.Int32",
+            "parent_token": "0x0100000a",
+            "row_offset": 1674,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 2,
+              "parameter_types": [
+                "string",
+                "class:45"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 6,
+              "raw_sha256": "2f347765281b54140ff89d2dfa5de8ab90c282f66d8257f8adcbddbd447feaac",
+              "return_type": "i4"
+            },
+            "token": "0x0a00000b"
+          },
+          {
+            "name": "Max",
+            "parent_name": "System.Math",
+            "parent_token": "0x0100000c",
+            "row_offset": 1680,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 2,
+              "parameter_types": [
+                "i4",
+                "i4"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 5,
+              "raw_sha256": "d8e6ac56db05a388e5930a577acd67f9774c608c445ba1d11f52d14e15d437cd",
+              "return_type": "i4"
+            },
+            "token": "0x0a00000c"
+          },
+          {
+            "name": "ToString",
+            "parent_name": "System.Int32",
+            "parent_token": "0x0100000a",
+            "row_offset": 1686,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "class:45"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 5,
+              "raw_sha256": "7064556bfc1199f365be184d6c78831f937cd4a92fffc721d3d6683c442bdf1d",
+              "return_type": "string"
+            },
+            "token": "0x0a00000d"
+          },
+          {
+            "name": "Substring",
+            "parent_name": "System.String",
+            "parent_token": "0x01000006",
+            "row_offset": 1692,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 2,
+              "parameter_types": [
+                "i4",
+                "i4"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 5,
+              "raw_sha256": "e59d1dce0978165de9d8913b0ab50835d26ccb8fd394efda4a7ac4a277176dc0",
+              "return_type": "string"
+            },
+            "token": "0x0a00000e"
+          },
+          {
+            "name": "Parse",
+            "parent_name": "System.Int32",
+            "parent_token": "0x0100000a",
+            "row_offset": 1698,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 3,
+              "parameter_types": [
+                "string",
+                "valuetype:53",
+                "class:45"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 8,
+              "raw_sha256": "07ddd56a16e5157556250631d7d2752ff358d04cbeedd26826240e6984a5e805",
+              "return_type": "i4"
+            },
+            "token": "0x0a00000f"
+          },
+          {
+            "name": "ToString",
+            "parent_name": "System.Int32",
+            "parent_token": "0x0100000a",
+            "row_offset": 1704,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 2,
+              "parameter_types": [
+                "string",
+                "class:45"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 6,
+              "raw_sha256": "23f8d0eb51600601b220bda01664434e546cc556fee8b63a783ba1bbfe56cfa3",
+              "return_type": "string"
+            },
+            "token": "0x0a000010"
+          },
+          {
+            "name": "op_Equality",
+            "parent_name": "System.String",
+            "parent_token": "0x01000006",
+            "row_offset": 1710,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 2,
+              "parameter_types": [
+                "string",
+                "string"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 5,
+              "raw_sha256": "9506c899776ebdee1b3bf56b29306d76d73cc7e93ea1d0338b497f684f6eef38",
+              "return_type": "bool"
+            },
+            "token": "0x0a000011"
+          },
+          {
+            "name": "WriteLine",
+            "parent_name": "System.Console",
+            "parent_token": "0x0100000e",
+            "row_offset": 1716,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "string"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 4,
+              "raw_sha256": "250d91037dcedea60ffbb7aec99c8f9d09cfc2b1928dc36a3deca0c261a8ac18",
+              "return_type": "void"
+            },
+            "token": "0x0a000012"
+          },
+          {
+            "name": "get_Error",
+            "parent_name": "System.Console",
+            "parent_token": "0x0100000e",
+            "row_offset": 1722,
+            "signature": {
+              "calling_convention": "default",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 0,
+              "parameter_types": [],
+              "parse_status": "decoded",
+              "raw_length": 4,
+              "raw_sha256": "4c105100cc696ec5faf64bab911ba30b5c140e79d8e4df0bf44fc0435386595d",
+              "return_type": "class:61"
+            },
+            "token": "0x0a000013"
+          },
+          {
+            "name": "get_Message",
+            "parent_name": "System.Exception",
+            "parent_token": "0x01000010",
+            "row_offset": 1728,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 0,
+              "parameter_types": [],
+              "parse_status": "decoded",
+              "raw_length": 3,
+              "raw_sha256": "df29f5ab2554df47369dafce3bc8630f16eabc3f72c21bbd24c5e73c286f650f",
+              "return_type": "string"
+            },
+            "token": "0x0a000014"
+          },
+          {
+            "name": "WriteLine",
+            "parent_name": "System.IO.TextWriter",
+            "parent_token": "0x0100000f",
+            "row_offset": 1734,
+            "signature": {
+              "calling_convention": "default has-this",
+              "field_type": null,
+              "generic_parameter_count": null,
+              "issue": null,
+              "kind": "method",
+              "parameter_count": 1,
+              "parameter_types": [
+                "string"
+              ],
+              "parse_status": "decoded",
+              "raw_length": 4,
+              "raw_sha256": "c65dc7d303e94729245de0fa4db4b80ac687af6d0bb38c5c884bc9c11f01e005",
+              "return_type": "void"
+            },
+            "token": "0x0a000015"
+          }
+        ],
+        "user_strings": {
+          "issues": [],
+          "literals": [
+            {
+              "offset": 2401,
+              "token": "0x70000001",
+              "value": "\\A[A-Za-z0-9-]+\\z"
+            },
+            {
+              "offset": 2437,
+              "token": "0x70000025",
+              "value": "key"
+            },
+            {
+              "offset": 2445,
+              "token": "0x7000002d",
+              "value": "KEY="
+            },
+            {
+              "offset": 2455,
+              "token": "0x70000037",
+              "value": "\\A(0|[1-9][0-9]{0,3})\\z"
+            },
+            {
+              "offset": 2503,
+              "token": "0x70000067",
+              "value": "fee"
+            },
+            {
+              "offset": 2511,
+              "token": "0x7000006f",
+              "value": "FEE="
+            },
+            {
+              "offset": 2521,
+              "token": "0x70000079",
+              "value": "\\A[0-9A-Fa-f]*\\z"
+            },
+            {
+              "offset": 2555,
+              "token": "0x7000009b",
+              "value": "check"
+            },
+            {
+              "offset": 2567,
+              "token": "0x700000a7",
+              "value": "SUM="
+            },
+            {
+              "offset": 2577,
+              "token": "0x700000b1",
+              "value": "X2"
+            },
+            {
+              "offset": 2583,
+              "token": "0x700000b7",
+              "value": "usage"
+            },
+            {
+              "offset": 2595,
+              "token": "0x700000c3",
+              "value": "E:"
+            }
+          ],
+          "state": "complete"
+        },
+        "coverage": {
+          "issues": [],
+          "state": "complete"
+        },
+        "limitations": [
+          "Metadata tokens are build-local coordinates and are only meaningful with the reported artifact SHA-256 and MVID.",
+          "CIL instruction anchors are decoded from file-backed method bodies only; no target assembly is loaded or executed.",
+          "Exported types are reported from ExportedType rows as declared; forwarded types are not resolved in their implementing assemblies.",
+          "User strings are the #US literals loaded by ldstr in the inspected method bodies, with their own coverage; instruction anchors and normalized CIL digests keep their build-local tokens.",
+          "Member signatures decode ECMA-335 primitive, class, valuetype, generic instantiation, generic variable, pointer, byref, single-dimension and general array, function pointer, custom modifier, and typed reference forms; class and valuetype operands keep their encoded TypeDefOrRefOrSpec values, and unsupported forms such as vararg sentinels retain raw signature hashes.",
+          "Types, fields, methods, call edges, field accesses, and user strings cover only the selected declaring types; coverage describes that selection. Edge targets outside it keep their names but are not described."
+        ]
+      }
+    },
+    {
+      "original_evidence_id": "ev_21bdf71893e60faa31226d17f80650dfad13fab1bde1150cfad373ea50821f1e",
+      "operation": "inspect_analysis_view",
+      "provider": {
+        "id": "rea-analysis-view",
+        "name": "REA analysis view projection",
+        "version": "1"
+      },
+      "authority": "shipped-artifact",
+      "confidence": "derived",
+      "limitations": [
+        "Static inspection did not load the assembly, resolve dependencies through a CLR, decompile C#, or execute target code."
+      ],
+      "selected_result": {
+        "artifact": {
+          "path": "$ARTIFACT",
+          "sha256": "6f4e7e1d49e03f60adf9deb4929aafbe3fdd6babb628881807c63efb3ee089b4"
+        },
+        "coverage": {
+          "examined": 1,
+          "exhausted": true,
+          "next_offset": null,
+          "status": "page",
+          "total": 1
+        },
+        "identity_scope": {
+          "requires_artifact_sha256": "6f4e7e1d49e03f60adf9deb4929aafbe3fdd6babb628881807c63efb3ee089b4",
+          "requires_mvid": "9f72da28-6f8e-49b8-b861-7e2eb7cf8fec",
+          "token_identity": "build-local"
+        },
+        "item": [
+          {
+            "data_length": 98,
+            "data_sha256": "61f6a443e10532dba0eeb06958b8cd5432cd60c6f4993c8506688993f8a18797",
+            "declared_offset": 0,
+            "embedded": true,
+            "flags": 1,
+            "implementation_token": null,
+            "name": "legacy-note.txt",
+            "row_offset": 1820,
+            "token": "0x28000001",
+            "visibility": "public"
+          }
+        ],
+        "kind": "managed",
+        "limitations": [
+          "Static inspection did not load the assembly, resolve dependencies through a CLR, decompile C#, or execute target code."
+        ],
+        "parent_digest": "ecb15eb301fd42aeca006ea30085f84abb2c0761aa65cff18c4e2d7d7688d660",
+        "parent_evidence_id": "ev_ecb15eb301fd42aeca006ea30085f84abb2c0761aa65cff18c4e2d7d7688d660",
+        "parent_operation": "inspect_managed_artifact",
+        "source_coverage": {
+          "issues": [],
+          "state": "complete"
+        },
+        "source_metadata_status": "complete",
+        "unknowns": [
+          "Collection counts and pages cover producer-returned rows; metadata completeness remains the original metadata status and coverage, not an absence claim about unreturned rows.",
+          "Metadata tokens are build-local coordinates bound to the recorded artifact SHA-256 and module MVID; this view does not load or execute the assembly."
+        ],
+        "view": {
+          "collection": "resources",
+          "kind": "managed",
+          "limit": 10,
+          "offset": 0
+        },
+        "view_digest": "236f06891baea38dbb13df38576ebc58afe9a9b5a8424992d77262ce1d5d3bb5"
+      }
+    }
+  ],
+  "local_byte_observation": {
+    "method": "Ordinary local byte search, not an REA result",
+    "offset": 1124,
+    "length": 98,
+    "sha256": "61f6a443e10532dba0eeb06958b8cd5432cd60c6f4993c8506688993f8a18797",
+    "text": "Historical sketch only: all fees are flat 99. This inert resource is not an active specification.\n"
+  },
+  "failed_runtime_tool": {
+    "operation": "capture_process_scenario",
+    "arguments": [
+      "fee",
+      "4"
+    ],
+    "code": "capability_unavailable",
+    "category": "unsupported_provider",
+    "reason": "Windows PTY process capture is unavailable because this adapter does not yet verify descendant cleanup. Use Linux (including WSL for Linux commands) or macOS. Reinstalling the PTY backend does not enable native Windows capture.",
+    "produced_capture": false
+  }
+}
