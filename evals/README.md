@@ -27,6 +27,11 @@ The reviewer-only expectations and executable oracle are deliberately separate f
 
 ## Cases and coverage
 
+The [artifact reconstruction trial](artifact/README.md) adds an owned compiled
+managed executable with exactly three behaviors, frozen literals, actual REA
+static findings, separately labeled runtime observations and wrong-candidate
+checks. It is a disclosed source-exposed same-agent example, not a blind trial.
+
 | ID | Task | Executable check |
 | --- | --- | --- |
 | `function` | Rebuild one saturating arithmetic function | Boundaries, invalid/missing operands, deterministic generated corpus |

@@ -84,6 +84,8 @@ For product or feature specifications, read [the blueprint workflow](references/
 
 For a function, interface, or format, start with a compact contract: inputs and outputs, types/encoding, preconditions, side effects/state, failure behavior, dependencies, and evidence gaps. Define acceptance cases with an independent source of expected results using [comparison and test oracles](references/reconstruction-methods.md#comparison-and-test-oracles). Read only the applicable blueprint sections if this contract exposes a wider design question; a missing function specification does not require a product map.
 
+For a bounded reconstruction trial from packaged or compiled bytes, use the [artifact trial procedure](references/artifact-trials.md) to freeze identity/oracles, disclose source exposure, connect actual REA findings to runtime checks, and challenge wrong candidates without inventing canonical evidence.
+
 For file import/export reconstruction, use the [file compatibility procedure](references/file-compatibility.md) to freeze version/schema and encoding decisions, test both interoperability directions beyond round trips, and verify that rejection or failed persistence preserves prior state. Keep caught-write recovery separate from crash durability and concurrency claims.
 
 For adapting a saved reconstruction to another selected version, use the [version-change procedure](references/version-changes.md) to establish actual behavioral changes, select dependent revalidation and verify migration/recovery against frozen expectations.
