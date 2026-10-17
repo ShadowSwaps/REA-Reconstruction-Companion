@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { deflateRawSync } from 'node:zlib';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { planInstall, applyInstall, hash, NAME, BEGIN, END } from '../install.mjs';
 import { runUpdate, stateLocation, WEEK, REPO, releaseCandidate, newer, download } from '../skills/rea-reconstruction-companion/scripts/update.mjs';
 import { releaseFiles, MAX_ARCHIVE } from '../skills/rea-reconstruction-companion/scripts/release-archive.mjs';
@@ -75,6 +75,90 @@ const check = (f, context = f.context) => runUpdate('check', { allowFreeNetwork:
 test('disabled by default: on-use check writes nothing and makes no request', async t => {
   const f = fixture(t); const n = transport(f);
   assert.equal((await check(f, n.context)).status, 'disabled'); assert.equal(n.calls.length, 0); assert.ok(!fs.existsSync(f.location.directory));
+});
+
+test('optional setup denial reports unknown availability and health without state, network or installation changes', async t => {
+  for (const code of ['EPERM', 'EACCES']) for (const stage of ['resolve-state', 'inspect-state', 'prepare-directory', 'acquire-lock']) {
+    const f = fixture(t, 'on'); await enable(f); const n = transport(f);
+    // Preserve an existing offer, skip decision and cooldown even when setup fails.
+    const saved = JSON.parse(fs.readFileSync(f.location.file));
+    saved.pending = releaseCandidate(release()); saved.skippedVersion = future; saved.lastAttempt = now;
+    fs.writeFileSync(f.location.file, JSON.stringify(saved));
+    const before = fs.readFileSync(f.location.file), rea = fs.readFileSync(f.reaSkill);
+    const payload = new Map(Object.keys(saved.files).map(p => [p, fs.readFileSync(path.join(f.installed.companion, p))]));
+    const method = { 'resolve-state': 'lstatSync', 'inspect-state': 'lstatSync', 'prepare-directory': 'mkdirSync', 'acquire-lock': 'openSync' }[stage];
+    const target = { 'resolve-state': f.installed.companion, 'inspect-state': f.location.file, 'prepare-directory': f.location.directory, 'acquire-lock': path.join(f.location.directory, 'update.lock') }[stage];
+    const original = fs[method]; let attempts = 0;
+    fs[method] = function(file, ...args) {
+      if (file === target) { attempts++; throw Object.assign(new Error('Injected setup denial'), { code }); }
+      assert.notEqual(file, f.reaSkill, 'denied setup cannot inspect integration');
+      return original.call(fs, file, ...args);
+    };
+    let result;
+    try { result = await check(f, n.context); } finally { fs[method] = original; }
+    assert.equal(result.status, 'local-check-unavailable'); assert.equal(result.reason, 'permission-denied');
+    assert.equal(result.code, code); assert.equal(result.stage, stage);
+    assert.equal(result.updateAvailability, 'unknown'); assert.equal(result.integrationHealth, 'unknown');
+    assert.equal(result.version, undefined); assert.equal(result.installed, undefined);
+    assert.match(result.message, /Continue the main task/); assert.ok(!result.message.includes(f.dir));
+    assert.equal(attempts, 1); assert.equal(n.calls.length, 0);
+    assert.deepEqual(fs.readFileSync(f.location.file), before); assert.deepEqual(fs.readFileSync(f.reaSkill), rea);
+    for (const [p, bytes] of payload) assert.deepEqual(fs.readFileSync(path.join(f.installed.companion, p)), bytes);
+    assert.deepEqual(fs.readdirSync(f.location.directory), ['state.json']);
+  }
+});
+
+test('setup errors stay explicit for other actions and non-permission failures', async t => {
+  for (const code of ['EPERM', 'EACCES', 'EIO', 'ENOSPC']) {
+    const f = fixture(t); await enable(f); const n = transport(f);
+    const original = fs.openSync;
+    fs.openSync = function(file, ...args) {
+      if (file === path.join(f.location.directory, 'update.lock')) throw Object.assign(new Error('Injected lock failure'), { code });
+      return original.call(fs, file, ...args);
+    };
+    try {
+      for (const action of ['enable', 'disable', 'status', 'defer', 'skip', 'apply', ...(['EIO', 'ENOSPC'].includes(code) ? ['check'] : [])]) {
+        await assert.rejects(runUpdate(action, {}, n.context), { code });
+      }
+    } finally { fs.openSync = original; }
+    assert.equal(n.calls.length, 0);
+  }
+});
+
+test('permission errors after locking and during lock cleanup are not setup-unavailable results', async t => {
+  for (const code of ['EPERM', 'EACCES']) for (const phase of ['read-state', 'save-state', 'cleanup']) {
+    const f = fixture(t); await enable(f); const n = transport(f);
+    const method = { 'read-state': 'readFileSync', 'save-state': 'writeFileSync', cleanup: 'unlinkSync' }[phase];
+    const original = fs[method];
+    fs[method] = function(file, ...args) {
+      if ((phase === 'read-state' && file === f.location.file) ||
+          (phase === 'save-state' && path.dirname(file) === f.location.directory && path.basename(file).endsWith('.tmp')) ||
+          (phase === 'cleanup' && file === path.join(f.location.directory, 'update.lock'))) {
+        throw Object.assign(new Error('Injected post-lock failure'), { code });
+      }
+      return original.call(fs, file, ...args);
+    };
+    try { await assert.rejects(runUpdate('check', { allowFreeNetwork: phase !== 'cleanup' }, n.context), { code }); } finally { fs[method] = original; }
+    assert.equal(n.calls.length, 0);
+    assert.equal(fs.existsSync(path.join(f.location.directory, 'update.lock')), phase === 'cleanup');
+  }
+});
+
+test('installed CLI setup denial exits zero with structured unknowns; explicit mutation still exits one', async t => {
+  const f = fixture(t); await enable(f);
+  const script = path.join(f.installed.companion, 'scripts/update.mjs');
+  for (const code of ['EPERM', 'EACCES']) {
+    const preload = path.join(f.dir, `denied-${code}.mjs`);
+    fs.writeFileSync(preload, `import fs from 'node:fs';\nconst original = fs.openSync;\nfs.openSync = function(file, ...args) { if (file === ${JSON.stringify(path.join(f.location.directory, 'update.lock'))}) throw Object.assign(new Error('Injected lock denial'), { code: '${code}' }); return original.call(fs, file, ...args); };\nglobalThis.fetch = () => { throw new Error('Unexpected networking'); };\n`);
+    const before = fs.readFileSync(f.location.file);
+    let result = spawnSync(process.execPath, ['--import', pathToFileURL(preload).href, script, 'check', '--allow-free-network'], { cwd: f.dir, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr); assert.equal(result.stderr, '');
+    const output = JSON.parse(result.stdout); assert.equal(output.status, 'local-check-unavailable');
+    assert.equal(output.code, code); assert.equal(output.updateAvailability, 'unknown'); assert.equal(output.integrationHealth, 'unknown');
+    result = spawnSync(process.execPath, ['--import', pathToFileURL(preload).href, script, 'disable'], { cwd: f.dir, encoding: 'utf8' });
+    assert.equal(result.status, 1); assert.match(result.stderr, /Update needs attention: Injected lock denial/);
+    assert.deepEqual(fs.readFileSync(f.location.file), before);
+  }
 });
 
 test('enable requires a verified package and explicit integration choice', async t => {
