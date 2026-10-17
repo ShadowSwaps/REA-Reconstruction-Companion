@@ -272,6 +272,12 @@ The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw ev
 
 If this project is useful to you, you can [support my work on Ko-fi](https://ko-fi.com/shadowswaps). Contributions are optional; the project remains freely available under its open-source licenses.
 
+<p align="center">
+  <a href="https://ko-fi.com/shadowswaps">
+    <img src="assets/kofi-support.png" alt="Support ShadowSwaps on Ko-fi" width="480">
+  </a>
+</p>
+
 Bug reports, reproducible examples and focused pull requests are also welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing.
 
 ## License
