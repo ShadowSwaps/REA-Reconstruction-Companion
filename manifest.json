@@ -32,6 +32,7 @@
     "integration/rea-companion.md": "1d99a273ab57c20d149bff63ab70e9c3811bd5cc0389d5aae59c1caa3b91a120",
     "scripts/build_release.py": "6cf91979bd4083ea6d6699d21cd2955434c946c2a6c9490e2b2b7c89283de1be",
     "scripts/manifest.mjs": "889022c637d6ae5f40166a0118120e7cef85768e6a588aa9bed9665cdf798238",
+    "scripts/verify_release.py": "8d529f812e81cb0c6b93e8500dcc28cf942228e2dfe494d3661ec15afa28606a",
     "tests/artifact.test.mjs": "034b1bf2604de8412b94406ca97c2085b34c06fba707eb29cbcfc00be6a5c65a",
     "tests/browser-improvement.test.mjs": "55e9ea85e022fe2d633de25369251b4e36ad9311048635f0e06d3698211abd24",
     "tests/evals.test.mjs": "ed50e6689a35c21cfecb763798b271d5b78c07714b5a7e523f413c7a538e3984",
@@ -182,7 +183,7 @@
     ".github/CODEOWNERS": "08930e27734909873f10f6f513e44e9dafcfdf768ff00c389589bddf93c6a884",
     ".github/ISSUE_TEMPLATE/release-request.md": "574bd6c1d9004b3a959e7ba6fb77f3f89c727133a1a99c7cba7bbe142c254c5d",
     ".github/workflows/codeql.yml": "af99491df9b57052a57d08035d028fd926201ce24155e144fab24f7d8b969f82",
-    ".github/workflows/test.yml": "c0469f7590e85b1413089c7dad44da0f2773b39c3fa7cbbbf3a6acaf8a04ef53",
+    ".github/workflows/test.yml": "96a18b8d187350fd18f0359817d68eb57e0f0f734a894febf9e55e77060e9108",
     "assets/discord-banner.png": "4f25d6a75a9b0203ca9ebc217f815e46fb1783a244d81b763b5681173c24a1f6",
     "assets/kofi-support.png": "31d0947770098a2efbf31033331d4284df3f127d71608f2e3f45e53f2abeb736"
   }
