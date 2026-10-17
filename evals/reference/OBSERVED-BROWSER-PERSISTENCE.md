@@ -1,9 +1,11 @@
 # Browser persistence and recovery follow-up — 2026-10-17
 
 This bounded follow-up reused the unchanged Pocket Board 1.0.0 reference and
-reconstruction from the [original trial](OBSERVED-BROWSER-TRIAL.md). The original
-agent authored both targets, saw the reference source and expectations, and
-performed this review. This is source-exposed, same-agent evidence, with no blind
+reconstruction from the [original trial](OBSERVED-BROWSER-TRIAL.md). The historical
+trial's agent authored both targets and saw the reference source and expectations.
+This follow-up used those visible sources and expectations in a fresh task chat;
+one agent ran the new observations, wrote the audit and reviewed its own results.
+This is source-exposed, same-agent review evidence, with no blind
 benchmark, independent review or model/host comparison. Requested settings were
 Sol, Medium reasoning and Standard speed; no extra agent, dependency, paid
 service or scheduler was added.
