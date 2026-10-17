@@ -1,0 +1,2741 @@
+{
+  "date": "2026-10-17",
+  "method": "Source-exposed, same-agent, supported in-app browser; bounded DOM/storage projections",
+  "identityRecorded": "After final observations; final app unchanged during refreshed runs; original hashes independently pinned before observations",
+  "files": {
+    "browser-check.mjs": "f16757d5a6d3ddd82596628cf789e5f4fac9cdae4b05d082217fb32bf4baf7c4",
+    "conflict.jpg": "a433da0163b9b62176370269e1c1741b6dd034a1f43aa7d85d4873b766cf9f2a",
+    "fixture.js": "b27134a8a35ccca3798f8d8da55a49808f8ec130a5eec384499a9ddc2b518d78",
+    "model-harness.mjs": "42f2366c278586393cb65bf6a157248677a81331e89c81753c26c638f9567187",
+    "profile.mjs": "1b71573aa30130fb0e12e1ab3cdcc7cc5c4584d19caaaf02878e33d8ee6961b0",
+    "recovery-check.mjs": "acd7024269ffcfe4b40e69d0aa64bb738dc47d2e3ac27715688d7f2ed1d80fc8",
+    "server.mjs": "81309444d077c22c2492571130cc5fba8b47bee3ea82e2cb5dc1f3415b9a4370",
+    "improved/app.js": "61d03ba652ed09760a7ca3f032056cd87b6083660e806a8e948e11bcc438ff06",
+    "improved/index.html": "3be22d8ee7ecd60f0cb7d423e4ceb0ec6bbf1aa4e53af0ad69f75be4718af162",
+    "parity/app.js": "9022fd0a2145d6c47f1386bfac969f989bf84be0dcc71b89e7ca4e5dc3d34e2a",
+    "parity/index.html": "ec021e4220a49919245de8c314422bbc4223bbbeed9e5940e020866f682fe8df",
+    "reference/app.js": "ed392ef1d7c581bf40af3dbfb12bc157902580992c6aad052931aeb0369c7335",
+    "reference/index.html": "686e977381dd33880dc9be478062053418077761107a7e364d04193161c999a3"
+  },
+  "main": {
+    "captures": [
+      {
+        "target": "reference",
+        "label": "seed",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Ready",
+          "hidden": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "reference",
+        "label": "prior-success",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "First \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "First"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"First \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": First\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "First"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "reference",
+        "label": "failed-after-success",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "Save failed.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "First \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "  Draft \u03a9 <tag>  "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert: Save failed.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"First \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Draft \u03a9 <tag>\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "First \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "title": "  Draft \u03a9 <tag>  ",
+          "done": true,
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "reference",
+        "label": "retry",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":2,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "Draft \u03a9 <tag>"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Draft \u03a9 <tag>\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":2,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "status": "Saved",
+          "error": "",
+          "title": "Draft \u03a9 <tag>"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "reference",
+        "label": "retry-reload",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Ready",
+          "hidden": true,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "reference",
+        "label": "new-failure",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Save failed.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "New task",
+          "title": "  New draft  "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: New task\n- alert: Save failed.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": New draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "title": "  New draft  ",
+          "done": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "status": "New task"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "reference",
+        "label": "new-retry",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "New draft \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "New draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"New draft \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": New draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "New draft"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}"
+      },
+      {
+        "target": "reference",
+        "label": "blank-validation",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "Title is required.",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "New draft \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "   "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"New draft \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [active]\n  - checkbox \"Done\"\n  - text: Done\n  - alert: Title is required.\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "invalid": "Title is required.",
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}"
+      },
+      {
+        "target": "reference",
+        "label": "filter-cancel",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "New draft \u2014 Open"
+          ],
+          "scope": "open",
+          "selected": [
+            "false"
+          ],
+          "status": "Cancelled",
+          "title": "   "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Cancelled\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\"\n    - option \"Open\" [selected]\n    - option \"Done\"\n  - button \"New draft \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "New draft \u2014 Open"
+          ],
+          "hidden": true,
+          "status": "Cancelled"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}"
+      },
+      {
+        "target": "reference",
+        "label": "enter-submit",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":2,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "Enter submitted"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"Enter submitted \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [active]: Enter submitted\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":2,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "Enter submitted"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}"
+      },
+      {
+        "target": "reference",
+        "label": "unsaved-reload",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"Enter submitted \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "hidden": true,
+          "scope": "all",
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}"
+      },
+      {
+        "target": "reference",
+        "label": "fresh-tab",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": null,
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"Enter submitted \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.",
+        "expected": {
+          "hidden": true,
+          "status": "Ready",
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}"
+      },
+      {
+        "target": "reference",
+        "label": "edit-winner",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "A wins \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "A wins"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"A wins \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A wins\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "reference",
+        "label": "edit-stale",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "B draft \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"B draft\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"B draft \u2014 Done\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "B draft",
+          "recovery": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"B draft\",\"done\":true}]}"
+      },
+      {
+        "target": "reference",
+        "label": "new-winner",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "A wins \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "A wins"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"A wins \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A wins\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}"
+      },
+      {
+        "target": "reference",
+        "label": "new-stale",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "B draft \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"B draft \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "B draft",
+          "recovery": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B draft\",\"done\":false}]}"
+      },
+      {
+        "target": "parity",
+        "label": "seed",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Ready",
+          "hidden": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "parity",
+        "label": "prior-success",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "First \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "First"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"First \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": First\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "First"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "parity",
+        "label": "failed-after-success",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "Save failed.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "First \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "  Draft \u03a9 <tag>  "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert: Save failed.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"First \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Draft \u03a9 <tag>\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "First \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "title": "  Draft \u03a9 <tag>  ",
+          "done": true,
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "parity",
+        "label": "retry",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":2,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "Draft \u03a9 <tag>"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Draft \u03a9 <tag>\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":2,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "status": "Saved",
+          "error": "",
+          "title": "Draft \u03a9 <tag>"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "parity",
+        "label": "retry-reload",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Ready",
+          "hidden": true,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "parity",
+        "label": "new-failure",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Save failed.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "New task",
+          "title": "  New draft  "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: New task\n- alert: Save failed.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": New draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "title": "  New draft  ",
+          "done": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "status": "New task"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "parity",
+        "label": "new-retry",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "New draft \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "New draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"New draft \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": New draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "New draft"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}"
+      },
+      {
+        "target": "parity",
+        "label": "blank-validation",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "Title is required.",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "New draft \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "   "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"New draft \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [active]\n  - checkbox \"Done\"\n  - text: Done\n  - alert: Title is required.\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "invalid": "Title is required.",
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}"
+      },
+      {
+        "target": "parity",
+        "label": "filter-cancel",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "New draft \u2014 Open"
+          ],
+          "scope": "open",
+          "selected": [
+            "false"
+          ],
+          "status": "Cancelled",
+          "title": "   "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Cancelled\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\"\n    - option \"Open\" [selected]\n    - option \"Done\"\n  - button \"New draft \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "New draft \u2014 Open"
+          ],
+          "hidden": true,
+          "status": "Cancelled"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}"
+      },
+      {
+        "target": "parity",
+        "label": "enter-submit",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":2,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "Enter submitted"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"Enter submitted \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [active]: Enter submitted\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":2,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "Enter submitted"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}"
+      },
+      {
+        "target": "parity",
+        "label": "unsaved-reload",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"Enter submitted \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "hidden": true,
+          "scope": "all",
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}"
+      },
+      {
+        "target": "parity",
+        "label": "fresh-tab",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": null,
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"Enter submitted \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.",
+        "expected": {
+          "hidden": true,
+          "status": "Ready",
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}"
+      },
+      {
+        "target": "parity",
+        "label": "edit-winner",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "A wins \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "A wins"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"A wins \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A wins\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "parity",
+        "label": "edit-stale",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "B draft \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"B draft\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"B draft \u2014 Done\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "B draft",
+          "recovery": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"B draft\",\"done\":true}]}"
+      },
+      {
+        "target": "parity",
+        "label": "new-winner",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "A wins \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "A wins"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"A wins \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A wins\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}"
+      },
+      {
+        "target": "parity",
+        "label": "new-stale",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "B draft \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"B draft \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "B draft",
+          "recovery": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B draft\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "seed",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Ready",
+          "hidden": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "prior-success",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "First \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "First"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"First \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": First\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "First"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "failed-after-success",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "Save failed. Draft kept; storage or safe tab coordination is unavailable. Retry when available.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "First \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Save failed",
+          "title": "  Draft \u03a9 <tag>  "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Save failed\n- alert: Save failed. Draft kept; storage or safe tab coordination is unavailable. Retry when available.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"First \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Draft \u03a9 <tag>\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "First \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "title": "  Draft \u03a9 <tag>  ",
+          "done": true,
+          "status": "Save failed"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"First\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "retry",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":3,\"entered\":3,\"writes\":2,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "Draft \u03a9 <tag>"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Draft \u03a9 <tag>\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":3,\\\"entered\\\":3,\\\"writes\\\":2,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "status": "Saved",
+          "error": "",
+          "title": "Draft \u03a9 <tag>"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "retry-reload",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Ready",
+          "hidden": true,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "new-failure",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Save failed. Draft kept; storage or safe tab coordination is unavailable. Retry when available.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Save failed",
+          "title": "  New draft  "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Save failed\n- alert: Save failed. Draft kept; storage or safe tab coordination is unavailable. Retry when available.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": New draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "title": "  New draft  ",
+          "done": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done"
+          ],
+          "status": "Save failed"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "new-retry",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "New draft \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "New draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"New draft \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": New draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "New draft"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "blank-validation",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "Title is required.",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "New draft \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Not saved",
+          "title": "   "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Not saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"New draft \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [active]\n  - checkbox \"Done\"\n  - text: Done\n  - alert: Title is required.\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "invalid": "Title is required.",
+          "status": "Not saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "filter-cancel",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "New draft \u2014 Open"
+          ],
+          "scope": "open",
+          "selected": [
+            "false"
+          ],
+          "status": "Cancelled",
+          "title": "   "
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Cancelled\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\"\n    - option \"Open\" [selected]\n    - option \"Done\"\n  - button \"New draft \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "rows": [
+            "New draft \u2014 Open"
+          ],
+          "hidden": true,
+          "status": "Cancelled"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"New draft\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "enter-submit",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":3,\"entered\":3,\"writes\":2,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "Enter submitted"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"Enter submitted \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Enter submitted\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":3,\\\"entered\\\":3,\\\"writes\\\":2,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "Enter submitted"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "unsaved-reload",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"Enter submitted \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "hidden": true,
+          "scope": "all",
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "fresh-tab",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": true,
+          "invalid": "",
+          "probe": null,
+          "recovery": false,
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Draft \u03a9 <tag> \u2014 Done\"\n  - button \"Beta \u2014 Done\"\n  - button \"Enter submitted \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.",
+        "expected": {
+          "hidden": true,
+          "status": "Ready",
+          "rows": [
+            "Draft \u03a9 <tag> \u2014 Done",
+            "Beta \u2014 Done",
+            "Enter submitted \u2014 Open"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Draft \u03a9 <tag>\",\"done\":true},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Enter submitted\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "edit-winner",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "A wins \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "A wins"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"A wins \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A wins\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "edit-stale",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "Another tab changed stored tasks. Load latest to review; your draft is kept.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": true,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "true"
+          ],
+          "status": "Conflict \u2014 draft kept",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Conflict \u2014 draft kept\n- alert: Another tab changed stored tasks. Load latest to review; your draft is kept.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\"\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Conflict \u2014 draft kept",
+          "title": "B draft",
+          "recovery": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "edit-load-latest",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "Review latest tasks. Save draft as new, or Cancel and reopen a task.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": true,
+          "rows": [
+            "A wins \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "true"
+          ],
+          "status": "Latest loaded \u2014 draft kept",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Latest loaded \u2014 draft kept\n- alert: Review latest tasks. Save draft as new, or Cancel and reopen a task.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"A wins \u2014 Open\"\n  - button \"Beta \u2014 Done\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\" [active]\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Latest loaded \u2014 draft kept",
+          "title": "B draft"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "edit-still-blocked",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "Save draft as new, or Cancel and reopen a task.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": true,
+          "rows": [
+            "A wins \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "true"
+          ],
+          "status": "Conflict \u2014 draft kept",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Conflict \u2014 draft kept\n- alert: Save draft as new, or Cancel and reopen a task.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"A wins \u2014 Open\"\n  - button \"Beta \u2014 Done\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\"\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Conflict \u2014 draft kept",
+          "title": "B draft"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "edit-copy",
+        "actual": {
+          "busy": false,
+          "done": true,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "A wins \u2014 Open",
+            "Beta \u2014 Done",
+            "B draft \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B draft\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"A wins \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"B draft \u2014 Done\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "B draft",
+          "recovery": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A wins\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B draft\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "new-winner",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "A wins \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "A wins"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"A wins \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A wins\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "new-stale",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Another tab changed stored tasks. Load latest to review; your draft is kept.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": true,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Conflict \u2014 draft kept",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Conflict \u2014 draft kept\n- alert: Another tab changed stored tasks. Load latest to review; your draft is kept.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\"\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Conflict \u2014 draft kept",
+          "title": "B draft",
+          "recovery": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "new-load-latest",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Review latest tasks. Save draft as new, or Cancel and reopen a task.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": true,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "A wins \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false"
+          ],
+          "status": "Latest loaded \u2014 draft kept",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Latest loaded \u2014 draft kept\n- alert: Review latest tasks. Save draft as new, or Cancel and reopen a task.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"A wins \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\" [active]\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Latest loaded \u2014 draft kept",
+          "title": "B draft"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "new-still-blocked",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Save draft as new, or Cancel and reopen a task.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": true,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "A wins \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false"
+          ],
+          "status": "Conflict \u2014 draft kept",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Conflict \u2014 draft kept\n- alert: Save draft as new, or Cancel and reopen a task.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"A wins \u2014 Open\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\"\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Conflict \u2014 draft kept",
+          "title": "B draft"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "new-copy",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "A wins \u2014 Open",
+            "B draft \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "B draft"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false},{\"id\":4,\"title\":\"B draft\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"A wins \u2014 Open\"\n  - button \"B draft \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B draft\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "title": "B draft",
+          "recovery": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A wins\",\"done\":false},{\"id\":4,\"title\":\"B draft\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-edit-A-held",
+        "actual": {
+          "busy": true,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":true}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saving\u2026",
+          "title": "A overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\" [disabled]\n- status: Saving\u2026\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\" [disabled]:\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [disabled] [pressed]\n  - button \"Beta \u2014 Done\" [disabled]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [disabled]: A overlap\n  - checkbox \"Done\" [disabled]\n  - text: Done\n  - alert\n  - button \"Save\" [disabled]\n  - button \"Cancel\" [disabled]\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":true}\"",
+        "expected": {
+          "status": "Saving\u2026",
+          "busy": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-edit-A-queued",
+        "actual": {
+          "busy": true,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saving\u2026",
+          "title": "B overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\" [disabled]\n- status: Saving\u2026\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\" [disabled]:\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [disabled] [pressed]\n  - button \"Beta \u2014 Done\" [disabled]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [disabled]: B overlap\n  - checkbox \"Done\" [disabled]\n  - text: Done\n  - alert\n  - button \"Save\" [disabled]\n  - button \"Cancel\" [disabled]\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saving\u2026",
+          "busy": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-edit-A-winner",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "A overlap \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "A overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"A overlap \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\" [active]\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "busy": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-edit-A-conflict",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Another tab changed stored tasks. Load latest to review; your draft is kept.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": true,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Conflict \u2014 draft kept",
+          "title": "B overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Conflict \u2014 draft kept\n- alert: Another tab changed stored tasks. Load latest to review; your draft is kept.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\"\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Conflict \u2014 draft kept",
+          "title": "B overlap",
+          "busy": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-edit-A-recovered",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "A overlap \u2014 Open",
+            "Beta \u2014 Done",
+            "B overlap \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "B overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B overlap\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"A overlap \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"B overlap \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"A overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B overlap\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-edit-B-held",
+        "actual": {
+          "busy": true,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":true}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saving\u2026",
+          "title": "B overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\" [disabled]\n- status: Saving\u2026\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\" [disabled]:\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [disabled] [pressed]\n  - button \"Beta \u2014 Done\" [disabled]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [disabled]: B overlap\n  - checkbox \"Done\" [disabled]\n  - text: Done\n  - alert\n  - button \"Save\" [disabled]\n  - button \"Cancel\" [disabled]\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":true}\"",
+        "expected": {
+          "status": "Saving\u2026",
+          "busy": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-edit-B-queued",
+        "actual": {
+          "busy": true,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saving\u2026",
+          "title": "A overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\" [disabled]\n- status: Saving\u2026\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\" [disabled]:\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [disabled] [pressed]\n  - button \"Beta \u2014 Done\" [disabled]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [disabled]: A overlap\n  - checkbox \"Done\" [disabled]\n  - text: Done\n  - alert\n  - button \"Save\" [disabled]\n  - button \"Cancel\" [disabled]\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saving\u2026",
+          "busy": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-edit-B-winner",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "B overlap \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Saved",
+          "title": "B overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"B overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"B overlap \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\" [active]\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "busy": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"B overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-edit-B-conflict",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Another tab changed stored tasks. Load latest to review; your draft is kept.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": true,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Conflict \u2014 draft kept",
+          "title": "A overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"B overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Conflict \u2014 draft kept\n- alert: Another tab changed stored tasks. Load latest to review; your draft is kept.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\"\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Conflict \u2014 draft kept",
+          "title": "A overlap",
+          "busy": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"B overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-edit-B-recovered",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "B overlap \u2014 Open",
+            "Beta \u2014 Done",
+            "A overlap \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "A overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"B overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A overlap\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"B overlap \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"A overlap \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"B overlap\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A overlap\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-new-A-held",
+        "actual": {
+          "busy": true,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":true}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Saving\u2026",
+          "title": "A overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\" [disabled]\n- status: Saving\u2026\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\" [disabled]:\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [disabled]\n  - button \"Beta \u2014 Done\" [disabled]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [disabled]: A overlap\n  - checkbox \"Done\" [disabled]\n  - text: Done\n  - alert\n  - button \"Save\" [disabled]\n  - button \"Cancel\" [disabled]\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":true}\"",
+        "expected": {
+          "status": "Saving\u2026",
+          "busy": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-new-A-queued",
+        "actual": {
+          "busy": true,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Saving\u2026",
+          "title": "B overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\" [disabled]\n- status: Saving\u2026\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\" [disabled]:\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [disabled]\n  - button \"Beta \u2014 Done\" [disabled]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [disabled]: B overlap\n  - checkbox \"Done\" [disabled]\n  - text: Done\n  - alert\n  - button \"Save\" [disabled]\n  - button \"Cancel\" [disabled]\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saving\u2026",
+          "busy": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-new-A-winner",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "A overlap \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "A overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A overlap\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"A overlap \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\" [active]\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "busy": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A overlap\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-new-A-conflict",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Another tab changed stored tasks. Load latest to review; your draft is kept.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": true,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Conflict \u2014 draft kept",
+          "title": "B overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A overlap\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Conflict \u2014 draft kept\n- alert: Another tab changed stored tasks. Load latest to review; your draft is kept.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\"\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Conflict \u2014 draft kept",
+          "title": "B overlap",
+          "busy": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A overlap\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-new-A-recovered",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "A overlap \u2014 Open",
+            "B overlap \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "B overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A overlap\",\"done\":false},{\"id\":4,\"title\":\"B overlap\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"A overlap \u2014 Open\"\n  - button \"B overlap \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"A overlap\",\"done\":false},{\"id\":4,\"title\":\"B overlap\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-new-B-held",
+        "actual": {
+          "busy": true,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":true}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Saving\u2026",
+          "title": "B overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\" [disabled]\n- status: Saving\u2026\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\" [disabled]:\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [disabled]\n  - button \"Beta \u2014 Done\" [disabled]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [disabled]: B overlap\n  - checkbox \"Done\" [disabled]\n  - text: Done\n  - alert\n  - button \"Save\" [disabled]\n  - button \"Cancel\" [disabled]\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":true}\"",
+        "expected": {
+          "status": "Saving\u2026",
+          "busy": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-new-B-queued",
+        "actual": {
+          "busy": true,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Saving\u2026",
+          "title": "A overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\" [disabled]\n- status: Saving\u2026\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\" [disabled]:\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [disabled]\n  - button \"Beta \u2014 Done\" [disabled]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [disabled]: A overlap\n  - checkbox \"Done\" [disabled]\n  - text: Done\n  - alert\n  - button \"Save\" [disabled]\n  - button \"Cancel\" [disabled]\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saving\u2026",
+          "busy": true
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-new-B-winner",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "B overlap \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "B overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B overlap\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"B overlap \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": B overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\" [active]\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved",
+          "busy": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B overlap\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-new-B-conflict",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Another tab changed stored tasks. Load latest to review; your draft is kept.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "recovery": true,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false"
+          ],
+          "status": "Conflict \u2014 draft kept",
+          "title": "A overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B overlap\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Conflict \u2014 draft kept\n- alert: Another tab changed stored tasks. Load latest to review; your draft is kept.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\"\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Conflict \u2014 draft kept",
+          "title": "A overlap",
+          "busy": false
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B overlap\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "overlap-new-B-recovered",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done",
+            "B overlap \u2014 Open",
+            "A overlap \u2014 Open"
+          ],
+          "scope": "all",
+          "selected": [
+            "false",
+            "false",
+            "false",
+            "true"
+          ],
+          "status": "Saved",
+          "title": "A overlap"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B overlap\",\"done\":false},{\"id\":4,\"title\":\"A overlap\",\"done\":false}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"B overlap \u2014 Open\"\n  - button \"A overlap \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": A overlap\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"B overlap\",\"done\":false},{\"id\":4,\"title\":\"A overlap\",\"done\":false}]}"
+      },
+      {
+        "target": "improved",
+        "label": "lock-refusal",
+        "actual": {
+          "busy": false,
+          "done": false,
+          "error": "Save failed. Draft kept; storage or safe tab coordination is unavailable. Retry when available.",
+          "hidden": false,
+          "invalid": "",
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":true,\"requests\":1,\"entered\":0,\"writes\":0,\"held\":false}",
+          "recovery": false,
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "scope": "all",
+          "selected": [
+            "true",
+            "false"
+          ],
+          "status": "Save failed",
+          "title": "Lock kept"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Save failed\n- alert: Save failed. Draft kept; storage or safe tab coordination is unavailable. Retry when available.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Lock kept\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\" [active]\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":true,\\\"requests\\\":1,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "expected": {
+          "status": "Save failed",
+          "title": "Lock kept",
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      }
+    ],
+    "errors": [],
+    "limits": [
+      "Source exposed; same-agent implementation, tests and review",
+      "Controlled pre-native write rejection and lock holds/refusal",
+      "Reload/fresh tab only; actual browser restart and real storage denial unrun",
+      "Cooperating tabs only; no protection against writers ignoring lock",
+      "DOM projection is bounded; no browser/profile identity or durability claim"
+    ]
+  },
+  "supplemental": {
+    "captures": [
+      {
+        "label": "seed-a",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "actual": {
+          "hidden": true,
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "expected": {
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Ready"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "label": "seed-b",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Ready\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":0,\\\"entered\\\":0,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "actual": {
+          "hidden": true,
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":0,\"entered\":0,\"writes\":0,\"held\":false}",
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Ready",
+          "title": ""
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "expected": {
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Ready"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "label": "conflict-a",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Conflict \u2014 draft kept\n- alert: Another tab changed stored tasks. Load latest to review; your draft is kept.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [pressed]\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Copy A\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\"\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "actual": {
+          "hidden": false,
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Conflict \u2014 draft kept",
+          "title": "Copy A"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "expected": {
+          "title": "Copy A",
+          "status": "Conflict \u2014 draft kept"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "label": "conflict-b",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Conflict \u2014 draft kept\n- alert: Another tab changed stored tasks. Load latest to review; your draft is kept.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Copy B\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\"\n  - button \"Save draft as new\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":1,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "actual": {
+          "hidden": false,
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":1,\"entered\":1,\"writes\":0,\"held\":false}",
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Conflict \u2014 draft kept",
+          "title": "Copy B"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "expected": {
+          "title": "Copy B",
+          "status": "Conflict \u2014 draft kept"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "label": "copy-held",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\" [disabled]\n- status: Saving\u2026\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\" [disabled]:\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [disabled] [pressed]\n  - button \"Beta \u2014 Done\" [disabled]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [disabled]: Copy A\n  - checkbox \"Done\" [disabled]\n  - text: Done\n  - alert\n  - button \"Save\" [disabled]\n  - button \"Cancel\" [disabled]\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\" [disabled]\n  - button \"Save draft as new\" [disabled]\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":0,\\\"held\\\":true}\"",
+        "actual": {
+          "hidden": false,
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":0,\"held\":true}",
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Saving\u2026",
+          "title": "Copy A"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "expected": {
+          "title": "Copy A",
+          "status": "Saving\u2026"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "label": "copy-queued",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\" [disabled]\n- status: Saving\u2026\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\" [disabled]:\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\" [disabled]\n  - button \"Beta \u2014 Done\" [disabled] [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\" [disabled]: Copy B\n  - checkbox \"Done\" [checked] [disabled]\n  - text: Done\n  - alert\n  - button \"Save\" [disabled]\n  - button \"Cancel\" [disabled]\n- complementary:\n  - heading \"Recover your draft\" [level=2]\n  - paragraph: The draft stays in the editor until saved or cancelled. Reloading this page loses it.\n  - button \"Load latest (keep draft)\" [disabled]\n  - button \"Save draft as new\" [disabled]\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":1,\\\"writes\\\":0,\\\"held\\\":false}\"",
+        "actual": {
+          "hidden": false,
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":1,\"writes\":0,\"held\":false}",
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Saving\u2026",
+          "title": "Copy B"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "expected": {
+          "title": "Copy B",
+          "status": "Saving\u2026"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "label": "copy-a-saved",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Winner \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"Copy A \u2014 Open\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Copy A\n  - checkbox \"Done\"\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\" [active]\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "actual": {
+          "hidden": false,
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "rows": [
+            "Winner \u2014 Open",
+            "Beta \u2014 Done",
+            "Copy A \u2014 Open"
+          ],
+          "status": "Saved",
+          "title": "Copy A"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Copy A\",\"done\":false},{\"id\":4,\"title\":\"Copy B\",\"done\":true}]}",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Copy A\",\"done\":false},{\"id\":4,\"title\":\"Copy B\",\"done\":true}]}"
+      },
+      {
+        "label": "copy-b-saved",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Saved\n- alert\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Winner \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - button \"Copy A \u2014 Open\"\n  - button \"Copy B \u2014 Done\" [pressed]\n  - heading \"Editor\" [level=2]\n  - generic: Title\n  - textbox \"Title\": Copy B\n  - checkbox \"Done\" [checked]\n  - text: Done\n  - alert\n  - button \"Save\"\n  - button \"Cancel\"\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":2,\\\"entered\\\":2,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "actual": {
+          "hidden": false,
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":2,\"entered\":2,\"writes\":1,\"held\":false}",
+          "rows": [
+            "Winner \u2014 Open",
+            "Beta \u2014 Done",
+            "Copy A \u2014 Open",
+            "Copy B \u2014 Done"
+          ],
+          "status": "Saved",
+          "title": "Copy B"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Copy A\",\"done\":false},{\"id\":4,\"title\":\"Copy B\",\"done\":true}]}",
+        "expected": {
+          "status": "Saved"
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Winner\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true},{\"id\":3,\"title\":\"Copy A\",\"done\":false},{\"id\":4,\"title\":\"Copy B\",\"done\":true}]}"
+      },
+      {
+        "label": "malformed-recovery",
+        "draft": "Keep malformed",
+        "status": "Save failed",
+        "stored": "malformed"
+      },
+      {
+        "label": "cancel-latest",
+        "ax": "- banner:\n  - heading \"Pocket Board\" [level=1]\n  - button \"New task\"\n- status: Cancelled\n- alert: Save failed. Draft kept; storage or safe tab coordination is unavailable. Retry when available.\n- main:\n  - heading \"Tasks\" [level=2]\n  - generic: Show\n  - combobox \"Show\":\n    - option \"All\" [selected]\n    - option \"Open\"\n    - option \"Done\"\n  - button \"Alpha \u2014 Open\"\n  - button \"Beta \u2014 Done\"\n  - heading \"Editor\" [level=2]\n  - paragraph: Select a task or create one.\n- complementary \"Controlled instrumentation\":\n  - paragraph: Synthetic pre-write rejection and lock scheduling only; not real browser storage denial.\n  - button \"Reject next save\"\n  - button \"Hold next lock\"\n  - button \"Release held lock\"\n  - button \"Refuse locks\"\n  - status: \"{\\\"secure\\\":true,\\\"locks\\\":true,\\\"reject\\\":false,\\\"hold\\\":false,\\\"deny\\\":false,\\\"requests\\\":4,\\\"entered\\\":4,\\\"writes\\\":1,\\\"held\\\":false}\"",
+        "actual": {
+          "hidden": true,
+          "probe": "{\"secure\":true,\"locks\":true,\"reject\":false,\"hold\":false,\"deny\":false,\"requests\":4,\"entered\":4,\"writes\":1,\"held\":false}",
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ],
+          "status": "Cancelled",
+          "title": "Keep malformed"
+        },
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}",
+        "expected": {
+          "hidden": true,
+          "status": "Cancelled",
+          "rows": [
+            "Alpha \u2014 Open",
+            "Beta \u2014 Done"
+          ]
+        },
+        "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "label": "startup-warning-retained",
+        "before": "Storage could not be read.",
+        "duringEdit": "Storage could not be read.",
+        "after": "",
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Repaired\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      }
+    ],
+    "errors": [],
+    "method": "Additional same-agent actual-browser assertions; controlled lock hold; no real denial/restart claim"
+  }
+}

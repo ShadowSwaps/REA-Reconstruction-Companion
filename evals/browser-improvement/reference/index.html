@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pocket Board</title>
+<style>
+body{font:16px system-ui,sans-serif;background:#f3f5f8;color:#17283a;margin:32px auto;max-width:900px;padding:0 20px}header{display:flex;justify-content:space-between;align-items:center}main{display:grid;grid-template-columns:1fr 1fr;gap:24px}section{background:white;padding:24px;border:1px solid #d2d9e2;border-radius:8px}button,input,select{font:inherit;padding:8px}button{cursor:pointer}label{display:block;margin:16px 0 8px}#tasks{display:grid;gap:8px;margin-top:20px}#tasks button{text-align:left}#tasks button[aria-pressed=true]{outline:3px solid #376ed1}input[type=text]{box-sizing:border-box;width:100%}[role=alert]{color:#a51919}#editor[hidden],#hint[hidden]{display:none}h1{font-size:28px}h2{font-size:21px}
+</style>
+<header><h1>Pocket Board</h1><button id="new">New task</button></header>
+<p id="status" role="status">Ready</p><p id="error" role="alert"></p>
+<main><section><h2>Tasks</h2><label for="filter">Show</label><select id="filter"><option value="all">All</option><option value="open">Open</option><option value="done">Done</option></select><div id="tasks"></div></section>
+<section><h2>Editor</h2><p id="hint">Select a task or create one.</p><form id="editor" hidden novalidate><label for="title">Title</label><input id="title" type="text"><label><input id="done" type="checkbox"> Done</label><p id="validation" role="alert"></p><button type="submit">Save</button> <button type="button" id="cancel">Cancel</button></form></section></main>
+<script src="app.js"></script></html>

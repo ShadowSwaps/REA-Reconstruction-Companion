@@ -6,6 +6,8 @@ For a complete application to investigate with REA, use the [Pocket Tasks refere
 
 The [worked reconstruction example](reference/reconstruction/README.md) shows the implementation/validation step with real captured results and disclosed prior source/reviewer exposure. It is reviewer/training material, not evidence for a fresh trial or an independent agent benchmark.
 
+The [worked browser improvement](browser-improvement/README.md) preserves a historical reference/parity pair and separately improves save feedback and tab-conflict recovery. It includes a frozen acceptance profile, local fixtures, repeatable checks and bounded browser observations, with explicit cooperative-lock and fault-injection limits.
+
 The [checkpoint/resume evaluation](resume/README.md) adds two supplied-evidence triage tasks and a JSON-only checker. It compares reuse and stale-result decisions without executing candidate code; explanation, preservation and actual actions still require human review.
 
 ## Run an evaluation
