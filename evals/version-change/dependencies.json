@@ -1,0 +1,11 @@
+{
+  "F-codec": ["targetCodec","interface"],
+  "F-titles": ["targetTitles","titleInterface"],
+  "V-codec": ["F-codec","candidateCodec","corpus","environment","harness"],
+  "V-titles": ["F-titles","candidateTitles","titlesCorpus","environment","harness"],
+  "R-codec": ["V-codec"],
+  "R-titles": ["V-titles"],
+  "V-interface": ["V-codec","V-titles"],
+  "V-integration": ["V-interface","composition"],
+  "V-migration": ["V-codec","persistence","migrationCorpus"]
+}
