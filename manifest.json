@@ -51,7 +51,7 @@
     "evals/fixtures/wycheproof-LICENSE.txt": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
     "evals/fixtures/wycheproof-empty.json": "bfac0a0fac747550e516d3e8b4d0e52cfd3079d06edb9e6e063be175760d1d0d",
     "evals/oracles.mjs": "ec7bce0f4f801cab04db99d6f32d8e90c0f4b4a58e90b2e0540c6c7ffcfe157a",
-    "evals/reference/OBSERVED-BROWSER-PERSISTENCE.md": "7c6dd32ca40346e57cbbc6af269b57abb1e39dfa2dad1fc1d9510f3edb8b0f66",
+    "evals/reference/OBSERVED-BROWSER-PERSISTENCE.md": "c16ff99d76e8a531e0bfc77dfd353793df38ad7aa3db560cfffa434f7cd723a7",
     "evals/reference/OBSERVED-BROWSER-TRIAL.md": "f9d212d177bf2806e469cae27e834e3b3b3e9af9c18526e62d6ca3a5ab3b2b2b",
     "evals/reference/OBSERVED-TRIAL.md": "3afc1f6ff3ac831bea6e57c156859ec40355ac96c8318f4af300c4f69d8584c7",
     "evals/reference/README.md": "f699399dfade051bb3d4490787d28281e8bc57fbd94f60466c8ae7e7026dad8e",
