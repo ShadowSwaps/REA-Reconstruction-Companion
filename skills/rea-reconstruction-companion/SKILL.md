@@ -84,6 +84,8 @@ For product or feature specifications, read [the blueprint workflow](references/
 
 For a function, interface, or format, start with a compact contract: inputs and outputs, types/encoding, preconditions, side effects/state, failure behavior, dependencies, and evidence gaps. Define acceptance cases with an independent source of expected results using [comparison and test oracles](references/reconstruction-methods.md#comparison-and-test-oracles). Read only the applicable blueprint sections if this contract exposes a wider design question; a missing function specification does not require a product map.
 
+For file import/export reconstruction, use the [file compatibility procedure](references/file-compatibility.md) to freeze version/schema and encoding decisions, test both interoperability directions beyond round trips, and verify that rejection or failed persistence preserves prior state. Keep caught-write recovery separate from crash durability and concurrency claims.
+
 Start from the exact target and a prioritized question checklist. Use REA summaries and focused follow-ups to trace priority workflows from trigger through state/data changes to results. Read the base skill's target-specific references only when needed. Reuse matching evidence; a new target or version must not silently inherit another app's conclusions.
 
 Distinguish **observed facts**, **inferences**, **unknowns**, and **proposed design choices** throughout. Static analysis does not establish runtime behavior, strings do not establish active features, and client/network evidence does not reveal an inaccessible backend's complete implementation. Use bounded experiments to resolve uncertainties that could change the design.

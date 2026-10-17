@@ -1,0 +1,14 @@
+{
+  "id": "IE-20261017",
+  "reference": "synthetic Pocket Ledger 1",
+  "license": "MIT",
+  "exposure": "same-agent source-exposed; no blind or independent claim",
+  "phase": "contract/corpus/reference observations frozen before candidate",
+  "files": {
+    "CONTRACT.md": "e2d5e73bb59fb4062ac4c4381da3e4614f83854d12904ca8f5c2f4d00479d55c",
+    "corpus.json": "624f497538556c74d81c8ce37fb42342a21dfb039693943652fe2c0d580382ef",
+    "reference.mjs": "9ca2b75875e22aee8f84644b9d1d520fa7da798efb8553e9311211648644e1ec",
+    "observed.json": "726699b701e95346f8fcba0b503b14332bc74642d145c216ffced0c534afa527",
+    "freeze.mjs": "af5a57d0f27297f9468995ba1b946826b2e2eae7f7c2ea4f51c0626e19907440"
+  }
+}

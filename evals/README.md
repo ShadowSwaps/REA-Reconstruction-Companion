@@ -8,6 +8,8 @@ The [worked reconstruction example](reference/reconstruction/README.md) shows th
 
 The [worked browser improvement](browser-improvement/README.md) preserves a historical reference/parity pair and separately improves save feedback and tab-conflict recovery. It includes a frozen acceptance profile, local fixtures, repeatable checks and bounded browser observations, with explicit cooperative-lock and fault-injection limits.
 
+The [file import/export trial](import-export/README.md) freezes a synthetic two-version format before reconstruction, tests both interoperability directions against literal expected values, and checks state preservation after rejection and controlled persistence failures. It includes a runnable example and checker mutations; source exposure and durability limits remain explicit.
+
 The [checkpoint/resume evaluation](resume/README.md) adds two supplied-evidence triage tasks and a JSON-only checker. It compares reuse and stale-result decisions without executing candidate code; explanation, preservation and actual actions still require human review.
 
 ## Run an evaluation
