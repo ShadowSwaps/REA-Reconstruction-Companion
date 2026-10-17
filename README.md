@@ -253,11 +253,18 @@ The full source is included: skill and research references, installer, optional 
 
 ```sh
 node scripts/manifest.mjs
-node --test
+node scripts/run-checks.mjs
 python scripts/build_release.py
 ```
 
 Tests cover installation choices, backups, rollback, package integrity, and the local behavioral evaluation harness, including deliberately incorrect candidates. CI runs on Windows, macOS, and Linux with Node 20, 22, and 24. The included workflows use standard runners, skip private repositories, and add no model API calls or artifact/cache uploads. These checks do not establish reconstruction quality on every target or model.
+
+The test runner first checks directory-link fixture setup in the same temporary
+parent/runtime. A denied or unknown probe leaves required validation incomplete;
+it does not explain unrelated assertion failures or prove administrator rights
+are needed. Original test failures and counts remain visible. See
+[test environment diagnostics](CONTRIBUTING.md#test-environment-diagnostics) for
+probe-only output, explicit full runs and supported local/CI next steps.
 
 The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw evidence, independent executable oracles, and a human review rubric. It covers narrow functions, file formats, stateful workflows, original quirks versus approved improvements, ambiguous retries, inaccessible backends, contradictory evidence, hostile embedded instructions, cryptographic boundaries, and cost-sensitive tool choices. Paired selection tasks check that an implementation follows the requested compatibility or improvement goal; human review still verifies its reasoning and authorization. Running its harness tests is separate from evaluating an actual agent; model runs are not started automatically and require an environment established to incur no additional charge. See [CONTRIBUTING.md](CONTRIBUTING.md).
 

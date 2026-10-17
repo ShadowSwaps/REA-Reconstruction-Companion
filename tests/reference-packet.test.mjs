@@ -1,3 +1,4 @@
+import { fixtureLink } from '../scripts/fixture-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -88,14 +89,14 @@ test('malformed and oversized identity files fail; formatting alone is irrelevan
 test('packet root and evidence-directory links are refused without touching their targets', t => {
   const { dir, packet } = fixture(t);
   const type = process.platform === 'win32' ? 'junction' : 'dir';
-  const link = path.join(dir, 'packet-link'); fs.symlinkSync(packet, link, type);
+  const link = path.join(dir, 'packet-link'); fixtureLink(packet, link, type);
   const before = contents(packet); assert.throws(() => verifyPacket(link)); assert.deepEqual(contents(packet), before);
   const movedTarget = path.join(dir, 'original-target');
   // Both resolved move endpoints are inside this fresh test fixture.
   assert.equal(path.dirname(path.resolve(movedTarget)), dir);
   assert.equal(path.dirname(path.resolve(packet)), dir);
   fs.renameSync(path.join(packet, 'target'), movedTarget);
-  fs.symlinkSync(movedTarget, path.join(packet, 'target'), type);
+  fixtureLink(movedTarget, path.join(packet, 'target'), type);
   refusesWithoutChanges(packet);
   assert.deepEqual(fs.readdirSync(movedTarget), ['pocket-tasks.mjs']);
 });

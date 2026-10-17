@@ -1,3 +1,4 @@
+import { fixtureLink } from '../scripts/fixture-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -137,7 +138,7 @@ test('unsafe evidence is unverified, blocks recovery and leaves unrelated work i
   const report = path.join(source, 'input-report.json');
   fs.unlinkSync(report);
   const outside = path.join(dir, 'outside'); fs.mkdirSync(outside);
-  fs.symlinkSync(outside, report, process.platform === 'win32' ? 'junction' : 'dir');
+  fixtureLink(outside, report, process.platform === 'win32' ? 'junction' : 'dir');
   assert.equal(inspect('resume', source).files['input-report.json'].state, 'unverified');
   assert.throws(() => recover('restore', 'resume', source, destination), /Unverified/);
   assert.equal(fs.existsSync(destination), false);

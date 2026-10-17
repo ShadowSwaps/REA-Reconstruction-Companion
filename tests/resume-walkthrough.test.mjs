@@ -1,3 +1,4 @@
+import { fixtureLink } from '../scripts/fixture-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -184,7 +185,7 @@ for (const invalid of ['undefined', 'NaN', 'Infinity', '-Infinity', '({ toJSON()
 }
 test('a directly linked workspace directory is rejected', t => {
   const dir = prepare(t), alias = path.join(path.dirname(dir), 'alias');
-  fs.symlinkSync(dir, alias, process.platform === 'win32' ? 'junction' : 'dir');
+  fixtureLink(dir, alias, process.platform === 'win32' ? 'junction' : 'dir');
   assert.equal(cli(['continue', 'resume', alias]).status, 2);
   assert.equal(fs.existsSync(path.join(dir, 'triage.json')), false);
   fs.unlinkSync(alias);

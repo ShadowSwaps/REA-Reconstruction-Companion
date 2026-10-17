@@ -1,3 +1,4 @@
+import { fixtureLink } from '../scripts/fixture-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -516,7 +517,7 @@ test('linked recorded REA file or parent is warned about without reading its tar
     const link = choice === 'file' ? f.reaSkill : path.dirname(f.reaSkill);
     fs.renameSync(link, path.join(f.dir, 'original-rea'));
     // A junction also exercises rejection on Windows without symlink privilege.
-    fs.symlinkSync(target, link, process.platform === 'win32' ? 'junction' : 'dir');
+    fixtureLink(target, link, process.platform === 'win32' ? 'junction' : 'dir');
     const original = fs.openSync;
     const spy = t.mock.method(fs, 'openSync', (file, ...args) => {
       assert.notEqual(file, f.reaSkill, 'a linked REA path must never be opened');
@@ -547,7 +548,7 @@ for (const scenario of ['replacement-after-open', 'parent-link-before-open', 'sa
       if (scenario === 'parent-link-before-open') {
         const target = path.join(f.dir, 'other-rea'); fs.mkdirSync(target); fs.writeFileSync(path.join(target, 'SKILL.md'), text);
         fs.renameSync(path.dirname(f.reaSkill), path.join(f.dir, 'original-rea'));
-        fs.symlinkSync(target, path.dirname(f.reaSkill), process.platform === 'win32' ? 'junction' : 'dir');
+        fixtureLink(target, path.dirname(f.reaSkill), process.platform === 'win32' ? 'junction' : 'dir');
         changed = true;
       }
       targetFd = originalOpen(file, ...args);
@@ -853,7 +854,7 @@ test('linked update state and companion directories are rejected without followi
     const target = path.join(f.dir, 'unrelated'); fs.mkdirSync(target); fs.writeFileSync(path.join(target, 'sentinel.txt'), 'untouched');
     const link = choice === 'state' ? f.location.file : path.join(f.installed.companion, 'linked.txt');
     if (choice === 'state') fs.unlinkSync(link);
-    fs.symlinkSync(target, link, process.platform === 'win32' ? 'junction' : 'dir');
+    fixtureLink(target, link, process.platform === 'win32' ? 'junction' : 'dir');
     await assert.rejects(check(f, n.context), /link/i);
     assert.equal(n.calls.length, 0); assert.equal(fs.readFileSync(path.join(target, 'sentinel.txt'), 'utf8'), 'untouched');
   }

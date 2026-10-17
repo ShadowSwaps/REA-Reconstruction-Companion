@@ -1,3 +1,4 @@
+import { fixtureLink } from '../scripts/fixture-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -126,7 +127,7 @@ test('missing, oversized, linked, extra evidence and invalid invocation are reje
     if (mode === 'extra') fs.writeFileSync(path.join(dir,'unexpected.json'),'{}');
     if (mode === 'linked') {
       const outside = path.join(path.dirname(dir),'outside'); fs.mkdirSync(outside); fs.unlinkSync(file);
-      fs.symlinkSync(outside,file,process.platform === 'win32' ? 'junction' : 'dir');
+      fixtureLink(outside,file,process.platform === 'win32' ? 'junction' : 'dir');
     }
     assert.equal(cli(['continue',dir]).status,2); assert.equal(fs.existsSync(path.join(dir,'triage.json')),false);
     if (mode === 'linked') fs.unlinkSync(file);

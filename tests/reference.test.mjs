@@ -1,3 +1,4 @@
+import { fixtureLink } from '../scripts/fixture-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -104,7 +105,7 @@ test('candidate packet contains only selected evidence, with reproducible hashes
 test('packet rejects an existing file and a linked parent into the source checkout', t => {
   const dir = fixture(t), file = path.join(dir, 'existing'); fs.writeFileSync(file, 'keep');
   assert.throws(() => prepare(file)); assert.equal(fs.readFileSync(file, 'utf8'), 'keep');
-  const linked = path.join(dir, 'source-link'); fs.symlinkSync(repo, linked, process.platform === 'win32' ? 'junction' : 'dir');
+  const linked = path.join(dir, 'source-link'); fixtureLink(repo, linked, process.platform === 'win32' ? 'junction' : 'dir');
   assert.throws(() => prepare(path.join(linked, 'must-not-create-trial')));
   assert.equal(fs.existsSync(path.join(repo, 'must-not-create-trial')), false);
 });
@@ -148,7 +149,7 @@ test('save collision preserves existing data and a foreign pending file', t => {
 });
 test('store parent links and relative paths are rejected before writing', t => {
   const dir = fixture(t), outside = path.join(dir, 'outside'); fs.mkdirSync(outside);
-  const link = path.join(dir, 'linked'); fs.symlinkSync(outside, link, process.platform === 'win32' ? 'junction' : 'dir');
+  const link = path.join(dir, 'linked'); fixtureLink(outside, link, process.platform === 'win32' ? 'junction' : 'dir');
   assert.equal(run(dir, [{ op: 'save' }], path.join(link, 'tasks.json')).status, 2);
   assert.deepEqual(fs.readdirSync(outside), []);
   assert.equal(run(dir, [{ op: 'save' }], 'tasks.json').status, 2);

@@ -10,12 +10,60 @@ Use Node.js 20 or newer. There are no npm dependencies.
 
 ```sh
 node scripts/manifest.mjs
-node --test
+node scripts/run-checks.mjs
 ```
 
 Run the manifest command after editing any packaged file, including tests. The installer verifies package hashes before changing an installation. Hashes detect accidental corruption; they are not a cryptographic signature or a substitute for trusting the source.
 
 Tests use isolated temporary directories. Add coverage for meaningful behavior changes, especially installation paths, optional integration, backups, and recovery. Do not run tests against a real user's skill directory. Behavioral testing with a real AI host or REA target is separate; record the model/host, target identity, expected result, observed result, and limitations when reporting it.
+
+### Test environment diagnostics
+
+`npm test` (or `node scripts/run-checks.mjs`) first probes one directory link in the
+resolved OS temporary parent used by the fixtures: a junction on Windows, a
+directory symlink elsewhere. It uses the current Node runtime and an exclusively
+owned small child directory, unlinks its link before removing empty directories,
+and never recursively follows a junction. This observation does not guarantee
+every later fixture or race will work. No installed-skill command starts probes.
+`node scripts/run-checks.mjs --help` performs no filesystem probes.
+
+If preflight is incomplete, the default stops before the full suite. It reports
+tests as **unrun**, counts as unknown (`null`), and the required gate as
+**incomplete**, with exit 2. `--preflight-only` always leaves validation incomplete
+(exit 2), even on a supported host. After a relevant changed condition, use the
+same command again. If a full run is useful despite the probe result, explicitly
+use `node scripts/run-checks.mjs --run-tests`; it runs the unchanged Node suite. Direct
+`node --test` also remains available. Neither command skips link safety cases to
+accommodate a denied capability. Avoid repeating a known blocked full run without
+a relevant changed condition.
+
+The runner streams original TAP output, errors and final counts on stdout.
+Schema 1 JSON lines on stderr separately report `preflight` observations and
+`validation` execution, child exit/signal/error, final counts and gate. Actual
+link-creation failures add a `fixture-setup` record, then rethrow the original
+error. Records include link kind, stage, result and OS code/errno/syscall when
+available; diagnostic records omit absolute paths and error messages. Original
+Node failure output can contain fixture paths; redact those before sharing.
+`denied` means observed `EPERM` or `EACCES`, not a diagnosis of sandbox policy or
+administrator requirements. Other probe errors have unknown cause. A denied
+probe does not explain unrelated assertion failures. Cleanup errors remain
+separate observations and cannot erase a prior probe or test error.
+
+Exit 0 requires complete diagnostics, child exit 0, known final counts and no
+failed, cancelled or todo tests. Existing platform-specific skips remain visible
+in the original counts; no new skip policy is added. A nonzero suite exit is
+preserved, along with its original failures. Otherwise missing diagnostics,
+unknown results, unavailable execution, signals or cleanup errors leave exit 2
+and the gate incomplete. A probe is never a product pass. CI and the extracted
+release verifier use this same runner after their existing integrity checks.
+
+For blocked required safety cases, use the unchanged suite in an already
+supported local environment or the existing authorized public-repository PR CI
+matrix. Required validation remains incomplete/failing until those cases execute
+successfully. The tooling does not elevate, change permissions, install software,
+dispatch remote CI, increase timeouts or retry automatically. Keep local blocks
+and CI commit/tree/package identities with validation evidence; a supported CI
+pass does not retroactively change a local denial.
 
 The v1.2.0 updater tests use synthetic releases, local ZIP fixtures, a controlled clock and injected HTTP responses; they never enable checks in real installations or contact GitHub. Exercise the seven-day limit, failed checks, consent/offer changes, no-charge gate, local modifications, client/integration preservation, archive validation, locks and recovery. The update helper executes the existing installer from `skills/rea-reconstruction-companion/scripts/installer.mjs`; `install.mjs` re-exports it for existing callers. Do not execute downloaded installer code or introduce automatic release publication. Live host prompting is a separate, explicitly reported test.
 
@@ -50,7 +98,7 @@ The `CODEOWNERS` file assigns all paths to the owner. Repository protections req
 ## Release preparation
 
 1. Update the version in `package.json` when preparing a release.
-2. Run `node scripts/manifest.mjs` and `node --test`.
+2. Run `node scripts/manifest.mjs` and `node scripts/run-checks.mjs`.
 3. Run `python scripts/build_release.py` with Python 3.10+; it uses only the standard library and verifies the generated archive.
 4. Confirm CI passes for the exact proposed commit, then submit the version, commit, release notes, generated ZIP and `.sha256` checksums for owner review. Keep unapproved build artifacts local.
 5. After explicit owner approval of that exact release, the owner or a specifically authorized agent may create the corresponding tag and publish the approved ZIP, `.sha256` file and release notes. Verify the published tag and asset checksums. Do not overwrite older release assets.

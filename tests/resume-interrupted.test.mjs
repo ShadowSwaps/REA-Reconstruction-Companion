@@ -1,3 +1,4 @@
+import { fixtureLink } from '../scripts/fixture-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -132,7 +133,7 @@ test('unknown, unsafe, oversized and nested entries fail before destination crea
   assert.throws(() => recoverInterrupted('resume', source, destination), /Unsafe/);
   fs.unlinkSync(path.join(source, 'before-report.json'));
   const outside = path.join(dir, 'outside'); fs.mkdirSync(outside);
-  fs.symlinkSync(outside, path.join(source, 'before-report.json'), process.platform === 'win32' ? 'junction' : 'dir');
+  fixtureLink(outside, path.join(source, 'before-report.json'), process.platform === 'win32' ? 'junction' : 'dir');
   assert.throws(() => recoverInterrupted('resume', source, destination), /Unsafe/);
   fs.unlinkSync(path.join(source, 'before-report.json'));
   assert.throws(() => recoverInterrupted('resume', source, path.join(source, 'nested')), /outside/);

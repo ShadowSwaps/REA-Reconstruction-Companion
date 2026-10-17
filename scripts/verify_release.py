@@ -53,7 +53,7 @@ def main():
             target.parent.mkdir(parents=True, exist_ok=True)
             with target.open('xb') as output:
                 output.write(data)
-        subprocess.run(['node', '--test'], cwd=package, check=True)
+        subprocess.run(['node', 'scripts/run-checks.mjs'], cwd=package, check=True)
 
 
 if __name__ == '__main__':
