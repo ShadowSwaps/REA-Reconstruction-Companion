@@ -1,0 +1,1 @@
+Synthetic Pocket Ledger release 2. Schema 1/2 API and explicit migration.

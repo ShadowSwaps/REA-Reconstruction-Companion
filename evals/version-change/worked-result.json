@@ -1,0 +1,122 @@
+{
+  "status": "version-change-passed",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "arch": "x64"
+  },
+  "reused": [
+    {
+      "id": "V-titles",
+      "source": "baseline.json",
+      "reportSha256": "59bd2d8317621e22b0ebf1af2fb3af45c2043216eb15747ca4abab39e86069c7",
+      "bindings": {
+        "candidateTitles": "03c470fff363e072aac19c21e8c4407b023b8e42c8cebfb48d3be5ebab3df54d",
+        "environment": "580f0bb4ee9ca28b46bad04440a56da0484913af765e816eca7d46e273257ce3",
+        "harness": "0777bd46b4272c2bfdff95430dc9c35435507665d97b041137f3335e510ef7fb",
+        "targetTitles": "03c470fff363e072aac19c21e8c4407b023b8e42c8cebfb48d3be5ebab3df54d",
+        "titleInterface": "a0783557de1b71f0e30a5076f331d8f57b837f6a6bbdde89d040b8ec4c5d04db",
+        "titlesCorpus": "ffe67b41b3789d09db27ae6ec99f41c644003f30c39cf6bd946086285d7c759e"
+      }
+    }
+  ],
+  "executed": [
+    "V-codec",
+    "V-interface",
+    "V-integration",
+    "V-migration"
+  ],
+  "freshBindings": {
+    "targetCodec": "5cdd045caf1f6bc04f46d7c1c4698152d745fef80be53ccb99c9dfa330fe5ad3",
+    "candidateCodec": "4702a4d6967e67f5efb73dc8bea337c336e048fd19b02b4cd902c8d6dbfeddc1",
+    "targetTitles": "03c470fff363e072aac19c21e8c4407b023b8e42c8cebfb48d3be5ebab3df54d",
+    "candidateTitles": "03c470fff363e072aac19c21e8c4407b023b8e42c8cebfb48d3be5ebab3df54d",
+    "interface": "1036894ac636b1031c8bae913fdacfad78b1d6e123cd260ae7cf6a0ea6cdf92b",
+    "titleInterface": "a0783557de1b71f0e30a5076f331d8f57b837f6a6bbdde89d040b8ec4c5d04db",
+    "corpus": "37b48f0aa9ce719d140c27c12f7461341ce6bd9858d7789732012ff55a355595",
+    "titlesCorpus": "ffe67b41b3789d09db27ae6ec99f41c644003f30c39cf6bd946086285d7c759e",
+    "migrationCorpus": "37b48f0aa9ce719d140c27c12f7461341ce6bd9858d7789732012ff55a355595",
+    "persistence": "7b29d66619d7e44c958d83f9520354a05729105f1f444e6be9bea68a0cfe3f1e",
+    "composition": "7dbd9e962f9f95b16e962cb4324cb0435ba93b284d96e0f8de37787aaae036ba",
+    "environment": "580f0bb4ee9ca28b46bad04440a56da0484913af765e816eca7d46e273257ce3",
+    "harness": "0777bd46b4272c2bfdff95430dc9c35435507665d97b041137f3335e510ef7fb"
+  },
+  "oldCandidateMismatch": "schema2 rejected",
+  "migrated": {
+    "format": "pocket-ledger",
+    "version": 2,
+    "entries": [
+      {
+        "id": "a",
+        "title": "Café 🧾",
+        "done": false
+      },
+      {
+        "id": "b",
+        "title": "Second",
+        "done": false
+      }
+    ]
+  },
+  "requirements": {
+    "codec": {
+      "implementation": "candidate-v2.mjs",
+      "verification": "fresh-listed-cases-passed"
+    },
+    "titles": {
+      "implementation": "summary.mjs-retained",
+      "verification": "original-scoped-report-reused"
+    },
+    "migration": {
+      "implementation": "candidate-v2.mjs:migrate",
+      "verification": "fresh-listed-transitions-and-faults-passed",
+      "priorVerification": "unrun"
+    }
+  },
+  "overallParity": "bounded selected workflows only; arbitrary inputs and external applications unverified",
+  "rowsAfterRestart": [
+    {
+      "id": "a",
+      "title": "Café 🧾",
+      "done": true
+    },
+    {
+      "id": "b",
+      "title": "Second",
+      "done": false
+    }
+  ],
+  "recoveries": [
+    {
+      "name": "unsupported",
+      "kind": "actual validation rejection",
+      "preserved": true
+    },
+    {
+      "name": "lateInvalid",
+      "kind": "actual validation rejection",
+      "preserved": true
+    },
+    {
+      "name": "duplicate",
+      "kind": "actual validation rejection",
+      "preserved": true
+    },
+    {
+      "name": "pre-rename",
+      "kind": "injected exception; retry observed",
+      "preserved": true
+    },
+    {
+      "name": "rename-to-nonempty-directory",
+      "kind": "controlled real OS I/O failure, not spontaneous",
+      "preserved": true
+    }
+  ],
+  "preservation": {
+    "v1-data.json": "0e407cfe642e4d0217cdfd0b94c802562b777443b9a390be72fbbb4d45bf196f",
+    "baseline.json": "15d028382a5ef4548196ca3725e72955d69aa38d42cb73c55a9092e7b09649bd",
+    "checkpoint.json": "c50ed962e2a6cbb3a0655f146eef411d7f306582eb1d91f22435be133d575dab"
+  },
+  "limitation": "synthetic same-agent source exposure; bounded caught failures; no crash/concurrency guarantees"
+}

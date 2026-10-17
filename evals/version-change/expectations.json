@@ -1,0 +1,14 @@
+{
+  "v1": {"format":"pocket-ledger","version":1,"entries":[{"id":"a","text":"Café 🧾"},{"id":"b","text":"Second"}]},
+  "v2": {"format":"pocket-ledger","version":2,"entries":[{"id":"a","title":"Café 🧾","done":true},{"id":"b","title":"Second","done":false}]},
+  "migrated": {"format":"pocket-ledger","version":2,"entries":[{"id":"a","title":"Café 🧾","done":false},{"id":"b","title":"Second","done":false}]},
+  "rowsV1": [{"id":"a","title":"Café 🧾","done":false},{"id":"b","title":"Second","done":false}],
+  "rowsV2": [{"id":"a","title":"Café 🧾","done":true},{"id":"b","title":"Second","done":false}],
+  "titles": ["Café 🧾","Second"],
+  "unsupported": {"format":"pocket-ledger","version":3,"entries":[]},
+  "lateInvalid": {"format":"pocket-ledger","version":2,"entries":[{"id":"a","title":"valid prefix","done":false},{"id":"b","title":"invalid suffix","done":"false"}]},
+  "duplicate": {"format":"pocket-ledger","version":2,"entries":[{"id":"a","title":"one","done":false},{"id":"a","title":"two","done":false}]},
+  "affected": ["F-codec","R-codec","V-codec","V-interface","V-integration","V-migration"],
+  "retained": ["F-titles","R-titles","V-titles"],
+  "errors": {"oldReader":"unsupported-version","downgrade":"lossy-version","unsupported":"unsupported-version","lateInvalid":"schema","duplicate":"duplicate-id","persistence":"persistence"}
+}
