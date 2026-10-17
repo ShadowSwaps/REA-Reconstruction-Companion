@@ -1,4 +1,4 @@
-import { fixtureLink } from '../scripts/test-environment.mjs';
+import { fixtureLink } from '../scripts/fixture-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

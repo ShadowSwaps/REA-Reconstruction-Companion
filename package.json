@@ -6,7 +6,7 @@
   "license": "MIT",
   "engines": { "node": ">=20" },
   "scripts": {
-    "test": "node scripts/test.mjs",
+    "test": "node scripts/run-checks.mjs",
     "manifest": "node scripts/manifest.mjs",
     "build": "python scripts/build_release.py"
   },

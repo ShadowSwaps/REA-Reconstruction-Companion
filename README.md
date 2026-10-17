@@ -253,7 +253,7 @@ The full source is included: skill and research references, installer, optional 
 
 ```sh
 node scripts/manifest.mjs
-node scripts/test.mjs
+node scripts/run-checks.mjs
 python scripts/build_release.py
 ```
 

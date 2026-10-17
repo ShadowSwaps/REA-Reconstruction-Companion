@@ -1,13 +1,13 @@
 import { fileURLToPath } from 'node:url';
-import { emit, preflight, summarize } from './test-environment.mjs';
-import { runTests } from './test-runner.mjs';
+import { emit, preflight, summarize } from './fixture-environment.mjs';
+import { runTests } from './suite-process.mjs';
 
 const args = process.argv.slice(2);
 if (args.length > 1 || args.some(arg => !['--help', '--preflight-only', '--run-tests'].includes(arg))) {
-  console.error('Usage: node scripts/test.mjs [--help|--preflight-only|--run-tests]');
+  console.error('Usage: node scripts/run-checks.mjs [--help|--preflight-only|--run-tests]');
   process.exitCode = 2;
 } else if (args.includes('--help')) {
-  console.log('Usage: node scripts/test.mjs [--preflight-only|--run-tests]\nDefault: bounded fixture probe, then unchanged Node suite if supported.\n--preflight-only: observation only; required validation remains incomplete (exit 2).\n--run-tests: run unchanged suite even if probe fails; retain failures.\nExit 0: completed validation; child failure: original exit; otherwise 2: incomplete.');
+  console.log('Usage: node scripts/run-checks.mjs [--preflight-only|--run-tests]\nDefault: bounded fixture probe, then unchanged Node suite if supported.\n--preflight-only: observation only; required validation remains incomplete (exit 2).\n--run-tests: run unchanged suite even if probe fails; retain failures.\nExit 0: completed validation; child failure: original exit; otherwise 2: incomplete.');
 } else {
   const probe = preflight();
   emit(probe);

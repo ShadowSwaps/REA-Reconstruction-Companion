@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 import { createInterface } from 'node:readline';
-import { summarize } from './test-environment.mjs';
+import { summarize } from './fixture-environment.mjs';
 
 export function runTests(probe, { cwd, command = process.execPath, args = ['--test', '--test-reporter=tap'],
   output = chunk => process.stdout.write(chunk), errors = 'inherit', env = process.env } = {}) {

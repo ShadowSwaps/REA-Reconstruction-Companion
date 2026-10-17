@@ -4,8 +4,9 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { preflight, summarize, fixtureLink } from '../scripts/test-environment.mjs';
-import { runTests } from '../scripts/test-runner.mjs';
+import { fileURLToPath } from 'node:url';
+import { preflight, summarize, fixtureLink } from '../scripts/fixture-environment.mjs';
+import { runTests } from '../scripts/suite-process.mjs';
 
 const denied = Object.assign(new Error('Injected private /host/path'), { code: 'EPERM', errno: -1, syscall: 'symlink' });
 // Controlled in-memory filesystem; these are injected outcomes, not host evidence.
@@ -126,8 +127,27 @@ test('fixture diagnostic rethrows exact original error and emits no private path
 
 test('help and invalid arguments perform no preflight', () => {
   for (const [args, code] of [[['--help'], 0], [['--invalid'], 2], [['--help', '--run-tests'], 2]]) {
-    const result = spawnSync(process.execPath, ['scripts/test.mjs', ...args], { encoding: 'utf8' });
+    const result = spawnSync(process.execPath, ['scripts/run-checks.mjs', ...args], { encoding: 'utf8' });
     assert.equal(result.status, code);
     assert.ok(!result.stderr.includes('"event":"preflight"'));
   }
+});
+
+test('default Node discovery executes controlled tests without discovering repository tooling', async t => {
+  const parent = fs.realpathSync(os.tmpdir()), dir = fs.mkdtempSync(path.join(parent, 'rea-discovery-test-'));
+  const scripts = ['run-checks.mjs', 'fixture-environment.mjs', 'suite-process.mjs'];
+  fs.mkdirSync(path.join(dir, 'scripts')); fs.mkdirSync(path.join(dir, 'tests'));
+  const file = path.join(dir, 'tests/controlled.test.mjs');
+  t.after(() => {
+    fs.unlinkSync(file);
+    for (const name of scripts) fs.unlinkSync(path.join(dir, 'scripts', name));
+    fs.rmdirSync(path.join(dir, 'scripts')); fs.rmdirSync(path.join(dir, 'tests')); fs.rmdirSync(dir);
+  });
+  for (const name of scripts) fs.copyFileSync(fileURLToPath(new URL('../scripts/' + name, import.meta.url)), path.join(dir, 'scripts', name));
+  fs.writeFileSync(file, "import test from 'node:test'; test('controlled discovery case', () => {});");
+  const env = { ...process.env }; delete env.NODE_TEST_CONTEXT;
+  let output = '';
+  const result = await runTests(preflight(controlled()), { cwd: dir, env, output: chunk => { output += chunk; } });
+  assert.equal(result.exit, 0); assert.equal(result.counts.tests, 1); assert.equal(result.counts.pass, 1);
+  assert.ok(!output.includes('Subtest: scripts/')); assert.ok(!output.includes('"event":"preflight"'));
 });

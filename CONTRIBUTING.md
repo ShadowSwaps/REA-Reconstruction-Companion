@@ -10,7 +10,7 @@ Use Node.js 20 or newer. There are no npm dependencies.
 
 ```sh
 node scripts/manifest.mjs
-node scripts/test.mjs
+node scripts/run-checks.mjs
 ```
 
 Run the manifest command after editing any packaged file, including tests. The installer verifies package hashes before changing an installation. Hashes detect accidental corruption; they are not a cryptographic signature or a substitute for trusting the source.
@@ -19,20 +19,20 @@ Tests use isolated temporary directories. Add coverage for meaningful behavior c
 
 ### Test environment diagnostics
 
-`npm test` (or `node scripts/test.mjs`) first probes one directory link in the
+`npm test` (or `node scripts/run-checks.mjs`) first probes one directory link in the
 resolved OS temporary parent used by the fixtures: a junction on Windows, a
 directory symlink elsewhere. It uses the current Node runtime and an exclusively
 owned small child directory, unlinks its link before removing empty directories,
 and never recursively follows a junction. This observation does not guarantee
 every later fixture or race will work. No installed-skill command starts probes.
-`node scripts/test.mjs --help` performs no filesystem probes.
+`node scripts/run-checks.mjs --help` performs no filesystem probes.
 
 If preflight is incomplete, the default stops before the full suite. It reports
 tests as **unrun**, counts as unknown (`null`), and the required gate as
 **incomplete**, with exit 2. `--preflight-only` always leaves validation incomplete
 (exit 2), even on a supported host. After a relevant changed condition, use the
 same command again. If a full run is useful despite the probe result, explicitly
-use `node scripts/test.mjs --run-tests`; it runs the unchanged Node suite. Direct
+use `node scripts/run-checks.mjs --run-tests`; it runs the unchanged Node suite. Direct
 `node --test` also remains available. Neither command skips link safety cases to
 accommodate a denied capability. Avoid repeating a known blocked full run without
 a relevant changed condition.
@@ -98,7 +98,7 @@ The `CODEOWNERS` file assigns all paths to the owner. Repository protections req
 ## Release preparation
 
 1. Update the version in `package.json` when preparing a release.
-2. Run `node scripts/manifest.mjs` and `node scripts/test.mjs`.
+2. Run `node scripts/manifest.mjs` and `node scripts/run-checks.mjs`.
 3. Run `python scripts/build_release.py` with Python 3.10+; it uses only the standard library and verifies the generated archive.
 4. Confirm CI passes for the exact proposed commit, then submit the version, commit, release notes, generated ZIP and `.sha256` checksums for owner review. Keep unapproved build artifacts local.
 5. After explicit owner approval of that exact release, the owner or a specifically authorized agent may create the corresponding tag and publish the approved ZIP, `.sha256` file and release notes. Verify the published tag and asset checksums. Do not overwrite older release assets.
