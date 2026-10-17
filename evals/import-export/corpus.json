@@ -1,0 +1,23 @@
+[
+  {"id":"v2-unicode","json":{"format":"pocket-ledger","version":2,"entries":[{"id":"tea","title":"  Thé ☕\n雪 😀  ","done":true},{"id":"zero","title":"\u0000 <b> & \\","done":false}]},"rows":[{"id":"tea","title":"  Thé ☕\n雪 😀  ","done":true},{"id":"zero","title":"\u0000 <b> & \\","done":false}]},
+  {"id":"v1-migration","json":{"format":"pocket-ledger","version":1,"entries":[{"id":"b","text":"Second"},{"id":"a","text":"First"}]},"rows":[{"id":"b","title":"Second","done":false},{"id":"a","title":"First","done":false}]},
+  {"id":"empty","json":{"format":"pocket-ledger","version":2,"entries":[]},"rows":[]},
+  {"id":"late-invalid","json":{"format":"pocket-ledger","version":2,"entries":[{"id":"ok","title":"Parsed first","done":false},{"id":"bad","title":"","done":false}]},"error":"schema"},
+  {"id":"duplicate-id","json":{"format":"pocket-ledger","version":2,"entries":[{"id":"a","title":"One","done":false},{"id":"a","title":"Two","done":true}]},"error":"duplicate-id"},
+  {"id":"unsupported","json":{"format":"pocket-ledger","version":3,"entries":[]},"error":"unsupported-version"},
+  {"id":"version-type","json":{"format":"pocket-ledger","version":"2","entries":[]},"error":"schema"},
+  {"id":"unknown-envelope","json":{"format":"pocket-ledger","version":2,"entries":[],"future":true},"error":"schema"},
+  {"id":"unknown-row","json":{"format":"pocket-ledger","version":2,"entries":[{"id":"a","title":"One","done":false,"extra":1}]},"error":"schema"},
+  {"id":"missing-done","json":{"format":"pocket-ledger","version":2,"entries":[{"id":"a","title":"One"}]},"error":"schema"},
+  {"id":"done-type","json":{"format":"pocket-ledger","version":2,"entries":[{"id":"a","title":"One","done":0}]},"error":"schema"},
+  {"id":"bad-id","json":{"format":"pocket-ledger","version":1,"entries":[{"id":"../x","text":"One"}]},"error":"schema"},
+  {"id":"lone-surrogate","text":"{\"format\":\"pocket-ledger\",\"version\":2,\"entries\":[{\"id\":\"a\",\"title\":\"\\ud800\",\"done\":false}]}","error":"schema"},
+  {"id":"truncated","text":"{\"format\":\"pocket-ledger\",\"version\":2,\"entries\":[","error":"syntax"},
+  {"id":"trailing-data","text":"{}garbage","error":"syntax"},
+  {"id":"array-root","json":[],"error":"schema"},
+  {"id":"null-root","json":null,"error":"schema"},
+  {"id":"unsupported-format","json":{"format":"other","version":2,"entries":[]},"error":"schema"},
+  {"id":"invalid-utf8","hex":"c328","error":"encoding"},
+  {"id":"bom","hex":"efbbbf7b7d","error":"encoding"},
+  {"id":"duplicate-key-quirk","text":"{\"format\":\"pocket-ledger\",\"version\":99,\"version\":2,\"entries\":[]}","rows":[]}
+]
