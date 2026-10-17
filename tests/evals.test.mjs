@@ -67,7 +67,7 @@ function fixture(t, source) {
 for (const id of Object.keys(good)) {
   test(`independent ${id} oracle accepts correct fixture but keeps human review pending`, t => {
     const report = runCheck(id, fixture(t, good[id]));
-    assert.equal(report.status, 'comparisons-passed');
+    assert.equal(report.status, 'comparisons-passed', JSON.stringify(report));
     assert.equal(report.passed, casesFor(id).length);
     assert.equal(report.failed, 0);
     assert.equal(report.humanReview, 'pending');
@@ -102,7 +102,7 @@ const mutants = [
 for (const [id, title, source, label] of mutants) {
   test(`oracle catches deliberate defect: ${title}`, t => {
     const report = runCheck(id, fixture(t, source));
-    assert.equal(report.status, 'comparison-failed');
+    assert.equal(report.status, 'comparison-failed', JSON.stringify(report));
     assert.ok(report.failures.includes(label), JSON.stringify(report));
     assert.ok(report.failureDetails.some(f => f.label === label && f.reason === 'value-mismatch'));
     assert.equal(report.errored, 0);
@@ -130,10 +130,10 @@ test('crypto fixture rejects every modified or malformed input and verifies both
 test('empty-message vectors distinguish successful empty plaintext from authentication failure', t => {
   const candidate = fixture(t, good.crypto);
   const correct = runCheck('crypto', candidate);
-  assert.equal(correct.status, 'comparisons-passed');
+  assert.equal(correct.status, 'comparisons-passed', JSON.stringify(correct));
   const source = good.crypto.replace('try {', "try { if(input?.operation === 'decrypt' && input.ciphertext === '') return ''; ");
   const bypass = runCheck('crypto', fixture(t, source));
-  assert.equal(bypass.status, 'comparison-failed');
+  assert.equal(bypass.status, 'comparison-failed', JSON.stringify(bypass));
   assert.equal(bypass.errored, 0);
   for (const id of [2, 3]) {
     const cases = casesFor('crypto');
@@ -149,7 +149,7 @@ test('empty-message vectors distinguish successful empty plaintext from authenti
 test('throws and non-JSON returns cannot masquerade as successful rejection', t => {
   for (const body of ['throw new Error("failure")', 'return NaN', 'return Infinity', 'return undefined', 'return new Date(0)', 'return 1n', 'return {nested:undefined}', 'const v = {}; v.self=v; return v']) {
     const report = runCheck('function', fixture(t, `export function evaluate() { ${body}; }`));
-    assert.equal(report.status, 'candidate-error');
+    assert.equal(report.status, 'candidate-error', JSON.stringify(report));
     assert.equal(report.passed, 0);
     assert.equal(report.failed, report.total);
     assert.equal(report.errored, report.total);
@@ -161,14 +161,14 @@ test('throws and non-JSON returns cannot masquerade as successful rejection', t 
 
 test('mutating candidate inputs cannot alter the parent oracle', t => {
   const report = runCheck('workflow', fixture(t, `export function evaluate(actions) { actions.length = 0; return []; }`));
-  assert.equal(report.status, 'comparison-failed');
+  assert.equal(report.status, 'comparison-failed', JSON.stringify(report));
   assert.ok(report.failures.includes('save-restart'));
 });
 
 test('missing export, invalid stdout and early exit are harness failures', t => {
   for (const source of ['export const answer = 1;', 'console.log("noise"); export function evaluate() {return null;}', 'process.exit(0);']) {
     const report = runCheck('function', fixture(t, source));
-    assert.equal(report.status, 'harness-error');
+    assert.equal(report.status, 'harness-error', JSON.stringify(report));
     assert.equal(report.passed, 0);
     assert.equal(report.humanReview, 'pending');
     assert.equal(report.notEvaluated, report.total);
@@ -183,7 +183,7 @@ test('unknown/manual cases and invalid time budgets fail before candidate execut
 
 test('an accidental hang is bounded and never counted as a useful mutation kill', t => {
   const report = runCheck('function', fixture(t, 'export function evaluate() { while (true) {} }'), { timeout: 300 });
-  assert.equal(report.status, 'harness-error');
+  assert.equal(report.status, 'harness-error', JSON.stringify(report));
   assert.equal(report.reason, 'timeout');
   assert.equal(report.passed, 0);
   assert.equal(report.failed, 0);
@@ -192,7 +192,7 @@ test('an accidental hang is bounded and never counted as a useful mutation kill'
 
 test('output overflow is a harness failure without candidate output disclosure', t => {
   const report = runCheck('function', fixture(t, 'process.stdout.write("private-example".repeat(100000)); export function evaluate() { return null; }'));
-  assert.equal(report.status, 'harness-error');
+  assert.equal(report.status, 'harness-error', JSON.stringify(report));
   assert.equal(report.reason, 'output-limit');
   assert.equal(report.notEvaluated, report.total);
   assert.ok(!JSON.stringify(report).includes('private-example'));
@@ -201,9 +201,9 @@ test('output overflow is a harness failure without candidate output disclosure',
 test('malformed result envelopes are harness failures, not rejected inputs', t => {
   const total = casesFor('function').length;
   for (const envelope of [{ok:false}, {ok:true}, {ok:'yes',value:null}, {ok:false,reason:'unrecognized'}]) {
-    const source = `process.stdout.write(${JSON.stringify(JSON.stringify(Array.from({length:total}, () => envelope)))}); process.exit(0);`;
+    const source = `import fs from 'node:fs'; fs.writeSync(1, ${JSON.stringify(JSON.stringify(Array.from({length:total}, () => envelope)))}); process.exit(0);`;
     const report = runCheck('function', fixture(t, source));
-    assert.equal(report.status, 'harness-error');
+    assert.equal(report.status, 'harness-error', JSON.stringify(report));
     assert.equal(report.reason, 'invalid-worker-result');
     assert.equal(report.notEvaluated, total);
   }
@@ -216,7 +216,7 @@ test('async results are awaited and shared results are snapshotted per invocatio
       shared.length = 0; shared.push(...await calculate(actions)); return shared;
     }`;
   const report = runCheck('workflow', fixture(t, source));
-  assert.equal(report.status, 'comparisons-passed');
+  assert.equal(report.status, 'comparisons-passed', JSON.stringify(report));
   assert.equal(report.compared, report.total);
   assert.equal(report.errored, 0);
   assert.equal(report.notEvaluated, 0);
@@ -228,7 +228,7 @@ test('hidden toJSON cannot turn a returned object into the required number or nu
       return Object.defineProperty({}, 'toJSON', {value: () => calculate(input)});
     }`;
   const report = runCheck('function', fixture(t, source));
-  assert.equal(report.status, 'candidate-error');
+  assert.equal(report.status, 'candidate-error', JSON.stringify(report));
   assert.equal(report.passed, 0);
   assert.equal(report.errored, report.total);
   assert.ok(report.failureDetails.every(f => f.reason === 'non-json-result'));
@@ -241,7 +241,7 @@ test('array serialization hooks cannot supply an accepted parser result', t => {
       return result === null ? null : Object.defineProperty(result, 'toJSON', {value: () => result});
     }`;
   const report = runCheck('format', fixture(t, source));
-  assert.equal(report.status, 'candidate-error');
+  assert.equal(report.status, 'candidate-error', JSON.stringify(report));
   assert.ok(report.failureDetails.some(f => f.label === 'valid-1' && f.reason === 'non-json-result'));
 });
 
@@ -255,7 +255,7 @@ test('changing getters cannot change the value between validation and comparison
       });
     }`;
   const report = runCheck('workflow', fixture(t, source));
-  assert.equal(report.status, 'candidate-error');
+  assert.equal(report.status, 'candidate-error', JSON.stringify(report));
   assert.equal(report.passed, 1); // The empty action list contains no accessors.
   assert.ok(report.failureDetails.every(f => f.reason === 'non-json-result'));
 });
@@ -281,7 +281,7 @@ test('hidden, symbolic and sparse result data cannot be silently discarded', t =
     'new (class extends Array {})(1,2)',
   ]) {
     const report = runCheck('function', fixture(t, `export function evaluate(){return ${value};}`));
-    assert.equal(report.status, 'candidate-error');
+    assert.equal(report.status, 'candidate-error', JSON.stringify(report));
     assert.equal(report.errored, report.total);
     assert.ok(report.failureDetails.every(f => f.reason === 'non-json-result'));
   }
@@ -298,7 +298,7 @@ test('frozen data and repeated references remain valid JSON results', t => {
       }));
     }`;
   const report = runCheck('workflow', fixture(t, source));
-  assert.equal(report.status, 'comparisons-passed');
+  assert.equal(report.status, 'comparisons-passed', JSON.stringify(report));
   assert.equal(report.compared, report.total);
 });
 
@@ -309,7 +309,7 @@ test('special property names are preserved as data and produce real mismatches',
         return calculate(input).map(snapshot => Object.defineProperty(snapshot, ${JSON.stringify(key)}, {value:'extra',enumerable:true}));
       }`;
     const report = runCheck('workflow', fixture(t, source));
-    assert.equal(report.status, 'comparison-failed');
+    assert.equal(report.status, 'comparison-failed', JSON.stringify(report));
     assert.equal(report.errored, 0);
     assert.equal(report.passed, 1);
     assert.ok(report.failureDetails.every(f => f.reason === 'value-mismatch'));
@@ -322,13 +322,48 @@ test('reports distinguish numeric mismatches, exceptions and invalid return valu
     if (a === 1) return NaN;
     return null;
   }`));
-  assert.equal(report.status, 'candidate-error');
+  assert.equal(report.status, 'candidate-error', JSON.stringify(report));
   assert.ok(report.errored > 0);
   assert.ok(report.compared > 0);
   assert.equal(report.compared + report.errored + report.notEvaluated, report.total);
   assert.equal(report.passed + report.failed + report.notEvaluated, report.total);
   assert.deepEqual(new Set(report.failureDetails.map(f => f.reason)), new Set(['candidate-threw','non-json-result','value-mismatch']));
   assert.ok(!JSON.stringify(report).includes('private-example'));
+});
+
+test('process failures preserve unexecuted accounting and bounded diagnostics', t => {
+  const scenarios = [
+    ['export function evaluate() { while (true) {} }', 'timeout', {timeout: 300}, null, 0, 0],
+    ['fs.writeSync(2, "private-example"); process.exit(7);', 'candidate-process-failed', {}, 7, 0, 15],
+    ['process.kill(process.pid, "SIGKILL");', 'candidate-process-failed', {}, process.platform === 'win32' ? 1 : null, 0, 0],
+    ['fs.writeSync(1, "private-example"); process.exit(0);', 'invalid-worker-output', {}, 0, 15, 0],
+    ['fs.writeSync(1, "[]"); process.exit(0);', 'incomplete-worker-output', {}, 0, 2, 0],
+    // A valid record in a partial run must never count as a completed comparison.
+    [`fs.writeSync(1, '[{"ok":true,"value":0}]'); process.exit(0);`, 'incomplete-worker-output', {}, 0, 23, 0],
+    ['export function evaluate() { process.exit(0); }', 'invalid-worker-output', {}, 0, 0, 0],
+    // Invalid UTF-8 must count its original bytes, not encoded replacement characters.
+    ['fs.writeSync(1, Buffer.from([255])); fs.writeSync(2, Buffer.from([255])); process.exit(7);', 'candidate-process-failed', {}, 7, 1, 1],
+    ['fs.writeSync(1, "ø"); fs.writeSync(2, "ø"); process.exit(0);', 'invalid-worker-output', {}, 0, 2, 2],
+  ];
+  for (const [source, reason, options, exitCode, stdoutBytes, stderrBytes] of scenarios) {
+    const report = runCheck('function', fixture(t, `import fs from 'node:fs'; ${source}`), options);
+    const detail = JSON.stringify(report);
+    assert.equal(report.status, 'harness-error', detail);
+    assert.equal(report.reason, reason, detail);
+    for (const field of ['passed', 'failed', 'compared', 'errored']) assert.equal(report[field], 0, detail);
+    assert.equal(report.notEvaluated, report.total, detail);
+    assert.equal(report.humanReview, 'pending');
+    const e = report.execution;
+    assert.equal(e.timeoutMs, options.timeout ?? 10000);
+    assert.ok(Number.isInteger(e.elapsedMs) && e.elapsedMs >= 0, detail);
+    assert.equal(e.exitCode, exitCode, detail);
+    if (reason === 'timeout') assert.equal(e.errorCode, 'ETIMEDOUT', detail);
+    if (source.includes('SIGKILL')) assert.equal(e.signal, process.platform === 'win32' ? null : 'SIGKILL', detail);
+    assert.equal(e.stdoutBytes, stdoutBytes, detail);
+    assert.equal(e.stderrBytes, stderrBytes, detail);
+    assert.ok(!detail.includes('private-example'));
+    assert.ok(!detail.includes('rea-eval-test-'));
+  }
 });
 
 test('CLI reports machine-readable results and correct exit status', t => {

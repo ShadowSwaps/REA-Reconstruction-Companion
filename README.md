@@ -59,7 +59,39 @@ Share the repository: [github.com/ShadowSwaps/REA-Reconstruction-Companion](http
 - Records cryptographic interoperability parameters and verifies relevant independent vectors and rejection cases.
 - Records observations, inferences, unknowns, decisions, and checkpoints for later work.
 
-“Understand this app so I can eventually build something similar” produces a specification and roadmap. “Build a similar app now” also authorizes the implementation workflow. A request about one function stays focused on that function.
+Describe the software and the outcome you want in ordinary language. The companion uses available REA tools or supplied evidence, identifies gaps, and keeps the work at your requested scope. Copy and adapt these examples to your target.
+
+**Understand and plan a future reconstruction.** Expect evidence-backed behavior and workflow requirements, known unknowns, and a staged roadmap before implementation:
+
+```text
+Use REA and the companion to understand the desktop notes app I have open
+so I can plan a similar app later. Focus on creating, editing, searching,
+and saving notes. Link requirements to the evidence, separate observations
+from inferences, and list unanswered questions and a staged build roadmap.
+Stop after the specification and plan.
+```
+
+**Build a similar app now.** A build request authorizes implementation within the requested scope. Expect incremental code changes and validation against observed requirements, with gaps and differences reported:
+
+```text
+Use REA and the companion to investigate the desktop notes app I have open
+and build a local web app with similar note creation, editing, search,
+and save behavior in this workspace. Start with one working workflow,
+then add the remaining features in testable increments. Validate against
+the evidence and report differences and anything you could not verify.
+```
+
+**Investigate one function or feature.** Expect a focused contract covering inputs, outputs, side effects, errors, and evidence gaps:
+
+```text
+Use REA and the companion to investigate the CSV import feature in the
+app I have open. Trace how it handles headers, quoted fields, duplicate
+rows, and malformed input. Document inputs, outputs, side effects, error
+behavior, and representative acceptance cases, citing the evidence.
+Keep this to an investigation; do not implement changes.
+```
+
+The agent must report missing tools or evidence instead of claiming live analysis or complete equivalence. A build request does not authorize deployment, releases, installation changes, paid tools, or additional charges. Those actions require their own authority; the no-additional-charges constraint below still applies.
 
 ## How it works with REA
 
