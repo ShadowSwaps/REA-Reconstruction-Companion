@@ -1,12 +1,12 @@
 {
   "name": "rea-reconstruction-companion",
-  "version": "1.3.10",
+  "version": "1.3.11",
   "files": {
     "README.md": "39cf2aacfe2112c8e7dacd8d7bb1f354e5ab161438c13b741b78bbad29a234f0",
     "INSTALL.md": "cdfea3d199ec9036b36334b9e939aef4102d67297f5963c35273494f17315b9d",
     "LICENSE": "aca900183741df5c9b3db981bd48aba202474218f758c8b194548178a22c93bd",
     "CONTRIBUTING.md": "a6a31a4dabb9d011d06b98d59ca9e5f997285ac24f777c2e01b24f762a7ce8eb",
-    "package.json": "40140a34fbfb08566c19b6296d03e114c7ccaad49e143d6ea201993eb5560984",
+    "package.json": "ba47e3b0a76788206a9e17a5e53b2209c76cf0d5aea38be152d992b3f839c51a",
     "install.mjs": "b84191c1d008f49695fb96d51a7a93a40c9f42947d79532ce31814328e0b8842",
     ".gitignore": "cc60841f3ff7c8e1ed628e84bc839c0c8de88d917da3d06763a535229a7c8802",
     ".gitattributes": "74f066599d3fe2817756c3e532a869d370d4294c5c0a188487da2855f9b2378e",
