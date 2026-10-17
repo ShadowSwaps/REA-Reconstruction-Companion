@@ -1,0 +1,16 @@
+{
+  "kind": "Sanitized tool failure record, not canonical Evidence",
+  "operation": "verify_reconstruction",
+  "specification": {
+    "name": "Parcel static evidence cannot verify behavioral parity",
+    "claims": [{"claim_id":"R-fee-parity","kind":"behavioral","dimension":"overall","comparison_evidence_id":"ev_f53b5f9bd880c1067a16482a306a61bc0d9a4779e9c5701665bf6421c7e3ca6e","title":"Static members alone establish fee parity"}]
+  },
+  "actual": {
+    "isError": true,
+    "code": "invalid_request",
+    "category": "invalid_input",
+    "message": "Analysis input is invalid. Check the arguments and try again.",
+    "issues": [{"path":[],"reason":"invalid_value","message":"Comparison Evidence identity or authority disagrees"}]
+  },
+  "interpretation": "The real REA verifier rejected an unsupported evidence kind. No parity pass or unknown result was produced. Ordinary subprocess captures are checked locally, never fabricated as REA comparison Evidence."
+}

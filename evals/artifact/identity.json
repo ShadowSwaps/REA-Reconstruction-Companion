@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "name": "Parcel 1.0.0.0",
+  "license": "MIT (repository LICENSE)",
+  "exposure": "Same agent authored reference source, resource, corpus and candidate. Source-exposed synthetic trial, not blind or independently authored.",
+  "investigationInputs": [
+    "reference/Parcel.exe",
+    "corpus.json"
+  ],
+  "excludedInvestigationInputs": [
+    "build-source/Parcel.cs",
+    "build-source/legacy-note.txt"
+  ],
+  "selectedBehaviors": [
+    "key",
+    "fee",
+    "check"
+  ],
+  "compiler": {
+    "family": "Microsoft .NET Framework C# compiler",
+    "version": "4.8.9221.0 built by: NET481REL1LAST_25H2",
+    "sha256": "46809206887326d2d24db1eff1f3064de972c3451abe766b49111450a5e08e00"
+  },
+  "buildOptions": [
+    "/optimize+",
+    "/debug-",
+    "/target:exe",
+    "/platform:anycpu",
+    "/resource:legacy-note.txt,legacy-note.txt"
+  ],
+  "execution": "Windows .NET Framework 4.x; candidate Node.js >=20. No acquisition or third-party runtime package.",
+  "artifact": {
+    "bytes": 5120,
+    "path": "reference/Parcel.exe",
+    "sha256": "6f4e7e1d49e03f60adf9deb4929aafbe3fdd6babb628881807c63efb3ee089b4"
+  },
+  "corpusSha256": "cec3c120b8e39a8025af07d6f52ee705b075d7887c6b4d4f507b5d0a28542c26",
+  "sourceSha256": "328018920a729784b96753283fddb253a6b1978256a49ee57fc8ec9f8a34cf77",
+  "resourceSha256": "61f6a443e10532dba0eeb06958b8cd5432cd60c6f4993c8506688993f8a18797",
+  "freeze": "Frozen before REA investigation and candidate implementation. Compiler output is preserved; rebuilding may change PE timestamp/MVID/hash."
+}

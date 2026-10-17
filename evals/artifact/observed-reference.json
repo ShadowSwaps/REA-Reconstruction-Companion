@@ -1,0 +1,554 @@
+{
+  "schema": 1,
+  "method": "Ordinary local Node spawnSync of owned compiled reference; not REA process capture",
+  "artifactSha256": "6f4e7e1d49e03f60adf9deb4929aafbe3fdd6babb628881807c63efb3ee089b4",
+  "corpusSha256": "cec3c120b8e39a8025af07d6f52ee705b075d7887c6b4d4f507b5d0a28542c26",
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.21.0"
+  },
+  "normalization": "CRLF to LF only; raw streams retained",
+  "rows": [
+    {
+      "id": "K1",
+      "behavior": "key",
+      "args": [
+        "key",
+        " ab-9\t"
+      ],
+      "raw": {
+        "out": "KEY=AB-9\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "KEY=AB-9\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "K2",
+      "behavior": "key",
+      "args": [
+        "key",
+        "12345678"
+      ],
+      "raw": {
+        "out": "KEY=12345678\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "KEY=12345678\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "K3",
+      "behavior": "key",
+      "args": [
+        "key",
+        "a"
+      ],
+      "raw": {
+        "out": "KEY=A\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "KEY=A\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "K4",
+      "behavior": "key",
+      "args": [
+        "key",
+        ""
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:key\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:key\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "K5",
+      "behavior": "key",
+      "args": [
+        "key",
+        "123456789"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:key\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:key\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "K6",
+      "behavior": "key",
+      "args": [
+        "key",
+        "café"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:key\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:key\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "K7",
+      "behavior": "key",
+      "args": [
+        "key",
+        "a b"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:key\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:key\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "K8",
+      "behavior": "key",
+      "args": [
+        "key",
+        "a\n"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:key\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:key\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "K9",
+      "behavior": "key",
+      "args": [
+        "key",
+        " a"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:key\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:key\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "K10",
+      "behavior": "key",
+      "args": [
+        "key"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:usage\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:usage\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "F1",
+      "behavior": "fee",
+      "args": [
+        "fee",
+        "0"
+      ],
+      "raw": {
+        "out": "FEE=0\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "FEE=0\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "F2",
+      "behavior": "fee",
+      "args": [
+        "fee",
+        "1"
+      ],
+      "raw": {
+        "out": "FEE=5\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "FEE=5\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "F3",
+      "behavior": "fee",
+      "args": [
+        "fee",
+        "3"
+      ],
+      "raw": {
+        "out": "FEE=5\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "FEE=5\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "F4",
+      "behavior": "fee",
+      "args": [
+        "fee",
+        "4"
+      ],
+      "raw": {
+        "out": "FEE=7\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "FEE=7\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "F5",
+      "behavior": "fee",
+      "args": [
+        "fee",
+        "1000"
+      ],
+      "raw": {
+        "out": "FEE=1999\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "FEE=1999\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "F6",
+      "behavior": "fee",
+      "args": [
+        "fee",
+        "1001"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:fee\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:fee\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "F7",
+      "behavior": "fee",
+      "args": [
+        "fee",
+        "01"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:fee\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:fee\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "F8",
+      "behavior": "fee",
+      "args": [
+        "fee",
+        "-1"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:fee\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:fee\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "F9",
+      "behavior": "fee",
+      "args": [
+        "fee",
+        "1\n"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:fee\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:fee\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "F10",
+      "behavior": "fee",
+      "args": [
+        "fee",
+        "1",
+        "extra"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:usage\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:usage\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "C1",
+      "behavior": "check",
+      "args": [
+        "check",
+        ""
+      ],
+      "raw": {
+        "out": "SUM=00\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "SUM=00\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "C2",
+      "behavior": "check",
+      "args": [
+        "check",
+        "ff01"
+      ],
+      "raw": {
+        "out": "SUM=00\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "SUM=00\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "C3",
+      "behavior": "check",
+      "args": [
+        "check",
+        "aB10"
+      ],
+      "raw": {
+        "out": "SUM=BB\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "SUM=BB\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "C4",
+      "behavior": "check",
+      "args": [
+        "check",
+        "FFFFFFFFFFFFFFFF"
+      ],
+      "raw": {
+        "out": "SUM=F8\r\n",
+        "err": "",
+        "exit": 0
+      },
+      "expected": {
+        "out": "SUM=F8\n",
+        "err": "",
+        "exit": 0
+      }
+    },
+    {
+      "id": "C5",
+      "behavior": "check",
+      "args": [
+        "check",
+        "0"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:check\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:check\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "C6",
+      "behavior": "check",
+      "args": [
+        "check",
+        "GG"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:check\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:check\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "C7",
+      "behavior": "check",
+      "args": [
+        "check",
+        "000000000000000000"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:check\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:check\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "C8",
+      "behavior": "check",
+      "args": [
+        "check",
+        "AA\n"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:check\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:check\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "C9",
+      "behavior": "check",
+      "args": [
+        "check",
+        " 00"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:check\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:check\n",
+        "exit": 2
+      }
+    },
+    {
+      "id": "C10",
+      "behavior": "check",
+      "args": [
+        "CHECK",
+        "00"
+      ],
+      "raw": {
+        "out": "",
+        "err": "E:usage\r\n",
+        "exit": 2
+      },
+      "expected": {
+        "out": "",
+        "err": "E:usage\n",
+        "exit": 2
+      }
+    }
+  ]
+}
