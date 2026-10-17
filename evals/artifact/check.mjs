@@ -13,7 +13,11 @@ export function checkSaved(cases, saved) {
   if (saved.artifactSha256 !== locked['reference/Parcel.exe'] || saved.corpusSha256 !== locked['corpus.json'] || !Array.isArray(saved.rows) || saved.rows.length !== cases.length) throw new Error('Observation identity/coverage mismatch');
   for (const [index, c] of cases.entries()) {
     const row = saved.rows[index];
-    if (row.id !== c.id || row.behavior !== c.behavior || !isDeepStrictEqual(row.args, c.args) || !isDeepStrictEqual(comparable(row.raw), { out: c.out, err: c.err, exit: c.exit })) throw new Error('Observation mismatch: ' + c.id);
+    // This capture format contains completed streams and exit only. Reject
+    // contradictory failure/partial fields instead of projecting them away.
+    if (!row?.raw || !isDeepStrictEqual(Object.keys(row.raw).sort(), ['err', 'exit', 'out'])
+      || row.id !== c.id || row.behavior !== c.behavior || !isDeepStrictEqual(row.args, c.args)
+      || !isDeepStrictEqual(comparable(row.raw), { out: c.out, err: c.err, exit: c.exit })) throw new Error('Observation mismatch: ' + c.id);
   }
 }
 export function check({ candidate = path.join(root, 'candidate.mjs'), freshReference = process.platform === 'win32' } = {}) {

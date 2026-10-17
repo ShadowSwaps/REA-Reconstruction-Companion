@@ -85,6 +85,14 @@ comparisons failed, and 2 means invocation, integrity, filesystem or execution
 error. Errors retain partial attempts and hide private paths. Partial files and
 status markers alone never mean a check passed.
 
+Additional controlled process-result faults cover timeout, unavailable executable,
+permission denial, missing exit, signal, stderr and truncated output. They exercise
+the same recovery path, preserving the completed applicable before-report and
+failed attempt without claiming final verification or retrying unchanged work.
+Removing an injected blocker permits a fresh destination; these cases are not
+real-provider observations. For investigation questions and partial capabilities,
+see [checkpoint recovery guidance](../../skills/rea-reconstruction-companion/references/checkpoints.md#failed-investigation-operations-and-partial-capability).
+
 Run `node --test tests/resume-interrupted.test.mjs`. Tests actually exit a child
 process at deterministic writes, after triage, before-report, candidate output,
 after-report and result; partial-write tests exit after writing a truncated file.

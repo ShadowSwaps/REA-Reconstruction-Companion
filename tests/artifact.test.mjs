@@ -51,6 +51,18 @@ test('freeze refuses changed reference, literal oracle and identity before execu
   }
 });
 
+test('saved failed or partial captures cannot pass with matching streams and a success exit', () => {
+  const cases = verifyFreeze(), original = JSON.parse(read('observed-reference.json'));
+  // Injected contradictory/unsupported capture records, not live provider failures.
+  for (const field of [{ error: { code: 'ETIMEDOUT' } }, { error: { code: 'ENOENT' } },
+    { signal: 'SIGTERM' }, { status: 'partial' }, { truncated: true }]) {
+    const saved = structuredClone(original);
+    Object.assign(saved.rows[0].raw, field);
+    saved.rows[0].pass = true;
+    assert.throws(() => checkSaved(cases, saved), /Observation mismatch/);
+  }
+});
+
 test('saved capture rejects unsupported authority, environment and normalization without promoting static results', () => {
   const cases = verifyFreeze(), original = JSON.parse(read('observed-reference.json'));
   for (const change of [r => r.schema = 2, r => r.method = 'Static member inspection; runtime not run',

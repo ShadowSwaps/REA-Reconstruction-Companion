@@ -82,6 +82,43 @@ uses unchanged fixture bytes, two controlled cap settings and a minimal real-loc
 Node probe. It demonstrates selective revalidation without a compatibility engine;
 cross-version and cross-host claims remain unverified.
 
+## Failed investigation operations and partial capability
+
+Keep the selected question beside the failure. Add the attempted operation and
+bounded inputs, target identity, relevant provider/profile/environment, observed
+error and progress, and references to any complete or partial output to the same
+checkpoint. Preserve the original failure and applicable completed findings;
+failure of one operation does not restart the investigation. Record absent
+output as absent rather than inventing an Evidence ID or successful search.
+Exclude secrets and private host details from shared excerpts.
+
+Use the base REA skill's connection/provider recovery guidance for the observed
+blocker. A timeout establishes that this attempt did not complete within its
+bound; it does not establish absent functionality, a globally broken provider,
+or a causal diagnosis from incidental warnings. A tool's retryable flag is not
+permission or evidence that an unchanged retry will help. Do not repeat an
+unchanged nonproductive attempt. Before a bounded retry, name a relevant changed
+condition or focused input and why it can resolve the question within existing
+authority. Do not silently inflate timeouts, acquire software, elevate or expand
+access, or use paid/remote analysis fallbacks to clear the block.
+
+| Available evidence | Supported continuation and boundary |
+| --- | --- |
+| Complete applicable findings from earlier operations | Reuse their tested scope and retain provenance; mark only dependent missing work unresolved. |
+| Partial analysis, interrupted output or a truncated display | Follow the base skill's retained-evidence/view rules to establish what exists and its coverage. A preview or completion label alone cannot certify a complete analysis or a negative search. |
+| Static inventory/source metadata while internals are unavailable | Answer only the identity/layout questions those observations support. Metadata does not verify behavior or recover internal code. |
+| Authorized runtime observations while static analysis is blocked | Answer the selected observable behavior for the recorded inputs/environment. Label ordinary tool captures separately from REA Evidence; runtime agreement does not recover internals or prove whole-app parity. |
+| No trustworthy evidence sufficient for the required question | Mark that question blocked, state the exact missing observation and smallest feasible next action or changed condition. Continue independent supported questions without describing the required question as answered. |
+
+Keep operation status (failed, partial, complete or unavailable), evidence
+applicability (current, stale or unknown), and question status (answered, partial
+or blocked) separate. Unsupported evidence remains unsupported even if an
+alternative succeeds. Retain failures, original reports, unfinished requirements
+and unchanged user scope. Label replayed historical failures and injected faults;
+they are not new provider observations. Existing bounded checkers can reject
+specific invalid records or executions; they do not certify arbitrary prose,
+model compliance, runtime truth or a complete cause of failure.
+
 ## Interrupted validation
 
 Retain the failed attempt and its outputs as history. A partial file, completion
