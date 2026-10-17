@@ -37,6 +37,10 @@ and stored expected fields. Tests exercise the actual CLI comparison path with
 six wrong candidates: wrong key, inert flat-99 fee, lost checksum wrap, wrong
 error stream, wrong exit and acceptance of trailing-newline fee input. Tests also
 reject missing/duplicate/drifted observations and modified artifact/oracle identity.
+The original archived capture is also hash-pinned; its declared subprocess method,
+Windows environment and CRLF-only normalization are checked. A changed capture
+must remain separate from that historical record. These checks cannot authenticate
+arbitrary new observations or prove that their author actually ran a process.
 Thirty cases do not exhaust the input space or establish global equivalence.
 
 ## Repeat the investigation

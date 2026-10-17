@@ -74,6 +74,25 @@ test('changed metadata artifact alone does not claim a behavior change', () => {
   assert.ok(Object.values(assess(graph, { ...current, releaseNote: 'f'.repeat(64) }, map)).every(row => row.applicability === 'current'));
   assert.deepEqual(graphFor(current), graph);
 });
+
+test('mixed stale and unavailable evidence expires dependent reuse while retaining scoped history', () => {
+  const { graph, current } = fixture();
+  // Target codec changed; title candidate identity is no longer available.
+  // Static title findings remain applicable, but neither title runtime results
+  // nor integration can be promoted merely because archived outputs still match.
+  const now = { ...current, candidateTitles: undefined };
+  const selected = statuses(assess(graph, now, map));
+  assert.equal(selected['F-titles'], 'current');
+  assert.equal(selected['V-titles'], 'unknown');
+  assert.equal(selected['V-codec'], 'stale');
+  assert.equal(selected['V-integration'], 'unknown');
+  assert.equal(checkSelection(graph, now, selected, map).status, 'comparisons-passed');
+  for (const id of ['V-titles', 'V-codec', 'V-integration']) {
+    assert.ok(checkSelection(graph, now, { ...selected, [id]: 'current' }, map).failures
+      .some(row => row.id === id && row.reason === 'unsupported-reuse'));
+  }
+  assert.equal(checkSelection(graph, now, { ...selected, 'F-titles': 'stale' }, map).failures[0].reason, 'unnecessary-invalidation');
+});
 test('missing, oversized and unexpected receipt paths fail before continuation writes', async () => {
   for (const mode of ['missing','oversized','path','unexpected']) {
     const dir = setup();

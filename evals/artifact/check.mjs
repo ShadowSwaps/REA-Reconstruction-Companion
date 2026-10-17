@@ -4,6 +4,12 @@ import { fileURLToPath } from 'node:url';
 import { root, verifyFreeze, read, locked, hash } from './freeze.mjs';
 import { capture, comparable } from './process.mjs';
 export function checkSaved(cases, saved) {
+  // This entrypoint accepts the existing Windows subprocess capture format only.
+  // Metadata checks preserve its declared authority; they cannot prove capture truth.
+  if (saved?.schema !== 1 || saved.method !== 'Ordinary local Node spawnSync of owned compiled reference; not REA process capture'
+    || saved.normalization !== 'CRLF to LF only; raw streams retained' || saved.environment?.platform !== 'win32'
+    || !['x64', 'ia32', 'arm64'].includes(saved.environment.arch) || typeof saved.environment.node !== 'string'
+    || !/^v\d+\.\d+\.\d+$/.test(saved.environment.node)) throw new Error('Unsupported observation provenance');
   if (saved.artifactSha256 !== locked['reference/Parcel.exe'] || saved.corpusSha256 !== locked['corpus.json'] || !Array.isArray(saved.rows) || saved.rows.length !== cases.length) throw new Error('Observation identity/coverage mismatch');
   for (const [index, c] of cases.entries()) {
     const row = saved.rows[index];

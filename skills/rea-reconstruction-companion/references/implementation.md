@@ -59,8 +59,13 @@ Maintain a matrix linking each requirement to evidence, components, and tests, w
 - **Scope/design**: required for parity, intentional difference, or out of scope.
 - **Implementation**: not started, partial, implemented, or blocked.
 - **Verification**: verified against the reference; tested against a proposed specification; partially tested; untested; or failed.
+- **Applicability**: current for the selected artifact, candidate, contract/corpus and relevant environment; historical; stale; or unknown. Reassess actual dependencies, including indirect ones, using [checkpoint guidance](checkpoints.md); retain justified scoped reuse.
 
 This prevents 'implemented' from being mistaken for 'verified equivalent.' Record test commands/scenarios, actual outcomes, environment, and limitations. Do not imply a test ran when only its code was written.
+
+For each completion claim, identify the selected behavior/cases and supporting source: static finding, runtime observation, inference or unresolved evidence. Preserve failed, blocked and unrun scenarios separately from passing ones, including unavailable platforms. Selected passing cases do not establish whole-app equivalence or exhaustive security/performance coverage. Keep sanitized excerpts labeled as derivatives with original provenance; they do not inherit canonical authority from retained IDs. State source exposure and whether authorship/review was same-agent or independent. A separately frozen literal oracle avoids self-comparison without becoming independently authored evidence.
+
+Keep this proportional: extend the existing matrix or short result summary rather than require another report. Local checkers can reject particular malformed records and unsupported comparisons; they do not establish arbitrary prose correctness, runtime truth, honest reporting or complete dependency discovery.
 
 When required checks pass, avoid repeating them without a new change, failure, or unresolved concern. Continue toward the remaining requested scope rather than stopping after the first working slice.
 
