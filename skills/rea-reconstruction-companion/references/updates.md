@@ -42,7 +42,7 @@ For `check` only, EPERM/EACCES while resolving the state location, inspecting wh
 
 Continue the main task. No network request or installation change is attempted, and saved state, consent, pending offers and cooldown remain unchanged. No attempt timestamp can be recorded without access; do not retry automatically, repeatedly ask for access, elevate, weaken permissions, delete a lock, relocate state or use a network fallback. If setup created an absent directory before a later denial, that directory may remain. An authorized user can review the selected installation's access separately.
 
-This classification ends when the lock is acquired. Observed unsafe paths, corrupt state, non-permission setup errors, post-lock state errors and cleanup failures keep their error behavior (CLI exit one). Explicit `enable`, `disable`, `status`, `defer`, `skip` and `apply` actions also retain errors for denied setup. Existing lock contention still reports `busy`; successful setup still performs the local integration inspection before cooldown or network decisions.
+This classification ends when the lock is acquired. Observed unsafe paths, corrupt state, non-permission setup errors and lock cleanup failures still surface as errors (CLI exit one). Other post-lock failures retain their existing handling, including `unavailable` for failures inside the online-check block. Explicit `enable`, `disable`, `status`, `defer`, `skip` and `apply` actions also retain errors for denied setup. Existing lock contention still reports `busy`; successful setup still performs the local integration inspection before cooldown or network decisions.
 
 ## Local integration warning and REA refresh recovery
 
