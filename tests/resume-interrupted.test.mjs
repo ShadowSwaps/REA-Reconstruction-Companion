@@ -323,6 +323,52 @@ test('retained candidate output is history and cannot execute or certify the reg
   assert.deepEqual(snapshot(source), original);
 });
 
+for (const fault of ['timeout', 'unavailable', 'denied', 'no-exit', 'signal', 'stderr', 'truncated']) {
+  test(`injected ${fault} cannot pass on plausible output or discard completed applicable work`, t => {
+    const { source, destination, dir } = fixture(t);
+    interrupt(source, 'before-report.json');
+    const prior = snapshot(source), original = childProcess.spawnSync;
+    const calls = [];
+    t.mock.method(childProcess, 'spawnSync', function (command, args, options) {
+      const name = path.basename(fileURLToPath(args.at(-1)));
+      calls.push(name);
+      if (name !== 'candidate-after.mjs') return original.call(this, command, args, options);
+      // Controlled transport/process outcomes, not REA/provider observations.
+      // Even a zero exit and plausible stdout cannot override an execution error.
+      const result = { status: 0, signal: null, stdout: '[100]', stderr: '' };
+      const code = { timeout: 'ETIMEDOUT', unavailable: 'ENOENT', denied: 'EACCES' }[fault];
+      if (code) result.error = Object.assign(new Error('Injected execution failure'), { code });
+      if (fault === 'no-exit') result.status = null;
+      if (fault === 'signal') result.signal = 'SIGTERM';
+      if (fault === 'stderr') result.stderr = 'Injected diagnostic';
+      if (fault === 'truncated') result.stdout = '[100,';
+      return result;
+    });
+    syncBuiltinESMExports();
+    try {
+      assert.throws(() => recoverInterrupted('resume', source, destination));
+    } finally {
+      t.mock.restoreAll(); syncBuiltinESMExports();
+    }
+    assert.deepEqual(calls, ['target.mjs', 'candidate-after.mjs'], 'no unchanged retry or repeated completed candidate check');
+    const working = path.join(destination, 'working');
+    assert.equal(fs.existsSync(path.join(destination, 'result.json')), false);
+    assert.equal(fs.existsSync(path.join(working, 'result.json')), false);
+    assert.equal(fs.existsSync(path.join(working, 'after-report.json')), false);
+    assert.equal(read(working, 'before-report.json').comparisons.failed, 900);
+    assert.equal(read(working, 'execution-recovery.json').before, 'reused-validated-completed-report');
+    assert.equal(read(working, 'execution-recovery.json').after, 'fresh-execution-required');
+    assert.deepEqual(snapshot(source), prior);
+    const failedAttempt = snapshot(working);
+    // The injected blocker has now been removed; use a separate destination.
+    const completed = recoverInterrupted('resume', working, path.join(dir, 'resolved attempt'));
+    assert.equal(completed.afterFailures, 0);
+    assert.equal(completed.execution.before, 'reused-validated-completed-report');
+    assert.deepEqual(snapshot(working), failedAttempt);
+    assert.deepEqual(snapshot(source), prior);
+  });
+}
+
 test('fresh execution error stays distinct from a comparison failure and cannot produce completion', t => {
   const { source, destination, dir } = fixture(t);
   const copy = path.join(dir, 'execution error');
