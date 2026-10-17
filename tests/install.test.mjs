@@ -205,6 +205,24 @@ test('client paths are explicit and duplicate REA candidates require selection',
   assert.throws(() => locations({ client: 'codex', integration: 'on' }, context), /Multiple REA/);
 });
 
+test('claude_code alias uses the same profile, plan and receipt as claude-code', t => {
+  const f = fixture(t), profile = path.join(f.directory, 'claude profile');
+  const context = { ...f.context, home: f.directory, env: { CLAUDE_CONFIG_DIR: profile } };
+  assert.deepEqual(locations({ client: 'claude_code', integration: 'off' }, context), locations({ client: 'claude-code', integration: 'off' }, context));
+  assert.equal(locations({ client: 'claude_code', integration: 'off' }, context).skillsDir, path.join(profile, 'skills'));
+  assert.equal(locations({ client: 'claude_code', integration: 'off' }, { ...context, env: {} }).skillsDir, path.join(f.directory, '.claude', 'skills'));
+  const options = { ...f.options, client: 'claude_code' };
+  const planned = planInstall(options, context);
+  assert.equal(planned.options.client, 'claude-code');
+  assert.equal(options.client, 'claude_code', 'caller options are not mutated');
+  assert.deepEqual(planned.desired, planInstall({ ...options, client: 'claude-code' }, context).desired);
+  assert.equal(planned.desired.has('agents/openai.yaml'), false);
+  const installed = applyInstall(planned);
+  assert.equal(installed.client, 'claude-code');
+  assert.equal(JSON.parse(fs.readFileSync(path.join(installed.backupDirectory, 'receipt.json'))).client, 'claude-code');
+  assert.equal(applyInstall(planInstall({ ...options, check: true }, context)).status, 'verified');
+});
+
 test('Codex adapter is added only for Codex', t => {
   const f = fixture(t);
   f.options.client = 'codex';
@@ -330,4 +348,18 @@ test('CLI install works from another working directory without npm or PyYAML', t
   const check = spawnSync(process.execPath, [...args, '--check'], { cwd: f.directory, encoding: 'utf8' });
   assert.equal(check.status, 0, check.stderr);
   assert.equal(JSON.parse(check.stdout).status, 'verified');
+});
+
+test('CLI accepts claude_code for dry-run, install and check in both integration modes', t => {
+  for (const integration of ['on', 'off']) {
+    const f = fixture(t, integration === 'on');
+    const args = [path.join(root, 'install.mjs'), '--client', 'claude_code', '--integration', integration, '--skills-dir', f.skillsDir];
+    for (const [extra, expected] of [[['--dry-run'], 'dry-run'], [[], 'installed'], [['--check'], 'verified']]) {
+      const result = spawnSync(process.execPath, [...args, ...extra], { cwd: f.directory, encoding: 'utf8' });
+      assert.equal(result.status, 0, result.stderr);
+      const report = JSON.parse(result.stdout);
+      assert.equal(report.status, expected); assert.equal(report.client, 'claude-code');
+      if (expected === 'dry-run') assert.equal(fs.existsSync(path.join(f.skillsDir, NAME)), false);
+    }
+  }
 });

@@ -91,6 +91,10 @@ The integration asks the agent to use the companion for understanding a target *
 
 This is an instruction-based integration. It does not override client policies, grant tool permissions, connect MCP servers, guarantee model compliance, or force parallel execution. Without the rule, invoking the companion still tells the agent to use REA. The rule supplies the reverse direction: relevant REA work also loads the companion.
 
+**REA skill refreshes can remove this rule.** In REA 6.5.0 (skill version 42), `rea doctor` requires byte-for-byte canonical skill files, so adding our block can produce `skill:identity` / `config_drift` with “Installed REA skill identity is stale” even when version and tool count match. This is a known cause, not a reason to ignore all stale or doctor diagnostics: other managed files or settings may also differ. The pinned [identity check](https://github.com/morluto/rea/blob/3b79af28e80785afce9f5998d8f03289402a1847/src/application/Doctor.ts) and [skill installer](https://github.com/morluto/rea/blob/3b79af28e80785afce9f5998d8f03289402a1847/src/application/SetupSkill.ts) show why `rea setup` restores canonical files and preserves edited originals in backups, removing the active companion block. An REA update that refreshes the skill can do the same; other upstream versions may differ.
+
+After `rea setup`, `rea update`, or another REA skill refresh, recheck the selected integration and, if needed, restore only its block using the matching verified companion package; see [verification and scoped recovery](INSTALL.md#verify-and-report). Do not restore an entire old REA backup over newer instructions. If routing disappeared, explicitly invoke the companion or run the manual check. The optional on-use warning cannot run if the companion/helper is never invoked.
+
 `off` means **do not manage REA**, not “remove a rule already installed.” To disable an earlier integration, remove only the block between `<!-- rea-reconstruction-companion:begin -->` and `<!-- rea-reconstruction-companion:end -->` in the selected REA `SKILL.md`, including the markers. Keep the rest of REA intact.
 
 ## Requirements and compatibility
@@ -134,6 +138,8 @@ node install.mjs --client claude-code --integration off
 
 Use `--dry-run` on any installation command to inspect the paths and changes without writing files. The `companionChanges` lists identify added, modified, and removed files relative to the companion directory, including local files that a replacement would move into the backup. Use the same command with `--check` afterward to verify the selected installation mode. A missing REA skill or ambiguous choice stops integrated installation before the companion is installed. Differently cased paths to the same REA file are treated as one candidate; genuinely separate installations still require an explicit selection.
 
+`claude_code`, as used by REA, is accepted as an alias for `claude-code` by the installer and updater. Plans, receipts and newly saved update settings use `claude-code`.
+
 Default user locations:
 
 - Claude Code: `~/.claude/skills/rea-reconstruction-companion/`, or `$CLAUDE_CONFIG_DIR/skills/rea-reconstruction-companion/` when a custom configuration directory is set in the installer's environment. See [Claude Code's environment-variable documentation](https://code.claude.com/docs/en/env-vars). REA lookup stays within that selected profile unless `--rea-skill` explicitly selects another location.
@@ -168,6 +174,8 @@ You can explicitly invoke `$rea-reconstruction-companion` in Codex or `/rea-reco
 
 Starting with **v1.2.0**, the updater is bundled inside the skill, including installations for Codex, Claude Code and generic clients. Enable it once after installation if you want release notifications. The host calls a small local helper when the skill is used; it contacts GitHub only when seven days have elapsed. An idle skill runs nothing. Earlier versions do not gain this automatically: manually install a published v1.2.0-or-later package first.
 
+With checks enabled and recorded integration on, the current helper also inspects the recorded REA rule locally before cooldown or network decisions. Missing, changed/malformed, or unreadable/unsafe rules return `integration-needs-attention` without repair, state changes or networking. Disabled checks and integration off do not inspect REA. This warning is available only in versions containing this change and only when the companion/helper is invoked; it is not a background monitor or a full `rea doctor` check.
+
 When a newer stable release is found, the agent offers **Update now / Remind me next week / Skip this version / Disable checks**. No answer means no update. Approval is tied to the offered release and asset; changed assets require a new offer. Local customizations stop automatic replacement. Successful updates retain backups, verify the result and preserve your selected client and REA integration setting.
 
 Checks are **off by default**, independent of integration, and require existing Node.js 20+. There is no npm dependency, model/API key, paid service, extra model call, background daemon or scheduled AI task. Online operations also require confirmation that the actual network/tool environment cannot add charges. Unknown-cost or unavailable access is skipped; this is not an unconditional zero-resource-cost or billing-enforcement guarantee.
@@ -181,7 +189,7 @@ Read the [setup, commands, state location and recovery guide](skills/rea-reconst
 - REA edits preserve everything outside the marked integration block. The exact earlier pre-release rule can also be migrated; customized unmarked rules require review.
 - Backups and a receipt are stored in `.rea-reconstruction-companion-installer/` next to the parent skills directory. The installer prints the exact transaction path.
 - Failed commits attempt REA and companion recovery independently, so an unreadable or missing REA file does not prevent restoring the prior companion. Backups remain available; a detected concurrent edit is retained and reported rather than overwritten.
-- Updating REA may replace its skill instructions. Rerun the integrated command with `--check`, then rerun installation if the rule needs restoring. Nothing monitors or rewrites REA in the background.
+- Updating REA may replace its skill instructions. Follow [verification and scoped recovery](INSTALL.md#verify-and-report) after a refresh. Nothing monitors or rewrites REA in the background.
 
 For manual recovery, use the printed receipt to locate the selected paths. Restore `companion-before` to the companion's former location if appropriate. Restore `rea-before.md` only when REA has no later changes you need to retain; otherwise remove or repair just the integration block. If a process was killed and left an `install.lock`, make sure no installer is running before removing that exact lock file and retrying.
 

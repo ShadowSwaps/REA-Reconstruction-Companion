@@ -6,7 +6,7 @@ import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { deflateRawSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
-import { planInstall, applyInstall, hash, NAME, BEGIN } from '../install.mjs';
+import { planInstall, applyInstall, hash, NAME, BEGIN, END } from '../install.mjs';
 import { runUpdate, stateLocation, WEEK, REPO, releaseCandidate, newer, download } from '../skills/rea-reconstruction-companion/scripts/update.mjs';
 import { releaseFiles, MAX_ARCHIVE } from '../skills/rea-reconstruction-companion/scripts/release-archive.mjs';
 
@@ -145,7 +145,7 @@ test('missing/wrong approvals or no-charge authorization cannot download or inst
 });
 
 test('successful approved update preserves clients and integration, verifies and backs up', async t => {
-  for (const client of ['codex', 'claude-code', 'generic']) for (const integration of ['on', 'off']) {
+  for (const client of ['codex', 'claude-code', 'claude_code', 'generic']) for (const integration of ['on', 'off']) {
     const f = fixture(t, integration, client); await enable(f); const n = transport(f), offer = await check(f, n.context);
     const oldSkill = fs.readFileSync(path.join(f.installed.companion, 'SKILL.md'));
     fs.appendFileSync(f.reaSkill, '\nKeep later unrelated REA changes.\n');
@@ -155,10 +155,169 @@ test('successful approved update preserves clients and integration, verifies and
     assert.deepEqual(fs.readFileSync(path.join(result.backupDirectory, 'companion-before', 'SKILL.md')), oldSkill);
     assert.match(fs.readFileSync(path.join(f.installed.companion, 'SKILL.md'), 'utf8'), /Updated fixture/);
     assert.deepEqual(fs.readFileSync(f.reaSkill), beforeRea);
-    const state = JSON.parse(fs.readFileSync(f.location.file)); assert.equal(state.options.client, client); assert.equal(state.options.integration, integration); assert.equal(state.enabled, true); assert.equal(state.pending, null);
+    const state = JSON.parse(fs.readFileSync(f.location.file)); assert.equal(state.options.client, client === 'claude_code' ? 'claude-code' : client); assert.equal(state.options.integration, integration); assert.equal(state.enabled, true); assert.equal(state.pending, null);
     assert.equal((await check(f, n.context)).status, 'not-due'); assert.equal(n.calls.length, 3);
     assert.equal(fs.readdirSync(f.location.directory).some(x => x.startsWith('package-')), false);
   }
+});
+
+test('healthy recorded integration preserves cooldown, clock and no-charge decisions', async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f);
+  fs.appendFileSync(f.reaSkill, '\nUnrelated REA change outside the managed rule.\n');
+  assert.equal((await runUpdate('check', {}, n.context)).status, 'network-not-authorized');
+  assert.equal(n.calls.length, 0);
+  assert.equal((await check(f, n.context)).status, 'update-available');
+  assert.deepEqual(await check(f, { ...n.context, now: now + 1 }), { status: 'not-due' });
+  assert.equal((await check(f, { ...n.context, now: now - 1 })).status, 'clock-skew');
+  assert.equal(n.calls.length, 1);
+});
+
+test('local integration inspection accepts the 1 MiB boundary and rejects overflow', async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f);
+  const text = fs.readFileSync(f.reaSkill), limit = 1024 * 1024;
+  fs.writeFileSync(f.reaSkill, Buffer.concat([text, Buffer.alloc(limit - text.length, 32)]));
+  assert.equal((await runUpdate('check', {}, n.context)).status, 'network-not-authorized');
+  fs.appendFileSync(f.reaSkill, 'x');
+  assert.equal((await check(f, n.context)).integrationHealth, 'unreadable-or-unsafe');
+  assert.equal(n.calls.length, 0);
+});
+
+test('an existing update lock prevents even local REA inspection', async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f), before = fs.readFileSync(f.location.file);
+  const lock = path.join(f.location.directory, 'update.lock'); fs.writeFileSync(lock, 'other process');
+  const original = fs.lstatSync;
+  t.mock.method(fs, 'lstatSync', (file, ...args) => {
+    assert.notEqual(file, f.reaSkill, 'busy checks must not inspect REA');
+    return original(file, ...args);
+  });
+  assert.deepEqual(await check(f, n.context), { status: 'busy' });
+  assert.equal(fs.readFileSync(lock, 'utf8'), 'other process');
+  assert.deepEqual(fs.readFileSync(f.location.file), before); assert.equal(n.calls.length, 0);
+});
+
+const integrationFaults = [
+  ['canonical replacement', 'missing-block', f => fs.writeFileSync(f.reaSkill, baseRea)],
+  ['missing file', 'missing-file', f => fs.unlinkSync(f.reaSkill)],
+  ['missing parent', 'missing-file', f => fs.renameSync(path.dirname(f.reaSkill), path.join(f.dir, 'moved-rea'))],
+  ['changed block', 'changed-block', (f, text) => fs.writeFileSync(f.reaSkill, text.replace(BEGIN, BEGIN + '\nLocal edit.'))],
+  ['missing end marker', 'malformed-block', (f, text) => fs.writeFileSync(f.reaSkill, text.replace(END, ''))],
+  ['duplicate marker', 'malformed-block', (f, text) => fs.writeFileSync(f.reaSkill, text + END)],
+  ['reversed markers', 'malformed-block', f => fs.writeFileSync(f.reaSkill, baseRea + END + BEGIN)],
+  ['unmarked integration', 'malformed-block', (f, text) => fs.writeFileSync(f.reaSkill, text.replace(BEGIN, '').replace(END, ''))],
+  ['directory', 'unreadable-or-unsafe', f => { fs.unlinkSync(f.reaSkill); fs.mkdirSync(f.reaSkill); }],
+  ['oversized file', 'unreadable-or-unsafe', (f, text) => fs.writeFileSync(f.reaSkill, text + 'x'.repeat(1024 * 1024))],
+  ['invalid UTF-8', 'unreadable-or-unsafe', (f, text) => fs.writeFileSync(f.reaSkill, Buffer.concat([Buffer.from(text), Buffer.from([0xff])]))]
+];
+for (const [name, health, change] of integrationFaults) test(`local integration warning: ${name}; no state change, repair or networking`, async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f), offer = await check(f, n.context);
+  const companionBefore = fs.readFileSync(path.join(f.installed.companion, 'SKILL.md'));
+  change(f, fs.readFileSync(f.reaSkill, 'utf8'));
+  const stateBefore = fs.readFileSync(f.location.file);
+  // The same local warning wins before no-charge, cooldown and backwards-clock decisions.
+  for (const time of [now + 1, now - 1, now + WEEK]) for (const allowFreeNetwork of [false, true]) {
+    const result = await runUpdate('check', { allowFreeNetwork }, { ...n.context, now: time });
+    assert.equal(result.status, 'integration-needs-attention'); assert.equal(result.integrationHealth, health);
+    assert.match(result.message, /No repair or online check was attempted/);
+    assert.deepEqual(fs.readFileSync(f.location.file), stateBefore);
+  }
+  // A pending exact approval still cannot bypass the separate apply-time guard.
+  await assert.rejects(runUpdate('apply', { approvalId: offer.approvalId, allowFreeNetwork: true }, n.context), /Managed REA rule/);
+  assert.equal(n.calls.length, 1);
+  assert.deepEqual(fs.readFileSync(f.location.file), stateBefore);
+  assert.deepEqual(fs.readFileSync(path.join(f.installed.companion, 'SKILL.md')), companionBefore);
+});
+
+test('missing state, disabled checks and integration off do not inspect REA', async t => {
+  for (const mode of ['missing-state', 'disabled', 'off']) {
+    const f = fixture(t, mode === 'off' ? 'off' : 'on');
+    if (mode !== 'missing-state') await enable(f);
+    if (mode === 'disabled') await runUpdate('disable', {}, f.context);
+    const original = fs.lstatSync;
+    const spy = t.mock.method(fs, 'lstatSync', (file, ...args) => {
+      assert.notEqual(file, f.reaSkill, 'unmanaged REA must not be inspected');
+      return original(file, ...args);
+    });
+    try {
+      const n = transport(f), result = await runUpdate('check', {}, n.context);
+      assert.equal(result.status, mode === 'off' ? 'network-not-authorized' : 'disabled');
+      assert.equal(n.calls.length, 0);
+      if (mode === 'missing-state') assert.equal(fs.existsSync(f.location.directory), false);
+    } finally { spy.mock.restore(); }
+  }
+});
+
+test('unreadable recorded REA yields a local warning without exposing filesystem error text', async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f), before = fs.readFileSync(f.location.file);
+  const original = fs.openSync;
+  t.mock.method(fs, 'openSync', (file, ...args) => {
+    if (file === f.reaSkill) throw Object.assign(new Error('Untrusted error text'), { code: 'EACCES' });
+    return original(file, ...args);
+  });
+  const result = await runUpdate('check', {}, n.context);
+  assert.equal(result.integrationHealth, 'unreadable-or-unsafe');
+  assert.doesNotMatch(result.message, /Untrusted error text/);
+  assert.equal(n.calls.length, 0); assert.deepEqual(fs.readFileSync(f.location.file), before);
+});
+
+test('linked recorded REA file or parent is warned about without reading its target', async t => {
+  for (const choice of ['file', 'parent']) {
+    const f = fixture(t, 'on'); await enable(f); const n = transport(f);
+    const target = path.join(f.dir, 'other-rea'); fs.mkdirSync(target);
+    const targetFile = path.join(target, 'SKILL.md'), text = fs.readFileSync(f.reaSkill);
+    fs.writeFileSync(targetFile, text);
+    const link = choice === 'file' ? f.reaSkill : path.dirname(f.reaSkill);
+    fs.renameSync(link, path.join(f.dir, 'original-rea'));
+    // A junction also exercises rejection on Windows without symlink privilege.
+    fs.symlinkSync(target, link, process.platform === 'win32' ? 'junction' : 'dir');
+    const original = fs.openSync;
+    const spy = t.mock.method(fs, 'openSync', (file, ...args) => {
+      assert.notEqual(file, f.reaSkill, 'a linked REA path must never be opened');
+      return original(file, ...args);
+    });
+    try { assert.equal((await check(f, n.context)).integrationHealth, 'unreadable-or-unsafe'); }
+    finally { spy.mock.restore(); }
+    assert.equal(n.calls.length, 0); assert.deepEqual(fs.readFileSync(targetFile), text);
+  }
+});
+
+test('scoped repair after simulated REA refresh clears warning without resetting consent or cooldown', async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f); await check(f, n.context);
+  const before = fs.readFileSync(f.location.file), refreshed = baseRea + '\nNew upstream content to retain.\n';
+  fs.writeFileSync(f.reaSkill, refreshed);
+  assert.equal((await runUpdate('check', {}, n.context)).integrationHealth, 'missing-block');
+  const plan = planInstall(f.options, { packageRoot: root });
+  assert.equal(plan.skillChanged, false); assert.equal(plan.ruleChanged, true);
+  const repaired = applyInstall(plan);
+  assert.equal(fs.readFileSync(path.join(repaired.backupDirectory, 'rea-before.md'), 'utf8'), refreshed);
+  assert.ok(fs.readFileSync(f.reaSkill, 'utf8').endsWith('New upstream content to retain.\n'));
+  assert.equal(applyInstall(planInstall({ ...f.options, check: true }, { packageRoot: root })).status, 'verified');
+  assert.equal((await check(f, n.context)).status, 'not-due');
+  assert.deepEqual(fs.readFileSync(f.location.file), before); assert.equal(n.calls.length, 1);
+});
+
+test('saved claude_code alias is readable without rewriting state during local checks', async t => {
+  const f = fixture(t, 'on', 'claude_code'); await enable(f);
+  const state = JSON.parse(fs.readFileSync(f.location.file)); assert.equal(state.options.client, 'claude-code');
+  state.options.client = 'claude_code'; fs.writeFileSync(f.location.file, JSON.stringify(state));
+  const before = fs.readFileSync(f.location.file);
+  assert.equal((await runUpdate('check', {}, f.context)).status, 'network-not-authorized');
+  assert.deepEqual(fs.readFileSync(f.location.file), before);
+  await enable(f); assert.equal(JSON.parse(fs.readFileSync(f.location.file)).options.client, 'claude-code');
+});
+
+test('installed CLI enables alias and reports a local integration warning with exit zero', async t => {
+  const f = fixture(t, 'on', 'claude_code'), script = path.join(f.installed.companion, 'scripts/update.mjs');
+  const args = [script, 'enable', '--package', root, '--client', 'claude_code', '--integration', 'on', '--rea-skill', f.reaSkill];
+  let result = spawnSync(process.execPath, args, { cwd: f.dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr); assert.equal(JSON.parse(result.stdout).status, 'enabled');
+  assert.equal(JSON.parse(fs.readFileSync(f.location.file)).options.client, 'claude-code');
+  fs.writeFileSync(f.reaSkill, baseRea);
+  const before = fs.readFileSync(f.location.file);
+  result = spawnSync(process.execPath, [script, 'check'], { cwd: f.dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(JSON.parse(result.stdout).status, 'integration-needs-attention');
+  assert.equal(JSON.parse(result.stdout).integrationHealth, 'missing-block');
+  assert.deepEqual(fs.readFileSync(f.location.file), before);
 });
 
 test('local companion edits and REA rule edits block replacement but preserve data', async t => {

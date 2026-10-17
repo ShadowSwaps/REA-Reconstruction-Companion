@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { NAME, BEGIN, END, noLinks, readTree, hash, planInstall, applyInstall } from './installer.mjs';
+import { NAME, BEGIN, END, normalizeClient, noLinks, readTree, hash, planInstall, applyInstall } from './installer.mjs';
 import { MAX_ARCHIVE, releaseFiles } from './release-archive.mjs';
 
 export const WEEK = 7 * 24 * 60 * 60 * 1000;
@@ -41,6 +41,7 @@ function loadState(location) {
   const s = JSON.parse(fs.readFileSync(location.file, 'utf8'));
   if (s.schema !== 1 || s.companion !== location.root || typeof s.enabled !== 'boolean' || !s.options || !s.files || typeof s.files !== 'object' || Array.isArray(s.files)) throw new Error('Invalid update state; review it manually before re-enabling from a verified package.');
   versionParts(s.version);
+  s.options.client = normalizeClient(s.options.client);
   if (typeof s.options.skillsDir !== 'string' || path.join(s.options.skillsDir, NAME) !== location.root || !['codex', 'claude-code', 'generic'].includes(s.options.client) || !['on', 'off'].includes(s.options.integration)) throw new Error('Invalid saved installation settings.');
   if (s.options.integration === 'on' && (typeof s.options.reaSkill !== 'string' || typeof s.reaBlockHash !== 'string')) throw new Error('Missing saved REA settings.');
   for (const timestamp of [s.lastAttempt, s.lastSuccess]) if (timestamp !== null && (!Number.isSafeInteger(timestamp) || timestamp < 0)) throw new Error('Invalid update timestamp.');
@@ -57,12 +58,54 @@ function saveState(location, state) {
   } finally { if (exists(temporary)) fs.unlinkSync(temporary); }
 }
 
+// Inspect only the recorded file, without following links or reading unbounded content.
+// NONBLOCK avoids waiting on a FIFO if the path changes between lstat and open.
+function inspectReaBlock(reaSkill) {
+  let fd;
+  try {
+    noLinks(reaSkill);
+    if (!fs.lstatSync(reaSkill).isFile()) return { status: 'unreadable-or-unsafe' };
+    fd = fs.openSync(reaSkill, fs.constants.O_RDONLY | (fs.constants.O_NOFOLLOW || 0) | (fs.constants.O_NONBLOCK || 0));
+    const stat = fs.fstatSync(fd), limit = 1024 * 1024;
+    if (!stat.isFile() || stat.size > limit) return { status: 'unreadable-or-unsafe' };
+    const buffer = Buffer.alloc(limit + 1); let size = 0;
+    while (size < buffer.length) {
+      const count = fs.readSync(fd, buffer, size, buffer.length - size, null);
+      if (!count) break;
+      size += count;
+    }
+    if (size > limit) return { status: 'unreadable-or-unsafe' };
+    const bytes = buffer.subarray(0, size), text = bytes.toString('utf8');
+    if (!Buffer.from(text, 'utf8').equals(bytes)) return { status: 'unreadable-or-unsafe' };
+    const begins = text.split(BEGIN).length - 1, ends = text.split(END).length - 1;
+    if (!begins && !ends && !text.includes(NAME)) return { status: 'missing-block' };
+    if (begins !== 1 || ends !== 1 || text.indexOf(END) < text.indexOf(BEGIN)) return { status: 'malformed-block' };
+    return { status: 'present', hash: hash(text.slice(text.indexOf(BEGIN), text.indexOf(END) + END.length)) };
+  } catch (e) {
+    return { status: e.code === 'ENOENT' ? 'missing-file' : 'unreadable-or-unsafe' };
+  } finally { if (fd !== undefined) fs.closeSync(fd); }
+}
+
 function blockHash(reaSkill) {
   if (!reaSkill) return null;
-  noLinks(reaSkill);
-  const text = fs.readFileSync(reaSkill, 'utf8');
-  if (text.split(BEGIN).length !== 2 || text.split(END).length !== 2 || text.indexOf(END) < text.indexOf(BEGIN)) throw new Error('Managed REA rule is missing or changed.');
-  return hash(text.slice(text.indexOf(BEGIN), text.indexOf(END) + END.length));
+  const block = inspectReaBlock(reaSkill);
+  if (block.status !== 'present') throw new Error(`Managed REA rule is missing, changed or unreadable/unsafe (${block.status}).`);
+  return block.hash;
+}
+
+function integrationWarning(state) {
+  if (state.options.integration !== 'on') return null;
+  const block = inspectReaBlock(state.options.reaSkill);
+  if (block.status === 'present' && block.hash === state.reaBlockHash) return null;
+  const integrationHealth = block.status === 'present' ? 'changed-block' : block.status;
+  const messages = {
+    'missing-file': 'The recorded REA skill file is missing.',
+    'missing-block': 'The recorded REA skill no longer contains the companion rule; REA setup or a skill refresh may have removed it.',
+    'changed-block': 'The recorded companion rule differs from the verified baseline.',
+    'malformed-block': 'The recorded REA skill contains malformed, duplicate or unmarked companion integration.',
+    'unreadable-or-unsafe': 'The recorded REA skill could not be safely read as a regular UTF-8 file of at most 1 MiB.'
+  };
+  return { status: 'integration-needs-attention', integrationHealth, message: `${messages[integrationHealth]} Review the selected installation and recovery instructions. No repair or online check was attempted; explicit companion use remains available.` };
 }
 
 function unchanged(state) {
@@ -136,7 +179,7 @@ export async function runUpdate(action, options = {}, context = {}) {
       if (fs.realpathSync.native(plan.destination) !== location.root || applyInstall(plan).status !== 'verified') throw new Error('Install and verify this package at the selected location before enabling checks.');
       versionParts(plan.version);
       // Explicit enable/re-enable binds to the user's selected, verified installation.
-      state = { schema: 1, companion: location.root, enabled: true, version: plan.version, options: { client: options.client, skillsDir: path.dirname(location.root), integration: options.integration, reaSkill: plan.reaSkill }, files: hashes(plan.desired), reaBlockHash: blockHash(plan.reaSkill), lastAttempt: state?.lastAttempt ?? null, lastSuccess: state?.lastSuccess ?? null, skippedVersion: null, pending: null };
+      state = { schema: 1, companion: location.root, enabled: true, version: plan.version, options: { client: plan.options.client, skillsDir: path.dirname(location.root), integration: plan.options.integration, reaSkill: plan.reaSkill }, files: hashes(plan.desired), reaBlockHash: blockHash(plan.reaSkill), lastAttempt: state?.lastAttempt ?? null, lastSuccess: state?.lastSuccess ?? null, skippedVersion: null, pending: null };
       saveState(location, state); return { status: 'enabled', version: state.version, intervalDays: 7, stateFile: location.file };
     }
     if (action === 'status') return { status: state.enabled ? 'enabled' : 'disabled', version: state.version, lastAttempt: state.lastAttempt, lastSuccess: state.lastSuccess, skippedVersion: state.skippedVersion, stateFile: location.file };
@@ -150,6 +193,8 @@ export async function runUpdate(action, options = {}, context = {}) {
       saveState(location, state); return { status: action === 'skip' ? 'skipped' : 'deferred' };
     }
     if (action === 'check') {
+      const warning = integrationWarning(state);
+      if (warning) return warning;
       if (state.lastAttempt !== null && now < state.lastAttempt) return { status: 'clock-skew', message: 'Clock moved backwards; automatic checks deferred.' };
       if (state.lastAttempt !== null && now - state.lastAttempt < WEEK) return { status: 'not-due' };
       if (options.allowFreeNetwork !== true) return { status: 'network-not-authorized', message: 'Establish that network and tool use cannot add a charge before checking.' };
@@ -221,7 +266,7 @@ function args(argv) {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
     if (Number(process.versions.node.split('.')[0]) < 20) throw new Error('Node.js 20+ is required.');
-    if (process.argv.includes('--help')) console.log('update.mjs enable --package PATH --client CLIENT --integration on|off [--skills-dir PATH] [--rea-skill PATH]\nupdate.mjs status|disable|check [--allow-free-network]\nupdate.mjs apply|defer|skip --approve OFFER_ID [--allow-free-network]\nOff by default. Check on use, at most once per seven days. Apply only after human approval of the offer. --allow-free-network asserts that this network/tool use cannot add charges. No scheduler, tokens or model calls.');
+    if (process.argv.includes('--help')) console.log('update.mjs enable --package PATH --client CLIENT --integration on|off [--skills-dir PATH] [--rea-skill PATH]\nCLIENT: codex, claude-code (alias claude_code), or generic.\nupdate.mjs status|disable|check [--allow-free-network]\nupdate.mjs apply|defer|skip --approve OFFER_ID [--allow-free-network]\nOff by default. On use, inspect recorded integration locally; online checks at most once per seven days. Apply only after human approval of the offer. --allow-free-network asserts that this network/tool use cannot add charges. No scheduler, tokens or model calls.');
     else { const { action, options } = args(process.argv.slice(2)); console.log(json(await runUpdate(action, options))); }
   } catch (e) { console.error(`Update needs attention: ${e.message}`); process.exitCode = 1; }
 }

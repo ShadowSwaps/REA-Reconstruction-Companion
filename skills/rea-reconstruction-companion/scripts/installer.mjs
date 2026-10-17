@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 export const NAME = 'rea-reconstruction-companion';
 export const BEGIN = `<!-- ${NAME}:begin -->`;
 export const END = `<!-- ${NAME}:end -->`;
+export const normalizeClient = client => client === 'claude_code' ? 'claude-code' : client;
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const hash = data => crypto.createHash('sha256').update(data).digest('hex');
 const exists = p => { try { fs.lstatSync(p); return true; } catch (e) { if (e.code === 'ENOENT') return false; throw e; } };
@@ -80,9 +81,10 @@ function packageFiles(root) {
 }
 
 export function locations(options, context = {}) {
+  options = { ...options, client: normalizeClient(options.client) };
   const home = context.home || os.homedir();
   const env = context.env || process.env;
-  if (!['codex', 'claude-code', 'generic'].includes(options.client)) throw new Error('Choose --client codex, claude-code, or generic.');
+  if (!['codex', 'claude-code', 'generic'].includes(options.client)) throw new Error('Choose --client codex, claude-code (alias claude_code), or generic.');
   if (!['on', 'off'].includes(options.integration)) throw new Error('Choose --integration on (automatic co-use) or off (companion only).');
   if (options.client === 'generic' && !options.skillsDir) throw new Error('Generic clients require --skills-dir.');
   const codexRoot = env.CODEX_HOME ? path.join(env.CODEX_HOME, 'skills') : path.join(home, '.agents', 'skills');
@@ -165,6 +167,7 @@ function readTree(root) {
 const sameTree = (a, b) => a.size === b.size && [...a].every(([p, data]) => b.has(p) && data.equals(b.get(p)));
 
 export function planInstall(options, context = {}) {
+  options = { ...options, client: normalizeClient(options.client) };
   const root = path.resolve(context.packageRoot || ROOT);
   const { manifest, files } = packageFiles(root);
   const selected = locations(options, context);
@@ -299,7 +302,7 @@ export function runInstaller(argv, packageRoot = ROOT) {
     if (Number(process.versions.node.split('.')[0]) < 20) throw new Error('The installer requires Node.js 20 or newer.');
     const options = parseArgs(argv);
     if (options.help) {
-      console.log(`REA-Reconstruction-Companion installer\n\nnode install.mjs --client codex|claude-code|generic --integration on|off [options]\n\n--integration on   Add/update the automatic REA co-use rule (REA required)\n--integration off  Install companion only; leave existing REA untouched\n--skills-dir PATH  Client's skills directory (required for generic)\n--rea-skill PATH   Existing REA SKILL.md or its directory\n--dry-run          Show a plan without writing files\n--check            Verify selected installation mode without writing files\n--replace          Back up and replace a differing companion installation\n\nNo network requests or npm packages. Integration is an explicit choice.\nOff does not remove a rule added earlier; see README.md to disable it.\nSee README.md for client paths, backups, and update instructions.`);
+      console.log(`REA-Reconstruction-Companion installer\n\nnode install.mjs --client codex|claude-code|generic --integration on|off [options]\nclaude_code is an alias for claude-code.\n\n--integration on   Add/update the automatic REA co-use rule (REA required)\n--integration off  Install companion only; leave existing REA untouched\n--skills-dir PATH  Client's skills directory (required for generic)\n--rea-skill PATH   Existing REA SKILL.md or its directory\n--dry-run          Show a plan without writing files\n--check            Verify selected installation mode without writing files\n--replace          Back up and replace a differing companion installation\n\nNo network requests or npm packages. Integration is an explicit choice.\nOff does not remove a rule added earlier; see README.md to disable it.\nSee README.md for client paths, backups, and update instructions.`);
     } else {
       const result = applyInstall(planInstall(options, { packageRoot }));
       console.log(JSON.stringify(result, null, 2));
