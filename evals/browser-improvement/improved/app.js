@@ -39,7 +39,7 @@ function begin(task) {
   if (conflict) {ui.problem.textContent='Keep this draft as a new task, or Cancel before opening another task.';return;}
   selected=task?.id ?? null;ui.form.hidden=false;ui.prompt.hidden=true;
   ui.name.value=task?.title ?? '';ui.complete.checked=task?.done ?? false;
-  ui.invalid.textContent='';ui.problem.textContent='';ui.notice.textContent=task ? 'Editing task' : 'New task';paint();ui.name.focus();
+  ui.invalid.textContent='';ui.notice.textContent=task ? 'Editing task' : 'New task';paint();ui.name.focus();
 }
 ui.add.addEventListener('click',()=>begin(null));ui.scope.addEventListener('change',paint);
 for (const field of [ui.name,ui.complete]) field.addEventListener('input',()=>{

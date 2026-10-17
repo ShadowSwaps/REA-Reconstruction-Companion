@@ -48,7 +48,7 @@ for(const target of ['reference','parity','improved']) {
   });
 }
 for(const initial of ['[]','null','{"version":2,"items":[]}','bad'])test('improved: unchanged malformed startup can be explicitly repaired: '+initial,async()=>{
-  const a=app('improved',environment(initial));assert.equal(a.snapshot().error,'Storage could not be read.');a.open(0);a.input('Repair');await a.save();assert.deepEqual(titles(a.env),['Repair','Beta']);
+  const a=app('improved',environment(initial));assert.equal(a.snapshot().error,'Storage could not be read.');a.open(0);assert.equal(a.snapshot().error,'Storage could not be read.');a.input('Repair');await a.save();assert.deepEqual(titles(a.env),['Repair','Beta']);assert.equal(a.snapshot().error,'');
 });
 test('improved: feedback clears on input and invalid submission',async()=>{
   const a=app('improved');a.open(0);await a.save();a.input('');assert.equal(a.snapshot().status,'Unsaved changes');await a.save();assert.equal(a.snapshot().status,'Not saved');
@@ -117,9 +117,10 @@ test('published browser records recompute against acceptance and bind executed s
   assert.equal(auditCaptures(report.main).checkpoints,75);
   for(const [file,hash]of Object.entries(report.files))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(new URL('../evals/browser-improvement/'+file,import.meta.url))).digest('hex'),hash,file);
   const captures=report.supplemental.captures;
-  assert.deepEqual(captures.map(x=>x.label),['seed-a','seed-b','conflict-a','conflict-b','copy-held','copy-queued','copy-a-saved','copy-b-saved','malformed-recovery','cancel-latest']);
+  assert.deepEqual(captures.map(x=>x.label),['seed-a','seed-b','conflict-a','conflict-b','copy-held','copy-queued','copy-a-saved','copy-b-saved','malformed-recovery','cancel-latest','startup-warning-retained']);
   const copies={version:1,items:[{id:1,title:'Winner',done:false},seed.items[1],{id:3,title:'Copy A',done:false},{id:4,title:'Copy B',done:true}]};
   for(const label of ['copy-a-saved','copy-b-saved']){const c=captures.find(x=>x.label===label);assert.equal(c.actual.status,'Saved');assert.deepEqual(JSON.parse(c.stored),copies);}
   assert.deepEqual(captures.find(x=>x.label==='malformed-recovery'),{label:'malformed-recovery',draft:'Keep malformed',status:'Save failed',stored:'malformed'});
-  assert.equal(captures.at(-1).actual.hidden,true);assert.equal(captures.at(-1).stored,JSON.stringify(seed));
+  const cancel=captures.find(x=>x.label==='cancel-latest');assert.equal(cancel.actual.hidden,true);assert.equal(cancel.stored,JSON.stringify(seed));
+  const warning=captures.at(-1);assert.equal(warning.before,'Storage could not be read.');assert.equal(warning.duringEdit,warning.before);assert.equal(warning.after,'');assert.deepEqual(JSON.parse(warning.stored).items,[{id:1,title:'Repaired',done:false},seed.items[1]]);
 });

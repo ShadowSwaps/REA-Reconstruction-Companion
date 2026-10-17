@@ -38,6 +38,12 @@ export async function runRecoveryChecks(createTab,record) {
   await click(control,'Read store');assert.equal(await control.playwright.locator('#stored').textContent(),'malformed');
   captures.push({label:'malformed-recovery',draft,status:'Save failed',stored:'malformed'});await record({captures});
   await control.playwright.getByLabel('Raw store').fill(JSON.stringify(seed));await click(control,'Apply store');await click(a,'Cancel');await check('cancel-latest',a,{hidden:true,status:'Cancelled',rows:['Alpha — Open','Beta — Done']},seed.items);
+  await control.playwright.getByLabel('Raw store').fill('malformed');await click(control,'Apply store');await a.reload();
+  const before=await a.playwright.locator('#problem').textContent();assert.equal(before,'Storage could not be read.');
+  await a.playwright.locator('#rows button').nth(0).click();const duringEdit=await a.playwright.locator('#problem').textContent();assert.equal(duringEdit,before);
+  await a.playwright.getByLabel('Title',{exact:true}).fill('Repaired');await click(a,'Save');await a.playwright.domSnapshot();const after=await a.playwright.locator('#problem').textContent();assert.equal(after,'');
+  await click(control,'Read store');const stored=await control.playwright.locator('#stored').textContent();assert.equal(stored,JSON.stringify({version:1,items:[{id:1,title:'Repaired',done:false},seed.items[1]]}));
+  captures.push({label:'startup-warning-retained',before,duringEdit,after,stored});await record({captures});
   for(const tab of [a,b,writer,control])await tab.close();
   return {captures,errors:[],method:'Additional same-agent actual-browser assertions; controlled lock hold; no real denial/restart claim'};
 }

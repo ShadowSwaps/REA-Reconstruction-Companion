@@ -36,9 +36,10 @@ closed. Unaffected trim, Unicode/markup text, done flag, blank validation, cance
 filter, Enter submission, saved reload/fresh-tab and unsaved reload-loss workflows
 were also checked.
 
-Ten supplemental browser checkpoints/assertion records covered two overlapping
+Eleven supplemental browser checkpoints/assertion records covered two overlapping
 recovery copies (IDs 3 and 4 with both contributions retained), malformed latest
-recovery rejection with exact draft/bytes preserved, and Cancel loading latest.
+recovery rejection with exact draft/bytes preserved, Cancel loading latest, and
+retaining a malformed-startup warning across editor opening until successful repair.
 The plain candidate was additionally inspected in conflict without instrumentation;
 the screenshot in the example shows that state. Local regression tests execute all
 three actual scripts in a deliberately minimal DOM/storage/lock test double. They
@@ -62,9 +63,13 @@ auditor, an auditor assumption about instrumentation on the intentionally plain
 fresh tab, and a full-page screenshot rendering artifact. Scoped access, semantic
 normalization, bounded batches, explicit UTF-8, correct probe scope and a normal
 screenshot resolved these issues. They were not product passes or hidden retries.
-Original captures and failed transformations remain separate. The improved app
-source stayed unchanged during observations; its standalone identity receipt was
-recorded afterward, not backdated as a pre-run manifest.
+Original captures and failed transformations remain separate. Further review found
+editor opening cleared the malformed-startup warning too early; the candidate was
+corrected and its browser suites refreshed. Earlier candidate results remain
+historical. Final app source stayed unchanged during the refreshed observations;
+its standalone identity receipt was recorded afterward, not backdated as a pre-run
+manifest. A captured-JSON line-ending/manifest mismatch was also corrected before
+publication; final package verification compares every file with its committed blob.
 
 Controlled rejection happens before native storage write, and controlled holds/
 refusal affect fixture locks only. Real quota/permission denial and actual browser

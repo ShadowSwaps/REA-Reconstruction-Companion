@@ -1,16 +1,16 @@
 {
   "date": "2026-10-17",
   "method": "Source-exposed, same-agent, supported in-app browser; bounded DOM/storage projections",
-  "identityRecorded": "After observations; improved app unchanged during runs; original hashes independently pinned before observations",
+  "identityRecorded": "After final observations; final app unchanged during refreshed runs; original hashes independently pinned before observations",
   "files": {
     "browser-check.mjs": "f16757d5a6d3ddd82596628cf789e5f4fac9cdae4b05d082217fb32bf4baf7c4",
     "conflict.png": "a433da0163b9b62176370269e1c1741b6dd034a1f43aa7d85d4873b766cf9f2a",
     "fixture.js": "b27134a8a35ccca3798f8d8da55a49808f8ec130a5eec384499a9ddc2b518d78",
     "model-harness.mjs": "42f2366c278586393cb65bf6a157248677a81331e89c81753c26c638f9567187",
     "profile.mjs": "1b71573aa30130fb0e12e1ab3cdcc7cc5c4584d19caaaf02878e33d8ee6961b0",
-    "recovery-check.mjs": "c44111c9515854410d3410915b6f98796e6c776333d8b2d95f8ba5e082557849",
+    "recovery-check.mjs": "acd7024269ffcfe4b40e69d0aa64bb738dc47d2e3ac27715688d7f2ed1d80fc8",
     "server.mjs": "81309444d077c22c2492571130cc5fba8b47bee3ea82e2cb5dc1f3415b9a4370",
-    "improved/app.js": "bfe8bdccdf86714a89d2fa534f224c7947b0426df4c84eba71fa3cfd253077b3",
+    "improved/app.js": "61d03ba652ed09760a7ca3f032056cd87b6083660e806a8e948e11bcc438ff06",
     "improved/index.html": "3be22d8ee7ecd60f0cb7d423e4ceb0ec6bbf1aa4e53af0ad69f75be4718af162",
     "parity/app.js": "9022fd0a2145d6c47f1386bfac969f989bf84be0dcc71b89e7ca4e5dc3d34e2a",
     "parity/index.html": "ec021e4220a49919245de8c314422bbc4223bbbeed9e5940e020866f682fe8df",
@@ -2726,6 +2726,13 @@
           ]
         },
         "expectedStore": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      {
+        "label": "startup-warning-retained",
+        "before": "Storage could not be read.",
+        "duringEdit": "Storage could not be read.",
+        "after": "",
+        "stored": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Repaired\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
       }
     ],
     "errors": [],
