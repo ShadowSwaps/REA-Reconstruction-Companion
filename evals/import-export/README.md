@@ -49,8 +49,9 @@ failure is an environment limitation, not a passing recovery observation.
    expected ordering, title values and default completion.
 4. The same run verifies exact old file/memory preservation for rejection,
    controlled pre-rename failure and a real OS failure induced by redirecting
-   the rename attempt to a nonempty directory. Both are controlled faults, not
-   spontaneous disk/permission/quota observations. It checks retry, reload,
+   the rename attempt to a nonempty directory, plus a staging write whose
+   temporary basename exceeds the host filesystem's component limit. These are
+   controlled faults, not spontaneous disk/permission/quota observations. It checks retry, reload,
    malformed-startup fail-closed behavior and the CLI across process restart.
 5. Run the test file to challenge the actual checker: Unicode/completion/order
    corruption, false import results, destructive rejection and always-failing
@@ -64,3 +65,7 @@ deliberately preserved; unknown fields are rejected. Candidate startup uses a
 bounded read, while the frozen reference's startup reads the whole trusted
 fixture file before its parser checks size. This implementation hardening is
 separate from tested parity and is not a reference performance measurement.
+An externally supplied v1 startup file is read without automatic migration;
+if canonical v2 would exceed the limit, v2 export rejects `size` and the
+original startup bytes remain intact. This clarifies startup compatibility;
+import still checks canonical expansion before committing.

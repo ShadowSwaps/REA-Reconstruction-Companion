@@ -113,8 +113,32 @@ export function runTrial({ candidateFactory = candidate } = {}) {
     const malformed = path.join(temp, name + '-malformed'); fs.writeFileSync(malformed, '{broken');
     assert.equal(errorCode(() => factory({ file: malformed })), 'syntax');
     assert.equal(fs.readFileSync(malformed, 'utf8'), '{broken');
+    // Controlled real staging-write failure: legal existing basename, but its
+    // UUID temporary suffix exceeds this host filesystem's component limit.
+    const longFile = path.join(temp, 'l'.repeat(230) + '.json');
+    fs.writeFileSync(longFile, doc(seed));
+    let stagingError, reachedRename = false;
+    try { fs.writeFileSync(longFile + '.00000000-0000-0000-0000-000000000000.tmp', 'probe', { flag: 'wx' }); }
+    catch (e) { stagingError = e.code; }
+    assert.ok(stagingError, 'actual long-name staging write rejection observed');
+    const writeFailing = factory({ file: longFile, beforeReplace() { reachedRename = true; } });
+    const priorLongBytes = fs.readFileSync(longFile);
+    assert.equal(errorCode(() => writeFailing.importBytes(doc([]))), 'persistence');
+    assert.equal(reachedRename, false, 'failure before rename hook');
+    assert.deepEqual(writeFailing.state(), seed);
+    assert.deepEqual(fs.readFileSync(longFile), priorLongBytes);
+    // Startup accepts an externally supplied valid v1 file, like the reference;
+    // canonical-v2 expansion is checked at import/export, not silently migrated.
+    const legacy = path.join(temp, name + '-legacy-v1.json');
+    const legacyCase = cases.find(c => c.id === 'expanded-v1-over');
+    fs.writeFileSync(legacy, legacyCase.bytes);
+    const loadedLegacy = factory({ file: legacy });
+    assert.equal(loadedLegacy.state().length, 16);
+    assert.equal(errorCode(() => loadedLegacy.exportBytes()), 'size');
+    assert.deepEqual(fs.readFileSync(legacy), legacyCase.bytes);
     faults.push({ target: name, preRenameInjection: 'preserved; retry/restart passed',
-      controlledOsRename: osError, priorMemoryAndBytesPreserved: true, startupMalformed: 'failed closed' });
+      controlledOsRename: osError, controlledOsStagingWrite: stagingError,
+      priorMemoryAndBytesPreserved: true, startupMalformed: 'failed closed', legacyV1Startup: 'loaded without migration; oversized v2 export rejected' });
   }
   // Real executable transport plus separate-process restart, outside API-only checks.
   for (const name of ['reference', 'candidate']) {

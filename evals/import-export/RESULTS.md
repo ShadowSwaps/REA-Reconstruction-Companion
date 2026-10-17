@@ -13,11 +13,16 @@ model-independent; one host run is not a multi-model benchmark.
 | R3 recovery | Staged write/rename before memory replacement; per-rejection snapshots, controlled faults | Prior memory and exact file bytes preserved; retry/reload/process restart pass; malformed startup fails closed |
 | Checker challenges | Actual runTrial candidate wrappers and compareCases tests | Seven candidate defects plus empty/duplicate/missing/wrong observations are rejected |
 
-The controlled pre-rename exception and controlled nonempty-directory rename
-conflict both preserve prior memory/files. The latter caused actual OS EPERM
+The controlled pre-rename exception, long temporary-basename staging write and
+nonempty-directory rename conflict preserve prior memory/files. Rename caused actual OS EPERM
 on this Windows host. It is an induced I/O failure, not evidence of a
 spontaneous permission/disk/quota incident. Other platforms can report different
-OS error codes. Caught-error success does not establish crash durability,
+OS error codes. The long-name probe caused ENOENT on this Windows host and
+the store failed before reaching its rename hook. An initial review also found
+an unnecessary startup migration-size check in the candidate: the reference
+loads an externally supplied v1 file without migration and rejects oversized
+v2 at export. The candidate now preserves that behavior, checked explicitly
+without changing the frozen source/corpus. Caught-error success does not establish crash durability,
 concurrent-writer safety, fsync guarantees, safe hostile paths, rollback after
 rename or recovery of crash-left temporary files.
 

@@ -60,7 +60,7 @@ function readBounded(file) {
 export function createStore({ file, beforeReplace = () => {} } = {}) {
   let committed = [];
   if (file) {
-    try { committed = decode(readBounded(file)); serialize(committed, 2); }
+    try { committed = decode(readBounded(file)); }
     catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
   const api = {
