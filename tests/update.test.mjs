@@ -333,13 +333,18 @@ for (const scenario of ['replacement-after-open', 'parent-link-before-open', 'sa
 for (const field of ['relative-path', 'non-normalized-path', 'invalid-hash']) test(`invalid recorded REA ${field} stops before local inspection`, async t => {
   const f = fixture(t, 'on'); await enable(f); const n = transport(f);
   const state = JSON.parse(fs.readFileSync(f.location.file));
-  if (field === 'relative-path') state.options.reaSkill = path.relative(process.cwd(), f.reaSkill);
+  // Windows CI can put the checkout and fixtures on different drives; relative()
+  // across those drives returns an absolute path, so anchor within the fixture.
+  if (field === 'relative-path') {
+    state.options.reaSkill = path.relative(path.dirname(f.reaSkill), f.reaSkill);
+    assert.equal(path.isAbsolute(state.options.reaSkill), false);
+  }
   else if (field === 'non-normalized-path') state.options.reaSkill = path.dirname(f.reaSkill) + path.sep + '.' + path.sep + 'SKILL.md';
   else state.reaBlockHash = 'not-a-sha256';
   fs.writeFileSync(f.location.file, JSON.stringify(state));
   const before = fs.readFileSync(f.location.file), original = fs.openSync; let reaReads = 0;
   const open = t.mock.method(fs, 'openSync', (file, ...args) => {
-    if (typeof file === 'string' && path.resolve(file) === f.reaSkill) reaReads++;
+    if (typeof file === 'string' && (file === state.options.reaSkill || path.resolve(file) === f.reaSkill)) reaReads++;
     return original(file, ...args);
   });
   try { await assert.rejects(check(f, n.context), /Invalid saved REA settings/); }

@@ -42,7 +42,7 @@
     "tests/resume-walkthrough.test.mjs": "89b872821aa5909ed686a4cc429ea4a7c3201687cd30247db038d9a4dc78cf4b",
     "tests/resume.test.mjs": "1af95e2b964abba0654819de2dbd7eac82ebfad489846a1cdd479ce67b713144",
     "tests/selection-evals.test.mjs": "0cf261a84d285581c1f5f0b0866bea01dc16701a5d1fa9e5ff7d8a8525d4fccb",
-    "tests/update.test.mjs": "025238d0d2d1f825747809fd3de7836b2de5c02c79b132c33f8bfc650d59afa5",
+    "tests/update.test.mjs": "681d55fd2893377cdf20d622aeda53531304c5bae7f222b7f84682f2edd5c025",
     "evals/README.md": "c7170c4376d3ee4f78d178cbe2d0f4f78b8ed31970a42ea7cf7855711b91de4e",
     "evals/cases.md": "6101e7f74eaec75d8e2c3f651b3b7ecbed4cac53497fa9c34b8cfff76186ac6c",
     "evals/check.mjs": "949a9a5cc0a2c85929e69894fb573728e5dc4a5adb75afd91e34f7fb792e4ccb",
