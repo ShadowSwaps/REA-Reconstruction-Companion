@@ -17,7 +17,7 @@ is not a blind benchmark, independent review or reliability certification.
 | Recovery | Reload loses unsaved draft | Load latest keeps draft; save as new preserves both contributions |
 | Locking unavailable | No coordination | Writes fail closed; draft stays in memory |
 
-![Conflict retains the draft and exposes recovery controls](conflict.png)
+![Conflict retains the draft and exposes recovery controls](conflict.jpg)
 
 ## Run locally
 
