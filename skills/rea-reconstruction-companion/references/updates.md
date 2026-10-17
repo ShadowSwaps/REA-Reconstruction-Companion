@@ -36,6 +36,14 @@ node "<installed-skill>/scripts/update.mjs" apply --approve "<offered-approvalId
 
 Deferring postpones another offer for seven days from the decision. Skipping suppresses that version on subsequent weekly checks. Disabling cancels a pending offer and stops network checks. If no answer arrives, no download or installation occurs and automatic checking stays on the weekly interval.
 
+### Local setup permission denial
+
+For `check` only, EPERM/EACCES while resolving the state location, inspecting whether state exists, preparing its directory or acquiring its lock returns `status: "local-check-unavailable"` with CLI exit zero. The result includes `reason: "permission-denied"`, the OS `code`, setup `stage`, and explicit `updateAvailability: "unknown"` and `integrationHealth: "unknown"`. It does not report an installed/offered version, availability, corruption or a broken companion. Permission denial alone does not identify its cause; host policy, filesystem permissions or security software may be involved.
+
+Continue the main task. No network request or installation change is attempted, and saved state, consent, pending offers and cooldown remain unchanged. No attempt timestamp can be recorded without access; do not retry automatically, repeatedly ask for access, elevate, weaken permissions, delete a lock, relocate state or use a network fallback. If setup created an absent directory before a later denial, that directory may remain. An authorized user can review the selected installation's access separately.
+
+This classification ends when the lock is acquired. Observed unsafe paths, corrupt state, non-permission setup errors, post-lock state errors and cleanup failures keep their error behavior (CLI exit one). Explicit `enable`, `disable`, `status`, `defer`, `skip` and `apply` actions also retain errors for denied setup. Existing lock contention still reports `busy`; successful setup still performs the local integration inspection before cooldown or network decisions.
+
 ## Local integration warning and REA refresh recovery
 
 With checks enabled and recorded integration `on`, `check` first validates the saved fully resolved REA path and SHA-256 baseline, then inspects only that file before cooldown, backwards-clock and network-authorization decisions. It reads at most 1 MiB plus one overflow-detection byte, rejects linked/nonregular paths and invalid UTF-8, and compares the marked block with its recorded hash. Path identity and file metadata are checked before and after reading so an observed concurrent replacement or edit is not reported as healthy. It does not scan for another REA installation or validate all upstream files. Missing state, disabled checks and integration `off` do not inspect REA. The weekly limit still applies to online attempts.

@@ -168,14 +168,29 @@ export function releaseCandidate(release) {
 }
 
 export async function runUpdate(action, options = {}, context = {}) {
-  const location = stateLocation(context.skillRoot || DEFAULT_ROOT);
   const now = context.now ?? Date.now();
   if (!Number.isSafeInteger(now) || now < 0) throw new Error('Invalid clock.');
   if (!['enable', 'disable', 'status', 'check', 'defer', 'skip', 'apply'].includes(action)) throw new Error('Unknown update action.');
-  if (action !== 'enable' && !exists(location.file)) return { status: 'disabled' };
-  noLinks(location.directory); fs.mkdirSync(location.directory, { recursive: true, mode: 0o700 });
-  const lock = path.join(location.directory, 'update.lock'); let fd;
-  try { fd = fs.openSync(lock, 'wx', 0o600); } catch (e) { if (e.code === 'EEXIST') return { status: 'busy' }; throw e; }
+  let location, lock, fd, stage = 'resolve-state';
+  // Only setup denial during an optional check is nonblocking. Once locked,
+  // state validation, writes and cleanup keep their existing error contracts.
+  try {
+    location = stateLocation(context.skillRoot || DEFAULT_ROOT);
+    stage = 'inspect-state';
+    if (action !== 'enable' && !exists(location.file)) return { status: 'disabled' };
+    stage = 'prepare-directory';
+    noLinks(location.directory); fs.mkdirSync(location.directory, { recursive: true, mode: 0o700 });
+    lock = path.join(location.directory, 'update.lock');
+    stage = 'acquire-lock';
+    try { fd = fs.openSync(lock, 'wx', 0o600); } catch (e) { if (e.code === 'EEXIST') return { status: 'busy' }; throw e; }
+  } catch (e) {
+    if (action !== 'check' || !['EPERM', 'EACCES'].includes(e.code)) throw e;
+    return {
+      status: 'local-check-unavailable', reason: 'permission-denied', stage, code: e.code,
+      updateAvailability: 'unknown', integrationHealth: 'unknown',
+      message: 'The optional update check could not access its local setup. Update availability and integration health remain unknown. Continue the main task; no online check or installation change was attempted. Do not retry automatically or request elevated access.'
+    };
+  }
   try {
     let state = loadState(location);
     if (action === 'enable') {
