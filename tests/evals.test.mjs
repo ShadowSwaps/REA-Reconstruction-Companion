@@ -201,7 +201,7 @@ test('output overflow is a harness failure without candidate output disclosure',
 test('malformed result envelopes are harness failures, not rejected inputs', t => {
   const total = casesFor('function').length;
   for (const envelope of [{ok:false}, {ok:true}, {ok:'yes',value:null}, {ok:false,reason:'unrecognized'}]) {
-    const source = `process.stdout.write(${JSON.stringify(JSON.stringify(Array.from({length:total}, () => envelope)))}); process.exit(0);`;
+    const source = `import fs from 'node:fs'; fs.writeSync(1, ${JSON.stringify(JSON.stringify(Array.from({length:total}, () => envelope)))}); process.exit(0);`;
     const report = runCheck('function', fixture(t, source));
     assert.equal(report.status, 'harness-error', JSON.stringify(report));
     assert.equal(report.reason, 'invalid-worker-result');
@@ -333,17 +333,20 @@ test('reports distinguish numeric mismatches, exceptions and invalid return valu
 
 test('process failures preserve unexecuted accounting and bounded diagnostics', t => {
   const scenarios = [
-    ['export function evaluate() { while (true) {} }', 'timeout', {timeout: 300}, null],
-    ['process.stderr.write("private-example"); process.exit(7);', 'candidate-process-failed', {}, 7],
-    ['process.kill(process.pid, "SIGKILL");', 'candidate-process-failed', {}, process.platform === 'win32' ? 1 : null],
-    ['process.stdout.write("private-example"); process.exit(0);', 'invalid-worker-output', {}, 0],
-    ['process.stdout.write("[]"); process.exit(0);', 'incomplete-worker-output', {}, 0],
+    ['export function evaluate() { while (true) {} }', 'timeout', {timeout: 300}, null, 0, 0],
+    ['fs.writeSync(2, "private-example"); process.exit(7);', 'candidate-process-failed', {}, 7, 0, 15],
+    ['process.kill(process.pid, "SIGKILL");', 'candidate-process-failed', {}, process.platform === 'win32' ? 1 : null, 0, 0],
+    ['fs.writeSync(1, "private-example"); process.exit(0);', 'invalid-worker-output', {}, 0, 15, 0],
+    ['fs.writeSync(1, "[]"); process.exit(0);', 'incomplete-worker-output', {}, 0, 2, 0],
     // A valid record in a partial run must never count as a completed comparison.
-    [`process.stdout.write('[{"ok":true,"value":0}]'); process.exit(0);`, 'incomplete-worker-output', {}, 0],
-    ['export function evaluate() { process.exit(0); }', 'invalid-worker-output', {}, 0],
+    [`fs.writeSync(1, '[{"ok":true,"value":0}]'); process.exit(0);`, 'incomplete-worker-output', {}, 0, 23, 0],
+    ['export function evaluate() { process.exit(0); }', 'invalid-worker-output', {}, 0, 0, 0],
+    // Invalid UTF-8 must count its original bytes, not encoded replacement characters.
+    ['fs.writeSync(1, Buffer.from([255])); fs.writeSync(2, Buffer.from([255])); process.exit(7);', 'candidate-process-failed', {}, 7, 1, 1],
+    ['fs.writeSync(1, "ø"); fs.writeSync(2, "ø"); process.exit(0);', 'invalid-worker-output', {}, 0, 2, 2],
   ];
-  for (const [source, reason, options, exitCode] of scenarios) {
-    const report = runCheck('function', fixture(t, source), options);
+  for (const [source, reason, options, exitCode, stdoutBytes, stderrBytes] of scenarios) {
+    const report = runCheck('function', fixture(t, `import fs from 'node:fs'; ${source}`), options);
     const detail = JSON.stringify(report);
     assert.equal(report.status, 'harness-error', detail);
     assert.equal(report.reason, reason, detail);
@@ -356,8 +359,8 @@ test('process failures preserve unexecuted accounting and bounded diagnostics', 
     assert.equal(e.exitCode, exitCode, detail);
     if (reason === 'timeout') assert.equal(e.errorCode, 'ETIMEDOUT', detail);
     if (source.includes('SIGKILL')) assert.equal(e.signal, process.platform === 'win32' ? null : 'SIGKILL', detail);
-    assert.ok(Number.isInteger(e.stdoutBytes) && e.stdoutBytes >= 0);
-    assert.ok(Number.isInteger(e.stderrBytes) && e.stderrBytes >= 0);
+    assert.equal(e.stdoutBytes, stdoutBytes, detail);
+    assert.equal(e.stderrBytes, stderrBytes, detail);
     assert.ok(!detail.includes('private-example'));
     assert.ok(!detail.includes('rea-eval-test-'));
   }

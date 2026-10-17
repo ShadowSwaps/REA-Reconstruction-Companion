@@ -16,7 +16,7 @@ export function runCheck(id, candidatePath, { timeout = 10000 } = {}) {
   for (const name of ['SystemRoot', 'TEMP', 'TMP']) if (process.env[name]) environment[name] = process.env[name];
   const started = performance.now();
   const child = spawnSync(process.execPath, ['--max-old-space-size=128', worker, candidate], {
-    input: JSON.stringify(cases.map(c => c.input)), encoding: 'utf8', cwd: path.dirname(candidate),
+    input: JSON.stringify(cases.map(c => c.input)), cwd: path.dirname(candidate),
     env: environment, timeout, maxBuffer: 1024 * 1024, windowsHide: true,
   });
   // Never include candidate output, paths, environment values or error messages.
@@ -25,7 +25,7 @@ export function runCheck(id, candidatePath, { timeout = 10000 } = {}) {
     exitCode: child.status, signal: child.signal,
     errorCode: ['ETIMEDOUT', 'ENOBUFS', 'ENOENT', 'EACCES', 'ENOMEM', 'EAGAIN'].includes(child.error?.code)
       ? child.error.code : child.error ? 'OTHER' : null,
-    stdoutBytes: Buffer.byteLength(child.stdout ?? ''), stderrBytes: Buffer.byteLength(child.stderr ?? ''),
+    stdoutBytes: child.stdout?.length ?? 0, stderrBytes: child.stderr?.length ?? 0,
   };
   const report = { schemaVersion: 1, case: id, total: cases.length, passed: 0, failed: 0, compared: 0, errored: 0, notEvaluated: cases.length, status: 'harness-error', humanReview: 'pending', execution };
   if (child.error || child.status !== 0) {
@@ -34,7 +34,7 @@ export function runCheck(id, candidatePath, { timeout = 10000 } = {}) {
     return { ...report, reason };
   }
   let results;
-  try { results = JSON.parse(child.stdout); } catch { return { ...report, reason: 'invalid-worker-output' }; }
+  try { results = JSON.parse(child.stdout.toString('utf8')); } catch { return { ...report, reason: 'invalid-worker-output' }; }
   if (!Array.isArray(results) || results.length !== cases.length) return { ...report, reason: 'incomplete-worker-output' };
   // Validate the whole envelope before attributing failures to candidate behavior.
   if (!results.every(r => r !== null && typeof r === 'object' && !Array.isArray(r) && (
