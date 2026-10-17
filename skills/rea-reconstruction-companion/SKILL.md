@@ -70,9 +70,11 @@ Resolve inputs in this order: the user's current request and explicit correction
 
 Show the resolved brief concisely, then proceed. Do not make its approval a mandatory gate. Ask only when the target is absent/ambiguous or when an unresolved choice would materially change scope, correctness, or a consequential action. Continue independent useful work while awaiting an answer. Record nonblocking unknowns instead of issuing a questionnaire. Never treat an assumption as evidence.
 
+Interpret the whole request in context, including casual phrasing, minor typos, negation, follow-up references and explicit corrections. The examples below illustrate intent; they are not required wording or keyword triggers. "Can you make just that part work here?" can request a scoped build when the preceding conversation identifies the part and destination. "I might build it someday; explain it first" stays investigative. A correction such as "actually, only the decoder, and no code yet" supersedes the earlier build scope. Do not let a word such as "build" override a negation or future aspiration. If "make it better" could mean either a proposal or changing an installed reference, ask which outcome and target the user wants before making that consequential change.
+
 ## Choose the mode
 
-- **Understand and specify**: requests to understand, analyze, map, document, plan, or investigate an app for a possible future rebuild. This is the default when implementation intent is absent. Deliver a reconstruction blueprint; do not start product implementation.
+- **Understand and specify**: requests to understand, analyze, map, document, plan, or investigate an app for a possible future rebuild. This is the default when implementation intent is absent. Deliver the scoped explanation, contract or blueprint the question needs; do not start product implementation.
 - **Investigate and build**: explicit requests to implement, rebuild, or create a similar app now. Gather enough evidence for each slice and continue into implementation without a second routine approval gate. A full forensic understanding of every subsystem is not a prerequisite for the first well-specified slice.
 - **Build from specification**: explicit implementation requests with an existing selected specification. Check its evidence and applicability, then investigate gaps that affect the build. Do not restart the whole investigation automatically.
 
@@ -80,7 +82,7 @@ A later user request can change mode or scope; record the change and preserve us
 
 ## Investigate and specify
 
-For product or feature specifications, read [the blueprint workflow](references/blueprint.md). It defines the product map, requirements, architecture, evidence ledger, and implementation roadmap.
+For product or feature specifications, read the applicable sections of [the blueprint workflow](references/blueprint.md). It defines the product map, requirements, architecture, evidence ledger, and implementation roadmap. A selected feature needs its behavior and relevant boundaries, not a mandatory whole-product inventory. For a bounded explanation, answer the selected question with evidence and limits before adding design or roadmap work that the user did not request.
 
 For a function, interface, or format, start with a compact contract: inputs and outputs, types/encoding, preconditions, side effects/state, failure behavior, dependencies, and evidence gaps. Define acceptance cases with an independent source of expected results using [comparison and test oracles](references/reconstruction-methods.md#comparison-and-test-oracles). Read only the applicable blueprint sections if this contract exposes a wider design question; a missing function specification does not require a product map.
 
@@ -112,6 +114,8 @@ Record successful reference techniques and observed weaknesses separately. In sp
 
 For either build mode, read [the implementation workflow](references/implementation.md). Use ordinary coding tools to implement the proposed design. Build coherent vertical slices, integrate continuously, and link requirements to meaningful tests and actual outcomes.
 
+Load references as the next action requires them: checkpoint guidance and selected records for a resume; contract/oracle guidance for a narrow reconstruction; implementation guidance when building. Add format, cryptography, browser, performance or version-change guidance only when that boundary is involved. Follow necessary dependencies without preloading every reference, worked answer or research source. A resume does not itself expand scope or turn a specification-only task into a build.
+
 Keep the evidence-derived model of the original separate from choices for the new app. Original architecture and stack are inputs to a decision, not automatic requirements. A mock or passing isolated component test is insufficient evidence that a real end-to-end workflow works.
 
 Use [focused validation methods](references/validation-methods.md) when generated differential inputs, targeted mutation tests, or executable consumer/provider contracts would resolve a consequential uncertainty. Select applicable methods; they are not a mandatory suite for every target or a reason to install tools.
@@ -136,6 +140,8 @@ When resuming work or reassessing a changed target, use [portable checkpoints an
 When an artifact, environment, analysis assumption, or interface changes, mark affected findings and dependent requirements/tests stale until reassessed. Preserve the prior result and explain the revision. Stop digging into a mechanism once the selected behavior and design decision have adequate support; keep unanswered questions visible and prioritize those that could change the next implementation step.
 
 In product specification mode, finish when the selected workflows have actionable requirements, a proposed design, a build sequence, validation criteria, and explicit remaining gaps. For narrower subjects, finish when the selected question or scoped contract is adequately answered with evidence and limits. In build mode, judge completion against the selected acceptance criteria and actual integration results. Report open required questions as partial or unresolved; never claim global equivalence or complete understanding from limited coverage.
+
+End with the result, its meaningful limits and the next concrete action or completion state. Name the smallest missing observation or decision when blocked; do not ask for routine approval to continue an already requested local build. One compact record may combine the brief, evidence, contract, checks and checkpoint for a small task.
 
 The [research basis](references/research-basis.md) records the sources and limits behind this workflow. Read it when reviewing or extending the method; it is not a requirement to browse every source for each app.
 

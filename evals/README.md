@@ -4,6 +4,8 @@ The [version-change trial](version-change/README.md) combines frozen version evi
 
 This kit evaluates outcomes of using the skill, separately from installation. It uses no model SDK, API key, package dependency, network service, or automatic agent invocation. Node.js 20+ is needed only for the executable oracle checks. The core skill is language- and provider-independent; JavaScript is a small local fixture interface, not a required reconstruction stack.
 
+The [first-use review](first-use.md) walks through understanding, selected-feature reconstruction and checkpoint resumption with a varied natural-language scenario matrix. It records manual same-agent assessment separately from the existing executable contract tests; it does not run or score a model.
+
 For a complete application to investigate with REA, use the [Pocket Tasks reference trial](reference/README.md). It provides an executable local target, a candidate evidence packet, a language-independent process interface for reconstructions, independent expected behavior, and a repeatable human review procedure. Its app and tools also use existing Node.js 20+. The supplied-evidence cases below and the reference trial are distinct; neither automatically invokes a model or establishes live-host compatibility.
 
 The [worked reconstruction example](reference/reconstruction/README.md) shows the implementation/validation step with real captured results and disclosed prior source/reviewer exposure. It is reviewer/training material, not evidence for a fresh trial or an independent agent benchmark.
