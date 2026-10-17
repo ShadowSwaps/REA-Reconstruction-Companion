@@ -42,13 +42,28 @@ test('saved capture checking rejects omissions, duplicates, input drift and fals
   }
 });
 test('freeze refuses changed reference, literal oracle and identity before execution', () => {
-  for (const name of ['reference/Parcel.exe','corpus.json','identity.json']) {
+  for (const name of ['reference/Parcel.exe','corpus.json','identity.json','observed-reference.json']) {
     const dir=fs.mkdtempSync(path.join(os.tmpdir(),'rea-artifact-freeze-'));
     fs.cpSync(root, dir, { recursive: true });
     if (name === 'identity.json') {const j=JSON.parse(fs.readFileSync(path.join(dir,name)));j.artifact.sha256='0'.repeat(64);fs.writeFileSync(path.join(dir,name),JSON.stringify(j));}
     else fs.appendFileSync(path.join(dir,name),'changed');
     assert.throws(() => verifyFreeze(dir));
   }
+});
+
+test('saved capture rejects unsupported authority, environment and normalization without promoting static results', () => {
+  const cases = verifyFreeze(), original = JSON.parse(read('observed-reference.json'));
+  for (const change of [r => r.schema = 2, r => r.method = 'Static member inspection; runtime not run',
+    r => r.method = 'Canonical REA runtime Evidence', r => r.normalization = 'Discard errors',
+    r => delete r.environment, r => r.environment.platform = 'unrun',
+    r => r.environment.arch = '', r => r.environment.node = 'unknown', r => r.environment.node = ['v20.0.0']]) {
+    const saved = structuredClone(original); change(saved);
+    assert.throws(() => checkSaved(cases, saved), /Unsupported observation provenance/);
+  }
+  // A historical environment need not equal the current host. Metadata alone
+  // does not authenticate a new capture; the distributed archive is hash-pinned.
+  const different = structuredClone(original); different.environment.node = 'v20.0.0';
+  assert.doesNotThrow(() => checkSaved(cases, different));
 });
 test('unsupported REA behavioral claim retains real rejection and static/runtime limits', () => {
   const failure=JSON.parse(read('verification-rejection.json'));
