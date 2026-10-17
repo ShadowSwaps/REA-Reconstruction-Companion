@@ -57,7 +57,7 @@ Share the repository: [github.com/ShadowSwaps/REA-Reconstruction-Companion](http
 
 You can explicitly invoke `$rea-reconstruction-companion` in Codex or `/rea-reconstruction-companion` in Claude Code. With integration enabled, a relevant request to REA also instructs the agent to load the companion.
 
-Describe the software and the outcome you want in ordinary language. The companion uses available REA tools or supplied evidence, identifies gaps, and keeps the work at your requested scope. Copy and adapt these examples to your target.
+Describe the software and the outcome you want in ordinary language. The companion uses available REA tools or supplied evidence, identifies gaps, and keeps the work at your requested scope. These examples are illustrations, not required prompts: paraphrases, casual wording, minor typos and follow-ups should work in context. Say what you want to understand or build; you do not need to name a mode or reproduce a template. Explicit corrections and exclusions take precedence, and a possible future rebuild does not request implementation now.
 
 **Understand and plan a future reconstruction.** Expect evidence-backed behavior and workflow requirements, known unknowns, and a staged roadmap before implementation:
 
@@ -96,6 +96,16 @@ The agent must report missing tools or evidence instead of claiming live analysi
 > Continue implementing the app from this project's REA reconstruction specification.
 
 > Reimplement the decodeFrame function in this library and make it faster for large inputs. Recover its contract, then compare correctness and performance.
+
+### Resume earlier work
+
+> Pick up from this checkpoint. Keep the same scope, retain the passing evidence that still applies, and work on the next unfinished part.
+
+Select the checkpoint or its path and identify any changed target or goal. The agent should read that record and the sources needed for the next step, check evidence applicability, and preserve historical results. Resuming a specification does not authorize building it. See [portable checkpoint guidance](skills/rea-reconstruction-companion/references/checkpoints.md) and the [worked resume example](evals/resume/WALKTHROUGH.md).
+
+For a small question, expect a compact evidence-linked answer or contract with limits and a useful next action. A feature build adds implementation and acceptance results; it need not produce a whole-app blueprint. If a consequential target or outcome is unclear, expect one focused clarification. Host activation and instruction following vary: explicit invocation can help select the skill, but examples and installation do not guarantee every host/model will interpret every phrasing correctly.
+
+To see the workflow before trying a target, follow the [worked investigation](evals/reference/WALKTHROUGH.md), [reconstruction](evals/reference/reconstruction/README.md), or [resume](evals/resume/WALKTHROUGH.md) for your goal. These disclose answers and prior source exposure; they are teaching material, not prerequisites or evidence of a fresh agent trial. The [first-use review](evals/first-use.md) separates manual intent scenarios from executable checks.
 
 ## What it does
 
