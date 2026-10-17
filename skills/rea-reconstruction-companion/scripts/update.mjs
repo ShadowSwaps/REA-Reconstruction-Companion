@@ -43,7 +43,7 @@ function loadState(location) {
   versionParts(s.version);
   s.options.client = normalizeClient(s.options.client);
   if (typeof s.options.skillsDir !== 'string' || path.join(s.options.skillsDir, NAME) !== location.root || !['codex', 'claude-code', 'generic'].includes(s.options.client) || !['on', 'off'].includes(s.options.integration)) throw new Error('Invalid saved installation settings.');
-  if (s.options.integration === 'on' && (typeof s.options.reaSkill !== 'string' || typeof s.reaBlockHash !== 'string')) throw new Error('Missing saved REA settings.');
+  if (s.options.integration === 'on' && (typeof s.options.reaSkill !== 'string' || !path.isAbsolute(s.options.reaSkill) || path.resolve(s.options.reaSkill) !== s.options.reaSkill || typeof s.reaBlockHash !== 'string' || !/^[a-f0-9]{64}$/.test(s.reaBlockHash))) throw new Error('Invalid saved REA settings; review the recorded path and baseline before re-enabling from a verified package.');
   for (const timestamp of [s.lastAttempt, s.lastSuccess]) if (timestamp !== null && (!Number.isSafeInteger(timestamp) || timestamp < 0)) throw new Error('Invalid update timestamp.');
   if (Object.values(s.files).some(v => typeof v !== 'string' || !/^[a-f0-9]{64}$/.test(v))) throw new Error('Invalid installation baseline.');
   return s;
@@ -58,23 +58,28 @@ function saveState(location, state) {
   } finally { if (exists(temporary)) fs.unlinkSync(temporary); }
 }
 
-// Inspect only the recorded file, without following links or reading unbounded content.
+// Check that the recorded path and opened file still agree before and after a bounded read.
 // NONBLOCK avoids waiting on a FIFO if the path changes between lstat and open.
 function inspectReaBlock(reaSkill) {
   let fd;
   try {
+    const limit = 1024 * 1024;
+    const sameSnapshot = (a, b) => a.isFile() && b.isFile() && ['dev', 'ino', 'size', 'mtimeNs', 'ctimeNs'].every(key => a[key] === b[key]);
     noLinks(reaSkill);
-    if (!fs.lstatSync(reaSkill).isFile()) return { status: 'unreadable-or-unsafe' };
+    const before = fs.lstatSync(reaSkill, { bigint: true });
+    if (!before.isFile() || before.size > BigInt(limit)) return { status: 'unreadable-or-unsafe' };
     fd = fs.openSync(reaSkill, fs.constants.O_RDONLY | (fs.constants.O_NOFOLLOW || 0) | (fs.constants.O_NONBLOCK || 0));
-    const stat = fs.fstatSync(fd), limit = 1024 * 1024;
-    if (!stat.isFile() || stat.size > limit) return { status: 'unreadable-or-unsafe' };
+    const opened = fs.fstatSync(fd, { bigint: true });
+    noLinks(reaSkill);
+    if (!sameSnapshot(before, opened) || !sameSnapshot(opened, fs.lstatSync(reaSkill, { bigint: true }))) return { status: 'unreadable-or-unsafe' };
     const buffer = Buffer.alloc(limit + 1); let size = 0;
     while (size < buffer.length) {
       const count = fs.readSync(fd, buffer, size, buffer.length - size, null);
       if (!count) break;
       size += count;
     }
-    if (size > limit) return { status: 'unreadable-or-unsafe' };
+    noLinks(reaSkill);
+    if (BigInt(size) !== opened.size || !sameSnapshot(opened, fs.fstatSync(fd, { bigint: true })) || !sameSnapshot(opened, fs.lstatSync(reaSkill, { bigint: true }))) return { status: 'unreadable-or-unsafe' };
     const bytes = buffer.subarray(0, size), text = bytes.toString('utf8');
     if (!Buffer.from(text, 'utf8').equals(bytes)) return { status: 'unreadable-or-unsafe' };
     const begins = text.split(BEGIN).length - 1, ends = text.split(END).length - 1;
@@ -103,7 +108,7 @@ function integrationWarning(state) {
     'missing-block': 'The recorded REA skill no longer contains the companion rule; REA setup or a skill refresh may have removed it.',
     'changed-block': 'The recorded companion rule differs from the verified baseline.',
     'malformed-block': 'The recorded REA skill contains malformed, duplicate or unmarked companion integration.',
-    'unreadable-or-unsafe': 'The recorded REA skill could not be safely read as a regular UTF-8 file of at most 1 MiB.'
+    'unreadable-or-unsafe': 'The recorded REA skill could not be safely read as an unchanged regular UTF-8 file of at most 1 MiB.'
   };
   return { status: 'integration-needs-attention', integrationHealth, message: `${messages[integrationHealth]} Review the selected installation and recovery instructions. No repair or online check was attempted; explicit companion use remains available.` };
 }

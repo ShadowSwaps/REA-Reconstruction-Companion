@@ -38,7 +38,7 @@ Deferring postpones another offer for seven days from the decision. Skipping sup
 
 ## Local integration warning and REA refresh recovery
 
-With checks enabled and recorded integration `on`, `check` first inspects only the saved REA file, before cooldown, backwards-clock and network-authorization decisions. It reads at most 1 MiB plus one overflow-detection byte, rejects linked/nonregular paths and invalid UTF-8, and compares the marked block with its recorded hash. It does not scan for another REA installation or validate all upstream files. Missing state, disabled checks and integration `off` do not inspect REA. The weekly limit still applies to online attempts.
+With checks enabled and recorded integration `on`, `check` first validates the saved fully resolved REA path and SHA-256 baseline, then inspects only that file before cooldown, backwards-clock and network-authorization decisions. It reads at most 1 MiB plus one overflow-detection byte, rejects linked/nonregular paths and invalid UTF-8, and compares the marked block with its recorded hash. Path identity and file metadata are checked before and after reading so an observed concurrent replacement or edit is not reported as healthy. It does not scan for another REA installation or validate all upstream files. Missing state, disabled checks and integration `off` do not inspect REA. The weekly limit still applies to online attempts.
 
 An unhealthy result has `status: "integration-needs-attention"`, a brief `message`, and `integrationHealth`:
 
@@ -48,13 +48,15 @@ An unhealthy result has `status: "integration-needs-attention"`, a brief `messag
 | `missing-block` | The file no longer contains the companion integration. |
 | `changed-block` | The marked block differs from the verified baseline. |
 | `malformed-block` | Markers are incomplete, duplicated, reversed, or integration is unmarked. |
-| `unreadable-or-unsafe` | Safe bounded inspection failed, including permissions, links, nonregular/oversized files or invalid UTF-8. Health is unknown, not verified. |
+| `unreadable-or-unsafe` | Safe bounded inspection failed, including permissions, links, nonregular/oversized files, invalid UTF-8 or observed changes during inspection. Health is unknown, not verified. |
 
 This warning is a successful local check response (CLI exit zero), **not** successful installation verification. It returns before any network request and leaves files, saved hashes, opt-in, timestamps and pending approval unchanged; apply still independently rejects missing or changed integration. Healthy integration continues through the existing cooldown/network gates. Do not retry online to clear a local warning or infer that the companion/upstream installation is otherwise healthy.
 
 REA 6.5.0 (skill version 42) uses byte-for-byte canonical identity: our block can cause `rea doctor` to report `skill:identity` as stale / `config_drift`. Other differences can cause that diagnostic too. `rea setup` restores canonical files and can remove the block; an update that refreshes the skill can do the same. Other upstream versions may differ. After a refresh, explicitly invoke the companion or manually check the selected installation: **if the companion/helper is never invoked, this warning cannot run**.
 
 For recovery, use the verified companion package matching the installed files, the recorded client/skills directory and selected REA path. Run its `install.mjs --client <client> --integration on --skills-dir "<selected-skills-directory>" --rea-skill "<selected-REA-SKILL.md>" --check`, then inspect `--dry-run` if repair is needed. When only the rule is missing, `skillChangeNeeded` should be false. Within authorized repair scope, rerun without either flag, then verify with `--check`. Preserve newer upstream content; never restore the entire old REA backup to recover just this block. Review missing/unsafe paths and customized or malformed rules before any write. Do not add `--replace` or reset state just to silence the warning. An exact block restoration clears it without resetting the cooldown; an authorized manual update/settings change needs verification and explicit re-enable. Restoring the block may reproduce the known upstream canonical-byte diagnostic.
+
+If `--check` verifies but `changed-block` remains, inspect the exact bytes before changing the baseline. For example, after REA changes CRLF to LF, the installer restores its rule with the new newline style; its hash differs from the old recorded block. Only an explicitly authorized baseline change after package verification permits re-enabling with the same selected settings. Re-enable retains timestamps/cooldown but clears pending offers and skipped-version decisions; it never substitutes for approval of a new update offer. If the file is changing concurrently, let that operation finish and check locally again before deciding whether any repair is needed. Invalid saved paths/hashes are state errors, not evidence of REA drift; follow the corrupt-state recovery guidance below.
 
 ## Apply and recovery
 

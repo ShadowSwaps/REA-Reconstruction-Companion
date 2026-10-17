@@ -280,6 +280,166 @@ test('linked recorded REA file or parent is warned about without reading its tar
   }
 });
 
+for (const scenario of ['replacement-after-open', 'parent-link-before-open', 'same-size-edit-during-read', 'replacement-during-read']) for (const gate of ['local', 'cooldown', 'online']) {
+  test(`integration inspection rejects ${scenario} before the ${gate} decision`, async t => {
+    const f = fixture(t, 'on'); await enable(f); const n = transport(f);
+    if (gate === 'cooldown') await check(f, n.context);
+    const callsBefore = n.calls.length;
+    const saved = fs.readFileSync(f.location.file), text = fs.readFileSync(f.reaSkill, 'utf8');
+    const originalOpen = fs.openSync, originalRead = fs.readSync;
+    let armed = true, targetFd, inspectedBytes = 0, changed = false;
+    const replace = () => {
+      fs.renameSync(f.reaSkill, path.join(f.dir, 'old-rea.md'));
+      fs.writeFileSync(f.reaSkill, baseRea);
+      changed = true;
+    };
+    const open = t.mock.method(fs, 'openSync', (file, ...args) => {
+      if (file !== f.reaSkill || !armed) return originalOpen(file, ...args);
+      armed = false;
+      if (scenario === 'parent-link-before-open') {
+        const target = path.join(f.dir, 'other-rea'); fs.mkdirSync(target); fs.writeFileSync(path.join(target, 'SKILL.md'), text);
+        fs.renameSync(path.dirname(f.reaSkill), path.join(f.dir, 'original-rea'));
+        fs.symlinkSync(target, path.dirname(f.reaSkill), process.platform === 'win32' ? 'junction' : 'dir');
+        changed = true;
+      }
+      targetFd = originalOpen(file, ...args);
+      if (scenario === 'replacement-after-open') replace();
+      return targetFd;
+    });
+    const read = t.mock.method(fs, 'readSync', (fd, ...args) => {
+      const count = originalRead(fd, ...args);
+      if (fd === targetFd) {
+        inspectedBytes += count;
+        if (count && !changed && scenario === 'same-size-edit-during-read') {
+          fs.writeFileSync(f.reaSkill, text.replace('When using REA', 'When using XXX'));
+          const changedAt = new Date(Date.now() + 1000); fs.utimesSync(f.reaSkill, changedAt, changedAt);
+          changed = true;
+        }
+        if (count && !changed && scenario === 'replacement-during-read') replace();
+      }
+      return count;
+    });
+    let result;
+    try { result = await runUpdate('check', { allowFreeNetwork: gate !== 'local' }, n.context); }
+    finally { open.mock.restore(); read.mock.restore(); }
+    assert.equal(changed, true, 'the concurrent change must actually occur');
+    assert.equal(result.status, 'integration-needs-attention');
+    assert.equal(result.integrationHealth, 'unreadable-or-unsafe');
+    if (scenario === 'parent-link-before-open' || scenario === 'replacement-after-open') assert.equal(inspectedBytes, 0);
+    assert.equal(n.calls.length, callsBefore); assert.deepEqual(fs.readFileSync(f.location.file), saved);
+  });
+}
+
+for (const field of ['relative-path', 'non-normalized-path', 'invalid-hash']) test(`invalid recorded REA ${field} stops before local inspection`, async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f);
+  const state = JSON.parse(fs.readFileSync(f.location.file));
+  if (field === 'relative-path') state.options.reaSkill = path.relative(process.cwd(), f.reaSkill);
+  else if (field === 'non-normalized-path') state.options.reaSkill = path.dirname(f.reaSkill) + path.sep + '.' + path.sep + 'SKILL.md';
+  else state.reaBlockHash = 'not-a-sha256';
+  fs.writeFileSync(f.location.file, JSON.stringify(state));
+  const before = fs.readFileSync(f.location.file), original = fs.openSync; let reaReads = 0;
+  const open = t.mock.method(fs, 'openSync', (file, ...args) => {
+    if (typeof file === 'string' && path.resolve(file) === f.reaSkill) reaReads++;
+    return original(file, ...args);
+  });
+  try { await assert.rejects(check(f, n.context), /Invalid saved REA settings/); }
+  finally { open.mock.restore(); }
+  assert.equal(reaReads, 0); assert.equal(n.calls.length, 0); assert.deepEqual(fs.readFileSync(f.location.file), before);
+  if (field === 'relative-path' && process.platform === 'win32') {
+    // isAbsolute alone accepts drive-dependent paths such as \folder\SKILL.md.
+    state.options.reaSkill = path.sep + path.relative(path.parse(f.reaSkill).root, f.reaSkill);
+    assert.equal(path.isAbsolute(state.options.reaSkill), true);
+    fs.writeFileSync(f.location.file, JSON.stringify(state));
+    const saved = fs.readFileSync(f.location.file);
+    await assert.rejects(check(f, n.context), /Invalid saved REA settings/);
+    assert.equal(n.calls.length, 0); assert.deepEqual(fs.readFileSync(f.location.file), saved);
+  }
+});
+
+test('integration off never reads REA during authorized checks or approved updates', async t => {
+  const f = fixture(t, 'off', 'claude_code'); await enable(f); const n = transport(f), before = fs.readFileSync(f.reaSkill);
+  const original = fs.lstatSync;
+  const spy = t.mock.method(fs, 'lstatSync', (file, ...args) => {
+    assert.notEqual(file, f.reaSkill, 'integration off must not inspect REA even with network permission');
+    return original(file, ...args);
+  });
+  try {
+    const offer = await check(f, n.context);
+    assert.equal(offer.status, 'update-available');
+    assert.equal((await runUpdate('apply', { approvalId: offer.approvalId, allowFreeNetwork: true }, n.context)).status, 'updated');
+  } finally { spy.mock.restore(); }
+  assert.deepEqual(fs.readFileSync(f.reaSkill), before); assert.equal(n.calls.length, 3);
+});
+
+for (const action of ['disable', 'defer', 'skip']) test(`integration warning does not prevent an explicit ${action} decision`, async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f), offer = await check(f, n.context);
+  fs.writeFileSync(f.reaSkill, baseRea);
+  assert.equal((await check(f, n.context)).status, 'integration-needs-attention');
+  const saved = JSON.parse(fs.readFileSync(f.location.file));
+  const original = fs.lstatSync;
+  const spy = t.mock.method(fs, 'lstatSync', (file, ...args) => {
+    assert.notEqual(file, f.reaSkill, 'declining an update must not depend on reading REA');
+    return original(file, ...args);
+  });
+  let result;
+  try {
+    if (action !== 'disable') await assert.rejects(runUpdate(action, { approvalId: 'wrong' }, n.context), /does not match/);
+    result = await runUpdate(action, { approvalId: offer.approvalId }, { ...n.context, now: now + 1000 });
+  } finally { spy.mock.restore(); }
+  assert.equal(result.status, { disable: 'disabled', defer: 'deferred', skip: 'skipped' }[action]);
+  const after = JSON.parse(fs.readFileSync(f.location.file));
+  assert.deepEqual(after.options, saved.options); assert.deepEqual(after.files, saved.files); assert.equal(after.reaBlockHash, saved.reaBlockHash);
+  assert.equal(after.pending, null); assert.equal(after.enabled, action !== 'disable');
+  assert.equal(n.calls.length, 1); assert.equal(fs.readFileSync(f.reaSkill, 'utf8'), baseRea);
+});
+
+test('recovering a missing rule does not grant update approval or network authorization', async t => {
+  const f = fixture(t, 'on'); await enable(f); const n = transport(f), offer = await check(f, n.context);
+  fs.writeFileSync(f.reaSkill, baseRea);
+  assert.equal((await check(f, n.context)).status, 'integration-needs-attention');
+  const saved = fs.readFileSync(f.location.file);
+  applyInstall(planInstall(f.options, { packageRoot: root }));
+  for (const approvalId of [undefined, 'wrong']) await assert.rejects(runUpdate('apply', { approvalId, allowFreeNetwork: true }, n.context), /approval must match/);
+  for (const allowFreeNetwork of [undefined, false, 'true', 1]) await assert.rejects(runUpdate('apply', { approvalId: offer.approvalId, allowFreeNetwork }, n.context), /No-charge/);
+  assert.deepEqual(fs.readFileSync(f.location.file), saved); assert.equal(n.calls.length, 1);
+  assert.equal((await runUpdate('apply', { approvalId: offer.approvalId, allowFreeNetwork: true }, n.context)).status, 'updated');
+  assert.equal(n.calls.length, 3);
+});
+
+test('verified recovery after an REA newline change needs explicit baseline re-enable', async t => {
+  const f = fixture(t, 'on');
+  fs.writeFileSync(f.reaSkill, fs.readFileSync(f.reaSkill, 'utf8').replace(/\n/g, '\r\n'));
+  await enable(f); const n = transport(f), offer = await check(f, n.context);
+  const before = fs.readFileSync(f.location.file), saved = JSON.parse(before);
+  fs.writeFileSync(f.reaSkill, baseRea);
+  assert.equal((await check(f, n.context)).integrationHealth, 'missing-block');
+  applyInstall(planInstall(f.options, { packageRoot: root }));
+  assert.equal(applyInstall(planInstall({ ...f.options, check: true }, { packageRoot: root })).status, 'verified');
+  assert.equal((await check(f, n.context)).integrationHealth, 'changed-block');
+  assert.deepEqual(fs.readFileSync(f.location.file), before);
+  await assert.rejects(runUpdate('apply', { approvalId: offer.approvalId, allowFreeNetwork: true }, n.context), /Managed REA rule changed/);
+  await enable(f); // Explicit, separately authorized baseline change in this fixture.
+  const after = JSON.parse(fs.readFileSync(f.location.file));
+  assert.notEqual(after.reaBlockHash, saved.reaBlockHash);
+  assert.equal(after.lastAttempt, saved.lastAttempt); assert.equal(after.lastSuccess, saved.lastSuccess);
+  assert.equal(after.pending, null); assert.equal(after.enabled, true);
+  assert.equal((await check(f, n.context)).status, 'not-due'); assert.equal(n.calls.length, 1);
+});
+
+test('saved claude_code alias carries an exact offer through apply with canonical receipts', async t => {
+  const f = fixture(t, 'on', 'claude_code'); await enable(f); const n = transport(f), offer = await check(f, n.context);
+  const state = JSON.parse(fs.readFileSync(f.location.file));
+  state.options.client = 'claude_code'; fs.writeFileSync(f.location.file, JSON.stringify(state));
+  const before = fs.readFileSync(f.location.file);
+  assert.equal((await runUpdate('status', {}, n.context)).status, 'enabled');
+  assert.deepEqual(fs.readFileSync(f.location.file), before);
+  const result = await runUpdate('apply', { approvalId: offer.approvalId, allowFreeNetwork: true }, n.context);
+  assert.equal(result.status, 'updated');
+  assert.equal(JSON.parse(fs.readFileSync(f.location.file)).options.client, 'claude-code');
+  assert.equal(JSON.parse(fs.readFileSync(path.join(result.backupDirectory, 'receipt.json'))).client, 'claude-code');
+  assert.equal(fs.existsSync(path.join(f.installed.companion, 'agents/openai.yaml')), false);
+});
+
 test('scoped repair after simulated REA refresh clears warning without resetting consent or cooldown', async t => {
   const f = fixture(t, 'on'); await enable(f); const n = transport(f); await check(f, n.context);
   const before = fs.readFileSync(f.location.file), refreshed = baseRea + '\nNew upstream content to retain.\n';

@@ -230,7 +230,7 @@ test('Codex adapter is added only for Codex', t => {
   assert.ok(fs.existsSync(path.join(result.companion, 'agents', 'openai.yaml')));
 });
 
-test('Claude Code uses its configured profile and explicit skills directories take precedence', t => {
+for (const client of ['claude-code', 'claude_code']) test(`${client} uses its configured profile and explicit skills directories take precedence`, t => {
   const f = fixture(t, false);
   const configDir = path.join(f.directory, 'claude profile ø');
   const skillsDir = path.join(configDir, 'skills');
@@ -238,7 +238,7 @@ test('Claude Code uses its configured profile and explicit skills directories ta
   fs.mkdirSync(path.dirname(reaSkill), { recursive: true });
   fs.writeFileSync(reaSkill, base);
   const context = { ...f.context, home: f.directory, env: { CLAUDE_CONFIG_DIR: configDir } };
-  const options = { client: 'claude-code', integration: 'on' };
+  const options = { client, integration: 'on' };
   const result = applyInstall(planInstall(options, context));
   assert.equal(result.companion, path.join(skillsDir, NAME));
   // Windows may expose the temporary directory through an 8.3 path alias.
@@ -248,13 +248,13 @@ test('Claude Code uses its configured profile and explicit skills directories ta
   assert.equal(locations({ ...options, integration: 'off', skillsDir: f.skillsDir }, context).skillsDir, f.skillsDir);
 });
 
-test('a custom Claude profile never silently falls back to another profile for REA', t => {
+for (const client of ['claude-code', 'claude_code']) test(`a custom ${client} profile never silently falls back to another profile for REA`, t => {
   const f = fixture(t, false);
   const defaultRea = path.join(f.directory, '.claude', 'skills', 'reverse-engineer-anything', 'SKILL.md');
   fs.mkdirSync(path.dirname(defaultRea), { recursive: true });
   fs.writeFileSync(defaultRea, base);
   const custom = path.join(f.directory, 'other-profile');
-  assert.throws(() => planInstall({ client: 'claude-code', integration: 'on' }, {
+  assert.throws(() => planInstall({ client, integration: 'on' }, {
     ...f.context, home: f.directory, env: { CLAUDE_CONFIG_DIR: custom },
   }), /REA skill not found/);
   assert.equal(fs.readFileSync(defaultRea, 'utf8'), base);
