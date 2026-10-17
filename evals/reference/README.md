@@ -8,6 +8,8 @@ This is a controlled source-available JavaScript target, not a clean-room exerci
 
 A separate [observed browser-app trial](OBSERVED-BROWSER-TRIAL.md) records three workflows exercised through an actual browser, a source-available reconstruction, harness failures and coverage limits. Its private fixture and browser harness are distinct from the command-line Pocket Tasks packet below; it is not an additional public checker mode.
 
+The [browser persistence follow-up](OBSERVED-BROWSER-PERSISTENCE.md) records reload/fresh-tab persistence, injected save failures and concurrent-tab overwrites. Actual browser-process restart and real storage denial remain unrun; matching baseline weaknesses are kept separate from reliability claims.
+
 The [worked reconstruction extension](reconstruction/README.md) demonstrates a separate implementation, requirements-to-test links, captured comparison results and a repeatable validator. It discloses prior source/reviewer exposure and remains teaching material. Keep it outside a fresh candidate's evidence, alongside the reviewer corpus and prior answers.
 
 ## 1. Freeze the trial and prepare evidence

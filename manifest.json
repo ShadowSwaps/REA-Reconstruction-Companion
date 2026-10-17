@@ -1,12 +1,12 @@
 {
   "name": "rea-reconstruction-companion",
-  "version": "1.3.12",
+  "version": "1.3.13",
   "files": {
-    "README.md": "ae37694e9eff35bf94583444e0075af763f91793758ce3b42542507616368e66",
+    "README.md": "772fd3696f01ebbe8d599ac0ab75fa6c982cd202a261404c8f45b785435ed1f8",
     "INSTALL.md": "cdfea3d199ec9036b36334b9e939aef4102d67297f5963c35273494f17315b9d",
     "LICENSE": "aca900183741df5c9b3db981bd48aba202474218f758c8b194548178a22c93bd",
     "CONTRIBUTING.md": "a6a31a4dabb9d011d06b98d59ca9e5f997285ac24f777c2e01b24f762a7ce8eb",
-    "package.json": "38fc76949bd64508217401c14066790c1e9d3c4ec7198d4edf3ac5d2c26dbf5f",
+    "package.json": "325bab68f0936ef013593260790e563d3f7727ae6a2628e69735b3f12d721cb8",
     "install.mjs": "b84191c1d008f49695fb96d51a7a93a40c9f42947d79532ce31814328e0b8842",
     ".gitignore": "cc60841f3ff7c8e1ed628e84bc839c0c8de88d917da3d06763a535229a7c8802",
     ".gitattributes": "74f066599d3fe2817756c3e532a869d370d4294c5c0a188487da2855f9b2378e",
@@ -15,7 +15,7 @@
     "skills/rea-reconstruction-companion/references/blueprint.md": "b4319aabe653a1862fad3f4bd2e69efee4596cc598c0e80853bb236272fd24e6",
     "skills/rea-reconstruction-companion/references/checkpoints.md": "c15f92fb1c9741d25e18cd5c67cdfb1d3b1113f4238d215a2b8efd9c439f5666",
     "skills/rea-reconstruction-companion/references/cryptographic-compatibility.md": "13b8dba857fbc826361ca04e856e2440143559ecfb8df46528d39b5110f59086",
-    "skills/rea-reconstruction-companion/references/implementation.md": "c3aa2867334ea7a7bdb704db6069ee82e7ac699e0a89b5087f8011c9181b7f13",
+    "skills/rea-reconstruction-companion/references/implementation.md": "678957584a22d241838fe5e72390d9a1dba8d14a73da5c0d55c1316273c6ad41",
     "skills/rea-reconstruction-companion/references/performance.md": "1e7fc728f5157d4087b161f0b3a34e34de48e5d97844325d9a6fd71b7644b5a9",
     "skills/rea-reconstruction-companion/references/reconstruction-methods.md": "b3e3d23dfa178c3b566417e3d70f2ad4cb22f1a698f07878ac0616948863ebfe",
     "skills/rea-reconstruction-companion/references/research-basis.md": "f15355c765c96156d061834368b1e375e865de6aad68447d5429e6427749cd6a",
@@ -51,9 +51,10 @@
     "evals/fixtures/wycheproof-LICENSE.txt": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
     "evals/fixtures/wycheproof-empty.json": "bfac0a0fac747550e516d3e8b4d0e52cfd3079d06edb9e6e063be175760d1d0d",
     "evals/oracles.mjs": "ec7bce0f4f801cab04db99d6f32d8e90c0f4b4a58e90b2e0540c6c7ffcfe157a",
+    "evals/reference/OBSERVED-BROWSER-PERSISTENCE.md": "7c6dd32ca40346e57cbbc6af269b57abb1e39dfa2dad1fc1d9510f3edb8b0f66",
     "evals/reference/OBSERVED-BROWSER-TRIAL.md": "f9d212d177bf2806e469cae27e834e3b3b3e9af9c18526e62d6ca3a5ab3b2b2b",
     "evals/reference/OBSERVED-TRIAL.md": "3afc1f6ff3ac831bea6e57c156859ec40355ac96c8318f4af300c4f69d8584c7",
-    "evals/reference/README.md": "713c3ff26cd0d8406049711403887ad4e4c6319162aea6d912ca9c46716aa331",
+    "evals/reference/README.md": "f699399dfade051bb3d4490787d28281e8bc57fbd94f60466c8ae7e7026dad8e",
     "evals/reference/TASK.md": "18b2fda3447ae84c28e7d2c342bed4346d62b03d9295fbf4c2e17f92d63b545c",
     "evals/reference/WALKTHROUGH.md": "6740f65bad064488e595b05559f5b7dd3855ef2d0249d97ff0bdf7004518dab5",
     "evals/reference/check.mjs": "ad685922324deaed4ae73edf5699b9f6940708e3181a3758f4c7aac75a731cd9",
@@ -114,6 +115,7 @@
     ".github/ISSUE_TEMPLATE/release-request.md": "574bd6c1d9004b3a959e7ba6fb77f3f89c727133a1a99c7cba7bbe142c254c5d",
     ".github/workflows/codeql.yml": "af99491df9b57052a57d08035d028fd926201ce24155e144fab24f7d8b969f82",
     ".github/workflows/test.yml": "c0469f7590e85b1413089c7dad44da0f2773b39c3fa7cbbbf3a6acaf8a04ef53",
-    "assets/discord-banner.png": "4f25d6a75a9b0203ca9ebc217f815e46fb1783a244d81b763b5681173c24a1f6"
+    "assets/discord-banner.png": "4f25d6a75a9b0203ca9ebc217f815e46fb1783a244d81b763b5681173c24a1f6",
+    "assets/kofi-support.png": "31d0947770098a2efbf31033331d4284df3f127d71608f2e3f45e53f2abeb736"
   }
 }
