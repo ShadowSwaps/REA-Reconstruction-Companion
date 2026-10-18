@@ -114,7 +114,7 @@
     "evals/measured-optimization/bench.mjs": "f014a06ed2efaf34735738ca5b0b874c1311b261e98846ab1800dc1a10da3c54",
     "evals/measured-optimization/candidate.mjs": "70dce76aed0eaee999c3181034e68e14bf344577db149f460384abb52b636b64",
     "evals/measured-optimization/check.mjs": "891fb80ac543b81537919f27ecc997b993b8273c913e3243cfc96e5658e9f3c8",
-    "evals/measured-optimization/correctness.json": "3b692299d818618eb8b48a0f6e9b0a6281f7af3ec2dfedb7fd7b848edf58238b",
+    "evals/measured-optimization/correctness.json": "1c1ef1cf9620a56eceee883c0546083adbc664d17197bc5b5debbed9d6db19aa",
     "evals/measured-optimization/final-1.json": "21797ec441e84a48168b2179aa3f1c9ea06c5fb0649c7a13d9ce8cd62001b799",
     "evals/measured-optimization/final-2.json": "d01c751410a3c585939d3bd4c8f724d4d336e76db950dcf56eb9ad09cd3b93d9",
     "evals/measured-optimization/profile.json": "79f2e5abfa45ab51dbd91d09db917125f77b213eefb50306385e18e2f9d08efc",
