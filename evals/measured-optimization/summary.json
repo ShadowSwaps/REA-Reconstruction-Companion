@@ -1,0 +1,208 @@
+{
+  "baseline": [
+    {
+      "workload": "small",
+      "baseline": {
+        "count": 12,
+        "minUs": 2.0004000000000133,
+        "medianUs": 2.1572000000000173,
+        "maxUs": 2.4181000000000092,
+        "minBatchMs": 2.0004000000000133
+      },
+      "pairedRatioMedian": null,
+      "candidateFasterPairs": null
+    },
+    {
+      "workload": "typical",
+      "baseline": {
+        "count": 12,
+        "minUs": 9.481999999999971,
+        "medianUs": 10.046400000000006,
+        "maxUs": 13.678800000000026,
+        "minBatchMs": 2.3704999999999927
+      },
+      "pairedRatioMedian": null,
+      "candidateFasterPairs": null
+    },
+    {
+      "workload": "stress-ascii",
+      "baseline": {
+        "count": 12,
+        "minUs": 18.540000000000134,
+        "medianUs": 20.424499999999952,
+        "maxUs": 26.561000000000096,
+        "minBatchMs": 1.8540000000000134
+      },
+      "pairedRatioMedian": null,
+      "candidateFasterPairs": null
+    },
+    {
+      "workload": "stress-unicode",
+      "baseline": {
+        "count": 12,
+        "minUs": 30.93500000000006,
+        "medianUs": 32.8875,
+        "maxUs": 46.84400000000011,
+        "minBatchMs": 3.093500000000006
+      },
+      "pairedRatioMedian": null,
+      "candidateFasterPairs": null
+    }
+  ],
+  "final-1": [
+    {
+      "workload": "small",
+      "baseline": {
+        "count": 12,
+        "minUs": 1.904800000000023,
+        "medianUs": 2.1353500000000025,
+        "maxUs": 2.882400000000004,
+        "minBatchMs": 1.904800000000023
+      },
+      "candidate": {
+        "count": 12,
+        "minUs": 1.8403000000000134,
+        "medianUs": 2.0547499999999985,
+        "maxUs": 2.6715000000000093,
+        "minBatchMs": 1.8403000000000134
+      },
+      "pairedRatioMedian": 0.9492804017073306,
+      "candidateFasterPairs": 8
+    },
+    {
+      "workload": "typical",
+      "baseline": {
+        "count": 12,
+        "minUs": 9.44640000000004,
+        "medianUs": 10.102999999999952,
+        "maxUs": 12.117600000000039,
+        "minBatchMs": 2.36160000000001
+      },
+      "candidate": {
+        "count": 12,
+        "minUs": 9.921999999999798,
+        "medianUs": 10.48720000000003,
+        "maxUs": 14.237999999999941,
+        "minBatchMs": 2.4804999999999495
+      },
+      "pairedRatioMedian": 1.0132525939240118,
+      "candidateFasterPairs": 5
+    },
+    {
+      "workload": "stress-ascii",
+      "baseline": {
+        "count": 12,
+        "minUs": 18.443000000000325,
+        "medianUs": 20.953500000000105,
+        "maxUs": 27.043999999999922,
+        "minBatchMs": 1.8443000000000325
+      },
+      "candidate": {
+        "count": 12,
+        "minUs": 19.026000000000067,
+        "medianUs": 21.956499999999934,
+        "maxUs": 25.48400000000001,
+        "minBatchMs": 1.9026000000000067
+      },
+      "pairedRatioMedian": 1.026282086066642,
+      "candidateFasterPairs": 4
+    },
+    {
+      "workload": "stress-unicode",
+      "baseline": {
+        "count": 12,
+        "minUs": 30.2800000000002,
+        "medianUs": 34.218000000000046,
+        "maxUs": 43.81399999999999,
+        "minBatchMs": 3.02800000000002
+      },
+      "candidate": {
+        "count": 12,
+        "minUs": 32.32899999999972,
+        "medianUs": 35.08800000000001,
+        "maxUs": 38.56300000000033,
+        "minBatchMs": 3.2328999999999724
+      },
+      "pairedRatioMedian": 1.0102315015990466,
+      "candidateFasterPairs": 4
+    }
+  ],
+  "final-2": [
+    {
+      "workload": "small",
+      "baseline": {
+        "count": 12,
+        "minUs": 1.9057999999999993,
+        "medianUs": 2.1245999999999725,
+        "maxUs": 3.2933000000000168,
+        "minBatchMs": 1.9057999999999993
+      },
+      "candidate": {
+        "count": 12,
+        "minUs": 1.8975000000000364,
+        "medianUs": 2.1687999999999974,
+        "maxUs": 2.703400000000016,
+        "minBatchMs": 1.8975000000000364
+      },
+      "pairedRatioMedian": 0.984565754381505,
+      "candidateFasterPairs": 7
+    },
+    {
+      "workload": "typical",
+      "baseline": {
+        "count": 12,
+        "minUs": 9.597600000000057,
+        "medianUs": 10.354399999999941,
+        "maxUs": 15.483200000000013,
+        "minBatchMs": 2.399400000000014
+      },
+      "candidate": {
+        "count": 12,
+        "minUs": 9.851599999999962,
+        "medianUs": 10.561399999999935,
+        "maxUs": 15.63560000000001,
+        "minBatchMs": 2.4628999999999905
+      },
+      "pairedRatioMedian": 1.0213634783688195,
+      "candidateFasterPairs": 5
+    },
+    {
+      "workload": "stress-ascii",
+      "baseline": {
+        "count": 12,
+        "minUs": 18.506000000000427,
+        "medianUs": 19.8654999999998,
+        "maxUs": 32.19200000000001,
+        "minBatchMs": 1.8506000000000427
+      },
+      "candidate": {
+        "count": 12,
+        "minUs": 20.010000000000332,
+        "medianUs": 22.04499999999996,
+        "maxUs": 28.776000000000014,
+        "minBatchMs": 2.001000000000033
+      },
+      "pairedRatioMedian": 1.0948613489680883,
+      "candidateFasterPairs": 2
+    },
+    {
+      "workload": "stress-unicode",
+      "baseline": {
+        "count": 12,
+        "minUs": 30.973000000000184,
+        "medianUs": 32.63149999999982,
+        "maxUs": 47.44399999999999,
+        "minBatchMs": 3.0973000000000184
+      },
+      "candidate": {
+        "count": 12,
+        "minUs": 32.58199999999988,
+        "medianUs": 36.68549999999996,
+        "maxUs": 45.797000000000025,
+        "minBatchMs": 3.258199999999988
+      },
+      "pairedRatioMedian": 1.082913290872317,
+      "candidateFasterPairs": 1
+    }
+  ]
+}

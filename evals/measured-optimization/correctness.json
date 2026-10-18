@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "frozenCasesPerTarget": 33,
+  "unicodeBoundaries": 12,
+  "generatedSequences": 256,
+  "persistenceFaultTargets": 2,
+  "limits": "Same-agent source-exposed finite tests; historical CLI unchanged; no exhaustive equivalence proof."
+}

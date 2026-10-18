@@ -14,6 +14,8 @@ The [worked browser improvement](browser-improvement/README.md) preserves a hist
 
 The [file import/export trial](import-export/README.md) freezes a synthetic two-version format before reconstruction, tests both interoperability directions against literal expected values, and checks state preservation after rejection and controlled persistence failures. It includes a runnable example and checker mutations; source exposure and durability limits remain explicit.
 
+The [measured optimization example](measured-optimization/README.md) freezes a bounded experiment on that reconstruction, retains raw paired timings and checks behavior plus measurement contracts. The candidate did not demonstrate an overall benefit; the historical implementation remains unchanged. Same-agent synthetic results apply only to the recorded workloads/runtime.
+
 The [checkpoint/resume evaluation](resume/README.md) adds two supplied-evidence triage tasks and a JSON-only checker. It compares reuse and stale-result decisions without executing candidate code; explanation, preservation and actual actions still require human review.
 
 ## Run an evaluation

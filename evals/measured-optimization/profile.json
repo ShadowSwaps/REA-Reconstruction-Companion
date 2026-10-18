@@ -1,0 +1,16 @@
+{
+  "phase": "exploratory-profile",
+  "iterations": 50000,
+  "checksum": 83100000,
+  "sampledHits": {
+    "baseline:decode": 534,
+    "other/runtime/consumer": 268,
+    "baseline:serialize": 206,
+    "(garbage collector)": 44,
+    "baseline:(anonymous)": 32,
+    "baseline:importBytes": 7,
+    "baseline:fields": 4,
+    "baseline:state": 1
+  },
+  "limitation": "Sampled CPU attribution, not elapsed comparison, allocation volume or proof of causality."
+}

@@ -1,0 +1,728 @@
+{
+  "experiment": "MO-20261018",
+  "phase": "final-2",
+  "runtime": {
+    "node": "v24.21.0",
+    "v8": "13.6.233.17-node.53",
+    "platform": "win32",
+    "arch": "x64",
+    "flags": [],
+    "nodeOptions": ""
+  },
+  "identities": {
+    "PROTOCOL.md": "7dfb4c64edc7822a89e5f4d4ec8990c83a3693ecff56d280bd27bdb27f612a86",
+    "workloads.mjs": "7d50995f0cf811e134f74d04a97f051a092efa93a0372632d03d53e404911f6c",
+    "bench.mjs": "f014a06ed2efaf34735738ca5b0b874c1311b261e98846ab1800dc1a10da3c54",
+    "../import-export/candidate.mjs": "7b29d66619d7e44c958d83f9520354a05729105f1f444e6be9bea68a0cfe3f1e",
+    "../import-export/reference.mjs": "9ca2b75875e22aee8f84644b9d1d520fa7da798efb8553e9311211648644e1ec",
+    "../import-export/corpus.json": "624f497538556c74d81c8ce37fb42342a21dfb039693943652fe2c0d580382ef",
+    "../import-export/identity.json": "5ba5a46b352a4df7470052cf6b9acefe0bb490d6d52da81a556f0ea43d849359",
+    "candidate.mjs": "70dce76aed0eaee999c3181034e68e14bf344577db149f460384abb52b636b64"
+  },
+  "workloads": [
+    {
+      "id": "small",
+      "iterations": 1000,
+      "bytes": 89,
+      "sha256": "f6dd4ca283d7a3b01b35b65ccfc85ec47580ebbd30c086ce46f4a734145f1c21",
+      "scalarsPerTitle": 4
+    },
+    {
+      "id": "typical",
+      "iterations": 250,
+      "bytes": 750,
+      "sha256": "8e7bb8239f4b3a3d081a5b9b5ba017a55b332f1a3584691cf5aab3419984920f",
+      "scalarsPerTitle": 32
+    },
+    {
+      "id": "stress-ascii",
+      "iterations": 100,
+      "bytes": 1904,
+      "sha256": "39a71f7fc41fa4803bfb66952338cb4ebdaf1774873ee382733b9d03200582c2",
+      "scalarsPerTitle": 80
+    },
+    {
+      "id": "stress-unicode",
+      "iterations": 100,
+      "bytes": 3824,
+      "sha256": "ae1a187974a6b9f1fee3d49227235816bafa3b27d6fae83fd17e7edc0c764764",
+      "scalarsPerTitle": 80
+    }
+  ],
+  "warmupBatches": 2,
+  "pairs": 12,
+  "samples": [
+    {
+      "pair": 0,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 2.196399999999997,
+      "checksum": 8000
+    },
+    {
+      "pair": 0,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 2.8359999999999985,
+      "checksum": 8000
+    },
+    {
+      "pair": 0,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.6795000000000044,
+      "checksum": 79000
+    },
+    {
+      "pair": 0,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 3.8708000000000027,
+      "checksum": 79000
+    },
+    {
+      "pair": 0,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.2151000000000067,
+      "checksum": 134200
+    },
+    {
+      "pair": 0,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 3.2192000000000007,
+      "checksum": 134200
+    },
+    {
+      "pair": 0,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 4.366100000000003,
+      "checksum": 166200
+    },
+    {
+      "pair": 0,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 4.744399999999999,
+      "checksum": 166200
+    },
+    {
+      "pair": 1,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 2.906499999999994,
+      "checksum": 79000
+    },
+    {
+      "pair": 1,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 3.9089000000000027,
+      "checksum": 79000
+    },
+    {
+      "pair": 1,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 2.268799999999999,
+      "checksum": 134200
+    },
+    {
+      "pair": 1,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.877600000000001,
+      "checksum": 134200
+    },
+    {
+      "pair": 1,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.4539999999999793,
+      "checksum": 166200
+    },
+    {
+      "pair": 1,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 4.5797000000000025,
+      "checksum": 166200
+    },
+    {
+      "pair": 1,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 3.2933000000000163,
+      "checksum": 8000
+    },
+    {
+      "pair": 1,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 2.7034000000000162,
+      "checksum": 8000
+    },
+    {
+      "pair": 2,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.193899999999985,
+      "checksum": 134200
+    },
+    {
+      "pair": 2,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 1.8871000000000038,
+      "checksum": 134200
+    },
+    {
+      "pair": 2,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 3.681999999999988,
+      "checksum": 166200
+    },
+    {
+      "pair": 2,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.2430000000000234,
+      "checksum": 166200
+    },
+    {
+      "pair": 2,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 2.2753999999999905,
+      "checksum": 8000
+    },
+    {
+      "pair": 2,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 2.2413999999999987,
+      "checksum": 8000
+    },
+    {
+      "pair": 2,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.595400000000012,
+      "checksum": 79000
+    },
+    {
+      "pair": 2,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 2.727400000000017,
+      "checksum": 79000
+    },
+    {
+      "pair": 3,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.4285999999999888,
+      "checksum": 166200
+    },
+    {
+      "pair": 3,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 3.6185000000000116,
+      "checksum": 166200
+    },
+    {
+      "pair": 3,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 2.3917000000000144,
+      "checksum": 8000
+    },
+    {
+      "pair": 3,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 2.295000000000016,
+      "checksum": 8000
+    },
+    {
+      "pair": 3,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 2.997700000000009,
+      "checksum": 79000
+    },
+    {
+      "pair": 3,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.6873999999999967,
+      "checksum": 79000
+    },
+    {
+      "pair": 3,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 1.9577999999999918,
+      "checksum": 134200
+    },
+    {
+      "pair": 3,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.118799999999993,
+      "checksum": 134200
+    },
+    {
+      "pair": 4,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 2.1411999999999978,
+      "checksum": 8000
+    },
+    {
+      "pair": 4,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 2.0993999999999744,
+      "checksum": 8000
+    },
+    {
+      "pair": 4,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.6370999999999754,
+      "checksum": 79000
+    },
+    {
+      "pair": 4,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 2.529800000000023,
+      "checksum": 79000
+    },
+    {
+      "pair": 4,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.062100000000015,
+      "checksum": 134200
+    },
+    {
+      "pair": 4,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 2.1833000000000027,
+      "checksum": 134200
+    },
+    {
+      "pair": 4,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 3.6551000000000045,
+      "checksum": 166200
+    },
+    {
+      "pair": 4,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.2539999999999907,
+      "checksum": 166200
+    },
+    {
+      "pair": 5,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 2.489699999999999,
+      "checksum": 79000
+    },
+    {
+      "pair": 5,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.6245999999999867,
+      "checksum": 79000
+    },
+    {
+      "pair": 5,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 1.912099999999981,
+      "checksum": 134200
+    },
+    {
+      "pair": 5,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.0527000000000157,
+      "checksum": 134200
+    },
+    {
+      "pair": 5,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.3362000000000194,
+      "checksum": 166200
+    },
+    {
+      "pair": 5,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 3.5323000000000206,
+      "checksum": 166200
+    },
+    {
+      "pair": 5,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 2.0870999999999924,
+      "checksum": 8000
+    },
+    {
+      "pair": 5,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 2.2032999999999845,
+      "checksum": 8000
+    },
+    {
+      "pair": 6,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.501499999999993,
+      "checksum": 134200
+    },
+    {
+      "pair": 6,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 2.0921000000000163,
+      "checksum": 134200
+    },
+    {
+      "pair": 6,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 4.002100000000013,
+      "checksum": 166200
+    },
+    {
+      "pair": 6,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.7712000000000216,
+      "checksum": 166200
+    },
+    {
+      "pair": 6,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 2.2497999999999934,
+      "checksum": 8000
+    },
+    {
+      "pair": 6,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 2.074799999999982,
+      "checksum": 8000
+    },
+    {
+      "pair": 6,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.7956000000000074,
+      "checksum": 79000
+    },
+    {
+      "pair": 6,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 2.617500000000007,
+      "checksum": 79000
+    },
+    {
+      "pair": 7,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.272299999999973,
+      "checksum": 166200
+    },
+    {
+      "pair": 7,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 3.52819999999997,
+      "checksum": 166200
+    },
+    {
+      "pair": 7,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 1.9972999999999956,
+      "checksum": 8000
+    },
+    {
+      "pair": 7,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 1.996499999999969,
+      "checksum": 8000
+    },
+    {
+      "pair": 7,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 2.559699999999964,
+      "checksum": 79000
+    },
+    {
+      "pair": 7,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.5604999999999905,
+      "checksum": 79000
+    },
+    {
+      "pair": 7,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 2.186300000000017,
+      "checksum": 134200
+    },
+    {
+      "pair": 7,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.421299999999974,
+      "checksum": 134200
+    },
+    {
+      "pair": 8,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 1.9786000000000286,
+      "checksum": 8000
+    },
+    {
+      "pair": 8,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 2.2081999999999766,
+      "checksum": 8000
+    },
+    {
+      "pair": 8,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.7070999999999685,
+      "checksum": 79000
+    },
+    {
+      "pair": 8,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 2.399400000000014,
+      "checksum": 79000
+    },
+    {
+      "pair": 8,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.2613000000000056,
+      "checksum": 134200
+    },
+    {
+      "pair": 8,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 2.015299999999968,
+      "checksum": 134200
+    },
+    {
+      "pair": 8,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 3.7835000000000036,
+      "checksum": 166200
+    },
+    {
+      "pair": 8,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.202699999999993,
+      "checksum": 166200
+    },
+    {
+      "pair": 9,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 2.442600000000027,
+      "checksum": 79000
+    },
+    {
+      "pair": 9,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.643599999999992,
+      "checksum": 79000
+    },
+    {
+      "pair": 9,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 1.8846000000000345,
+      "checksum": 134200
+    },
+    {
+      "pair": 9,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.4565000000000055,
+      "checksum": 134200
+    },
+    {
+      "pair": 9,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.245999999999981,
+      "checksum": 166200
+    },
+    {
+      "pair": 9,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 3.8466999999999985,
+      "checksum": 166200
+    },
+    {
+      "pair": 9,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 2.1497999999999706,
+      "checksum": 8000
+    },
+    {
+      "pair": 9,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 2.0843000000000416,
+      "checksum": 8000
+    },
+    {
+      "pair": 10,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.001000000000033,
+      "checksum": 134200
+    },
+    {
+      "pair": 10,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 1.8506000000000427,
+      "checksum": 134200
+    },
+    {
+      "pair": 10,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 3.36869999999999,
+      "checksum": 166200
+    },
+    {
+      "pair": 10,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.0973000000000184,
+      "checksum": 166200
+    },
+    {
+      "pair": 10,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 1.9837999999999738,
+      "checksum": 8000
+    },
+    {
+      "pair": 10,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 1.9057999999999993,
+      "checksum": 8000
+    },
+    {
+      "pair": 10,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.4628999999999905,
+      "checksum": 79000
+    },
+    {
+      "pair": 10,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 2.529299999999978,
+      "checksum": 79000
+    },
+    {
+      "pair": 11,
+      "workload": "stress-unicode",
+      "variant": "baseline",
+      "elapsedMs": 3.240100000000041,
+      "checksum": 166200
+    },
+    {
+      "pair": 11,
+      "workload": "stress-unicode",
+      "variant": "candidate",
+      "elapsedMs": 3.258199999999988,
+      "checksum": 166200
+    },
+    {
+      "pair": 11,
+      "workload": "small",
+      "variant": "baseline",
+      "elapsedMs": 1.9919999999999618,
+      "checksum": 8000
+    },
+    {
+      "pair": 11,
+      "workload": "small",
+      "variant": "candidate",
+      "elapsedMs": 1.8975000000000364,
+      "checksum": 8000
+    },
+    {
+      "pair": 11,
+      "workload": "typical",
+      "variant": "baseline",
+      "elapsedMs": 3.2502000000000066,
+      "checksum": 79000
+    },
+    {
+      "pair": 11,
+      "workload": "typical",
+      "variant": "candidate",
+      "elapsedMs": 2.5529999999999973,
+      "checksum": 79000
+    },
+    {
+      "pair": 11,
+      "workload": "stress-ascii",
+      "variant": "baseline",
+      "elapsedMs": 1.888900000000035,
+      "checksum": 134200
+    },
+    {
+      "pair": 11,
+      "workload": "stress-ascii",
+      "variant": "candidate",
+      "elapsedMs": 2.041500000000042,
+      "checksum": 134200
+    }
+  ]
+}
