@@ -26,6 +26,8 @@ Use paths appropriate to the receiving workspace; do not transfer credentials or
 
 Read the selected checkpoint and the sources needed for the next slice. Confirm the target, candidate, relevant environment and the scope of earlier reports. Reuse applicable findings instead of restarting the whole investigation. Retain unfinished work: an input-validation test passing does not establish a complete function, and “implemented” does not mean verified against the reference.
 
+Reconcile the saved roadmap with current priorities and hard requirements. A changed first outcome can reorder enabling dependencies and invalidate a slice's acceptance scope even when files are unchanged. Revise the affected sequence and evidence/test applicability, retaining justified reuse and historical results. A saved plan does not override a current scope or mode correction.
+
 Distinguish these situations:
 
 | Situation | Consequence |

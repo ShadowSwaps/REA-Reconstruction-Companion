@@ -74,10 +74,19 @@ Stop after the specification and plan.
 ```text
 Use REA and the companion to investigate the desktop notes app I have open
 and build a local web app with similar note creation, editing, search,
-and save behavior in this workspace. Start with one working workflow,
-then add the remaining features in testable increments. Validate against
+and save behavior in this workspace. I need to trust today's notes first:
+it must work offline and reopen my saved notes. Start with that working
+journey, including save failures, then add search and the remaining
+features in testable increments. Animations can wait. Validate against
 the evidence and report differences and anything you could not verify.
 ```
+
+For a broad request, expect a compact plan around the first useful outcome, its
+essential dependencies and design-changing unknowns, with evidence-linked checks
+and deferred work kept visible. Explicit hard requirements remain binding. If
+finding existing notes matters most, that can lead instead of creating new ones;
+you do not need to use priority labels or complete a feature inventory. See the
+[worked prioritization example](evals/prioritization.md) for a plan and its limits.
 
 **Investigate one function or feature.** Expect a focused contract covering inputs, outputs, side effects, errors, and evidence gaps:
 
