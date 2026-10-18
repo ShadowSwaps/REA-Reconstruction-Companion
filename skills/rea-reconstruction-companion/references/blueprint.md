@@ -4,7 +4,7 @@ Use this workflow for broad investigations or missing specification areas. Scale
 
 ## Question checklist and product map
 
-Identify users/roles, their jobs, and the main outcomes. Map core/supporting capabilities, navigation and entry points, relevant integrations, background work, persistence, and synchronization. Include configuration, permissions, feature flags, and platform differences when they affect scope. Distinguish reachable behavior from dormant code or packaged resources.
+Identify users/roles, their jobs, and the main outcomes. Start with the principal journey and enough of a capability map to choose useful work; expand it when dependencies or the requested coverage require it. Map relevant navigation and entry points, integrations, background work, persistence, and synchronization. Include configuration, permissions, feature flags, and platform differences when they affect scope. Distinguish reachable behavior from dormant code or packaged resources.
 
 For each priority workflow, capture the actor, trigger, preconditions, initial state, action sequence, system responses, inputs, transformations, outputs, persistent changes, and side effects. Examine meaningful loading, empty, success, failure, cancellation, and recovery states. Map dependencies between workflows; a collection of screens alone is not a product model.
 
@@ -69,7 +69,24 @@ Recommend a stack from the requirements and existing project constraints. Record
 
 ## Roadmap and specification handoff
 
-Order implementation by dependencies and risk. Define milestones as usable vertical slices, each with requirements, component boundaries, validation, and unresolved prerequisites. Prototype uncertain mechanisms before large dependent work. Distinguish the first useful version from the remaining parity backlog.
+### Choose the first useful slice
+
+Resolve what the user needs to accomplish first: who acts, from what starting state, through which entry point, and what observable result makes the work useful. Infer this from the whole request and current context, including corrections; a broad app name alone does not rank its features. If context supports a reversible choice, state it briefly as proposed and proceed in the selected mode. If competing priorities would materially change architecture or useful success, ask a focused question and continue independent evidence work. Do not require a questionnaire or routine plan approval.
+
+Separate the selected work by its role, with a brief reason:
+
+- **Essential outcome and hard requirements:** the behavior that completes the journey, plus explicit platform, offline, format, fidelity or other constraints. A hard requirement stays binding even when expensive; if it conflicts with another requirement, expose the conflict rather than silently dropping it.
+- **Enabling dependencies:** only the data, state, interfaces and integration mechanisms needed for that outcome. Shared identity/schema/storage may need to come first, but validate it through the journey it enables rather than build an unrelated general platform.
+- **Consequential unknowns:** gaps that could invalidate the slice's behavior, compatibility or design. Investigate those before committing dependent work. A missing format version, persistence guarantee or service contract can matter more than an unexplained cosmetic detail; prioritize by the consequence of being wrong, not by counting unknowns.
+- **Deferred work:** optional polish, lower-priority journeys and unresolved details outside the slice, with their reason and any condition for revisiting. Keep the rest of the requested scope and explicit exclusions visible. Deferring work is sequencing, not removing a hard requirement or declaring the assignment complete.
+
+Choose a small end-to-end result through the actual entry point, domain behavior and necessary data/integration boundaries. Include persistence/reopen, failure feedback or recovery when the journey needs them. A disconnected screen, success-only mock or cheapest isolated component is not a completed working slice. For a search-first request over existing notes, reading/importing/indexing that data may precede a new-note editor. Do not impose the same starting feature on every app.
+
+Evidence sufficiency is specific to the question and slice. Resolve critical unknowns with the smallest useful investigation or prototype; defer low-impact details with their limits intact. An unavailable backend can leave exact sharing blocked while a local-editing slice remains useful. Label provisional adapters and substitute behavior; they do not verify the original service. If the missing dependency prevents any useful requested result, report that blocker instead of presenting a mock as completed parity.
+
+### Sequence and acceptance
+
+Give a short dependency-aware sequence of usable slices. For each, name the user outcome, essential requirements/enabling boundaries, prerequisites or design-changing unknowns, and evidence-linked acceptance checks. Explain an ordering tradeoff where it matters; avoid arbitrary priority scores and exhaustive feature lists. A bounded enabling step can precede a usable result, but say what it enables and how that result will validate it. Distinguish the first useful version from the remaining parity backlog.
 
 Prepare a validation plan for the selected scope and its relevant integration boundaries, including equivalent reference scenarios where possible. Plan controlled initial states, representative fixtures, meaningful failure cases, comparison tolerances, and intentional differences.
 
@@ -78,3 +95,5 @@ For each critical acceptance criterion, identify an available source of expected
 The specification is ready for a slice when its observable behavior, required contracts, acceptance criteria, and critical unknowns are sufficiently defined. Unknowns outside that slice need not prevent progress. An unresolved critical dependency must not be silently replaced with assumed behavior.
 
 Deliver a blueprint that another agent can act on without the original conversation. Include unresolved questions and the next investigation actions, with direct evidence references rather than an unqualified narrative of how the original supposedly works.
+
+Keep the output proportional: a compact brief and a few ordered steps may suffice. A roadmap in understand/specify mode remains a proposal; it does not authorize implementation. For a selected function or format, use its complete contract and consequential dependencies without an app-wide prioritization exercise. On correction or resume, revise priorities, slice boundaries and affected evidence/test applicability while retaining useful work and historical results; see [checkpoint guidance](checkpoints.md#on-resuming).
