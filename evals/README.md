@@ -8,6 +8,8 @@ The [first-use review](first-use.md) walks through understanding, selected-featu
 
 The [prioritization example and review](prioritization.md) show how a broad request becomes a short dependency-aware sequence with evidence-linked acceptance. Frozen manual constraints cover hard requirements, conflicting priorities, unavailable dependencies and corrections; existing executable checks remain separate.
 
+The [quirk-decision assessment](quirk-decisions.md) applies preserve/improve/defer to existing selection, persistence and format fixtures, plus labeled hypothetical consumers. Its frozen reasoned scenarios and same-agent manual judgments are separate from executable profile and dependency regressions; no model is run or scored.
+
 For a complete application to investigate with REA, use the [Pocket Tasks reference trial](reference/README.md). It provides an executable local target, a candidate evidence packet, a language-independent process interface for reconstructions, independent expected behavior, and a repeatable human review procedure. Its app and tools also use existing Node.js 20+. The supplied-evidence cases below and the reference trial are distinct; neither automatically invokes a model or establishes live-host compatibility.
 
 The [worked reconstruction example](reference/reconstruction/README.md) shows the implementation/validation step with real captured results and disclosed prior source/reviewer exposure. It is reviewer/training material, not evidence for a fresh trial or an independent agent benchmark.

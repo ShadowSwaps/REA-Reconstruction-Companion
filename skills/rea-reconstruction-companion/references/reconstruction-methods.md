@@ -43,6 +43,22 @@ A test oracle is the basis for deciding whether a result is acceptable. Choose i
 
 Keep raw reference fixtures separate from regenerated outputs. Never update an expected result merely to make a failing test pass. Record normalization/tolerances and their semantic justification. Treat nondeterministic comparisons as distributions or bounded properties when necessary, with adequate observations and explicit limits.
 
+## Preserve, improve or defer
+
+For a consequential quirk or mismatch, first record what the selected original actually did, with scenario/evidence and version/configuration limits. Keep any explanation of its intent or cause as an inference. Then choose the reconstruction behavior from the current user goal and affected contracts, rather than assuming the original is optimal or that every awkward behavior is a defect.
+
+| Decision | When it fits | Acceptance consequence |
+| --- | --- | --- |
+| Preserve | Required by the user's fidelity goal, an external consumer/file/protocol, or an established compatibility contract. | Retain meaningful outputs, state effects and required order/timing for that profile; compare against frozen original evidence. Don't normalize away a consumer dependency. |
+| Improve | The authorized reconstruction goals support a deliberate difference and its dependency impact is understood sufficiently for the selected slice. | Define a separate proposed requirement and distinguishing test; retain unaffected compatibility checks and test the affected consumers/recovery paths. A better-looking result alone is insufficient. |
+| Defer | Evidence is insufficient, a consequential choice remains unresolved, or work lies outside the useful current slice. | Keep the question, reason/impact and concrete next observation or revisit trigger visible. Required behavior stays pending or blocked; optional polish can wait. Deferral is neither a passing test nor removal of a hard requirement. |
+
+Decide at the relevant interface/profile dimension: improved selection can coexist with a preserved export format. Check affected users, readers/writers, state transitions and indirect dependencies before changing a quirk. A duplicate-key rule or event sequence may look incidental yet be externally consumed. Preserve only the timing guarantees the contract needs, not every observed delay. Matching stale save feedback or silent data loss records parity; it does not meet a reliability goal. Don't reproduce harmful behavior unquestioningly: expose conflicts with safety constraints or other hard requirements and resolve the consequential tradeoff within actual authority.
+
+Extend the existing requirement/decision row with a concise chain: original observation and evidence → user goal/constraint → affected interfaces/dependencies → disposition and rationale → reconstruction requirement and acceptance. Include material cost/tradeoff and unknowns. A short note suffices for a narrow function; no compulsory per-quirk form or approval ceremony. Existing build authorization supports routine decisions within its goals; ask a focused question when an unresolved consequential tradeoff needs the user's choice. Understanding or planning alone does not authorize implementation, and reconstruction authority does not authorize editing the original installed app.
+
+Freeze original cases before adapting the candidate. An intentional-difference case should show how the original differs from the proposed acceptance and how the candidate satisfies it; retain relevant unchanged cases beside it. Keep profile results separate and never rewrite a historical oracle or switch profiles to make a failure pass. If original behavior cannot be observed, label that comparison unavailable and test a proposed contract only as such. On changed priorities or resume, reassess decisions and dependent acceptance applicability while retaining historical observations and justified reuse; see [checkpoint guidance](checkpoints.md#on-resuming).
+
 ## Coverage and failure reduction
 
 Cover input partitions, boundaries, invalid cases, meaningful state transitions, and relevant configuration combinations. For large configuration spaces, constrained pairwise or higher-strength combinations can reduce work; choose strength by risk and state exactly what is covered. Interaction coverage is not code coverage, temporal sequence coverage, or a proof that all failures are found. [R8](research-basis.md#r8-combinatorial-coverage)

@@ -28,6 +28,8 @@ Read the selected checkpoint and the sources needed for the next slice. Confirm 
 
 Reconcile the saved roadmap with current priorities and hard requirements. A changed first outcome can reorder enabling dependencies and invalidate a slice's acceptance scope even when files are unchanged. Revise the affected sequence and evidence/test applicability, retaining justified reuse and historical results. A saved plan does not override a current scope or mode correction.
 
+Reassess saved [quirk decisions](reconstruction-methods.md#preserve-improve-or-defer) when goals, consumers or evidence change. Retain each original observation and prior acceptance profile as history; update affected requirements/tests and deferred questions with their revisit triggers. A newly preferred profile does not retroactively turn an earlier failed comparison into a pass.
+
 Distinguish these situations:
 
 | Situation | Consequence |

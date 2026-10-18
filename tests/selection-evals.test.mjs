@@ -58,6 +58,12 @@ for (const [id, improved] of [['quirk-parity', false], ['quirk-improvement', tru
 
 const mutants = [
   ['quirk-parity', 'silent bug fix breaks requested parity', candidate(true), 'sort-retarget'],
+  ['quirk-parity', 'preserved selection still requires canonical pin order', candidate(false).replace(
+    'rows.filter(row => pins.has(row.id)).map(row => row.id)',
+    'visible.filter(id => pins.has(id))'), 'canonical-pin-order'],
+  ['quirk-parity', 'preserved selection still requires hidden pin retention', candidate(false).replace(
+    'rows.filter(row => pins.has(row.id))',
+    'rows.filter(row => pins.has(row.id) && visible.includes(row.id))'), 'preserve-hidden-pins'],
   ['quirk-improvement', 'faithful quirk violates approved improvement', candidate(false), 'sort-retarget'],
   ['quirk-improvement', 'selection lost on sorting', candidate(true).replace(
     "if (action.type === 'sort') order = action.order;",
