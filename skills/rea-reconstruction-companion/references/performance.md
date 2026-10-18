@@ -33,3 +33,36 @@ For each candidate record: affected requirement/journey; bottleneck evidence; hy
 Re-run the same workloads and relevant behavior tests. Check that cache changes preserve invalidation, batching preserves ordering/durability, and parallelism preserves determinism or documented concurrency guarantees. Confirm the end-to-end benefit and detect regressions in memory, startup, background work, or another important journey. Keep improvements that meet the selected goals; revise or revert unsupported complexity.
 
 Preserve a compact baseline/after-results table and regression thresholds justified by the requirement and measured noise. Mark unavailable or inconclusive comparisons honestly. Continue optimization while a required quality target or a consequential measured bottleneck remains unresolved; do not pursue endless micro-optimizations after the selected goals are met.
+
+## Keep a measured experiment reviewable
+
+Freeze the selected operation, original identity, independent expected results,
+fixed small/typical/stress inputs, bottleneck hypothesis and bounded run budget
+before optimizing. Preserve the original implementation; never introduce a slow
+path to manufacture a demonstration. Separate exploratory/profile runs from final
+comparisons and retain raw samples, failures and unsuccessful candidates. Do not
+rerun until the result looks favorable. A negative or inconclusive result can
+complete the experiment without promoting the candidate.
+
+Time equivalent complete work, consume outputs, and state which setup, I/O,
+validation and consumer work is inside the boundary. Record warmup, batch sizes,
+order/interleaving, repetitions, runtime flags and material uncontrolled load.
+Check exact outputs, errors, state preservation and affected side effects before
+performance claims. Recompute summaries from complete samples; report workload
+regressions and run disagreement rather than choosing one favorable statistic.
+Small batch counts do not justify request-tail percentiles or universal claims.
+Keep correctness gates separate from noisy timing; avoid machine-sensitive CI
+thresholds. A saved-evidence checker validates selected contracts, not timing
+honesty or arbitrary narrative claims.
+
+Name resource metrics precisely: retained heap change is neither peak RSS nor
+allocation rate; elapsed time is not CPU time or energy. Collect only metrics
+the hypothesis needs. Public evidence should retain portable runtime/workload
+identity while omitting private paths, account/hardware identifiers and detailed
+host inventory. Keep sensitive provenance privately when necessary.
+
+The [runnable measured optimization example](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/tree/main/evals/measured-optimization)
+applies this procedure to an existing reconstruction. Its single-pass validation
+candidate passed selected behavior checks but did not demonstrate an overall
+speed benefit; the original is retained. This is a same-agent, source-exposed
+synthetic observation, not a model benchmark or cross-platform performance claim.
