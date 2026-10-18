@@ -1,8 +1,9 @@
 // Reviewer-side expected results. Never import a candidate to generate them.
 import fs from 'node:fs';
 import { selectionCases } from './selection-oracles.mjs';
+import { backendCases } from './backend-oracles.mjs';
 
-export const executableCases = ['function', 'format', 'workflow', 'crypto', 'quirk-parity', 'quirk-improvement'];
+export const executableCases = ['function', 'format', 'workflow', 'crypto', 'quirk-parity', 'quirk-improvement', 'backend-local'];
 
 // Public synthetic test data: RFC 8439, section 2.8.2 (Nir and Langley).
 // Factual byte transcription, not a copied cipher implementation. See README.
@@ -11,6 +12,7 @@ export const vector = Object.freeze(JSON.parse(fs.readFileSync(new URL('./fixtur
 const emptyVectors = JSON.parse(fs.readFileSync(new URL('./fixtures/wycheproof-empty.json', import.meta.url), 'utf8')).tests;
 
 export function casesFor(id) {
+  if (id === 'backend-local') return structuredClone(backendCases());
   if (id === 'quirk-parity' || id === 'quirk-improvement') return selectionCases(id);
   const cases = [];
   const add = (label, input, expected) => cases.push({ label, input, expected });

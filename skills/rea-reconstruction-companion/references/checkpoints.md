@@ -55,6 +55,8 @@ Record the old claim, its original target and why it is stale separately from an
 
 Resume ordinary implementation once the next slice has sufficient evidence. Do not add a routine approval gate for a valid local continuation. An unresolved consequential choice, new scope or external action still follows the actual user's authorization and host policy. Apply the existing no-additional-charges constraint throughout.
 
+For an [inaccessible service](unavailable-backends.md), retain the selected local/replay/deferred path, hard remote requirements, supplied-recording coverage, pending integration and revisit trigger. Changed provider/recording/auth evidence invalidates dependent checks; historical local success cannot become remote verification on resume.
+
 ## Measure only relevant environment evidence
 
 Identical app bytes can behave differently with a changed runtime or setting.
