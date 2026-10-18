@@ -46,6 +46,8 @@ Give each selected requirement a stable ID and define:
 
 Use Given/When/Then scenarios when helpful. Keep functional parity, interaction fidelity, visual fidelity, and interoperability independently assessable. Separate required behavior from incidental implementation details and intentional differences.
 
+For surprising original behavior, apply [preserve, improve or defer](reconstruction-methods.md#preserve-improve-or-defer) in the affected requirement row. Link the observation, user goal, consumer/dependency impact and chosen acceptance profile; keep unresolved required work and revisit triggers visible in the roadmap. Mixed fidelity/improvement goals can yield different decisions at different interfaces.
+
 Define relevant nonfunctional targets: performance, reliability, accessibility, security/privacy, compatibility, and recovery. Measured original properties need measurement context; suggested targets need rationale and an explicit proposed status. Do not fabricate benchmarks.
 
 Express consequential quality requirements as scenarios: context and workload, stimulus or failure, expected response, and a measurable criterion. For example, saving while a connection drops may require a local durable result and an explicit pending-sync state. Select criteria from the user's needs or label them as proposals. Use [profiling and optimization](performance.md) for performance baselines and improvement candidates.
