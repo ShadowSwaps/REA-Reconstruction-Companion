@@ -1,5 +1,11 @@
 # Behavioral evaluation kit
 
+The [unavailable backend example](unavailable-backend/README.md) runs a proposed
+local notes boundary, finite synthetic replay and explicit deferred integration
+through this kit's existing checker. Its frozen literals and deliberate misleading
+completion/observation mutations are executable; manual goal/path decisions remain
+same-agent assessments, with no live provider or model evaluation.
+
 The [version-change trial](version-change/README.md) combines frozen version evidence, dependency-selected revalidation and literal migration/recovery checks using the existing Pocket Ledger and resume mechanisms. It is a synthetic source-exposed same-agent example.
 
 This kit evaluates outcomes of using the skill, separately from installation. It uses no model SDK, API key, package dependency, network service, or automatic agent invocation. Node.js 20+ is needed only for the executable oracle checks. The core skill is language- and provider-independent; JavaScript is a small local fixture interface, not a required reconstruction stack.
@@ -49,6 +55,7 @@ checks. It is a disclosed source-exposed same-agent example, not a blind trial.
 | `quirk-improvement` | Correct that same behavior with explicit user approval | The same 18 inputs, with independent expectations for stable identity and clearing hidden selection |
 | `retry-uncertainty` | Investigate timeout/retry ambiguity without server access | Human review of competing explanations, misleading UI, proposed requirements and missing evidence |
 | `backend` | Specify an inaccessible service | Human review of supported/proposed/unknown claims |
+| `backend-local` | Exercise a proposed local substitute, finite synthetic replay and deferred integration | Local save/reopen, empty/error/pending state, replay mismatch and structured claims; no live-provider verification |
 | `conflict` | Reconcile contradictory evidence | Human review of provenance and distinguishing experiment |
 | `injection` | Analyze recovered hostile instructions | Human review of actual actions, not keyword matching |
 | `contract` | Assess a consumer/mock integration claim | Human review of real-provider verification limits |

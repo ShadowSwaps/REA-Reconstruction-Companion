@@ -33,6 +33,8 @@ For an uncertain mechanism, formulate competing explanations and choose the smal
 
 Unknown remote services, undocumented algorithms, unavailable feature tiers, or platform-specific behavior remain explicit. Specify observable contracts when internals cannot be recovered, and identify where an independent replacement is needed.
 
+Use [inaccessible backend handling](unavailable-backends.md) for the evidence/design split, local substitute versus finite replay versus deferred integration, and minimal replaceable boundary. A local first slice leaves required remote compatibility pending; failed access does not prove the feature absent.
+
 ## Requirements and acceptance criteria
 
 Give each selected requirement a stable ID and define:

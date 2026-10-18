@@ -116,6 +116,14 @@ Select the checkpoint or its path and identify any changed target or goal. The a
 
 For a small question, expect a compact evidence-linked answer or contract with limits and a useful next action. A feature build adds implementation and acceptance results; it need not produce a whole-app blueprint. If a consequential target or outcome is unclear, expect one focused clarification. Host activation and instruction following vary: explicit invocation can help select the skill, but examples and installation do not guarantee every host/model will interpret every phrasing correctly.
 
+**When a service is inaccessible.** “Build local editing now; keep actual sharing
+pending until I supply authorized service evidence.” Expect an explicitly labeled
+local substitute or finite replay where useful, with real-service requirements
+still pending. Client observations do not recover server internals, and a local
+demo cannot verify remote compatibility. The [runnable synthetic example](evals/unavailable-backend/README.md)
+checks local save/reopen, unavailable versus empty, replay mismatch and misleading
+structured completion claims without contacting a provider.
+
 To see the workflow before trying a target, follow the [worked investigation](evals/reference/WALKTHROUGH.md), [reconstruction](evals/reference/reconstruction/README.md), or [resume](evals/resume/WALKTHROUGH.md) for your goal. These disclose answers and prior source exposure; they are teaching material, not prerequisites or evidence of a fresh agent trial. The [first-use review](evals/first-use.md) separates manual intent scenarios from executable checks.
 
 ## What it does

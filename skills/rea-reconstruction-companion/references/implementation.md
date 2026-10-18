@@ -19,6 +19,8 @@ Use risk-driven prototypes for uncertain mechanisms. Integrate slices as they ar
 
 Use original implementation choices as evidence, then make deliberate choices for the new product. Mark synthetic data, provisional contracts, mocks, and substitute services. Do not label an integration complete solely because its simulated dependency returns a success response.
 
+For inaccessible dependencies, apply [the selected substitute/replay/deferred path](unavailable-backends.md). Keep local save, pending synchronization and remote outcome separate through the real entry point; reject missing recordings or malformed responses without automatic remote fallback. Retain required provider checks as pending.
+
 Preserve independent reference fixtures before adjusting the implementation. Follow [comparison and test oracles](reconstruction-methods.md#comparison-and-test-oracles) for differential, stateful, property-based, or metamorphic checks when those methods fit the requirement. Tests derived only from the new code cannot establish parity with the original.
 
 ## Validate at the right boundaries
