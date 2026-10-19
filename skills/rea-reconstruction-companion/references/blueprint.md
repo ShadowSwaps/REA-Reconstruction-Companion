@@ -50,6 +50,8 @@ Give each selected requirement a stable ID and define:
 
 Use Given/When/Then scenarios when helpful. Keep functional parity, interaction fidelity, visual fidelity, and interoperability independently assessable. Separate required behavior from incidental implementation details and intentional differences.
 
+For selected UI journeys, define [accessibility acceptance](interface-accessibility.md) alongside those dimensions: keyboard actions, focus transitions, names/labels, error correction and dynamic feedback. Label proposed improvements and retain unobserved keyboard or assistive-technology behavior as unknown; an image or role/name inspection does not prove it.
+
 For surprising original behavior, apply [preserve, improve or defer](reconstruction-methods.md#preserve-improve-or-defer) in the affected requirement row. Link the observation, user goal, consumer/dependency impact and chosen acceptance profile; keep unresolved required work and revisit triggers visible in the roadmap. Mixed fidelity/improvement goals can yield different decisions at different interfaces.
 
 Define relevant nonfunctional targets: performance, reliability, accessibility, security/privacy, compatibility, and recovery. Measured original properties need measurement context; suggested targets need rationale and an explicit proposed status. Do not fabricate benchmarks.

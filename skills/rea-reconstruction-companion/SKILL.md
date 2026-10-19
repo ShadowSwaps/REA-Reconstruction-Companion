@@ -98,6 +98,8 @@ Distinguish **observed facts**, **inferences**, **unknowns**, and **proposed des
 
 For an unavailable backend or external service, use [inaccessible backend handling](references/unavailable-backends.md) to choose an authorized local substitute, supplied finite replay or deferred integration. Preserve hard real-service requirements and keep local/replayed success distinct from remote verification.
 
+For selected UI workflows, use [interface accessibility](references/interface-accessibility.md) to specify keyboard operation, focus, labels, errors and status feedback separately from visual/functional fidelity. Distinguish original observations from proposed improvements and keyboard/assistive-technology evidence from markup alone; keep the checks proportional to the requested interface.
+
 For screenshots, recordings or sparse/conflicting descriptions, use [visual and partial evidence](references/visual-evidence.md) to recover a proportionate brief, visible states and supported transitions. Preserve source/frame/crop and actual timing limits; separate presentation, interaction and functional compatibility. Continue useful specification or an authorized proposed slice without demanding unavailable binaries or live access. Images and narration do not establish unseen behavior or authorize implementation by themselves.
 
 When an original behavior is awkward or surprising, use [preserve, improve or defer](references/reconstruction-methods.md#preserve-improve-or-defer) to choose deliberately from the user's goals and affected compatibility contracts. Keep the original observation separate from inferred intent and the reconstruction decision; a reproducible quirk alone establishes neither a defect nor a requirement to copy it.
