@@ -54,6 +54,10 @@ The replay compares command response JSON and saved document JSON semantically; 
 
 ## Repeat the example
 
+For a standalone user walkthrough, follow [run, data and recovery instructions](RUN.md).
+It copies only the candidate and that guide, with no checker or checkout needed.
+The commands below instead repeat the repository's comparison/evidence checks.
+
 From a trusted checkout or extracted release, first inspect `candidate.mjs` and `validate.mjs`. With existing Node.js 20+:
 
 ```sh

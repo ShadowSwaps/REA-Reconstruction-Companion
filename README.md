@@ -124,6 +124,12 @@ demo cannot verify remote compatibility. The [runnable synthetic example](evals/
 checks local save/reopen, unavailable versus empty, replay mismatch and misleading
 structured completion claims without contacting a provider.
 
+Runnable results should include proportionate prerequisites, setup/run/stop,
+a principal walkthrough, data locations and safe reset/recovery steps exercised
+outside the checkout. The [standalone Pocket Tasks walkthrough](evals/reference/reconstruction/RUN.md)
+demonstrates this with existing Node and PowerShell; it is a same-agent fresh-folder
+check, not a clean OS or independent beginner test. See [handoff guidance](skills/rea-reconstruction-companion/references/runnable-handoffs.md).
+
 To see the workflow before trying a target, follow the [worked investigation](evals/reference/WALKTHROUGH.md), [reconstruction](evals/reference/reconstruction/README.md), or [resume](evals/resume/WALKTHROUGH.md) for your goal. These disclose answers and prior source exposure; they are teaching material, not prerequisites or evidence of a fresh agent trial. The [first-use review](evals/first-use.md) separates manual intent scenarios from executable checks.
 
 ## What it does
