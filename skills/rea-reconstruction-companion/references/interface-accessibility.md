@@ -73,7 +73,7 @@ runtime or assistive tool, add a paid service, or bypass automation controls jus
 to complete a checklist. Stop at the agreed cases or a concrete limitation;
 selected passes do not establish all-device coverage or whole-app conformance.
 
-The [Pocket Board worked slice](../../../evals/interface-accessibility/README.md)
+The [Pocket Board worked slice](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/blob/main/evals/interface-accessibility/README.md)
 keeps the historical reference and intentional candidate separate. Its bounded
 keyboard/focus/error evidence and unrun announcement checks illustrate this split.
 
