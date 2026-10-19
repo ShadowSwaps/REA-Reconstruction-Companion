@@ -1,0 +1,33 @@
+{
+  "completion": [
+    "new-requirement",
+    "variant"
+  ],
+  "codec-composition": [
+    "completion",
+    "historical-codec",
+    "baseline"
+  ],
+  "stored-rows": [
+    "codec-composition",
+    "schema2",
+    "persistence"
+  ],
+  "schema1-export": [
+    "stored-rows",
+    "lossy-version-guard"
+  ],
+  "retry-reopen": [
+    "stored-rows",
+    "persistence",
+    "environment"
+  ],
+  "reference-schema-facts": [
+    "historical-reference",
+    "historical-contract"
+  ],
+  "standalone-title-listing": [
+    "historical-summary",
+    "normalized-row-contract"
+  ]
+}
