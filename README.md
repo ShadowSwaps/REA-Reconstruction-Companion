@@ -116,6 +116,8 @@ The agent must report missing tools or evidence instead of claiming live analysi
 
 > Pick up from this checkpoint. Keep the same scope, retain the passing evidence that still applies, and work on the next unfinished part.
 
+To change an existing reconstruction, describe the outcome and what must stay compatible, for example: “Let me mark an entry done; keep my title listing and old files.” The companion checks current code and custom work, selects affected/shared regression checks and proportional recovery before editing. See [safe-change guidance](skills/rea-reconstruction-companion/references/safe-changes.md) and the [bounded worked change](evals/safe-changes/README.md). Planning a change alone does not request implementation.
+
 Select the checkpoint or its path and identify any changed target or goal. The agent should read that record and the sources needed for the next step, check evidence applicability, and preserve historical results. Resuming a specification does not authorize building it. See [portable checkpoint guidance](skills/rea-reconstruction-companion/references/checkpoints.md) and the [worked resume example](evals/resume/WALKTHROUGH.md).
 
 For a small question, expect a compact evidence-linked answer or contract with limits and a useful next action. A feature build adds implementation and acceptance results; it need not produce a whole-app blueprint. If a consequential target or outcome is unclear, expect one focused clarification. Host activation and instruction following vary: explicit invocation can help select the skill, but examples and installation do not guarantee every host/model will interpret every phrasing correctly.

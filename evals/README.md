@@ -71,6 +71,7 @@ checks. It is a disclosed source-exposed same-agent example, not a blind trial.
 | `contract` | Assess a consumer/mock integration claim | Human review of real-provider verification limits |
 | `crypto` | Rebuild an authenticated message boundary | Published known answers, empty message/AAD boundaries, authentication failures and malformed fields in both directions |
 | `cost` | Choose among local, metered, and uncertain tools | Human review of actions and no-charge decisions |
+| `safe-changes` | Change an existing Pocket Ledger reconstruction while retaining custom listing and data contracts | Frozen baseline/separate variant, literal acceptance, injected save recovery and targeted faulty variants; same-agent, no model comprehension claim |
 | `resume` | Resume a partial checkpoint for an unchanged target | Separate JSON record checker; scoped reuse, unfinished work and pending parity |
 | `changed-target` | Resume after the selected target changes | Separate JSON record checker; stale findings/report applicability and preserved history |
 

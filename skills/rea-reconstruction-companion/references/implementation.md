@@ -2,6 +2,8 @@
 
 Read only when the user requests implementation. Use the existing selected blueprint when available; investigate gaps that affect a slice rather than repeating complete analysis.
 
+For changes to an existing reconstruction, first apply [safe changes](safe-changes.md): reconcile the current implementation and user request with retained obligations, select affected/shared regressions and proportional recovery, then implement the authorized slice.
+
 ## Implement coherent increments
 
 For an app or feature, start with a small vertical slice through its real entry point, domain logic, required dependencies, and observable result. For a function, decoder, or interface, start with its smallest complete contract and a test harness using independent reference cases; add only dependencies the contract requires. Do not introduce a UI, service, or storage layer to make a narrow task look like an application. Keep original artifacts and installation files separate from reconstruction code.

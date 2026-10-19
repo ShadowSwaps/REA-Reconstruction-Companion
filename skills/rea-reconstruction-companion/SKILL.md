@@ -90,6 +90,8 @@ For a bounded reconstruction trial from packaged or compiled bytes, use the [art
 
 For file import/export reconstruction, use the [file compatibility procedure](references/file-compatibility.md) to freeze version/schema and encoding decisions, test both interoperability directions beyond round trips, and verify that rejection or failed persistence preserves prior state. Keep caught-write recovery separate from crash durability and concurrency claims.
 
+For a request to modify an existing reconstruction, use [safe changes](references/safe-changes.md) to reconcile current intent and custom work, retained contracts, affected dependencies, acceptance and recovery before editing. Keep changed requirements separate from changes to the reference version or environment.
+
 For adapting a saved reconstruction to another selected version, use the [version-change procedure](references/version-changes.md) to establish actual behavioral changes, select dependent revalidation and verify migration/recovery against frozen expectations.
 
 Start from the exact target and a prioritized question checklist. Use REA summaries and focused follow-ups to trace priority workflows from trigger through state/data changes to results. Read the base skill's target-specific references only when needed. Reuse matching evidence; a new target or version must not silently inherit another app's conclusions.
