@@ -38,6 +38,8 @@ Select tests based on consequential behavior and risk, avoiding tests that merel
 - Relevant performance/resource targets, accessibility, and visual fidelity.
 - Installation/configuration, startup, and requested deployment behavior.
 
+For selected UI work, exercise [interface accessibility](interface-accessibility.md) through actual keyboard/focus/error/status workflows using existing supported tools. Keep markup inspection, deterministic doubles, live browser observations and unrun assistive-technology checks distinct; preserve the original and the separately selected improvement profile.
+
 For reference comparisons, use equivalent inputs, fixtures, initial state, versions, and environments; record unavoidable differences. Specify acceptable tolerances. An intentional design difference should be assessed against its proposed requirement, not reported as original parity.
 
 Carry each consequential [preserve/improve/defer decision](reconstruction-methods.md#preserve-improve-or-defer) into the selected tests. Exercise the intentional difference and affected dependencies alongside unchanged compatibility cases; keep deferred required scenarios pending. Don't edit the original or its frozen expected results to satisfy the candidate.

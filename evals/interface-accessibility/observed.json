@@ -1,0 +1,319 @@
+{
+  "captures": [
+    {
+      "label": "seed",
+      "actual": {
+        "active": "BODY",
+        "hidden": true,
+        "rows": [
+          "Alpha — Open",
+          "Beta — Done"
+        ],
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "expected": {
+        "active": "BODY",
+        "hidden": true,
+        "rows": [
+          "Alpha — Open",
+          "Beta — Done"
+        ],
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t5 text Ready\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t16 checkbox Alpha — Open, Value: 0, ID: task-1\n\t\t\t17 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t20 text Select a task or create one.\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html"
+    },
+    {
+      "label": "new-focus",
+      "actual": {
+        "active": "add"
+      },
+      "expected": {
+        "active": "add"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t5 text Ready\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t16 checkbox Alpha — Open, Value: 0, ID: task-1\n\t\t\t17 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t20 text Select a task or create one.\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 4 button New task, ID: add"
+    },
+    {
+      "label": "show-focus",
+      "actual": {
+        "active": "scope"
+      },
+      "expected": {
+        "active": "scope"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t5 text Ready\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t16 checkbox Alpha — Open, Value: 0, ID: task-1\n\t\t\t17 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t20 text Select a task or create one.\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand"
+    },
+    {
+      "label": "alpha-focus",
+      "actual": {
+        "active": "task-1"
+      },
+      "expected": {
+        "active": "task-1"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t5 text Ready\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t16 checkbox Alpha — Open, Value: 0, ID: task-1\n\t\t\t17 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t20 text Select a task or create one.\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 16 checkbox Alpha — Open, Value: 0, ID: task-1"
+    },
+    {
+      "label": "beta-focus",
+      "actual": {
+        "active": "task-2"
+      },
+      "expected": {
+        "active": "task-2"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t5 text Ready\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t16 checkbox Alpha — Open, Value: 0, ID: task-1\n\t\t\t17 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t20 text Select a task or create one.\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 17 checkbox Beta — Done, Value: 0, ID: task-2"
+    },
+    {
+      "label": "reverse",
+      "actual": {
+        "active": "task-1"
+      },
+      "expected": {
+        "active": "task-1"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t5 text Ready\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t16 checkbox Alpha — Open, Value: 0, ID: task-1\n\t\t\t17 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t20 text Select a task or create one.\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 16 checkbox Alpha — Open, Value: 0, ID: task-1"
+    },
+    {
+      "label": "editor",
+      "actual": {
+        "active": "name",
+        "title": "Alpha",
+        "hidden": false
+      },
+      "expected": {
+        "active": "name",
+        "title": "Alpha",
+        "hidden": false
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t24 text Editing task\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t25 checkbox Alpha — Open, Value: 1, ID: task-1\n\t\t\t26 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, Value: Alpha, ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 0, ID: complete\n\t\t\t31 button Save\n\t\t\t32 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 29 text field (settable) Title, Value: Alpha, ID: name"
+    },
+    {
+      "label": "done-focus",
+      "actual": {
+        "active": "complete"
+      },
+      "expected": {
+        "active": "complete"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t24 text Editing task\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t25 checkbox Alpha — Open, Value: 1, ID: task-1\n\t\t\t26 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, Value: Alpha, ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 0, ID: complete\n\t\t\t31 button Save\n\t\t\t32 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 30 checkbox (settable, integer) Description: Done, Value: 0, ID: complete"
+    },
+    {
+      "label": "space-toggle",
+      "actual": {
+        "active": "complete",
+        "done": true
+      },
+      "expected": {
+        "active": "complete",
+        "done": true
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t33 text Unsaved changes\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t25 checkbox Alpha — Open, Value: 1, ID: task-1\n\t\t\t26 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, Value: Alpha, ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 1, ID: complete\n\t\t\t31 button Save\n\t\t\t32 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 30 checkbox (settable, integer) Description: Done, Value: 1, ID: complete"
+    },
+    {
+      "label": "save-focus",
+      "actual": {
+        "active": "Save"
+      },
+      "expected": {
+        "active": "Save"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t33 text Unsaved changes\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t25 checkbox Alpha — Open, Value: 1, ID: task-1\n\t\t\t26 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, Value: Alpha, ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 1, ID: complete\n\t\t\t31 button Save\n\t\t\t32 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 31 button Save"
+    },
+    {
+      "label": "cancel-focus",
+      "actual": {
+        "active": "abandon"
+      },
+      "expected": {
+        "active": "abandon"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t33 text Unsaved changes\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t25 checkbox Alpha — Open, Value: 1, ID: task-1\n\t\t\t26 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, Value: Alpha, ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 1, ID: complete\n\t\t\t31 button Save\n\t\t\t32 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 32 button Cancel, ID: abandon"
+    },
+    {
+      "label": "cancel-return",
+      "actual": {
+        "active": "task-1",
+        "hidden": true
+      },
+      "expected": {
+        "active": "task-1",
+        "hidden": true
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t24 text Cancelled\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t25 checkbox Alpha — Open, Value: 0, ID: task-1\n\t\t\t26 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 text Select a task or create one.\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 25 checkbox Alpha — Open, Value: 0, ID: task-1"
+    },
+    {
+      "label": "blank",
+      "actual": {
+        "active": "name",
+        "invalid": "true",
+        "description": "invalid",
+        "error": "Title is required.",
+        "status": "Not saved",
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "expected": {
+        "active": "name",
+        "invalid": "true",
+        "description": "invalid",
+        "error": "Title is required.",
+        "status": "Not saved",
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Alpha\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t24 text Not saved\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t25 checkbox Alpha — Open, Value: 1, ID: task-1\n\t\t\t26 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 0, ID: complete\n\t\t\t31 text Title is required.\n\t\t\t32 button Save\n\t\t\t33 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 29 text field (settable) Title, ID: name"
+    },
+    {
+      "label": "corrected",
+      "actual": {
+        "active": "name",
+        "invalid": "false",
+        "error": "",
+        "status": "Unsaved changes"
+      },
+      "expected": {
+        "active": "name",
+        "invalid": "false",
+        "error": "",
+        "status": "Unsaved changes"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t34 text Unsaved changes\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t25 checkbox Alpha — Open, Value: 1, ID: task-1\n\t\t\t26 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, Value:   Corrected  , ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 0, ID: complete\n\t\t\t32 button Save\n\t\t\t33 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 29 text field (settable) Title, Value:   Corrected  , ID: name"
+    },
+    {
+      "label": "saved",
+      "actual": {
+        "active": "name",
+        "title": "Corrected",
+        "status": "Saved",
+        "problem": "",
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Corrected\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "expected": {
+        "active": "name",
+        "title": "Corrected",
+        "status": "Saved",
+        "problem": "",
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Corrected\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t34 text Saved\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t35 checkbox Corrected — Open, Value: 1, ID: task-1\n\t\t\t36 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, Value: Corrected, ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 0, ID: complete\n\t\t\t32 button Save\n\t\t\t33 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 29 text field (settable) Title, Value: Corrected, ID: name"
+    },
+    {
+      "label": "save-again",
+      "actual": {
+        "active": "Save",
+        "status": "Saved",
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Corrected\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "expected": {
+        "active": "Save",
+        "status": "Saved",
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Corrected\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t34 text Saved\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t35 checkbox Corrected — Open, Value: 1, ID: task-1\n\t\t\t36 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, Value: Corrected, ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 0, ID: complete\n\t\t\t32 button Save\n\t\t\t33 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 32 button Save"
+    },
+    {
+      "label": "rejected",
+      "actual": {
+        "active": "Save",
+        "title": "Kept draft",
+        "status": "Save failed",
+        "problem": "Save failed. Draft kept; storage or safe tab coordination is unavailable. Retry when available.",
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Corrected\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "expected": {
+        "active": "Save",
+        "title": "Kept draft",
+        "status": "Save failed",
+        "problem": "Save failed. Draft kept; storage or safe tab coordination is unavailable. Retry when available.",
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Corrected\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t34 text Save failed\n\t35 text Save failed. Draft kept; storage or safe tab coordination is unavailable. Retry when available.\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t36 checkbox Corrected — Open, Value: 1, ID: task-1\n\t\t\t37 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, Value: Kept draft, ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 0, ID: complete\n\t\t\t32 button Save\n\t\t\t33 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 32 button Save"
+    },
+    {
+      "label": "retry",
+      "actual": {
+        "active": "Save",
+        "status": "Saved",
+        "problem": "",
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Kept draft\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "expected": {
+        "active": "Save",
+        "status": "Saved",
+        "problem": "",
+        "store": "{\"version\":1,\"items\":[{\"id\":1,\"title\":\"Kept draft\",\"done\":false},{\"id\":2,\"title\":\"Beta\",\"done\":true}]}"
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t34 text Saved\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t35 checkbox Kept draft — Open, Value: 1, ID: task-1\n\t\t\t36 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 container form\n\t\t\t28 text Title\n\t\t\t29 text field (settable) Title, Value: Kept draft, ID: name\n\t\t\t30 checkbox (settable, integer) Description: Done, Value: 0, ID: complete\n\t\t\t32 button Save\n\t\t\t33 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 32 button Save"
+    },
+    {
+      "label": "row-return",
+      "actual": {
+        "active": "task-1",
+        "hidden": true,
+        "rows": [
+          "Kept draft — Open",
+          "Beta — Done"
+        ]
+      },
+      "expected": {
+        "active": "task-1",
+        "hidden": true,
+        "rows": [
+          "Kept draft — Open",
+          "Beta — Done"
+        ]
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t24 text Cancelled\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: All, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 (selected) All\n\t\t\t\t13 Open\n\t\t\t\t14 Done\n\t\t15 container rows\n\t\t\t25 checkbox Kept draft — Open, Value: 0, ID: task-1\n\t\t\t26 checkbox Beta — Done, Value: 0, ID: task-2\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t27 text Select a task or create one.\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 25 checkbox Kept draft — Open, Value: 0, ID: task-1"
+    },
+    {
+      "label": "filtered-fallback",
+      "actual": {
+        "active": "add",
+        "hidden": true,
+        "rows": [
+          "No tasks."
+        ]
+      },
+      "expected": {
+        "active": "add",
+        "hidden": true,
+        "rows": [
+          "No tasks."
+        ]
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t24 text Cancelled\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: Open, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 All\n\t\t\t\t13 (selected) Open\n\t\t\t\t14 Done\n\t\t25 text No tasks.\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t26 text Select a task or create one.\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 4 button New task, ID: add"
+    },
+    {
+      "label": "new-editor",
+      "actual": {
+        "active": "name",
+        "title": "",
+        "done": false,
+        "hidden": false
+      },
+      "expected": {
+        "active": "name",
+        "title": "",
+        "done": false,
+        "hidden": false
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t24 text New task\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: Open, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 All\n\t\t\t\t13 (selected) Open\n\t\t\t\t14 Done\n\t\t25 text No tasks.\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t26 container form\n\t\t\t27 text Title\n\t\t\t28 text field (settable) Title, ID: name\n\t\t\t29 checkbox (settable, integer) Description: Done, Value: 0, ID: complete\n\t\t\t30 button Save\n\t\t\t31 button Cancel, ID: abandon\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 28 text field (settable) Title, ID: name"
+    },
+    {
+      "label": "new-cancel",
+      "actual": {
+        "active": "add",
+        "hidden": true
+      },
+      "expected": {
+        "active": "add",
+        "hidden": true
+      },
+      "ax": "Browser tab: 8, Title: \"Pocket Board\", URL: \"http://127.0.0.1:41781/fixture.html\".\n0 AXWebArea Pocket Board, URL: 127.0.0.1:41781/fixture.html\n\t1 container\n\t\t2 heading Pocket Board, Value: 1\n\t\t\t3 text Pocket Board\n\t\t4 button New task, ID: add\n\t24 text Cancelled\n\t6 container\n\t\t7 heading Tasks, Value: 2\n\t\t\t8 text Tasks\n\t\t9 text Show\n\t\t10 pop up button (collapsed, settable) Show, Value: Open, ID: scope, Secondary Actions: Expand\n\t\t\t11 menu\n\t\t\t\t12 All\n\t\t\t\t13 (selected) Open\n\t\t\t\t14 Done\n\t\t25 text No tasks.\n\t\t18 heading Editor, Value: 2\n\t\t\t19 text Editor\n\t\t26 text Select a task or create one.\n\t21 container Controlled instrumentation\n\t\t22 text Synthetic pre-native-write rejection only.\n\t\t23 button Reject next save, ID: reject\n\nThe focused UI element is 4 button New task, ID: add"
+    }
+  ],
+  "errors": [],
+  "method": "Actual native browser keys with read-only DOM/AX; source-exposed, same-agent",
+  "unrun": [
+    "Screen-reader announcements",
+    "Other browser/device combinations",
+    "Measured contrast and full conformance"
+  ]
+}

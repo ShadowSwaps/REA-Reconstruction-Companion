@@ -1,5 +1,10 @@
 # Behavioral evaluation kit
 
+The [interface accessibility slice](interface-accessibility/README.md) preserves
+the historical Pocket Board fixtures and demonstrates selected keyboard/focus,
+error correction and status cases. Live native-key evidence is separate from
+deterministic doubles and unrun screen-reader/device checks.
+
 The [visual-evidence example](visual-evidence/README.md) uses frozen synthetic
 screens, a missing/cropped transition and conflicting narration. Fixed JSON
 cell checks challenge unsupported claims; manual interpretation is a disclosed

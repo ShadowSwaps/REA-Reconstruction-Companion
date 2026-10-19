@@ -63,6 +63,8 @@ If the original has awkward behavior, say which compatibility matters and what y
 
 Screenshots, recordings and incomplete descriptions can also provide a starting point. The companion separates visible states and demonstrated transitions from assumptions, asks about gaps that change the result, and keeps visual similarity distinct from working behavior. See the [bounded visual-evidence example](evals/visual-evidence/README.md); supplied images do not require a whole-app rebuild or imply access to its server.
 
+For selected interfaces, the companion also separates keyboard operation, focus, labels, errors and status feedback from visual fidelity. The [accessibility worked slice](evals/interface-accessibility/README.md) demonstrates a small intentional improvement with live keyboard evidence and explicit unrun screen-reader checks.
+
 **Understand and plan a future reconstruction.** Expect evidence-backed behavior and workflow requirements, known unknowns, and a staged roadmap before implementation:
 
 ```text
