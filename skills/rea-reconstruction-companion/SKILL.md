@@ -133,7 +133,7 @@ Scale documentation to the task: a compact contract and test record may suffice 
 - Requirements, original/proposed architecture, data models, and contracts.
 - Dependency-ordered implementation roadmap, decisions, and validation plan.
 - Reproducible reference scenarios, relevant performance baselines, and quality tradeoffs.
-- Implementation and parity status when building; setup/run instructions for runnable results.
+- Implementation and parity status when building; [runnable handoff instructions](references/runnable-handoffs.md) exercised for the selected setup/run/stop, workflow, data and recovery boundaries.
 
 Use stable local IDs and traceability: **feature -> evidence -> requirement -> component -> acceptance test**. Keep REA Evidence IDs alongside local IDs. Preserve needed evidence bundles before closing sessions according to the base REA skill.
 

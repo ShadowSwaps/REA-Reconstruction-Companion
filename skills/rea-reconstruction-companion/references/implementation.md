@@ -73,4 +73,4 @@ Keep this proportional: extend the existing matrix or short result summary rathe
 
 When required checks pass, avoid repeating them without a new change, failure, or unresolved concern. Continue toward the remaining requested scope rather than stopping after the first working slice.
 
-Deliver runnable instructions, relevant configuration/fixture requirements, and a checkpoint of completed requirements, outstanding gaps, blockers, and next actions. Judge completion against the selected acceptance criteria and actual integration results. If a real dependency or required scenario remains unavailable, report partial coverage and its impact plainly.
+For runnable results, follow [runnable handoffs](runnable-handoffs.md) to give and exercise proportionate setup/run/stop, walkthrough, data and recovery instructions outside the development checkout. Deliver a checkpoint of completed requirements, outstanding gaps, blockers, and next actions. Judge completion against the selected acceptance criteria and actual integration results. If a real dependency or required scenario remains unavailable, report partial coverage and its impact plainly.
