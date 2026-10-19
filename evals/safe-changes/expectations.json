@@ -1,0 +1,77 @@
+{
+  "inputV1": {
+    "format": "pocket-ledger",
+    "version": 1,
+    "entries": [
+      {
+        "id": "a",
+        "text": "Café 🧾"
+      },
+      {
+        "id": "b",
+        "text": "Second"
+      }
+    ]
+  },
+  "inputV2": {
+    "format": "pocket-ledger",
+    "version": 2,
+    "entries": [
+      {
+        "id": "a",
+        "title": "Café 🧾",
+        "done": false
+      },
+      {
+        "id": "b",
+        "title": "Second",
+        "done": false
+      }
+    ]
+  },
+  "before": [
+    {
+      "id": "a",
+      "title": "Café 🧾",
+      "done": false
+    },
+    {
+      "id": "b",
+      "title": "Second",
+      "done": false
+    }
+  ],
+  "after": [
+    {
+      "id": "a",
+      "title": "Café 🧾",
+      "done": true
+    },
+    {
+      "id": "b",
+      "title": "Second",
+      "done": false
+    }
+  ],
+  "titles": [
+    "Café 🧾",
+    "Second"
+  ],
+  "errors": {
+    "invalid": "schema",
+    "missing": "not-found",
+    "lossy": "lossy-version",
+    "save": "persistence"
+  },
+  "affected": [
+    "completion",
+    "codec-composition",
+    "stored-rows",
+    "schema1-export",
+    "retry-reopen"
+  ],
+  "retained": [
+    "reference-schema-facts",
+    "standalone-title-listing"
+  ]
+}

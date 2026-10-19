@@ -1,0 +1,17 @@
+{
+  "id": "SC-20261019",
+  "exposure": "source-exposed same-agent; literals independent of outputs, not independent authorship",
+  "files": {
+    "CONTRACT.md": "03e117e1165923a3fbc744f2a53b3d5e9cf6db617d10effdbb94b079d089914b",
+    "baseline.mjs": "068918a4ec0d31bb1ad7fb8c59205f2b3b27b5d54d3c35ae0d906f0fd76794d9",
+    "expectations.json": "4cc83eae7c1f405cc6830d88d5e9aed3528cb41dd429d1b08fdcb82272805015",
+    "dependencies.json": "e90999a7f21cbaf370910f886149bbb6db0fd4f03344462c4abf897cf75094cf",
+    "../version-change/candidate-v2.mjs": "23598fe3c701f3f48ac2e3eeb9df1ce4b09f8831af4784ea707a65d7d6b41e01",
+    "../version-change/summary.mjs": "03c470fff363e072aac19c21e8c4407b023b8e42c8cebfb48d3be5ebab3df54d",
+    "../version-change/identity.json": "00a55cf633c7a131be494965b7cc426c12224e5515f643a9b810660fe1f61a1a",
+    "../import-export/candidate.mjs": "7b29d66619d7e44c958d83f9520354a05729105f1f444e6be9bea68a0cfe3f1e",
+    "../import-export/reference.mjs": "9ca2b75875e22aee8f84644b9d1d520fa7da798efb8553e9311211648644e1ec",
+    "../import-export/CONTRACT.md": "e2d5e73bb59fb4062ac4c4381da3e4614f83854d12904ca8f5c2f4d00479d55c",
+    "../import-export/identity.json": "5ba5a46b352a4df7470052cf6b9acefe0bb490d6d52da81a556f0ea43d849359"
+  }
+}

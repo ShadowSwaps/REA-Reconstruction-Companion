@@ -1,0 +1,26 @@
+{
+  "status": "selected-change-passed",
+  "changed": [
+    "no-op and invalid edits preserve exact old data",
+    "completion, schema1 rejection, schema2 reader and fresh-process reopen"
+  ],
+  "retained": [
+    "previous implementation reads new data without rewriting",
+    "v1/v2 imports, v1 cross-reader/export, explicit migrate, late invalid import"
+  ],
+  "affected": [
+    "completion",
+    "codec-composition",
+    "stored-rows",
+    "schema1-export",
+    "retry-reopen"
+  ],
+  "retainedEvidence": [
+    "reference-schema-facts",
+    "standalone-title-listing"
+  ],
+  "noOpWrites": 0,
+  "observedSaveAttempts": 7,
+  "recovery": "injected pre-rename failure; retry; explicit disposable data restore",
+  "limits": "same-agent source-exposed Node fixture; manual impact map; no model comprehension, real disk denial, crash, concurrency or global compatibility claim"
+}

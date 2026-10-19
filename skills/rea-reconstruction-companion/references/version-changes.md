@@ -5,6 +5,8 @@ Use this with [checkpoints](checkpoints.md) and, for changed saved data,
 detection, selective revalidation and migration/recovery. Ordinary complete-
 source work uses normal tools; use REA for applicable artifacts/runtime evidence.
 
+If the request changes only the reconstruction's behavior while the reference stays selected, use [safe changes](safe-changes.md). Do not invent a reference-version transition or force a migration for that edit.
+
 1. Freeze both reference versions, license, artifact identities, relevant
    environment, contracts and representative observations. Separate product
    version from schema and runtime version. Identify a consequential behavior
