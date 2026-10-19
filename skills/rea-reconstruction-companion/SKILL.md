@@ -35,7 +35,7 @@ Keep the combined workflow proportional to the user's target and objective. A re
 Identify three separate things from the user's request:
 
 1. **Subject and scope**: a whole product/system, feature/workflow, subsystem/module/class, function/method, interface/protocol, data format/store, or behavior captured in a recording/runtime session.
-2. **Evidence carrier**: the executable/library/package, source tree, web page, live runtime, database snapshot, or recording containing relevant evidence. Inspect metadata with the base REA skill when the format is uncertain; a file extension alone is not a reliable native/managed/runtime classification.
+2. **Evidence carrier**: the executable/library/package, source tree, web page, live runtime, database snapshot, screenshot, recording, or supplied description containing relevant evidence. Inspect metadata with the base REA skill when the format is uncertain; a file extension alone is not a reliable native/managed/runtime classification. An image of an app is not a live app connection.
 3. **Objective**: explain/specify, reconstruct/implement, optimize, compare, or diagnose. Multiple objectives can share a subject without expanding it to the whole product.
 
 Bind names/paths/URLs and any selectors (module, qualified symbol, address, endpoint, table, scenario, or version pair) to the user's chosen subject. A function inside an executable remains a function-level task even if REA must open the whole executable. A named product can span multiple processes/packages; do not equate one binary with the complete system. Expand to dependencies only as necessary to answer the selected question and explain that boundary.
@@ -97,6 +97,8 @@ Start from the exact target and a prioritized question checklist. Use REA summar
 Distinguish **observed facts**, **inferences**, **unknowns**, and **proposed design choices** throughout. Static analysis does not establish runtime behavior, strings do not establish active features, and client/network evidence does not reveal an inaccessible backend's complete implementation. Use bounded experiments to resolve uncertainties that could change the design.
 
 For an unavailable backend or external service, use [inaccessible backend handling](references/unavailable-backends.md) to choose an authorized local substitute, supplied finite replay or deferred integration. Preserve hard real-service requirements and keep local/replayed success distinct from remote verification.
+
+For screenshots, recordings or sparse/conflicting descriptions, use [visual and partial evidence](references/visual-evidence.md) to recover a proportionate brief, visible states and supported transitions. Preserve source/frame/crop and actual timing limits; separate presentation, interaction and functional compatibility. Continue useful specification or an authorized proposed slice without demanding unavailable binaries or live access. Images and narration do not establish unseen behavior or authorize implementation by themselves.
 
 When an original behavior is awkward or surprising, use [preserve, improve or defer](references/reconstruction-methods.md#preserve-improve-or-defer) to choose deliberately from the user's goals and affected compatibility contracts. Keep the original observation separate from inferred intent and the reconstruction decision; a reproducible quirk alone establishes neither a defect nor a requirement to copy it.
 

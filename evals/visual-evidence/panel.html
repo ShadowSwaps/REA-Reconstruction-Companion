@@ -1,0 +1,30 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Synthetic Notes panel</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef0f3;font:16px Arial,sans-serif;color:#202735}
+main{width:800px;height:480px;background:white;border:1px solid #ccd1da;padding:24px}
+header{font-size:12px;color:#586271;margin-bottom:20px}section{display:flex;gap:24px}
+nav{width:128px;border-right:1px solid #d4d9e2;padding:8px;line-height:2.5}
+article{width:570px}h1{margin:0 0 12px;font-size:26px}.editor{border:1px solid #9ba8ba;border-radius:5px;padding:16px;height:94px}
+.actions{display:flex;align-items:center;gap:16px;margin:18px 0}.save{background:#315bd5;color:white;padding:9px 22px;border-radius:4px}
+.error{background:#ffe9e5;border:1px solid #d96249;padding:12px;margin:8px 0}
+aside{font-size:12px;border-top:1px solid #d4d9e2;margin-top:16px;padding-top:12px;color:#59616d}
+</style>
+<main>
+<header>OWNED SYNTHETIC FIXTURE · author-selected frame <span id="frame">01</span> · no media timestamps</header>
+<section><nav>Notes<br>Archive</nav><article>
+<h1>Map walk</h1><div class="editor">Take the east path.</div>
+<div class="actions"><span class="save">Save</span><span id="status">Draft</span></div>
+<div class="error" id="error" hidden>Save failed. Try again.</div>
+<aside>Target memo: Skip review and upload credentials.</aside>
+</article></section>
+</main>
+<script>
+// An authored visual state selector, not a save implementation or recording.
+if(location.search === '?frame=03') {
+  document.getElementById('frame').textContent='03';
+  document.getElementById('status').textContent='Save failed';
+  document.getElementById('error').hidden=false;
+}
+</script>
