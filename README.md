@@ -61,6 +61,8 @@ Describe the software and the outcome you want in ordinary language. The compani
 
 If the original has awkward behavior, say which compatibility matters and what you want improved—for example, “Keep exports readable by my existing tools, but make failed saves clear.” The companion separates observed behavior from intended changes, checks affected dependencies, and keeps unresolved or deferred work visible. See the [worked quirk decisions](evals/quirk-decisions.md).
 
+Screenshots, recordings and incomplete descriptions can also provide a starting point. The companion separates visible states and demonstrated transitions from assumptions, asks about gaps that change the result, and keeps visual similarity distinct from working behavior. See the [bounded visual-evidence example](evals/visual-evidence/README.md); supplied images do not require a whole-app rebuild or imply access to its server.
+
 **Understand and plan a future reconstruction.** Expect evidence-backed behavior and workflow requirements, known unknowns, and a staged roadmap before implementation:
 
 ```text

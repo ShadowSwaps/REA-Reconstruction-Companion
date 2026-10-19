@@ -1,0 +1,29 @@
+{
+  "kind": "owned-synthetic-ordered-images-not-video",
+  "mediaTime": null,
+  "missingFrame": "02",
+  "sourceViewport": [
+    1280,
+    720
+  ],
+  "panelCrop": [
+    0,
+    0,
+    800,
+    480
+  ],
+  "frame03DerivativeCrop": [
+    160,
+    48,
+    600,
+    330
+  ],
+  "files": {
+    "panel.html": "1ac8e13e3636e1ebb57155df72959e456591ec4a58dd434ecc3fef923b911260",
+    "INPUTS.md": "7f9031227615de337551806f4f0f8f0c0c5dcd0135dce85c104d05abe91a02ba",
+    "ACCEPTANCE.json": "7253cf193bcd9ab4625e21b39404d59b73337afb276141c3e0b696b7ec262a16",
+    "frame-01.png": "6abdb1c03ecea865fcffec0c9db35e041284a2f23e5e2be00b771c6bb146b93e",
+    "frame-03.png": "8c6773cbb8ba7eed37f027b0e86442d95786401d491bc4e14bcb418837c0b236",
+    "frame-03-crop.png": "faa57e4e9c6cf1087261afc76359630b377f17a6c23f2846b631f026bc1d374e"
+  }
+}

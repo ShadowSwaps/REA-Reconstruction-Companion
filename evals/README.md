@@ -1,5 +1,10 @@
 # Behavioral evaluation kit
 
+The [visual-evidence example](visual-evidence/README.md) uses frozen synthetic
+screens, a missing/cropped transition and conflicting narration. Fixed JSON
+cell checks challenge unsupported claims; manual interpretation is a disclosed
+same-agent review, not a general vision/language evaluation or actual video trial.
+
 The [unavailable backend example](unavailable-backend/README.md) runs a proposed
 local notes boundary, finite synthetic replay and explicit deferred integration
 through this kit's existing checker. Its frozen literals and deliberate misleading

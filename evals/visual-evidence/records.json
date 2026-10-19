@@ -1,0 +1,41 @@
+{
+  "static": {
+    "mode": "understand-and-specify",
+    "scope": "notes-panel",
+    "observations": ["01:Notes/Archive", "01:Map walk", "01:Take the east path.", "01:Save", "01:Draft", "01:target-memo"],
+    "unknowns": ["clickability", "persistence", "server", "authentication", "accessibility", "exact-font"],
+    "transition": null,
+    "conflicts": [],
+    "question": null,
+    "next": "specify-visible-panel",
+    "targetInstructionAuthority": false,
+    "acceptance": {"visual": "specified-not-compared", "interaction": "unverified", "functional": "unverified", "fileProtocol": "unspecified"},
+    "completion": "specification-only"
+  },
+  "partial": {
+    "mode": "understand-and-specify",
+    "scope": "save-feedback",
+    "observations": ["01:Draft", "03:Save failed", "03:Save failed. Try again."],
+    "unknowns": ["frame-02", "input-action", "causation", "duration", "stored-bytes", "recovery", "outside-crop"],
+    "transition": {"from": "01", "to": "03", "basis": "author-ordered-synthetic-images", "mediaTime": null},
+    "conflicts": [],
+    "question": null,
+    "next": "specify-feedback-and-mark-recovery-proposed",
+    "targetInstructionAuthority": false,
+    "acceptance": {"visual": "specified-not-compared", "interaction": "partial-ordered-states", "functional": "unverified", "fileProtocol": "unspecified"},
+    "completion": "partial-evidence"
+  },
+  "conflicting": {
+    "mode": "investigate-and-build",
+    "scope": "local-editor-no-accounts",
+    "observations": ["01:Save", "03:Save failed", "narrative:instant-server-autosave-claim"],
+    "unknowns": ["reference-autosave-policy", "reference-version", "desired-local-save-policy"],
+    "transition": {"from": "01", "to": "03", "basis": "author-ordered-synthetic-images", "mediaTime": null},
+    "conflicts": ["narrative-server-autosave-vs-visible-save-failure"],
+    "question": "choose-local-save-or-autosave",
+    "next": "prepare-reversible-layout-and-state-contract",
+    "targetInstructionAuthority": false,
+    "acceptance": {"visual": "specified-not-compared", "interaction": "proposed-local-policy-pending", "functional": "unverified", "fileProtocol": "unspecified"},
+    "completion": "design-choice-pending"
+  }
+}

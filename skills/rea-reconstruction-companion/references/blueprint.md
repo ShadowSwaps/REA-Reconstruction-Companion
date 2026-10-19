@@ -29,6 +29,8 @@ Keep a finding ledger containing:
 
 Observed facts may come from static inspection or execution; say which. An inference about how a feature works is not a verified requirement. Proposed behavior belongs to the new design and must not be attributed to the original.
 
+For [visual or incomplete supplied evidence](visual-evidence.md), bind findings to images/frames, crop boundaries, actual timing and separately attributed narrative. Keep visible states distinct from demonstrated interactions and unseen effects; preserve consequential contradictions when deriving requirements.
+
 For an uncertain mechanism, formulate competing explanations and choose the smallest observation that distinguishes them. Reconcile static and runtime evidence explicitly. Do not describe an unsuccessful bounded search as proof of universal absence, or page exhaustion as proof of source completeness.
 
 Unknown remote services, undocumented algorithms, unavailable feature tiers, or platform-specific behavior remain explicit. Specify observable contracts when internals cannot be recovered, and identify where an independent replacement is needed.
