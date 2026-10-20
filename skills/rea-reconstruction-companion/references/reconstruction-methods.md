@@ -71,8 +71,9 @@ which conclusions remain historical or unresolved. Follow the affected finding
 ones, before reusing validation. Unchanged bytes alone do not preserve a result
 whose assumed setting or interpretation was corrected. Keep unaffected scoped
 evidence with its original identities; missing dependency coverage stays unknown.
-See [checkpoint applicability](checkpoints.md#on-resuming) and the
-[bounded worked example](../../../evals/conflicting-evidence/README.md).
+See [checkpoint applicability](checkpoints.md#on-resuming). The bounded worked
+example is repository-only at `evals/conflicting-evidence/README.md`; it is not
+included in standalone skill installations. The procedure above is self-contained.
 
 ## Comparison and test oracles
 
