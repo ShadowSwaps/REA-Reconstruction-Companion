@@ -1,5 +1,11 @@
 # Behavioral evaluation kit
 
+The [reconstruction security boundary](reconstruction-security/README.md) extends
+Pocket Ledger with bounded untrusted imports, synthetic sensitive-data projection
+checks and direct unauthorized-operation rejection. Simulated sessions and a text
+sink double are explicit; finite same-agent checks do not establish general
+security, independent acceptance or model performance.
+
 The [interface accessibility slice](interface-accessibility/README.md) preserves
 the historical Pocket Board fixtures and demonstrates selected keyboard/focus,
 error correction and status cases. Live native-key evidence is separate from

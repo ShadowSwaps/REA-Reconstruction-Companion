@@ -39,6 +39,11 @@ the skill's no-additional-charges and host authorization constraints.
 
 ## Keep the boundary small and replaceable
 
+Apply [security boundaries](reconstruction-security.md) to any substitute that
+simulates identity or access. Label simulated authentication; hidden controls and
+editable local roles cannot establish real-service authorization. Preserve
+required real identity/session/access checks as pending.
+
 Define only what the selected slice needs: inputs/outputs/types, missing/null and
 empty behavior, error semantics, relevant auth/identity assumptions, state ownership,
 persistence/effects, time/retry/order rules and dependency ownership. Distinguish

@@ -1,0 +1,12 @@
+{
+  "id": "SEC-20261020",
+  "exposure": "source-exposed same-agent; literal expectations frozen before boundary implementation",
+  "files": {
+    "CONTRACT.md": "6da2d500cb433cb53af1ea8e521736ab8cff73eb1ffe63ac92b685f041856713",
+    "expectations.json": "c8bd327205c756ee48f5bed61cae8444fd82b761196da9fe086de9c5a86930d8",
+    "../safe-changes/baseline.mjs": "068918a4ec0d31bb1ad7fb8c59205f2b3b27b5d54d3c35ae0d906f0fd76794d9",
+    "../version-change/candidate-v2.mjs": "23598fe3c701f3f48ac2e3eeb9df1ce4b09f8831af4784ea707a65d7d6b41e01",
+    "../version-change/summary.mjs": "03c470fff363e072aac19c21e8c4407b023b8e42c8cebfb48d3be5ebab3df54d",
+    "../import-export/candidate.mjs": "7b29d66619d7e44c958d83f9520354a05729105f1f444e6be9bea68a0cfe3f1e"
+  }
+}

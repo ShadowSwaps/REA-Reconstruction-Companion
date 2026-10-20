@@ -5,6 +5,8 @@ require a product-wide blueprint or a new parser dependency. Keep the selected
 format/version and approved workflows explicit. A fully exposed source fixture
 can use ordinary tools; use REA for applicable artifact/runtime evidence.
 
+For untrusted input or sensitive exports, apply the relevant [security boundaries](reconstruction-security.md): pre-parse resource limits, safe downstream use and data/access handling remain separate from format compatibility and caught-write recovery.
+
 1. Freeze the reference bytes, identity/version/license, exposure, observed
    behavior, representative corpus and acceptance decisions before implementing.
    Keep raw originals, generated outputs, candidate and reviewer oracle separate.

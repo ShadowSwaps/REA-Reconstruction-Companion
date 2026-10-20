@@ -1,5 +1,11 @@
 # REA-Reconstruction-Companion
 
+For reconstructed slices that handle untrusted input, sensitive data or restricted
+operations, use the conditional [security boundary guidance](skills/rea-reconstruction-companion/references/reconstruction-security.md)
+and [small local worked example](evals/reconstruction-security/README.md). Keep
+original behavior, proposed controls and demonstrated protection distinct;
+simulated authentication does not establish real access protection.
+
 ![REA Reconstruction Companion — Understand. Rebuild. Validate.](assets/discord-banner.png)
 
 **Understand existing software. Plan a reconstruction. Build and validate when requested.**
