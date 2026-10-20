@@ -98,8 +98,9 @@ where applicable. Challenge consequential assertions with deliberately faulty
 variants; keep faults, limitations and unrun platform cases visible. Reassess
 dependent evidence when identity, storage, parser or trust assumptions change.
 
-The repository's [local worked example](../../../evals/reconstruction-security/README.md)
-extends Pocket Ledger with a proposed boundary. Its finite same-agent scripted
+The repository's `evals/reconstruction-security/` local worked example (not part
+of the installed skill payload) extends Pocket Ledger with a proposed boundary.
+Its finite same-agent scripted
 checks are not penetration testing, independent acceptance, proof of general
 security, original parity or model-performance evidence. Use current primary
 platform guidance for the real stack; the [research basis](research-basis.md#r22-reconstruction-security-boundaries)
