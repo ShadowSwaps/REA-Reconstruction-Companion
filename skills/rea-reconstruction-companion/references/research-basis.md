@@ -114,6 +114,17 @@ IETF, [RFC 5116](https://www.rfc-editor.org/rfc/rfc5116), [RFC 5869](https://www
 
 C2SP, [Project Wycheproof](https://github.com/C2SP/wycheproof), and PyCA, [Test vectors](https://cryptography.io/en/stable/development/test-vectors/). Applied: independent known-answer and negative cases with explicit provenance and appropriate failure checks. Limitation: finite vectors do not establish security or side-channel resistance. These projects are references, not bundled dependencies; comply with upstream licensing if later importing their corpora.
 
+## R22 Reconstruction security boundaries
+
+Primary sources checked 20 October 2026; the conditional workflow applies their
+principles to the selected reconstruction, not as evidence about an unseen original.
+
+- OWASP, [Input Validation](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html), and IETF, [RFC 8259 section 9](https://www.rfc-editor.org/rfc/rfc8259#section-9): pre-parse resource limits and format/domain validation. Validation is separate from safe sinks and authorization; finite byte/depth examples are not a general denial-of-service proof.
+- OWASP, [Authorization](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html): least privilege, default denial and per-operation/object enforcement outside editable client controls. The local simulated resolver does not establish real identity, OS isolation or server protection.
+- OWASP, [Logging](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html): exclude tokens and unnecessary personal data, project safe event fields and test error paths. Known-marker checks and redaction are incomplete; this does not authorize publishing arbitrary captured evidence.
+- OWASP, [HTML5 Security](https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html): treat untrusted text as data; browser local storage does not protect sensitive data from same-origin scripts. The example checks a text sink double, not a live browser or every output context.
+- OWASP, [Secrets Management](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html): minimize secret access and use established lifecycle/storage mechanisms where actually needed. No vault deployment, new service or cryptographic implementation is prescribed or authorized.
+
 ## Scope of the synthesis
 
 Evidence-dependency tracking, compatibility corpus design, held-out reference cases, and explicit optimization decision records are workflow recommendations combining these sources with the installed REA skill. They are not named capabilities guaranteed by the REA server. Inspect current schemas when invoking tools.

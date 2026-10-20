@@ -1,0 +1,12 @@
+{
+  "input": {"format":"pocket-ledger","version":2,"entries":[{"id":"a","title":"Café 🧾","done":false},{"id":"b","title":"<img src=x onerror=boom()>","done":true}]},
+  "rows": [{"id":"a","title":"Café 🧾","done":false},{"id":"b","title":"<img src=x onerror=boom()>","done":true}],
+  "exportText": "{\"format\":\"pocket-ledger\",\"version\":2,\"entries\":[{\"id\":\"a\",\"title\":\"Café 🧾\",\"done\":false},{\"id\":\"b\",\"title\":\"<img src=x onerror=boom()>\",\"done\":true}]}\n",
+  "displayText": "Café 🧾\n<img src=x onerror=boom()>",
+  "legacyInput": "{\"format\":\"pocket-ledger\",\"version\":1,\"entries\":[{\"id\":\"c\",\"text\":\"Kept\"}]}",
+  "legacyExport": "{\"format\":\"pocket-ledger\",\"version\":1,\"entries\":[{\"id\":\"c\",\"text\":\"Kept\"}]}\n",
+  "legacyRows": [{"id":"c","title":"Kept","done":false}],
+  "denied": {"ok":false,"code":"denied"},
+  "syntheticMarkers": ["SYNTHETIC-TOKEN-DO-NOT-USE", "fixture-person@example.invalid"],
+  "limits": {"bytes":2048,"depth":4}
+}
