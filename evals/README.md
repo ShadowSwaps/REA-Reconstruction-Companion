@@ -1,5 +1,12 @@
 # Behavioral evaluation kit
 
+The [conflicting-evidence example](conflicting-evidence/README.md) contrasts a
+local runtime note, incomplete recording description, copy-derived reports and
+newer docs from another version. A controlled local check distinguishes two
+explanations while leaving capture causality, remote behavior and desired policy
+unresolved. Literal outcomes and misleading-decision rejection tests are finite
+same-author fixture checks, separate from live model understanding or app parity.
+
 The [reconstruction security boundary](reconstruction-security/README.md) extends
 Pocket Ledger with bounded untrusted imports, synthetic sensitive-data projection
 checks and direct unauthorized-operation rejection. Simulated sessions and a text

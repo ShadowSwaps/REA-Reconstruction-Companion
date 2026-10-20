@@ -44,6 +44,13 @@ Distinguish these situations:
 
 Invalidate by dependency and scope. A change to one artifact need not invalidate an independent artifact's findings or the user's unchanged scope decision. Conversely, identical observations from a small corpus do not prove that an unseen changed target is equivalent. Preserve explicit unknowns when impact cannot yet be narrowed.
 
+A corrected interpretation or newly conflicting source can change applicability
+without changing target bytes. Apply [evidence reconciliation](reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior):
+retain the prior claim/source as historical, identify the applicable replacement
+and follow dependent decisions and tests. Neither latest-date preference nor
+copy-derived agreement establishes supersession. Keep unresolved conclusions
+pending rather than silently transferring an old pass to the new interpretation.
+
 For multiple components, bind each reused finding, requirement verification and
 report to the artifacts, interfaces, corpus and relevant environment it actually
 used. Follow indirect dependencies too: an integration result can become stale

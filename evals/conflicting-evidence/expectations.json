@@ -1,0 +1,7 @@
+{
+  "insertion": ["z", "a"],
+  "title": ["a", "z"],
+  "differentRanks": ["a", "z"],
+  "empty": [],
+  "inputAfter": [{"id":"z","rank":1,"title":"Zulu"},{"id":"a","rank":1,"title":"Alpha"}]
+}

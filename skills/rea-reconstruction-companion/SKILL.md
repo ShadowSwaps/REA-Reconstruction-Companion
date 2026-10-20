@@ -100,6 +100,8 @@ Start from the exact target and a prioritized question checklist. Use REA summar
 
 Distinguish **observed facts**, **inferences**, **unknowns**, and **proposed design choices** throughout. Static analysis does not establish runtime behavior, strings do not establish active features, and client/network evidence does not reveal an inaccessible backend's complete implementation. Use bounded experiments to resolve uncertainties that could change the design.
 
+For conflicting sources or ambiguous behavior, use [evidence reconciliation](references/reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior) within the existing ledger: compare applicability, retain competing explanations, choose a distinguishing authorized check and leave consequential gaps unresolved. Newer or repeated evidence alone does not decide correctness or permit stale validation reuse.
+
 For an unavailable backend or external service, use [inaccessible backend handling](references/unavailable-backends.md) to choose an authorized local substitute, supplied finite replay or deferred integration. Preserve hard real-service requirements and keep local/replayed success distinct from remote verification.
 
 For selected UI workflows, use [interface accessibility](references/interface-accessibility.md) to specify keyboard operation, focus, labels, errors and status feedback separately from visual/functional fidelity. Distinguish original observations from proposed improvements and keyboard/assistive-technology evidence from markup alone; keep the checks proportional to the requested interface.

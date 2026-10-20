@@ -1,5 +1,11 @@
 # REA-Reconstruction-Companion
 
+For conflicting recordings, runtime results, docs or recollections, use
+[evidence reconciliation](skills/rea-reconstruction-companion/references/reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior)
+and the [bounded sorting example](evals/conflicting-evidence/README.md). Preserve
+source applicability, competing explanations and unresolved acceptance; newer or
+copy-derived evidence alone does not settle a claim.
+
 For reconstructed slices that handle untrusted input, sensitive data or restricted
 operations, use the conditional [security boundary guidance](skills/rea-reconstruction-companion/references/reconstruction-security.md)
 and [small local worked example](evals/reconstruction-security/README.md). Keep
