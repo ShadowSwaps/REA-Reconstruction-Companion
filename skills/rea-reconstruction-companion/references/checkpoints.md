@@ -26,6 +26,14 @@ Use paths appropriate to the receiving workspace; do not transfer credentials or
 
 Read the selected checkpoint and the sources needed for the next slice. Confirm the target, candidate, relevant environment and the scope of earlier reports. Reuse applicable findings instead of restarting the whole investigation. Retain unfinished work: an input-validation test passing does not establish a complete function, and “implemented” does not mean verified against the reference.
 
+For stateful journeys, retain the selected starting states, reset procedure,
+pending/session versus persisted data and exercised transition sequences in the
+same evidence/acceptance records. A saved screen or success label cannot restore
+an unknown pending operation. If a guard, initial-state assumption or persistence
+interpretation changes, reassess the dependent observations and sequence results
+before reuse; unchanged candidate bytes alone are insufficient. Keep untested
+transitions visible without invalidating unrelated evidence.
+
 Reconcile the saved roadmap with current priorities and hard requirements. A changed first outcome can reorder enabling dependencies and invalidate a slice's acceptance scope even when files are unchanged. Revise the affected sequence and evidence/test applicability, retaining justified reuse and historical results. A saved plan does not override a current scope or mode correction.
 
 For a request-driven edit, use [safe changes](safe-changes.md) to account for custom/uncommitted implementation and retained contracts before applying the saved plan. A new reconstruction requirement is distinct from a changed reference version or runtime.

@@ -104,6 +104,33 @@ Freeze original cases before adapting the candidate. An intentional-difference c
 
 ## Coverage and failure reduction
 
+### Selected transition checks
+
+Use the [workflow state rows](blueprint.md#consequential-workflow-states) to
+choose a few meaningful ordered cases. Reset between independent cases; preserve
+state within each sequence. Fix expected outputs, errors and data invariants
+from applicable reference evidence or a separately reasoned proposed contract
+before adapting the candidate. Record which basis applies. Do not derive the
+expected result from the implementation being checked.
+
+Assert consequential intermediate states as well as the terminal outcome: for
+example, failed save retains the prior committed bytes and a retryable session
+draft; cancel removes the pending action; reopening reads committed data rather
+than an abandoned preview. Those are examples of possible requirements, not
+universal product rules. Test the selected guards through the actual action
+boundary, rather than trusting a disabled control or status label.
+
+Challenge coverage with a plausible faulty variant: first show that ordinary
+success workflows still pass, then show that a selected transition check rejects
+the defect. Preserve the original fixtures/oracles; keep deliberate defects in
+test doubles or disposable candidates. Report sequences and initial states
+actually exercised, skipped/unknown transitions, reset/reopen method and injected
+faults. A finite authored example is neither general model understanding nor
+original-app parity. The separate repository-only example is
+`evals/workflow-edge-cases/README.md`; standalone installations do not include it.
+
+### Coverage boundaries
+
 Cover input partitions, boundaries, invalid cases, meaningful state transitions, and relevant configuration combinations. For large configuration spaces, constrained pairwise or higher-strength combinations can reduce work; choose strength by risk and state exactly what is covered. Interaction coverage is not code coverage, temporal sequence coverage, or a proof that all failures are found. [R8](research-basis.md#r8-combinatorial-coverage)
 
 When a mismatch occurs, minimize the input or action sequence while preserving it and keep the result as a regression case. Maintain a separate set of reference cases not used to tune the implementation when practical. Held-out cases help reveal overfitting to a few examples; they do not prove global correctness. Reduction is grounded in [R5](research-basis.md#r5-differential-testing); the held-out split is a workflow recommendation.

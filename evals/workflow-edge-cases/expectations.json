@@ -1,0 +1,527 @@
+{
+  "provenance": "Authored literals alongside implementation, frozen before first validation; no candidate output used.",
+  "inputs": {
+    "new": "{\"format\":\"pocket-ledger\",\"version\":2,\"entries\":[{\"id\":\"z\",\"title\":\"New 🐈\",\"done\":false}]}\n",
+    "other": "{\"format\":\"pocket-ledger\",\"version\":2,\"entries\":[{\"id\":\"y\",\"title\":\"Replacement\",\"done\":true}]}\n",
+    "malformed": "{"
+  },
+  "disk": {
+    "absent": null,
+    "initial": "{\"format\":\"pocket-ledger\",\"version\":2,\"entries\":[{\"id\":\"a\",\"title\":\"Keep Å\",\"done\":true},{\"id\":\"b\",\"title\":\"Second\",\"done\":false}]}\n",
+    "new": "{\"format\":\"pocket-ledger\",\"version\":2,\"entries\":[{\"id\":\"z\",\"title\":\"New 🐈\",\"done\":false}]}\n",
+    "other": "{\"format\":\"pocket-ledger\",\"version\":2,\"entries\":[{\"id\":\"y\",\"title\":\"Replacement\",\"done\":true}]}\n"
+  },
+  "states": {
+    "empty": {
+      "screen": "idle",
+      "committed": [],
+      "preview": null
+    },
+    "existing": {
+      "screen": "idle",
+      "committed": [
+        {
+          "id": "a",
+          "title": "Keep Å",
+          "done": true
+        },
+        {
+          "id": "b",
+          "title": "Second",
+          "done": false
+        }
+      ],
+      "preview": null
+    },
+    "preview-empty": {
+      "screen": "preview",
+      "committed": [],
+      "preview": [
+        {
+          "id": "z",
+          "title": "New 🐈",
+          "done": false
+        }
+      ]
+    },
+    "preview-existing": {
+      "screen": "preview",
+      "committed": [
+        {
+          "id": "a",
+          "title": "Keep Å",
+          "done": true
+        },
+        {
+          "id": "b",
+          "title": "Second",
+          "done": false
+        }
+      ],
+      "preview": [
+        {
+          "id": "z",
+          "title": "New 🐈",
+          "done": false
+        }
+      ]
+    },
+    "preview-replaced": {
+      "screen": "preview",
+      "committed": [
+        {
+          "id": "a",
+          "title": "Keep Å",
+          "done": true
+        },
+        {
+          "id": "b",
+          "title": "Second",
+          "done": false
+        }
+      ],
+      "preview": [
+        {
+          "id": "y",
+          "title": "Replacement",
+          "done": true
+        }
+      ]
+    },
+    "error-existing": {
+      "screen": "error",
+      "committed": [
+        {
+          "id": "a",
+          "title": "Keep Å",
+          "done": true
+        },
+        {
+          "id": "b",
+          "title": "Second",
+          "done": false
+        }
+      ],
+      "preview": [
+        {
+          "id": "z",
+          "title": "New 🐈",
+          "done": false
+        }
+      ]
+    },
+    "saved-new": {
+      "screen": "saved",
+      "committed": [
+        {
+          "id": "z",
+          "title": "New 🐈",
+          "done": false
+        }
+      ],
+      "preview": null
+    },
+    "saved-other": {
+      "screen": "saved",
+      "committed": [
+        {
+          "id": "y",
+          "title": "Replacement",
+          "done": true
+        }
+      ],
+      "preview": null
+    },
+    "reopened-new": {
+      "screen": "idle",
+      "committed": [
+        {
+          "id": "z",
+          "title": "New 🐈",
+          "done": false
+        }
+      ],
+      "preview": null
+    }
+  },
+  "sequences": [
+    {
+      "id": "empty-success",
+      "group": "ordinary",
+      "initial": "absent",
+      "state": "empty",
+      "steps": [
+        {
+          "op": "select",
+          "state": "preview-empty",
+          "disk": "absent",
+          "result": {
+            "ok": true
+          },
+          "token": "first",
+          "input": "new"
+        },
+        {
+          "op": "confirm",
+          "state": "saved-new",
+          "disk": "new",
+          "result": {
+            "ok": true
+          },
+          "token": "first"
+        },
+        {
+          "op": "reopen",
+          "state": "reopened-new",
+          "disk": "new",
+          "result": {
+            "ok": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "existing-success",
+      "group": "ordinary",
+      "initial": "initial",
+      "state": "existing",
+      "steps": [
+        {
+          "op": "select",
+          "state": "preview-existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          },
+          "token": "first",
+          "input": "new"
+        },
+        {
+          "op": "confirm",
+          "state": "saved-new",
+          "disk": "new",
+          "result": {
+            "ok": true
+          },
+          "token": "first"
+        },
+        {
+          "op": "reopen",
+          "state": "reopened-new",
+          "disk": "new",
+          "result": {
+            "ok": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "failure-retry",
+      "group": "transitions",
+      "initial": "initial",
+      "state": "existing",
+      "steps": [
+        {
+          "op": "select",
+          "state": "preview-existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          },
+          "token": "first",
+          "input": "new"
+        },
+        {
+          "op": "confirm",
+          "state": "error-existing",
+          "disk": "initial",
+          "result": {
+            "ok": false,
+            "error": "persistence"
+          },
+          "token": "first",
+          "fail": true
+        },
+        {
+          "op": "confirm",
+          "state": "saved-new",
+          "disk": "new",
+          "result": {
+            "ok": true
+          },
+          "token": "first"
+        },
+        {
+          "op": "confirm",
+          "state": "saved-new",
+          "disk": "new",
+          "result": {
+            "ok": false,
+            "error": "stale-selection"
+          },
+          "token": "first"
+        },
+        {
+          "op": "reopen",
+          "state": "reopened-new",
+          "disk": "new",
+          "result": {
+            "ok": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "failure-cancel",
+      "group": "transitions",
+      "initial": "initial",
+      "state": "existing",
+      "steps": [
+        {
+          "op": "select",
+          "state": "preview-existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          },
+          "token": "first",
+          "input": "new"
+        },
+        {
+          "op": "confirm",
+          "state": "error-existing",
+          "disk": "initial",
+          "result": {
+            "ok": false,
+            "error": "persistence"
+          },
+          "token": "first",
+          "fail": true
+        },
+        {
+          "op": "cancel",
+          "state": "existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          },
+          "token": "first"
+        },
+        {
+          "op": "confirm",
+          "state": "existing",
+          "disk": "initial",
+          "result": {
+            "ok": false,
+            "error": "stale-selection"
+          },
+          "token": "first"
+        },
+        {
+          "op": "reopen",
+          "state": "existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "replacement-stale",
+      "group": "transitions",
+      "initial": "initial",
+      "state": "existing",
+      "steps": [
+        {
+          "op": "select",
+          "state": "preview-existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          },
+          "token": "first",
+          "input": "new"
+        },
+        {
+          "op": "select",
+          "state": "preview-replaced",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          },
+          "token": "second",
+          "input": "other"
+        },
+        {
+          "op": "confirm",
+          "state": "preview-replaced",
+          "disk": "initial",
+          "result": {
+            "ok": false,
+            "error": "stale-selection"
+          },
+          "token": "first"
+        },
+        {
+          "op": "cancel",
+          "state": "preview-replaced",
+          "disk": "initial",
+          "result": {
+            "ok": false,
+            "error": "stale-selection"
+          },
+          "token": "first"
+        },
+        {
+          "op": "confirm",
+          "state": "saved-other",
+          "disk": "other",
+          "result": {
+            "ok": true
+          },
+          "token": "second"
+        }
+      ]
+    },
+    {
+      "id": "preview-reopen",
+      "group": "transitions",
+      "initial": "initial",
+      "state": "existing",
+      "steps": [
+        {
+          "op": "select",
+          "state": "preview-existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          },
+          "token": "first",
+          "input": "new"
+        },
+        {
+          "op": "reopen",
+          "state": "existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          }
+        },
+        {
+          "op": "confirm",
+          "state": "existing",
+          "disk": "initial",
+          "result": {
+            "ok": false,
+            "error": "stale-selection"
+          },
+          "token": "first"
+        }
+      ]
+    },
+    {
+      "id": "error-reopen",
+      "group": "transitions",
+      "initial": "initial",
+      "state": "existing",
+      "steps": [
+        {
+          "op": "select",
+          "state": "preview-existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          },
+          "token": "first",
+          "input": "new"
+        },
+        {
+          "op": "confirm",
+          "state": "error-existing",
+          "disk": "initial",
+          "result": {
+            "ok": false,
+            "error": "persistence"
+          },
+          "token": "first",
+          "fail": true
+        },
+        {
+          "op": "reopen",
+          "state": "existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          }
+        },
+        {
+          "op": "select",
+          "state": "preview-replaced",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          },
+          "token": "second",
+          "input": "other"
+        },
+        {
+          "op": "confirm",
+          "state": "preview-replaced",
+          "disk": "initial",
+          "result": {
+            "ok": false,
+            "error": "stale-selection"
+          },
+          "token": "first"
+        },
+        {
+          "op": "confirm",
+          "state": "saved-other",
+          "disk": "other",
+          "result": {
+            "ok": true
+          },
+          "token": "second"
+        }
+      ]
+    },
+    {
+      "id": "invalid-preserves-preview",
+      "group": "transitions",
+      "initial": "initial",
+      "state": "existing",
+      "steps": [
+        {
+          "op": "select",
+          "state": "preview-existing",
+          "disk": "initial",
+          "result": {
+            "ok": true
+          },
+          "token": "first",
+          "input": "new"
+        },
+        {
+          "op": "select",
+          "input": "malformed",
+          "state": "preview-existing",
+          "disk": "initial",
+          "result": {
+            "ok": false,
+            "error": "syntax"
+          }
+        },
+        {
+          "op": "confirm",
+          "state": "saved-new",
+          "disk": "new",
+          "result": {
+            "ok": true
+          },
+          "token": "first"
+        }
+      ]
+    }
+  ]
+}

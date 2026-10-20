@@ -1,5 +1,12 @@
 # Behavioral evaluation kit
 
+The [workflow edge-case example](workflow-edge-cases/README.md) is a separate
+Pocket Ledger import-confirmation variant. Frozen literal sequences check
+pending/committed state, failed save then retry/cancel, stale confirmation and
+reopen. Ordinary workflows also pass on faulty variants rejected by transition
+checks. Same-author source-exposed controls do not prove original-app parity,
+crash/concurrency handling, live permissions or model understanding.
+
 The [conflicting-evidence example](conflicting-evidence/README.md) contrasts a
 local runtime note, incomplete recording description, copy-derived reports and
 newer docs from another version. A controlled local check distinguishes two

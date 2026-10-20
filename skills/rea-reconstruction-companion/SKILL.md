@@ -116,6 +116,11 @@ Use available REA tools and their actual schemas. If REA access is blocked, foll
 
 For experiments, uncertain decompilation, state recovery, or compatibility work, use the applicable sections of [reconstruction methods](references/reconstruction-methods.md). Preserve reproducible scenarios and reference outputs, check the assumptions behind recovered code, and distinguish multiple views of one observation from independent corroboration.
 
+For a stateful journey, use [consequential workflow states](references/blueprint.md#consequential-workflow-states)
+to separate displayed, session/pending and persisted state in the existing records.
+Select meaningful ordered checks and retain untested transitions; a happy path or
+an injected local failure does not establish unseen original behavior.
+
 For encrypted formats or interfaces, read [cryptographic compatibility](references/cryptographic-compatibility.md) to recover an explicit interoperability profile and select independent acceptance/rejection vectors. A known algorithm does not imply available keys or a decryption capability.
 
 ## Assess performance and quality
