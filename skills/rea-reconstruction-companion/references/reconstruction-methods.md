@@ -32,6 +32,49 @@ Make relevant interactions executable using [consumer/provider contracts](valida
 
 Record why a conclusion is supported and what could falsify it. Two reports derived from the same capture are not two independent observations. Do not turn confidence labels into unsupported statistical probabilities. Preserve contradictory findings and conditions that explain them. When the target or an analysis assumption changes, reassess the dependent claims instead of carrying forward their verified status.
 
+### Conflicting evidence and ambiguous behavior
+
+Use the existing finding ledger and requirement/acceptance rows; a separate conflict
+system is unnecessary. State the disputed claim at the smallest useful scope and
+link each supporting or conflicting observation to its source location. Keep the
+observation, explanation/hypothesis, desired behavior and proposed design distinct.
+A reproducible original quirk does not decide which behavior the user wants.
+
+Compare applicability before choosing an explanation: artifact identity/version,
+source date versus capture date, environment/runtime, settings/feature flags,
+permissions/account capability, input/data, initial state/reset, action sequence
+and actual reproduction coverage. Keep unknown fields unknown. A newer document
+can describe another release; a runtime result can cover another configuration;
+a recording can omit an action. No source type, newest timestamp or majority
+automatically wins. Link copies, summaries and reports to their common origin;
+multiple views can help interpretation without becoming independent corroboration.
+
+Retain plausible competing explanations, including capture/harness limitations
+when supported. Choose a small authorized check that can distinguish consequential
+alternatives. Before running it, record the controlled conditions and expected
+outcomes under each explanation, including an inconclusive outcome. Then retain
+actual outputs, deviations and remaining limits. Repeating an uncontrolled case
+or obtaining the same success label does not necessarily discriminate causes.
+Do not acquire unavailable access, spend money or turn planning into a build to
+settle a conflict. A local fixture demonstrates its own mechanism, not the unseen
+original or backend.
+
+Resolve only the scoped claim the evidence supports. If consequential ambiguity
+remains, keep dependent acceptance unresolved and name the smallest missing
+observation or user decision. Ask a focused clarification only when available
+evidence cannot resolve a choice that changes the requested outcome; continue
+unaffected work. Preserve hard requirements, even if original behavior differs.
+
+When stronger/new evidence arrives, record what it supersedes, why it applies and
+which conclusions remain historical or unresolved. Follow the affected finding
+-> requirement -> decision/component -> test dependencies, including indirect
+ones, before reusing validation. Unchanged bytes alone do not preserve a result
+whose assumed setting or interpretation was corrected. Keep unaffected scoped
+evidence with its original identities; missing dependency coverage stays unknown.
+See [checkpoint applicability](checkpoints.md#on-resuming). The bounded worked
+example is repository-only at `evals/conflicting-evidence/README.md`; it is not
+included in standalone skill installations. The procedure above is self-contained.
+
 ## Comparison and test oracles
 
 A test oracle is the basis for deciding whether a result is acceptable. Choose it explicitly:

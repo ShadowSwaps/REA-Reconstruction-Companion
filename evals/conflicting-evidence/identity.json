@@ -1,0 +1,9 @@
+{
+  "kind": "authored fixed conflict case; not original-app evidence",
+  "files": {
+    "decision.json": "fe19cb0132a312a7c4427b989aba469f9749d705ad1f0c8203deb5d199176f73",
+    "expectations.json": "e3a59eadee1b5f17c75dca90c5e648d2b029848d22531ee35cceb4052c0889ad",
+    "sorter.mjs": "cfae6cf2ae27afdb127aa7ae44923f177ce7195d65c70e211a489a9b43bf6b0e",
+    "sources.json": "1143b9943d6f5b40f6b7cb1763992d654f6d8f681ab080ddbfb27868290c5aec"
+  }
+}

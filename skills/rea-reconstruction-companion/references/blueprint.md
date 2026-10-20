@@ -33,6 +33,13 @@ For [visual or incomplete supplied evidence](visual-evidence.md), bind findings 
 
 For an uncertain mechanism, formulate competing explanations and choose the smallest observation that distinguishes them. Reconcile static and runtime evidence explicitly. Do not describe an unsuccessful bounded search as proof of universal absence, or page exhaustion as proof of source completeness.
 
+For conflicting recordings, runtime results, documentation or descriptions, use
+[evidence reconciliation](reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior).
+Extend these same finding/acceptance rows with source applicability, competing
+explanations, predicted distinguishing outcomes and actual limits. A scoped
+resolution does not remove a separate desired-behavior decision or verify an
+unobserved dependency.
+
 Unknown remote services, undocumented algorithms, unavailable feature tiers, or platform-specific behavior remain explicit. Specify observable contracts when internals cannot be recovered, and identify where an independent replacement is needed.
 
 Use [inaccessible backend handling](unavailable-backends.md) for the evidence/design split, local substitute versus finite replay versus deferred integration, and minimal replaceable boundary. A local first slice leaves required remote compatibility pending; failed access does not prove the feature absent.

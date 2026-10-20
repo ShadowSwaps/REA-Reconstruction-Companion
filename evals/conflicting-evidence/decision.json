@@ -1,0 +1,11 @@
+{
+  "mode": "specify-only",
+  "hardRequirements": ["offline", "no-accounts"],
+  "sourceGroups": [["E-R"],["E-V","E-C1","E-C2"],["E-D"],["E-N"]],
+  "applicability": {"local":"frozen sorter.mjs; authored-1; selected input; insertion/title only", "recording":"unknown artifact/version/settings/reset; no causal resolution", "documentation":"authored-2; not selected-target verification", "narrative":"recollection plus explicit desired offline/no-accounts scope"},
+  "hypotheses": ["H-setting", "H-fixed", "H-capture"],
+  "experiment": {"id":"X1", "predictions":{"H-setting":{"insertion":["z","a"],"title":["a","z"]},"H-fixed":{"insertion":["z","a"],"title":["z","a"]}}, "inconclusive":"unexpected output or uncontrolled identity/conditions"},
+  "conclusion": {"classification":"observed local outputs; H-setting supported within X1", "source":"E-X1", "fixedInsertion":"refuted for selected local artifact/settings/input", "recordingCause":"unresolved", "remoteBehavior":"unverified"},
+  "revision": {"historical":["E-R","E-V","E-C1","E-C2","E-D","E-N"], "superseded":["F-local-order: universal insertion inference"], "reassess":["R-tie-policy","D-sort-design","T-order-acceptance"], "retainScoped":["F-schema","T-schema"], "unresolved":["F-remote","T-remote-parity","E-V cause"]},
+  "desiredPolicy": {"status":"unresolved", "question":"For the offline reconstruction, should equal ranks retain insertion or use title?", "reason":"available original evidence does not choose the user's intended tie policy", "unaffectedWork":"retain schema findings and specify unaffected rank ordering", "implementation":"not authorized by this specification request"}
+}

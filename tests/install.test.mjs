@@ -61,6 +61,39 @@ test('integration off installs without REA or modifying an existing REA', t => {
   }
 });
 
+test('standalone evidence guide links resolve inside the installed payload', t => {
+  const f = fixture(t);
+  const result = applyInstall(plan(f));
+  const guide = path.join(result.companion, 'references', 'reconstruction-methods.md');
+  const original = fs.readFileSync(guide, 'utf8');
+  assert.equal(fs.existsSync(path.join(result.companion, 'evals')), false);
+  const check = () => {
+    let localLinks = 0;
+    for (const [, target] of fs.readFileSync(guide, 'utf8').matchAll(/\]\(([^\s)]+)\)/g)) {
+      if (/^(https?:|mailto:|#)/.test(target)) continue;
+      localLinks++;
+      const destination = path.resolve(path.dirname(guide), target.split('#')[0]);
+      const relative = path.relative(result.companion, destination);
+      assert.ok(relative !== '..' && !relative.startsWith(`..${path.sep}`) && !path.isAbsolute(relative),
+        `Link escapes standalone skill: ${target}`);
+      assert.ok(fs.existsSync(destination), `Missing installed evidence guide target: ${target}`);
+    }
+    assert.ok(localLinks > 0, 'Exercise actual installed local reference links');
+  };
+  check();
+  // Reproduce the historical escape even with an existing external target.
+  const escaped = '../../../evals/conflicting-evidence/README.md';
+  const external = path.resolve(path.dirname(guide), escaped);
+  const fixtureRelative = path.relative(f.directory, external);
+  assert.ok(!fixtureRelative.startsWith('..') && !path.isAbsolute(fixtureRelative));
+  fs.mkdirSync(path.dirname(external), { recursive: true });
+  fs.writeFileSync(external, 'Unrelated file outside the installed payload.');
+  fs.writeFileSync(guide, original + `\n[bad example](${escaped})\n`);
+  assert.throws(check, /Link escapes standalone skill/);
+  fs.writeFileSync(guide, original + '\n[missing local guide](missing-guide.md)\n');
+  assert.throws(check, /Missing installed evidence guide target/);
+});
+
 test('off leaves a previously enabled rule untouched and says so', t => {
   const f = fixture(t);
   applyInstall(plan(f));

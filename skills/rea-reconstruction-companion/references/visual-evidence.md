@@ -48,6 +48,11 @@ and competing explanations; do not silently prefer the image or erase the text.
 For example, a visible Save control and reported autosave can coexist: clarify
 the consequential policy rather than declare either source false.
 
+Reconcile such tensions with runtime/documentation evidence using the existing
+[finding ledger procedure](reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior).
+Match capture identity and conditions before generalizing; repeated narration or
+transcripts of one capture add no independent observation.
+
 Ask a focused question when its answer changes the desired outcome, design or
 acceptance: which workflow matters, whether Save or autosave should govern the
 new design, whether reopen persistence is required, or whether only appearance

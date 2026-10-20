@@ -1,0 +1,26 @@
+{
+  "scope": "Synthetic local sorting investigation; specify an offline reconstruction, do not build it",
+  "hardRequirements": ["offline", "no-accounts"],
+  "selectedTarget": {"artifact": "sorter.mjs", "version": "authored-1", "runtime": "Node >=20", "permissions": "local-only, no account", "locale": "explicit code-point title comparison", "data": [{"id":"z","rank":1,"title":"Zulu"},{"id":"a","rank":1,"title":"Alpha"}]},
+  "evidence": [
+    {"id":"E-R", "kind":"runtime-note", "origin":"R1", "sourceDate":"2026-10-17", "captureDate":"2026-10-17", "location":"supplied run, output line 1", "version":"authored-1", "artifact":"sorter.mjs", "environment":"Node >=20, local-only", "setting":"insertion", "input":"selectedTarget.data, fresh array", "output":["z","a"], "limit":"supplied authored note; rerun below supplies current execution evidence"},
+    {"id":"E-V", "kind":"recording-description", "origin":"V1", "sourceDate":"2026-10-18", "captureDate":"unknown", "location":"described frames 1 and 3", "version":"unknown", "artifact":"unknown", "environment":"unknown", "setting":"unknown", "input":"rows appear equal-ranked; intermediate actions/reset missing", "output":["a","z"], "limit":"authored description only; no actual video or backend trace"},
+    {"id":"E-C1", "kind":"summary", "origin":"V1", "derivedFrom":"E-V", "sourceDate":"2026-10-19", "claim":"equal ranks reordered"},
+    {"id":"E-C2", "kind":"report", "origin":"V1", "derivedFrom":"E-C1", "sourceDate":"2026-10-20", "claim":"equal ranks reordered"},
+    {"id":"E-D", "kind":"documentation", "origin":"D1", "sourceDate":"2026-10-20", "captureDate":"not applicable", "location":"authored release-2 note, paragraph 1", "version":"authored-2", "artifact":"unavailable", "claim":"equal ranks always preserve insertion order", "limit":"different release; no selected-target execution"},
+    {"id":"E-N", "kind":"user-description", "origin":"N1", "sourceDate":"2026-10-20", "location":"authored recollection", "claim":"I remember server sorting; I need an offline reconstruction without accounts", "limit":"recollection does not establish a remote effect or authorize implementation"}
+  ],
+  "hypotheses": [
+    {"id":"H-setting", "claim":"same local artifact can produce both orders when tie-break changes", "predicted":{"insertion":["z","a"],"title":["a","z"]}},
+    {"id":"H-fixed", "claim":"selected artifact always preserves insertion regardless of setting", "predicted":{"insertion":["z","a"],"title":["z","a"]}},
+    {"id":"H-capture", "claim":"missing version/settings/actions can account for the described recording", "predicted":"either local outcome is compatible; local check cannot identify V1 cause"}
+  ],
+  "check": {"id":"X1", "authorization":"bounded local authored fixture execution only", "controls":["same frozen artifact", "same fresh input", "same process/runtime", "vary only tieBreak", "no IO or remote calls"], "inconclusive":"different outputs than either prediction, missing identity, or uncontrolled conditions require investigation"},
+  "historicalFindings": [
+    {"id":"F-local-order", "classification":"inference", "source":"E-R", "claim":"all settings preserve insertion", "limit":"overgeneralization from the insertion case; old T-order-acceptance covered insertion only"},
+    {"id":"F-schema", "classification":"static observation", "source":"selectedTarget.data", "claim":"these two fixture rows have id:string, rank:number, title:string", "test":"T-schema checks only these selected rows, not a universal format"},
+    {"id":"F-remote", "classification":"unknown", "source":"E-N", "claim":"no remote effect verified", "test":"T-remote-parity unrun"}
+  ],
+  "dependencies": {"F-local-order":["R-tie-policy","D-sort-design","T-order-acceptance"], "F-schema":["T-schema"], "F-remote":["T-remote-parity"]},
+  "laterEvidence": {"id":"E-X1", "kind":"actual run of X1", "appliesTo":"current frozen sorter.mjs, selected data, two named settings only", "supersedes":"F-local-order: universal insertion inference", "doesNotSupersede":["E-R historical insertion observation", "E-V unknown recording cause", "F-schema unrelated evidence", "F-remote unresolved"]}
+}
