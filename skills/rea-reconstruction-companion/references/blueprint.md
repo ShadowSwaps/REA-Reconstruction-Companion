@@ -16,6 +16,37 @@ Classify each investigation question as answered, partially answered, or unresol
 
 Before runtime experiments, record a repeatable starting state and scenario using [reconstruction methods](reconstruction-methods.md#repeatable-observation). Use contrasting scenarios to locate feature-specific work; include state transitions and persistence effects, not just screens. Keep unexercised account tiers, configurations, and platform paths visible as coverage gaps.
 
+### Consequential workflow states
+
+For a selected journey, extend the existing finding/requirement/acceptance rows
+with the starting state, input/action, guard, next state, data/side effects and
+observable result. Identify the evidence and its limits for each consequential
+transition. A compact table or sequence is enough; do not create a parallel
+state framework or require every combination to be enumerated.
+
+Separate what the interface displays from session state (selection, draft,
+pending operation) and persisted state. Record how each is established or reset.
+The same screen can conceal different pending work or committed data. Hidden
+state is a question to investigate, not proof of a recovered internal mechanism.
+Label static/runtime observations, causal hypotheses, desired requirements and
+proposed designs separately; reconcile conflicts through the finding ledger.
+
+Choose a small set of sequences by the consequence of being wrong. Useful
+contrasts can include empty versus existing data, rejected versus committed
+actions, failure then retry, cancel then delayed confirmation, or reopen with
+unfinished work. Examine changed permissions, concurrent actors or interruption
+only where applicable and authorized. Check both the user-visible outcome and
+relevant state/data after intermediate steps, including whether a rejected action
+preserves data. A final happy-path result alone cannot establish completion.
+
+Keep unobserved transitions and their dependent requirements unverified. A
+synchronous injected failure exercises that control path; it does not test a
+process crash, concurrent callback or live permission change. Revisit dependent
+observations/tests when starting-state, guard or persistence assumptions change;
+retain unrelated scoped evidence and historical results. Use
+[sequence comparison](reconstruction-methods.md#selected-transition-checks) for
+bounded checks and explicit coverage limits.
+
 ## Findings and uncertainty
 
 Keep a finding ledger containing:

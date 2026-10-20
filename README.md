@@ -1,5 +1,10 @@
 # REA-Reconstruction-Companion
 
+For state-dependent journeys, use [workflow state guidance](skills/rea-reconstruction-companion/references/blueprint.md#consequential-workflow-states)
+and the [bounded import-confirmation example](evals/workflow-edge-cases/README.md).
+Separate visible, pending and committed state; preserve untested transitions and
+distinguish local fault injection from original-target evidence.
+
 For conflicting recordings, runtime results, docs or recollections, use
 [evidence reconciliation](skills/rea-reconstruction-companion/references/reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior)
 and the [bounded sorting example](evals/conflicting-evidence/README.md). Preserve
