@@ -1,5 +1,18 @@
 # REA-Reconstruction-Companion
 
+For search, combined filters and sorted lists, use the focused
+[search and ordering guidance](skills/rea-reconstruction-companion/references/search-filter-sort.md)
+and [offline catalog example](evals/search-filter-sort/README.md). Recover matching,
+filter composition and comparator rules; check ordered identities, selection and
+page transitions. Keep observed original behavior separate from proposed changes.
+
+Example: “Reconstruct this catalog's search, category/availability filters and
+price sorting. Establish case/accent/whitespace behavior, missing values and ties;
+check what happens to selection and pages when I filter, reorder, add or delete.”
+For a deliberate improvement, state the changed goal: “Preserve the observed
+matching rules, but retain selection by item identity when sorting.” The companion
+keeps the original observation and proposed acceptance separately testable.
+
 For date/time-zone and localized data behavior, use the focused
 [date and locale contracts](skills/rea-reconstruction-companion/references/date-locale.md)
 and [bounded offline example](evals/date-locale/README.md). They distinguish
@@ -354,6 +367,8 @@ The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw ev
 </details>
 
 **Numeric quantities (v1.3.38):** [separate input, canonical values, rounding and units](evals/numeric-contracts/README.md). One offline fixed length profile uses frozen literal expectations, actual storage/import/reopen and value/state rejection of faulty variants. Same-author finite checks establish a proposed contract, not original parity or a general decimal/locale engine.
+
+**Search, filters and sorting (v1.3.39):** [exercise one proposed catalog profile](evals/search-filter-sort/README.md). Frozen literal orders and intermediate states cover matching, combined filters, missing/numeric values, stable ties, selection identity and page/data changes. Eleven faulty variants pass ordinary checks before selected assertions reject them; finite same-author checks establish neither original parity nor general locale/backend behavior.
 
 ## Support the project
 

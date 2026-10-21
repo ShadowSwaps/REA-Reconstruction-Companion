@@ -1,5 +1,12 @@
 # Behavioral evaluation kit
 
+The [search/filter/sort example](search-filter-sort/README.md) freezes one proposed
+offline catalog profile: literal ordered IDs and intermediate selection/page
+states, combined filters and meaningful matching/comparator boundaries. Eleven
+disposable faults pass ordinary checks before discriminating cases reject them.
+Same-author source-exposed checks do not establish original-app parity, general
+locale/search correctness or real backend/concurrent behavior.
+
 The [date/locale example](date-locale/README.md) freezes a proposed synthetic
 Gregorian/Oslo profile before implementation. Literal expectations cover date-only
 meaning, midnight and offset transitions, explicit wall-time disambiguation and

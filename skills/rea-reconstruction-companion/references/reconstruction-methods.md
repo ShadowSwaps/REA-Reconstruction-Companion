@@ -136,6 +136,8 @@ and finalizers; a synchronous stale-token test does not exercise those paths.
 
 For [numeric comparisons](numeric-contracts.md#freeze-distinguishing-checks), freeze literals independently of candidate conversion, select exact or justified approximate comparison, and challenge parsing, rounding-stage and unit faults through actual values. Same display or a broad epsilon cannot establish canonical equality.
 
+For [search/filter/sort comparisons](search-filter-sort.md#freeze-discriminating-checks), freeze ordered IDs and relevant intermediate selection/page states. Challenge plausible matching, filter-composition, comparator and identity/page faults that ordinary checks miss; set/count equality alone cannot validate order or action identity.
+
 ### Coverage boundaries
 
 Cover input partitions, boundaries, invalid cases, meaningful state transitions, and relevant configuration combinations. For large configuration spaces, constrained pairwise or higher-strength combinations can reduce work; choose strength by risk and state exactly what is covered. Interaction coverage is not code coverage, temporal sequence coverage, or a proof that all failures are found. [R8](research-basis.md#r8-combinatorial-coverage)
