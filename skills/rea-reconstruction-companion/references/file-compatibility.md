@@ -12,6 +12,8 @@ date-only versus instant/wall time, calendar, precision and offset/zone retentio
 Compare canonical semantic values and raw exports, not only localized display or
 self-roundtrips; a format change can silently shift the day or lose an occurrence.
 
+For numeric fields, recover the [numeric contract](numeric-contracts.md): canonical type/value, unit/scale retention and any rounding or lossy conversion at import/export. Compare actual values and required bytes before and after reopen; display equality does not establish data compatibility.
+
 1. Freeze the reference bytes, identity/version/license, exposure, observed
    behavior, representative corpus and acceptance decisions before implementing.
    Keep raw originals, generated outputs, candidate and reviewer oracle separate.

@@ -1,0 +1,295 @@
+{
+  "ordinary": [
+    {
+      "id": "whole-m",
+      "args": [
+        "2",
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "um": 2000000,
+        "display": "200.00 cm"
+      }
+    },
+    {
+      "id": "whole-cm",
+      "args": [
+        "2",
+        "dot",
+        "cm"
+      ],
+      "expected": {
+        "um": 20000,
+        "display": "2.00 cm"
+      }
+    },
+    {
+      "id": "negative-whole",
+      "args": [
+        "-2",
+        "comma",
+        "cm"
+      ],
+      "expected": {
+        "um": -20000,
+        "display": "-2,00 cm"
+      }
+    },
+    {
+      "id": "zero",
+      "args": [
+        "0",
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "um": 0,
+        "display": "0.00 cm"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "comma-decimal",
+      "args": [
+        "1,234",
+        "comma",
+        "m"
+      ],
+      "expected": {
+        "um": 1234000,
+        "display": "123,40 cm"
+      }
+    },
+    {
+      "id": "comma-not-grouping",
+      "args": [
+        "1,234",
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "error": "input"
+      }
+    },
+    {
+      "id": "binary-tie",
+      "args": [
+        "1.005",
+        "dot",
+        "cm"
+      ],
+      "expected": {
+        "um": 10050,
+        "display": "1.01 cm"
+      }
+    },
+    {
+      "id": "negative-tie",
+      "args": [
+        "-1.005",
+        "dot",
+        "cm"
+      ],
+      "expected": {
+        "um": -10050,
+        "display": "-1.01 cm"
+      }
+    },
+    {
+      "id": "even-tie",
+      "args": [
+        "1.025",
+        "dot",
+        "cm"
+      ],
+      "expected": {
+        "um": 10250,
+        "display": "1.03 cm"
+      }
+    },
+    {
+      "id": "below-tie",
+      "args": [
+        "1.004",
+        "dot",
+        "cm"
+      ],
+      "expected": {
+        "um": 10040,
+        "display": "1.00 cm"
+      }
+    },
+    {
+      "id": "after-conversion",
+      "args": [
+        "0.015",
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "um": 15000,
+        "display": "1.50 cm"
+      }
+    },
+    {
+      "id": "smallest-input",
+      "args": [
+        "0.001",
+        "dot",
+        "cm"
+      ],
+      "expected": {
+        "um": 10,
+        "display": "0.00 cm"
+      }
+    },
+    {
+      "id": "negative-rounded-zero",
+      "args": [
+        "-0.001",
+        "dot",
+        "cm"
+      ],
+      "expected": {
+        "um": -10,
+        "display": "0.00 cm"
+      }
+    },
+    {
+      "id": "signed-zero",
+      "args": [
+        "-0.000",
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "um": 0,
+        "display": "0.00 cm"
+      }
+    },
+    {
+      "id": "max",
+      "args": [
+        "1000",
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "um": 1000000000,
+        "display": "100000.00 cm"
+      }
+    },
+    {
+      "id": "min",
+      "args": [
+        "-1000",
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "um": -1000000000,
+        "display": "-100000.00 cm"
+      }
+    },
+    {
+      "id": "too-large",
+      "args": [
+        "1000.001",
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "error": "range"
+      }
+    },
+    {
+      "id": "too-negative",
+      "args": [
+        "-1000.001",
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "error": "range"
+      }
+    },
+    {
+      "id": "scale-rejection",
+      "args": [
+        "1.0001",
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "error": "input"
+      }
+    },
+    {
+      "id": "unknown-unit",
+      "args": [
+        "2",
+        "dot",
+        "mm"
+      ],
+      "expected": {
+        "error": "unit"
+      }
+    },
+    {
+      "id": "missing-grammar",
+      "args": [
+        "2",
+        null,
+        "cm"
+      ],
+      "expected": {
+        "error": "grammar"
+      }
+    },
+    {
+      "id": "suffix",
+      "args": [
+        "2cm",
+        "dot",
+        "cm"
+      ],
+      "expected": {
+        "error": "input"
+      }
+    },
+    {
+      "id": "absent",
+      "args": [
+        null,
+        "dot",
+        "m"
+      ],
+      "expected": {
+        "error": "input"
+      }
+    },
+    {
+      "id": "mixed",
+      "args": [
+        "1.234,5",
+        "comma",
+        "m"
+      ],
+      "expected": {
+        "error": "input"
+      }
+    }
+  ],
+  "persistence": {
+    "record": {
+      "schema": 1,
+      "unit": "um",
+      "value": 10050
+    },
+    "export": "{\"schema\":1,\"unit\":\"um\",\"value\":10050}\n",
+    "dot": "1.01 cm",
+    "comma": "1,01 cm"
+  }
+}

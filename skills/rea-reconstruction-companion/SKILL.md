@@ -92,6 +92,8 @@ For file import/export reconstruction, use the [file compatibility procedure](re
 
 For date/time-zone or locale-dependent behavior, use [date and locale contracts](references/date-locale.md) to distinguish calendar dates, instants and wall time, select consequential zone boundaries and separate localized display from parsing, sorting and stored/exported values. Preserve unresolved original semantics and explicit gap/overlap policies.
 
+For numeric quantities, use [numeric contracts](references/numeric-contracts.md) to separate localized input/display from canonical values, recover representation and explicit rounding mode/stage, and preserve unit meaning through conversion, storage and export. Keep unresolved original rules explicit and validate values beyond formatted equality.
+
 For a request to modify an existing reconstruction, use [safe changes](references/safe-changes.md) to reconcile current intent and custom work, retained contracts, affected dependencies, acceptance and recovery before editing. Keep changed requirements separate from changes to the reference version or environment.
 
 When the selected slice handles untrusted content, sensitive data or restricted operations, use [reconstruction security boundaries](references/reconstruction-security.md). Separate original observations, desired requirements, proposed controls and demonstrated protection; cover applicable parsing/sink limits, data handling and actual authorization without expanding planning into implementation.

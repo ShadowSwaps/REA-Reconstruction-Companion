@@ -61,6 +61,8 @@ For date-bearing workflows, extend these same records with the selected value's
 runtime data to observations; keep display, parsing and persisted/exported values
 separate. Field names and screenshots alone leave consequential semantics open.
 
+For numeric workflows, extend these same rows with the [input/value/rounding/unit contract](numeric-contracts.md): accepted grammar, representation/range/scale, consequential rounding mode/stage, conversion basis and canonical storage/export. Separate original evidence from proposed rules; a formatted label does not establish a stored value or unit.
+
 Keep a finding ledger containing:
 
 - Local finding ID, claim, classification, and rationale.
