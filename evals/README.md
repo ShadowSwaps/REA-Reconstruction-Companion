@@ -149,3 +149,12 @@ Every report includes `execution`: the configured `timeoutMs`, wall-clock `elaps
 For `harness-error`, inspect `reason` first. `timeout` means the worker exceeded its configured budget; `output-limit` means captured output exceeded the buffer limit. `candidate-process-failed` calls for checking the exit code, signal and process error code, then reviewing the local candidate's imports/export and process behavior. `invalid-worker-output`, `incomplete-worker-output` and `invalid-worker-result` call for checking unintended stdout writes, early exits and envelope shape. Review sensitive local output only in an appropriate environment. Preserve the failing report and environment before investigating; an unchanged retry passing does not identify the original cause. Do not count a harness failure as a caught value mismatch or relax the limit to make a test pass.
 
 Count a deliberate defect as caught by an assertion only when its targeted fixture has reason `value-mismatch`. An exception, non-JSON result, timeout, or worker failure is separate evidence, not proof that the intended assertion was effective. Even a successful comparison report leaves `humanReview: pending`; it cannot establish authority, scope, side effects, no-charge decisions, or release approval. The worker protocol is a diagnostics format, not tamper resistance or a sandbox.
+
+## Controlled asynchronous results
+
+[One bounded local example](asynchronous-results/README.md) executes actual
+promise callbacks with frozen intermediate expectations and selected faulty
+variants. It distinguishes stale values/errors/finalizers, abort requests and
+worker acknowledgements, and uncertain effects with scoped local receipts.
+Deterministic doubles do not establish real network, backend cancellation,
+concurrent delivery or original-app parity.

@@ -122,6 +122,10 @@ For experiments, uncertain decompilation, state recovery, or compatibility work,
 
 For a stateful journey, use [consequential workflow states](references/blueprint.md#consequential-workflow-states)
 to separate displayed, session/pending and persisted state in the existing records.
+For work that can finish after inputs or owners change, use
+[asynchronous results](references/asynchronous-results.md) to trace applicability,
+late success/error/finalizer effects, cancellation scope and uncertain-write
+reconciliation in those same rows.
 Select meaningful ordered checks and retain untested transitions; a happy path or
 an injected local failure does not establish unseen original behavior.
 

@@ -129,6 +129,11 @@ faults. A finite authored example is neither general model understanding nor
 original-app parity. The separate repository-only example is
 `evals/workflow-edge-cases/README.md`; standalone installations do not include it.
 
+For callbacks that can arrive after input/owner changes, apply
+[controlled completion checks](asynchronous-results.md#select-distinguishing-ordered-checks).
+Release actual promises explicitly and compare intermediate values, stale errors
+and finalizers; a synchronous stale-token test does not exercise those paths.
+
 ### Coverage boundaries
 
 Cover input partitions, boundaries, invalid cases, meaningful state transitions, and relevant configuration combinations. For large configuration spaces, constrained pairwise or higher-strength combinations can reduce work; choose strength by risk and state exactly what is covered. Interaction coverage is not code coverage, temporal sequence coverage, or a proof that all failures are found. [R8](research-basis.md#r8-combinatorial-coverage)

@@ -62,6 +62,15 @@ For measured bottlenecks or unmet quality requirements, use [profiling and optim
 
 Use REA's reconstruction verification only when its current schema supports the actual typed claims. A pass covers those comparable claims only. Combine it with the application tests needed for integration and user outcomes; it does not establish global equivalence.
 
+For [asynchronous result handling](asynchronous-results.md), exercise actual
+callbacks/promises with explicitly controlled completion order and frozen
+intermediate expectations. Check guards at each consequential effect, including
+error/status/loading cleanup, changed owner/input and completion after dismissal
+or abort. Verify any write-retry reconciliation at its enforcing boundary;
+client tokens and successful doubles do not establish backend cancellation or
+duplicate prevention. Keep deterministic scheduling separate from real network
+or concurrent execution evidence.
+
 ## Parity and completion
 
 Maintain a matrix linking each requirement to evidence, components, and tests, with these separate dimensions:
