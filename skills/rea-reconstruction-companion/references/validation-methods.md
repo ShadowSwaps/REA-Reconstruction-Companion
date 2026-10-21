@@ -24,6 +24,8 @@ Minimize an input or sequence while preserving the same discrepancy; retain the 
 
 ## Targeted mutation testing
 
+For [history and destructive actions](undo-destructive.md#freeze-distinguishing-sequences), challenge the selected grouping, redo-branch, restoration and confirmation/effect boundaries using disposable candidates and literal intermediate states. Require the declared ordinary controls to pass before counting a distinguishing value/state/effect assertion; errors outside the intended assertion remain inconclusive.
+
 After ordinary tests pass, select a consequential slice and a few plausible faults: off-by-one boundaries, inverted guards, removed validation, incorrect state persistence, or ignored authentication failure. Mutate only a disposable copy of the reconstruction. Keep the reference, raw fixtures, expected outcomes, installed apps, and production data unchanged. Use deterministic local tools or small manual mutations; a mutation service is not required. [R18](research-basis.md#r18-mutation-testing)
 
 Run the same relevant tests for each mutation, with bounded execution. Record each mutation and actual outcome:

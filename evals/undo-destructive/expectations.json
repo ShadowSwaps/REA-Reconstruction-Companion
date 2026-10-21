@@ -1,0 +1,1882 @@
+{
+  "profile": "list-history-v1-proposed",
+  "initial": {
+    "rows": [
+      {
+        "id": "a",
+        "text": "Alpha"
+      },
+      {
+        "id": "b",
+        "text": "Bravo"
+      },
+      {
+        "id": "c",
+        "text": "Charlie"
+      }
+    ],
+    "selected": "b",
+    "anchor": "b",
+    "undo": 0,
+    "redo": 0,
+    "pending": null,
+    "effects": []
+  },
+  "ordinary": [
+    {
+      "id": "ordinary-edit",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "text": "A1"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ordinary-end-delete",
+      "steps": [
+        {
+          "action": {
+            "type": "request",
+            "id": "c",
+            "kind": "delete"
+          },
+          "expected": {
+            "outcome": "pending",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 0,
+              "pending": {
+                "id": "c",
+                "kind": "delete"
+              },
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ordinary-single-group",
+      "steps": [
+        {
+          "action": {
+            "type": "batch",
+            "edits": [
+              {
+                "id": "a",
+                "text": "A1"
+              }
+            ]
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "branch-invalidates-redo",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "text": "A1"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "id": "b",
+            "text": "B1"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "B1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "unchanged",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "B1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "group-one-history-entry",
+      "steps": [
+        {
+          "action": {
+            "type": "batch",
+            "edits": [
+              {
+                "id": "a",
+                "text": "A1"
+              },
+              {
+                "id": "b",
+                "text": "B1"
+              }
+            ]
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "B1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "B1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "delete-restores-middle-identity-view",
+      "steps": [
+        {
+          "action": {
+            "type": "request",
+            "id": "b",
+            "kind": "delete"
+          },
+          "expected": {
+            "outcome": "pending",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 0,
+              "pending": {
+                "id": "b",
+                "kind": "delete"
+              },
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "noop-preserves-redo",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "text": "A1"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "text": "Alpha"
+          },
+          "expected": {
+            "outcome": "unchanged",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "failed-edit-preserves-redo",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "text": "A1"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "id": "b",
+            "text": "B1",
+            "fail": true
+          },
+          "expected": {
+            "outcome": "failed",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cancel-preserves-data-history",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "text": "A1"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "request",
+            "id": "b",
+            "kind": "delete"
+          },
+          "expected": {
+            "outcome": "pending",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": {
+                "id": "b",
+                "kind": "delete"
+              },
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "outcome": "cancelled",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "confirm-bound-to-requested-id",
+      "steps": [
+        {
+          "action": {
+            "type": "request",
+            "id": "b",
+            "kind": "delete"
+          },
+          "expected": {
+            "outcome": "pending",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 0,
+              "pending": {
+                "id": "b",
+                "kind": "delete"
+              },
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "select",
+            "id": "c"
+          },
+          "expected": {
+            "outcome": "selected",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 0,
+              "redo": 0,
+              "pending": {
+                "id": "b",
+                "kind": "delete"
+              },
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "permanent-barrier-and-repeat",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "text": "A1"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "request",
+            "id": "b",
+            "kind": "purge"
+          },
+          "expected": {
+            "outcome": "pending",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": {
+                "id": "b",
+                "kind": "purge"
+              },
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "outcome": "cancelled",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "request",
+            "id": "b",
+            "kind": "purge"
+          },
+          "expected": {
+            "outcome": "pending",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": {
+                "id": "b",
+                "kind": "purge"
+              },
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 0,
+              "redo": 0,
+              "pending": null,
+              "effects": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "unchanged",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 0,
+              "redo": 0,
+              "pending": null,
+              "effects": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "unchanged",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 0,
+              "redo": 0,
+              "pending": null,
+              "effects": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "outcome": "unchanged",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 0,
+              "redo": 0,
+              "pending": null,
+              "effects": [
+                "b"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "empty-history-and-repeated-confirm",
+      "steps": [
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "unchanged",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "unchanged",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "request",
+            "id": "b",
+            "kind": "delete"
+          },
+          "expected": {
+            "outcome": "pending",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 0,
+              "pending": {
+                "id": "b",
+                "kind": "delete"
+              },
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "outcome": "unchanged",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "two-distinct-edits-lifo",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "text": "A1"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "id": "b",
+            "text": "B1"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "B1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 2,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 2,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 1,
+              "redo": 1,
+              "pending": null,
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "b",
+                  "text": "B1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 2,
+              "redo": 0,
+              "pending": null,
+              "effects": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "new-edit-after-barrier",
+      "steps": [
+        {
+          "action": {
+            "type": "request",
+            "id": "b",
+            "kind": "purge"
+          },
+          "expected": {
+            "outcome": "pending",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "b",
+                  "text": "Bravo"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "b",
+              "anchor": "b",
+              "undo": 0,
+              "redo": 0,
+              "pending": {
+                "id": "b",
+                "kind": "purge"
+              },
+              "effects": []
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 0,
+              "redo": 0,
+              "pending": null,
+              "effects": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "text": "A1"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "A1"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 1,
+              "redo": 0,
+              "pending": null,
+              "effects": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "outcome": "applied",
+            "state": {
+              "rows": [
+                {
+                  "id": "a",
+                  "text": "Alpha"
+                },
+                {
+                  "id": "c",
+                  "text": "Charlie"
+                }
+              ],
+              "selected": "c",
+              "anchor": "c",
+              "undo": 0,
+              "redo": 1,
+              "pending": null,
+              "effects": [
+                "b"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

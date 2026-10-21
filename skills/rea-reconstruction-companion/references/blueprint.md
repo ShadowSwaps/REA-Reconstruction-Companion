@@ -65,6 +65,8 @@ For numeric workflows, extend these same rows with the [input/value/rounding/uni
 
 For [search/filter/sort workflows](search-filter-sort.md), retain the selected matching predicates, comparator/missing/tie policy, identity and page transitions in these rows. Distinguish the full result set from the displayed page and observed original rules from proposed changes.
 
+For [undo/redo and destructive actions](undo-destructive.md), add the selected restoration/grouping/history contract and confirmation/cancel/effect boundary to these rows. Separate data, identity/order and relevant view restoration from irreversible or unresolved effects; retain original evidence separately from proposed policies.
+
 Keep a finding ledger containing:
 
 - Local finding ID, claim, classification, and rationale.

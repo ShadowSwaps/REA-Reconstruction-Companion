@@ -96,6 +96,8 @@ For numeric quantities, use [numeric contracts](references/numeric-contracts.md)
 
 For search, combined filters or sorted lists, use [search and ordering contracts](references/search-filter-sort.md) to recover matching/normalization, predicate composition, comparator/missing/tie rules and selection/page behavior. Keep original evidence separate from proposed improvements; choose discriminating ordered-ID and state checks for the selected slice.
 
+For undo/redo or destructive actions, use [history and destructive-effect contracts](references/undo-destructive.md) to recover restoration, identity/order/view state, grouping, history lifetime and redo branching. Trace confirmation/cancel/repetition and distinguish reversible deletion from permanent or uncertain effects. Keep one-operation requests bounded and planning requests in planning mode.
+
 For a request to modify an existing reconstruction, use [safe changes](references/safe-changes.md) to reconcile current intent and custom work, retained contracts, affected dependencies, acceptance and recovery before editing. Keep changed requirements separate from changes to the reference version or environment.
 
 When the selected slice handles untrusted content, sensitive data or restricted operations, use [reconstruction security boundaries](references/reconstruction-security.md). Separate original observations, desired requirements, proposed controls and demonstrated protection; cover applicable parsing/sink limits, data handling and actual authorization without expanding planning into implementation.

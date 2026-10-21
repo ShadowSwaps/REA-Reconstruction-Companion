@@ -38,6 +38,8 @@ When [numeric semantics](numeric-contracts.md) change, retain original grammar, 
 
 When [search/filter/sort semantics](search-filter-sort.md) change, retain original matching, filter composition, comparator/locale/runtime, identity and page policy with their evidence. Reassess dependent ordered results and state transitions; identical counts or labels do not establish identical item order or action targets.
 
+When [history or destructive-effect semantics](undo-destructive.md) change, retain the original restoration, grouping/lifetime, target identity and confirmation/cancel/effect evidence. Reassess dependent history entries and acceptance, including partially completed or unknown effects. A snapshot is not proof that an external effect can be reversed; preserve prior oracles separately from a changed policy.
+
 Reconcile the saved roadmap with current priorities and hard requirements. A changed first outcome can reorder enabling dependencies and invalidate a slice's acceptance scope even when files are unchanged. Revise the affected sequence and evidence/test applicability, retaining justified reuse and historical results. A saved plan does not override a current scope or mode correction.
 
 For a request-driven edit, use [safe changes](safe-changes.md) to account for custom/uncommitted implementation and retained contracts before applying the saved plan. A new reconstruction requirement is distinct from a changed reference version or runtime.

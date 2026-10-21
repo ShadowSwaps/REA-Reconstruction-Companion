@@ -1,5 +1,18 @@
 # REA-Reconstruction-Companion
 
+For undo/redo, deletion or other destructive actions, use the focused
+[history and effect guidance](skills/rea-reconstruction-companion/references/undo-destructive.md)
+and [offline worked example](evals/undo-destructive/README.md). Recover values,
+identity/order, relevant view state, grouping and redo branching; distinguish
+confirmation/cancel and local restoration from irreversible or uncertain effects.
+
+Example: “Investigate only this editor's delete and undo behavior. Check what
+returns, with which identity, position and selection; compare cancel, confirm and
+repeated confirm. Stop after the contract and unanswered questions.” For an
+authorized change: “Implement one undoable delete in my reconstruction, preserving
+item identity and order. Verify undo/redo and cancellation with synthetic data.”
+Neither prompt implies that local undo can reverse an external consequence.
+
 For search, combined filters and sorted lists, use the focused
 [search and ordering guidance](skills/rea-reconstruction-companion/references/search-filter-sort.md)
 and [offline catalog example](evals/search-filter-sort/README.md). Recover matching,

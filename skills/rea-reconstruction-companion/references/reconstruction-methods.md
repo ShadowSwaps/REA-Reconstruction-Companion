@@ -20,6 +20,8 @@ Treat decompiled pseudocode as a tool-produced interpretation. When a claim depe
 
 ## State and interface recovery
 
+For a selected [undo/redo or destructive workflow](undo-destructive.md), recover the history and effect contract before choosing a convenient implementation. Compare intermediate restored values/identities/order and relevant view state; distinguish cancel, local undo and external compensation. Scale the checks to the chosen operation and preserve unknown effects.
+
 For sequence-dependent behavior, model observable states, triggers, guards, outputs, and persistent effects. Exercise sequences such as create/edit/save/restart/reopen, cancel/retry, and disconnect/reconnect when applicable. State names are hypotheses; similar screens can hide different states. Record reset assumptions and refine the model using counterexamples. Automated state exploration is optional and bounded by the available action vocabulary and test environment. [R7](research-basis.md#r7-state-models)
 
 For format/API/IPC compatibility, maintain a small representative corpus. Compare controlled changes in inputs with changes in records or messages. Describe field types, units, encoding, defaults, missing versus null values, identifiers, ordering, errors, and version behavior only as far as established. Relevant public specifications can resolve gaps, but check that they apply to the target version.
