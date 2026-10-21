@@ -88,3 +88,50 @@ explicitly visual deliverable. Revisit affected assumptions and checks when new
 frames, descriptions or version evidence arrive; retain prior limits/history as
 in [checkpoints](checkpoints.md). Fixed structured checks can catch selected
 unsupported claims; they cannot certify arbitrary visual interpretation or prose.
+
+## Responsive layouts and content extremes
+
+Use when resizing, enlarged text or changing content could prevent the selected
+journey. Extend its existing finding/requirement/acceptance rows: record source
+identity, content fixture, browser/version, CSS viewport and capture dimensions,
+font assumptions, zoom/text-scale mechanism and value, scroll owner, state and
+overlay/focus conditions. Keep unknown capture settings unknown. An image shows
+one arrangement; a media query or DOM geometry double does not show rendered
+behavior. Separate reference observations, proposed improvements and actual checks,
+preserving the user's mode and hard requirements.
+
+Select a few conditions by consequence, not an exhaustive breakpoint/device list:
+
+| Condition | Selected observations and useful acceptance |
+| --- | --- |
+| Narrow or resized window | Check wrapping/stacking, accidental horizontal overflow, clipped content and reachable actions; resize an open workflow and inspect retained draft/focus. Identify document versus nested scrolling, sticky/overlay obstruction and any justified two-dimensional region. Below the fold is different from inaccessible: scroll and operate the control. |
+| Enlarged or long content | Record native browser zoom, text-only scaling, OS scaling or authored font simulation accurately; these are different mechanisms. Exercise a long label/unbroken value, representative Unicode and a consequential error/correction. Check labels, messages and controls for loss/overlap, and access to full values if truncation or a single-line input is intentional. Representative strings do not prove translation, bidirectional shaping or every language. |
+| Empty versus populated data | Keep empty, unavailable and failed states distinct. Check the empty entry action and a late item at a bounded larger volume, then edit/save/cancel with actions reachable through the intended scroll owner. Look for controls pushed out, clipped lists, stale selection/focus or overlays after updates. A finite list test is not large-dataset performance evidence. |
+
+Freeze literal usability expectations before changing the example. Compare the
+same content/state at selected sizes, inspect actual rendering and perform the
+needed interactions with supported tools. Keep screenshots, input/action traces,
+resulting state and applicable geometry with candidate/fixture hashes. A locator
+that scrolls and clicks cannot establish keyboard order; replay keys where that
+matters. Geometry and center hit tests catch selected defects but do not establish
+readability, full occlusion/contrast, announcements or universal usability. An
+ordinary screenshot can miss a fault that appears only after text or data grows.
+
+Report visual similarity, functional reachability and accessibility separately.
+List tested combinations and explicit unrun browser/device/assistive-technology
+and native zoom/text-scaling checks. If a required rendering tool is unavailable,
+retain partial evidence and checkpoint the unmet acceptance; do not replace it
+with a passing geometry double or install tools implicitly. Revalidate affected
+rows when viewport, content, fonts, layout, scroll ownership or state changes.
+
+The repository's [Pocket Board responsive example](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/blob/main/evals/responsive-layouts/README.md)
+uses a small authored matrix and deliberately faulty layouts. Repository examples
+are not included in a standalone installed skill's reference directory.
+
+Primary basis checked 2026-10-21: W3C's informative explanations of
+[Reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html) and
+[Resize Text](https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html).
+They explain different requirements: reflow considers loss of information or
+functionality and two-dimensional scrolling, with exceptions; resizing text
+considers enlargement without loss of content or functionality. A selected matrix
+or simulated font size does not establish WCAG conformance or native zoom behavior.

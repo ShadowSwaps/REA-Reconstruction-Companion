@@ -2,6 +2,8 @@
 
 Read the relevant section when it can resolve a selected reconstruction risk. Use existing local tools, preserve independent evidence, and obey the main skill's no-additional-charges constraint. These methods do not require a particular language, framework, cloud service, or REA capability.
 
+For a selected interface's layout risks, use the existing [responsive evidence procedure](visual-evidence.md#responsive-layouts-and-content-extremes). Pair actual rendered narrow/content-extreme cases and interactions with frozen expectations; challenge a plausible layout fault when useful. Report DOM/geometry doubles separately from browser execution, font simulation separately from native zoom, and all unrun combinations. Avoid treating a single screenshot or automatic locator click as complete usability evidence.
+
 ## Bounded differential fuzzing
 
 Start with an independently preserved reference corpus and a comparator for meaningful outputs, errors, and state effects. Record target/version, reset procedure, generator/seed, input-size limits, iteration/time/resource budgets, and reproduction command. Run only in an authorized disposable environment; a reference process may have side effects. Never fuzz a live service or user's original data by implication.

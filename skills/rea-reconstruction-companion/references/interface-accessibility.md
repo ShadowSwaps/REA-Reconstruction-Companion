@@ -24,6 +24,12 @@ inaccessible quirk or silently redesign the product. Clarify only a consequentia
 unresolved conflict, such as an explicitly required focus/event sequence versus
 the proposed accessible interaction; continue useful independent work.
 
+For narrow windows, enlarged/long text and changing list volume, extend the same
+rows using [responsive conditions](visual-evidence.md#responsive-layouts-and-content-extremes).
+Repeat relevant focus, error/correction and action reachability checks after
+wrapping, scrolling or state changes. Inspect focus and control obstruction at
+the actual viewport; a wide-screen keyboard pass does not verify a narrow layout.
+
 Freeze a small set of relevant workflows and expectations before changing the
 candidate. Preserve historical originals/oracles and label deliberate differences.
 For example: open editor by keyboard → reject blank input → correct and save →

@@ -1,5 +1,11 @@
 # REA-Reconstruction-Companion
 
+For narrow windows, enlarged/long text or changing list volume, use the
+[responsive evidence guidance](skills/rea-reconstruction-companion/references/visual-evidence.md#responsive-layouts-and-content-extremes)
+and [small rendered example](evals/responsive-layouts/README.md). Keep visual
+agreement, reachable actions and accessibility evidence separately assessable;
+font simulation does not verify native browser zoom.
+
 For state-dependent journeys, use [workflow state guidance](skills/rea-reconstruction-companion/references/blueprint.md#consequential-workflow-states)
 and the [bounded import-confirmation example](evals/workflow-edge-cases/README.md).
 Separate visible, pending and committed state; preserve untested transitions and

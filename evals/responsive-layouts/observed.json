@@ -1,0 +1,1344 @@
+{
+  "schema": 1,
+  "method": "Supported IAB viewport override; actual native keys and read-only DOM geometry; source-exposed same-author",
+  "captures": [
+    {
+      "label": "ordinary",
+      "case": "ordinary",
+      "actual": {
+        "active": "",
+        "clipped": [],
+        "columns": 2,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 700,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 37,
+            "clientWidth": 414,
+            "id": "task-1",
+            "scrollHeight": 37,
+            "scrollWidth": 414,
+            "text": "Alpha — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 414,
+            "id": "task-2",
+            "scrollHeight": 37,
+            "scrollWidth": 414,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 960,
+        "status": "Ready",
+        "title": "",
+        "width": 960
+      },
+      "failures": []
+    },
+    {
+      "label": "resized-editor",
+      "case": "narrow",
+      "actual": {
+        "active": "name",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 640,
+        "hidden": false,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Alpha — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Editing task",
+        "title": "Alpha",
+        "width": 320
+      },
+      "failures": []
+    },
+    {
+      "label": "resize-return",
+      "case": "ordinary",
+      "actual": {
+        "active": "task-1",
+        "clipped": [],
+        "columns": 2,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 700,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 37,
+            "clientWidth": 414,
+            "id": "task-1",
+            "scrollHeight": 37,
+            "scrollWidth": 414,
+            "text": "Alpha — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 414,
+            "id": "task-2",
+            "scrollHeight": 37,
+            "scrollWidth": 414,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 960,
+        "status": "Cancelled",
+        "title": "Alpha",
+        "width": 960
+      },
+      "failures": []
+    },
+    {
+      "label": "long",
+      "case": "long",
+      "actual": {
+        "active": "",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 32,
+        "height": 640,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 489,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 489,
+            "scrollWidth": 235,
+            "text": "Review Å猫🙂 UnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifier — Open"
+          },
+          {
+            "clientHeight": 59,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 59,
+            "scrollWidth": 235,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Ready",
+        "title": "",
+        "width": 320
+      },
+      "failures": []
+    },
+    {
+      "label": "blank",
+      "case": "long",
+      "actual": {
+        "active": "name",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "Title is required.",
+        "font": 32,
+        "height": 640,
+        "hidden": false,
+        "invalid": "true",
+        "rows": [
+          {
+            "clientHeight": 489,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 489,
+            "scrollWidth": 235,
+            "text": "Review Å猫🙂 UnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifier — Open"
+          },
+          {
+            "clientHeight": 59,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 59,
+            "scrollWidth": 235,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Not saved",
+        "title": "",
+        "width": 320
+      },
+      "failures": []
+    },
+    {
+      "label": "corrected",
+      "case": "long",
+      "actual": {
+        "active": "name",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 32,
+        "height": 640,
+        "hidden": false,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 489,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 489,
+            "scrollWidth": 235,
+            "text": "Review Å猫🙂 UnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifier — Open"
+          },
+          {
+            "clientHeight": 59,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 59,
+            "scrollWidth": 235,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Unsaved changes",
+        "title": "Corrected Å猫🙂",
+        "width": 320
+      },
+      "failures": []
+    },
+    {
+      "label": "saved",
+      "case": "long",
+      "actual": {
+        "active": "save",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 32,
+        "height": 640,
+        "hidden": false,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 102,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 102,
+            "scrollWidth": 235,
+            "text": "Corrected Å猫🙂 — Open"
+          },
+          {
+            "clientHeight": 59,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 59,
+            "scrollWidth": 235,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Saved",
+        "title": "Corrected Å猫🙂",
+        "width": 320
+      },
+      "failures": []
+    },
+    {
+      "label": "long-cancel",
+      "case": "long",
+      "actual": {
+        "active": "task-1",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 32,
+        "height": 640,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 102,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 102,
+            "scrollWidth": 235,
+            "text": "Corrected Å猫🙂 — Open"
+          },
+          {
+            "clientHeight": 59,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 59,
+            "scrollWidth": 235,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Cancelled",
+        "title": "Corrected Å猫🙂",
+        "width": 320
+      },
+      "failures": []
+    },
+    {
+      "label": "empty",
+      "case": "empty",
+      "actual": {
+        "active": "",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 640,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [],
+        "scrollWidth": 320,
+        "status": "Ready",
+        "title": "",
+        "width": 320
+      },
+      "failures": []
+    },
+    {
+      "label": "volume",
+      "case": "volume",
+      "actual": {
+        "active": "",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 640,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 1 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 2 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-3",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 3 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-4",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 4 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-5",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 5 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-6",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 6 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-7",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 7 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-8",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 8 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-9",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 9 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-10",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 10 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-11",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 11 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-12",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 12 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-13",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 13 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-14",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 14 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-15",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 15 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-16",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 16 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-17",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 17 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-18",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 18 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-19",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 19 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-20",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 20 Å — Open"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Ready",
+        "title": "",
+        "width": 320
+      },
+      "failures": []
+    },
+    {
+      "label": "volume-return",
+      "case": "volume",
+      "actual": {
+        "active": "task-20",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 640,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 1 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 2 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-3",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 3 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-4",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 4 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-5",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 5 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-6",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 6 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-7",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 7 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-8",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 8 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-9",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 9 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-10",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 10 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-11",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 11 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-12",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 12 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-13",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 13 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-14",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 14 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-15",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 15 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-16",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 16 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-17",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 17 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-18",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 18 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-19",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 19 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-20",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Last edited Å — Open"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Cancelled",
+        "title": "Last edited Å",
+        "width": 320
+      },
+      "failures": []
+    },
+    {
+      "label": "volume-reopen",
+      "case": "volume",
+      "actual": {
+        "active": "",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 640,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 1 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 2 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-3",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 3 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-4",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 4 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-5",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 5 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-6",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 6 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-7",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 7 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-8",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 8 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-9",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 9 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-10",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 10 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-11",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 11 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-12",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 12 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-13",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 13 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-14",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 14 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-15",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 15 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-16",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 16 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-17",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 17 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-18",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 18 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-19",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 19 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-20",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Last edited Å — Open"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Ready",
+        "title": "",
+        "width": 320
+      },
+      "failures": []
+    }
+  ],
+  "screenshots": [
+    "ordinary.png",
+    "narrow-editor.png",
+    "long-top.png",
+    "long-error.png",
+    "long-actions.png",
+    "empty-editor.png",
+    "volume-top.png",
+    "volume-last.png",
+    "defect-fixed-columns.png",
+    "defect-clipped-text.png",
+    "defect-clipped-list.png",
+    "long-row-focus.png",
+    "defect-clipped-text-detail.png"
+  ],
+  "defects": [
+    {
+      "variant": "fixed-columns",
+      "case": "narrow",
+      "ordinary": {
+        "active": "",
+        "clipped": [],
+        "columns": 2,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 700,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 37,
+            "clientWidth": 414,
+            "id": "task-1",
+            "scrollHeight": 37,
+            "scrollWidth": 414,
+            "text": "Alpha — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 414,
+            "id": "task-2",
+            "scrollHeight": 37,
+            "scrollWidth": 414,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 960,
+        "status": "Ready",
+        "title": "",
+        "width": 960
+      },
+      "extreme": {
+        "active": "",
+        "clipped": [],
+        "columns": 2,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 640,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 37,
+            "clientWidth": 282,
+            "id": "task-1",
+            "scrollHeight": 37,
+            "scrollWidth": 282,
+            "text": "Alpha — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 282,
+            "id": "task-2",
+            "scrollHeight": 37,
+            "scrollWidth": 282,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 680,
+        "status": "Ready",
+        "title": "",
+        "width": 320
+      },
+      "failures": [
+        "columns",
+        "horizontal-overflow"
+      ]
+    },
+    {
+      "variant": "clipped-text",
+      "case": "long",
+      "ordinary": {
+        "active": "",
+        "clipped": [],
+        "columns": 2,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 700,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 40,
+            "clientWidth": 414,
+            "id": "task-1",
+            "scrollHeight": 40,
+            "scrollWidth": 414,
+            "text": "Alpha — Open"
+          },
+          {
+            "clientHeight": 40,
+            "clientWidth": 414,
+            "id": "task-2",
+            "scrollHeight": 40,
+            "scrollWidth": 414,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 960,
+        "status": "Ready",
+        "title": "",
+        "width": 960
+      },
+      "extreme": {
+        "active": "",
+        "clipped": [],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 32,
+        "height": 640,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 40,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 489,
+            "scrollWidth": 235,
+            "text": "Review Å猫🙂 UnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifierUnbrokenIdentifier — Open"
+          },
+          {
+            "clientHeight": 40,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 59,
+            "scrollWidth": 235,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Ready",
+        "title": "",
+        "width": 320
+      },
+      "failures": [
+        "row-text-clipped"
+      ]
+    },
+    {
+      "variant": "clipped-list",
+      "case": "volume",
+      "ordinary": {
+        "active": "",
+        "clipped": [],
+        "columns": 2,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 700,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 37,
+            "clientWidth": 414,
+            "id": "task-1",
+            "scrollHeight": 37,
+            "scrollWidth": 414,
+            "text": "Alpha — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 414,
+            "id": "task-2",
+            "scrollHeight": 37,
+            "scrollWidth": 414,
+            "text": "Beta — Done"
+          }
+        ],
+        "scrollWidth": 960,
+        "status": "Ready",
+        "title": "",
+        "width": 960
+      },
+      "extreme": {
+        "active": "",
+        "clipped": [
+          "task-7",
+          "task-8",
+          "task-9",
+          "task-10",
+          "task-11",
+          "task-12",
+          "task-13",
+          "task-14",
+          "task-15",
+          "task-16",
+          "task-17",
+          "task-18",
+          "task-19",
+          "task-20"
+        ],
+        "columns": 1,
+        "dpr": 1,
+        "error": "",
+        "font": 16,
+        "height": 640,
+        "hidden": true,
+        "invalid": "false",
+        "rows": [
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-1",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 1 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-2",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 2 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-3",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 3 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-4",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 4 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-5",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 5 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-6",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 6 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-7",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 7 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-8",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 8 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-9",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 9 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-10",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 10 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-11",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 11 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-12",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 12 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-13",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 13 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-14",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 14 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-15",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 15 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-16",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 16 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-17",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 17 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-18",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 18 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-19",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 19 Å — Open"
+          },
+          {
+            "clientHeight": 37,
+            "clientWidth": 235,
+            "id": "task-20",
+            "scrollHeight": 37,
+            "scrollWidth": 235,
+            "text": "Task 20 Å — Open"
+          }
+        ],
+        "scrollWidth": 305,
+        "status": "Ready",
+        "title": "",
+        "width": 320
+      },
+      "failures": [
+        "ancestor-clipping"
+      ]
+    }
+  ],
+  "errors": [],
+  "unrun": [
+    "Native browser zoom",
+    "OS text scaling",
+    "Other browser engines and devices",
+    "Screen readers",
+    "Full localization and large-dataset performance"
+  ],
+  "resizeReturn": {
+    "active": "task-1",
+    "hidden": true,
+    "title": "Alpha"
+  },
+  "controls": [
+    {
+      "active": "complete",
+      "hit": true,
+      "id": "complete",
+      "inViewport": true,
+      "outline": "solid"
+    },
+    {
+      "active": "save",
+      "hit": true,
+      "id": "save",
+      "inViewport": true,
+      "outline": "solid"
+    },
+    {
+      "active": "abandon",
+      "hit": true,
+      "id": "abandon",
+      "inViewport": true,
+      "outline": "solid"
+    },
+    {
+      "active": "save",
+      "hit": true,
+      "id": "save",
+      "inViewport": true,
+      "outline": "solid"
+    }
+  ],
+  "longResult": {
+    "invalid": "false",
+    "status": "Saved",
+    "title": "Corrected Å猫🙂",
+    "returned": "task-1"
+  },
+  "volumeResult": {
+    "returned": "task-20",
+    "reloadedLast": "Last edited Å — Open"
+  },
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "completed": true,
+  "emptyEditor": {
+    "active": "name",
+    "clipped": [],
+    "columns": 1,
+    "dpr": 1,
+    "error": "",
+    "font": 16,
+    "height": 640,
+    "hidden": false,
+    "invalid": "false",
+    "rows": [],
+    "scrollWidth": 305,
+    "status": "New task",
+    "title": "",
+    "width": 320
+  }
+}

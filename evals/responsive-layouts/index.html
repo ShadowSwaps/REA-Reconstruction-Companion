@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pocket Board responsive slice</title>
+<style>
+*{box-sizing:border-box}body{margin:24px auto;padding:0 16px;max-width:960px;background:#f3f5f8;color:#17283a;font:16px system-ui,sans-serif;overflow-wrap:anywhere}header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}h1{font-size:1.75em}h2{font-size:1.3em}.columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}.panel{min-width:0;border:1px solid #d2d9e2;border-radius:8px;padding:16px;background:white}button,input,select{font:inherit;padding:8px;max-width:100%}button{cursor:pointer;white-space:normal;overflow-wrap:anywhere}label{display:block;margin:16px 0 8px}.rows{display:grid;gap:8px;margin-top:20px}.rows button{text-align:left;min-width:0}.rows [aria-pressed=true]{outline:3px solid #376ed1}input[type=text]{width:100%}[role=alert]{color:#a51919}[hidden]{display:none!important}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #17283a;outline-offset:3px}.actions{display:flex;flex-wrap:wrap;gap:8px}body.large{font-size:32px}
+@media(max-width:600px){.columns{grid-template-columns:minmax(0,1fr)}}
+/* Deliberate defects, enabled only by the finite fixture server. */
+body.fixed-columns .columns{grid-template-columns:repeat(2,minmax(320px,1fr))}
+body.clipped-text .rows button{height:44px;overflow:hidden}
+body.clipped-list .rows{max-height:300px;overflow:hidden}
+</style></head><body>
+<header><h1>Pocket Board</h1><button id="add">New task</button></header><p role="status" id="notice">Ready</p><p role="alert" id="problem"></p>
+<main class="columns"><section class="panel"><h2>Tasks</h2><label for="scope">Show</label><select id="scope"><option value="all">All</option><option value="open">Open</option><option value="done">Done</option></select><div class="rows" id="rows"></div></section>
+<section class="panel"><h2>Editor</h2><p id="prompt">Select a task or create one.</p><form id="form" hidden novalidate><label for="name">Title</label><input type="text" id="name" aria-describedby="invalid" aria-invalid="false"><label><input id="complete" type="checkbox"> Done</label><p role="alert" id="invalid"></p><div class="actions"><button id="save" type="submit">Save</button><button type="button" id="abandon">Cancel</button></div></form></section></main><aside id="recovery" hidden><h2>Recover your draft</h2><p>The draft stays in the editor until saved or cancelled. Reloading this page loses it.</p><button id="latest" type="button">Load latest (keep draft)</button><button id="copy" type="button">Save draft as new</button></aside>
+<!-- Fixture configuration is inserted here by server.mjs before the unchanged application. -->
+<script src="../interface-accessibility/app.js"></script></body></html>

@@ -90,6 +90,8 @@ Use Given/When/Then scenarios when helpful. Keep functional parity, interaction 
 
 For selected UI journeys, define [accessibility acceptance](interface-accessibility.md) alongside those dimensions: keyboard actions, focus transitions, names/labels, error correction and dynamic feedback. Label proposed improvements and retain unobserved keyboard or assistive-technology behavior as unknown; an image or role/name inspection does not prove it.
 
+Where content or window size changes matter, add a small [viewport/content matrix](visual-evidence.md#responsive-layouts-and-content-extremes) to those acceptance rows. Bind scale method, content identity, scroll/overlay and state assumptions to actual rendered and interaction evidence; retain unrun combinations and proposed differences separately from reference behavior.
+
 For surprising original behavior, apply [preserve, improve or defer](reconstruction-methods.md#preserve-improve-or-defer) in the affected requirement row. Link the observation, user goal, consumer/dependency impact and chosen acceptance profile; keep unresolved required work and revisit triggers visible in the roadmap. Mixed fidelity/improvement goals can yield different decisions at different interfaces.
 
 Define relevant nonfunctional targets: performance, reliability, accessibility, security/privacy, compatibility, and recovery. Measured original properties need measurement context; suggested targets need rationale and an explicit proposed status. Do not fabricate benchmarks.
