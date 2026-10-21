@@ -1,5 +1,11 @@
 # REA-Reconstruction-Companion
 
+For date/time-zone and localized data behavior, use the focused
+[date and locale contracts](skills/rea-reconstruction-companion/references/date-locale.md)
+and [bounded offline example](evals/date-locale/README.md). They distinguish
+calendar dates, instants and wall time, selected offset transitions, and display
+from parsing, sorting and stored/exported values.
+
 For narrow windows, enlarged/long text or changing list volume, use the
 [responsive evidence guidance](skills/rea-reconstruction-companion/references/visual-evidence.md#responsive-layouts-and-content-extremes)
 and [small rendered example](evals/responsive-layouts/README.md). Keep visual

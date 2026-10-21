@@ -1,0 +1,8 @@
+{
+  "profile": "synthetic-gregorian-date-oslo-v1",
+  "frozenBeforeCandidate": true,
+  "files": {
+    "oracle.json": "3375c44091594806a57d7002d49588db0e747cb9e7b205287b467839ebe7879a",
+    "ORACLE.md": "c9b91999b846681717666ed6f95507ed10703a2c3ee6747938b764fdd4dd5a18"
+  }
+}

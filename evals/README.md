@@ -1,5 +1,12 @@
 # Behavioral evaluation kit
 
+The [date/locale example](date-locale/README.md) freezes a proposed synthetic
+Gregorian/Oslo profile before implementation. Literal expectations cover date-only
+meaning, midnight and offset transitions, explicit wall-time disambiguation and
+display versus canonical data. Four faulty candidates pass ordinary cases before
+selected boundaries reject their actual values. Same-author and finite-data limits
+remain explicit; no general calendar or recurrence system is provided.
+
 The [responsive-layout example](responsive-layouts/README.md) records a small
 rendered viewport/content matrix, native-key interactions and three CSS defects
 that ordinary screenshots miss. Same-author evidence and report-regression tests
