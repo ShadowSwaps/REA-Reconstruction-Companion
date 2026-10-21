@@ -875,19 +875,19 @@
     }
   ],
   "screenshots": [
-    "ordinary.png",
-    "narrow-editor.png",
-    "long-top.png",
-    "long-error.png",
-    "long-actions.png",
-    "empty-editor.png",
-    "volume-top.png",
-    "volume-last.png",
-    "defect-fixed-columns.png",
-    "defect-clipped-text.png",
-    "defect-clipped-list.png",
-    "long-row-focus.png",
-    "defect-clipped-text-detail.png"
+    "ordinary.jpg",
+    "narrow-editor.jpg",
+    "long-top.jpg",
+    "long-error.jpg",
+    "long-actions.jpg",
+    "empty-editor.jpg",
+    "volume-top.jpg",
+    "volume-last.jpg",
+    "defect-fixed-columns.jpg",
+    "defect-clipped-text.jpg",
+    "defect-clipped-list.jpg",
+    "long-row-focus.jpg",
+    "defect-clipped-text-detail.jpg"
   ],
   "defects": [
     {
@@ -1340,5 +1340,72 @@
     "status": "New task",
     "title": "",
     "width": 320
+  },
+  "screenshotDimensions": {
+    "defect-clipped-list.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    },
+    "defect-clipped-text-detail.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    },
+    "defect-clipped-text.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    },
+    "defect-fixed-columns.jpg": {
+      "width": 313,
+      "height": 625,
+      "format": "JPEG"
+    },
+    "empty-editor.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    },
+    "long-actions.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    },
+    "long-error.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    },
+    "long-row-focus.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    },
+    "long-top.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    },
+    "narrow-editor.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    },
+    "ordinary.jpg": {
+      "width": 960,
+      "height": 700,
+      "format": "JPEG"
+    },
+    "volume-last.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    },
+    "volume-top.jpg": {
+      "width": 305,
+      "height": 610,
+      "format": "JPEG"
+    }
   }
 }

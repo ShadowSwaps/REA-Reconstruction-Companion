@@ -22,7 +22,11 @@ native Tab/Return and locator preparation/clicks, with read-only DOM geometry
 and screenshots. The HTTP User-Agent reported Windows 10 x64 / Chrome155.0.0.0;
 the reduced UA does not disclose an exact Chromium patch. Device pixel ratio1.
 Viewport sizes are CSS pixels including the scrollbar; screenshots show the
-content area, which can be narrower. Native zoom was not exercised. The long
+content area, which can be narrower. The capture API returned JPEGs at960×700
+for ordinary,305×610 for typical narrow captures, and313×625 for the horizontal
+overflow defect. Their output sizing differs from the measured CSS viewport;
+do not infer physical device dimensions or browser zoom from those pixels.
+The report records each image's dimensions separately. Native zoom was not exercised. The long
 case changes the body font from16px to32px and controls inherit it: authored
 200% font-size simulation, not browser/OS zoom.
 
@@ -41,11 +45,11 @@ unobscured. Locator clicks can scroll to prepare a case and do not prove a
 whole-list keyboard navigation path. Error feedback is the retained app's short
 literal error, not every long translated message.
 
-![Ordinary](ordinary.png)
-![Narrow editor](narrow-editor.png)
-![Long row and focus](long-row-focus.png)
-![Enlarged actions](long-actions.png)
-![Late row after save/cancel](volume-last.png)
+![Ordinary](ordinary.jpg)
+![Narrow editor](narrow-editor.jpg)
+![Long row and focus](long-row-focus.jpg)
+![Enlarged actions](long-actions.jpg)
+![Late row after save/cancel](volume-last.jpg)
 
 ## Deliberate defects and limits
 
@@ -56,9 +60,9 @@ extreme produced an actual layout assertion difference:
 - clipped-text with long32px content: row scroll height exceeds its visible box.
 - clipped-list with20rows: late rows extend beyond a hidden-overflow ancestor.
 
-![Fixed columns](defect-fixed-columns.png)
-![Clipped row](defect-clipped-text-detail.png)
-![Clipped list](defect-clipped-list.png)
+![Fixed columns](defect-fixed-columns.jpg)
+![Clipped row](defect-clipped-text-detail.jpg)
+![Clipped list](defect-clipped-list.jpg)
 
 [observed.json](observed.json) retains12ordered captures, selected control checks,
 three ordinary/extreme defect pairs and action results. [observed-identity.json](observed-identity.json)
