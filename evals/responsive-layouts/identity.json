@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "files": {
+    "CONTRACT.md": "9dcb98bb626775c73f2d952103d45daceff4b990a85c4dcfb32d6026e474b9f0",
+    "expectations.json": "22ad76a36cf34c5c0e93f5456be26442d8bd9c658690a5800dabcb07a4dade38"
+  },
+  "provenance": "Authored literals frozen before candidate/browser execution",
+  "referenceAppSha256": "bfc9f41ef279ff6a09e30e25590f772ab5c4acdc1fee3b5dc4c31ef507348bc4"
+}

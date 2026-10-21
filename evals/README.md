@@ -1,5 +1,10 @@
 # Behavioral evaluation kit
 
+The [responsive-layout example](responsive-layouts/README.md) records a small
+rendered viewport/content matrix, native-key interactions and three CSS defects
+that ordinary screenshots miss. Same-author evidence and report-regression tests
+retain unrun native zoom, device and assistive-technology checks explicitly.
+
 The [workflow edge-case example](workflow-edge-cases/README.md) is a separate
 Pocket Ledger import-confirmation variant. Frozen literal sequences check
 pending/committed state, failed save then retry/cancel, stale confirmation and

@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "ordinary": {"width":960,"height":700,"font":16,"rows":2,"columns":2},
+  "narrow": {"width":320,"height":640,"font":16,"rows":2,"columns":1},
+  "long": {"width":320,"height":640,"font":32,"rows":2,"columns":1},
+  "empty": {"width":320,"height":640,"font":16,"rows":0,"columns":1},
+  "volume": {"width":320,"height":640,"font":16,"rows":20,"columns":1},
+  "error": "Title is required.",
+  "saved": "Saved",
+  "corrected": "Corrected Å猫🙂",
+  "lastSaved": "Last edited Å",
+  "defects": {"fixed-columns":"narrow","clipped-text":"long","clipped-list":"volume"}
+}
