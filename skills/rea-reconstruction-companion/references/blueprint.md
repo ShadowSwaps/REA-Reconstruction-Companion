@@ -49,6 +49,11 @@ bounded checks and explicit coverage limits.
 
 ## Findings and uncertainty
 
+For date-bearing workflows, extend these same records with the selected value's
+[date/time meaning and locale context](date-locale.md). Bind zone/offset and
+runtime data to observations; keep display, parsing and persisted/exported values
+separate. Field names and screenshots alone leave consequential semantics open.
+
 Keep a finding ledger containing:
 
 - Local finding ID, claim, classification, and rationale.

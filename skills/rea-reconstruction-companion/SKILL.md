@@ -90,6 +90,8 @@ For a bounded reconstruction trial from packaged or compiled bytes, use the [art
 
 For file import/export reconstruction, use the [file compatibility procedure](references/file-compatibility.md) to freeze version/schema and encoding decisions, test both interoperability directions beyond round trips, and verify that rejection or failed persistence preserves prior state. Keep caught-write recovery separate from crash durability and concurrency claims.
 
+For date/time-zone or locale-dependent behavior, use [date and locale contracts](references/date-locale.md) to distinguish calendar dates, instants and wall time, select consequential zone boundaries and separate localized display from parsing, sorting and stored/exported values. Preserve unresolved original semantics and explicit gap/overlap policies.
+
 For a request to modify an existing reconstruction, use [safe changes](references/safe-changes.md) to reconcile current intent and custom work, retained contracts, affected dependencies, acceptance and recovery before editing. Keep changed requirements separate from changes to the reference version or environment.
 
 When the selected slice handles untrusted content, sensitive data or restricted operations, use [reconstruction security boundaries](references/reconstruction-security.md). Separate original observations, desired requirements, proposed controls and demonstrated protection; cover applicable parsing/sink limits, data handling and actual authorization without expanding planning into implementation.

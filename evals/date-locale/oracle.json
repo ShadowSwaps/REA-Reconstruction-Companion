@@ -1,0 +1,40 @@
+{
+  "profile": "synthetic-gregorian-date-oslo-v1",
+  "ordinary": [
+    {"id":"date-ordinary","op":"date","args":["2026-03-04","en-GB","Europe/Oslo"],"expected":{"value":"2026-03-04","display":"04/03/2026"}},
+    {"id":"instant-winter","op":"project","args":["2026-01-15T11:00:00Z","Europe/Oslo"],"expected":{"date":"2026-01-15","wall":"2026-01-15T12:00:00","offsetMinutes":60}},
+    {"id":"wall-winter","op":"wall","args":["2026-01-15T12:00:00+01:00","Europe/Oslo"],"expected":{"instant":"2026-01-15T11:00:00Z","zone":"Europe/Oslo","sourceWall":"2026-01-15T12:00:00+01:00"}},
+    {"id":"sort-ordinary","op":"sort","args":[["2026-03-05","2026-03-04"]],"expected":["2026-03-04","2026-03-05"]}
+  ],
+  "boundaries": [
+    {"id":"date-west-viewer","op":"date","args":["2026-03-04","en-US","America/Los_Angeles"],"expected":{"value":"2026-03-04","display":"03/04/2026"}},
+    {"id":"date-other-order","op":"date","args":["2026-03-04","en-US","Europe/Oslo"],"expected":{"value":"2026-03-04","display":"03/04/2026"}},
+    {"id":"before-midnight","op":"project","args":["2026-01-15T22:59:59Z","Europe/Oslo"],"expected":{"date":"2026-01-15","wall":"2026-01-15T23:59:59","offsetMinutes":60}},
+    {"id":"at-midnight","op":"project","args":["2026-01-15T23:00:00Z","Europe/Oslo"],"expected":{"date":"2026-01-16","wall":"2026-01-16T00:00:00","offsetMinutes":60}},
+    {"id":"spring-before","op":"project","args":["2026-03-29T00:59:59Z","Europe/Oslo"],"expected":{"date":"2026-03-29","wall":"2026-03-29T01:59:59","offsetMinutes":60}},
+    {"id":"spring-at","op":"project","args":["2026-03-29T01:00:00Z","Europe/Oslo"],"expected":{"date":"2026-03-29","wall":"2026-03-29T03:00:00","offsetMinutes":120}},
+    {"id":"autumn-before","op":"project","args":["2026-10-25T00:59:59Z","Europe/Oslo"],"expected":{"date":"2026-10-25","wall":"2026-10-25T02:59:59","offsetMinutes":120}},
+    {"id":"autumn-at","op":"project","args":["2026-10-25T01:00:00Z","Europe/Oslo"],"expected":{"date":"2026-10-25","wall":"2026-10-25T02:00:00","offsetMinutes":60}},
+    {"id":"fold-earlier","op":"wall","args":["2026-10-25T02:30:00+02:00","Europe/Oslo"],"expected":{"instant":"2026-10-25T00:30:00Z","zone":"Europe/Oslo","sourceWall":"2026-10-25T02:30:00+02:00"}},
+    {"id":"fold-later","op":"wall","args":["2026-10-25T02:30:00+01:00","Europe/Oslo"],"expected":{"instant":"2026-10-25T01:30:00Z","zone":"Europe/Oslo","sourceWall":"2026-10-25T02:30:00+01:00"}},
+    {"id":"gap-standard-offset","op":"wall","args":["2026-03-29T02:30:00+01:00","Europe/Oslo"],"expected":{"error":"wall-offset"}},
+    {"id":"gap-summer-offset","op":"wall","args":["2026-03-29T02:30:00+02:00","Europe/Oslo"],"expected":{"error":"wall-offset"}},
+    {"id":"unqualified-fold","op":"wall","args":["2026-10-25T02:30:00","Europe/Oslo"],"expected":{"error":"wall"}},
+    {"id":"summer-wrong-offset","op":"wall","args":["2026-07-15T12:00:00+01:00","Europe/Oslo"],"expected":{"error":"wall-offset"}},
+    {"id":"sort-month-crossing","op":"sort","args":[["2026-04-01","2026-03-31"]],"expected":["2026-03-31","2026-04-01"]},
+    {"id":"valid-leap-day","op":"date","args":["2024-02-29","en-GB","UTC"],"expected":{"value":"2024-02-29","display":"29/02/2024"}},
+    {"id":"invalid-leap-day","op":"date","args":["2026-02-29","en-GB","UTC"],"expected":{"error":"date"}},
+    {"id":"ambiguous-localized-input","op":"date","args":["03/04/2026","en-GB","UTC"],"expected":{"error":"date"}},
+    {"id":"unqualified-instant","op":"project","args":["2026-03-04T12:00:00","Europe/Oslo"],"expected":{"error":"instant"}},
+    {"id":"unsupported-zone","op":"project","args":["2026-01-15T11:00:00Z","Unknown/Zone"],"expected":{"error":"zone"}},
+    {"id":"unsupported-locale","op":"date","args":["2026-03-04","xx","UTC"],"expected":{"error":"locale"}}
+  ],
+  "persistence": {
+    "record":{"schema":1,"calendarDate":"2026-03-04","instant":"2026-10-25T01:30:00Z","zone":"Europe/Oslo","sourceWall":"2026-10-25T02:30:00+01:00"},
+    "export":"{\"schema\":1,\"calendarDate\":\"2026-03-04\",\"instant\":\"2026-10-25T01:30:00Z\",\"zone\":\"Europe/Oslo\",\"sourceWall\":\"2026-10-25T02:30:00+01:00\"}\n",
+    "gbDate":"04/03/2026",
+    "usDate":"03/04/2026",
+    "utcEvent":{"date":"2026-10-25","wall":"2026-10-25T01:30:00","offsetMinutes":0},
+    "rejectedRecord":{"schema":1,"calendarDate":"2026-02-29","instant":"2026-10-25T01:30:00Z","zone":"Europe/Oslo","sourceWall":"2026-10-25T02:30:00+01:00"}
+  }
+}
