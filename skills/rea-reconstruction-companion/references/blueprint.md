@@ -63,6 +63,8 @@ separate. Field names and screenshots alone leave consequential semantics open.
 
 For numeric workflows, extend these same rows with the [input/value/rounding/unit contract](numeric-contracts.md): accepted grammar, representation/range/scale, consequential rounding mode/stage, conversion basis and canonical storage/export. Separate original evidence from proposed rules; a formatted label does not establish a stored value or unit.
 
+For [search/filter/sort workflows](search-filter-sort.md), retain the selected matching predicates, comparator/missing/tie policy, identity and page transitions in these rows. Distinguish the full result set from the displayed page and observed original rules from proposed changes.
+
 Keep a finding ledger containing:
 
 - Local finding ID, claim, classification, and rationale.

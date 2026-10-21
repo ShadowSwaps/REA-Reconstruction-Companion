@@ -12,6 +12,8 @@ Do not derive the oracle through the candidate conversion being checked.
 
 ## Bounded differential fuzzing
 
+For a selected list pipeline, use [search/filter/sort checks](search-filter-sort.md#freeze-discriminating-checks) to choose meaningful matching, combined-predicate, order and state contrasts. Preserve literal expectations and distinguish faulty values/state from infrastructure errors; a complete local result set is not a server-pagination oracle.
+
 Start with an independently preserved reference corpus and a comparator for meaningful outputs, errors, and state effects. Record target/version, reset procedure, generator/seed, input-size limits, iteration/time/resource budgets, and reproduction command. Run only in an authorized disposable environment; a reference process may have side effects. Never fuzz a live service or user's original data by implication.
 
 Generate inputs appropriate to the recovered contract: boundary values and malformed bytes for a decoder, grammar-aware messages for a structured protocol, or valid and invalid action sequences for a stateful feature. Use coverage guidance when available; otherwise call the work generated differential testing and report that code coverage is unknown. Do not install a fuzzing engine just to satisfy this guidance. [R17](research-basis.md#r17-differential-fuzzing)

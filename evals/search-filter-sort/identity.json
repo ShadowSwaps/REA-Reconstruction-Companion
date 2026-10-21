@@ -1,0 +1,5 @@
+{
+  "profile": "catalog-v1-proposed",
+  "expectationsSha256": "1423fdc55eeac4a722c136aea929e8cc839ec3a0c807f4a806150a02a5d3a5fb",
+  "basis": "Same-author literal ID orders and intermediate states reasoned before candidate implementation; proposed, source-exposed, no original-app evidence."
+}

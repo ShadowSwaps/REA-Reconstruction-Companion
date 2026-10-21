@@ -1,0 +1,1207 @@
+{
+  "profile": "catalog-v1-proposed",
+  "pageSize": 3,
+  "datasets": {
+    "plain": [
+      {
+        "id": "p",
+        "title": "Alpha",
+        "kind": "book",
+        "active": true,
+        "price": 1
+      },
+      {
+        "id": "q",
+        "title": "Beta",
+        "kind": "book",
+        "active": true,
+        "price": 3
+      },
+      {
+        "id": "r",
+        "title": "Gamma",
+        "kind": "tool",
+        "active": false,
+        "price": 5
+      }
+    ],
+    "catalog": [
+      {
+        "id": "c",
+        "title": "Café kit",
+        "kind": "book",
+        "active": true,
+        "price": 10
+      },
+      {
+        "id": "a",
+        "title": "Cafe kit",
+        "kind": "tool",
+        "active": true,
+        "price": 2
+      },
+      {
+        "id": "b",
+        "title": "Cafe  kit",
+        "kind": "book",
+        "active": false,
+        "price": 2
+      },
+      {
+        "id": "z",
+        "title": "Zulu",
+        "kind": "book",
+        "active": true,
+        "price": null
+      },
+      {
+        "id": "d",
+        "title": "café kit",
+        "kind": "tool",
+        "active": true,
+        "price": 0
+      },
+      {
+        "id": "e",
+        "title": "Alpha",
+        "kind": "book",
+        "active": true
+      },
+      {
+        "id": "f",
+        "title": "Beta",
+        "kind": "tool",
+        "active": false,
+        "price": 10
+      },
+      {
+        "id": "g",
+        "title": "Cafe kit",
+        "kind": "book",
+        "active": true,
+        "price": 2
+      }
+    ]
+  },
+  "ordinary": [
+    {
+      "id": "simple-search",
+      "dataset": "plain",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": " AL "
+            }
+          },
+          "expected": {
+            "order": [
+              "p"
+            ],
+            "page": 0,
+            "visible": [
+              "p"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-combined",
+      "dataset": "plain",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "kinds": [
+                "book"
+              ],
+              "active": true,
+              "maxPrice": 3
+            }
+          },
+          "expected": {
+            "order": [
+              "p",
+              "q"
+            ],
+            "page": 0,
+            "visible": [
+              "p",
+              "q"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-sort",
+      "dataset": "plain",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "sort": "priceDesc"
+            }
+          },
+          "expected": {
+            "order": [
+              "r",
+              "q",
+              "p"
+            ],
+            "page": 0,
+            "visible": [
+              "r",
+              "q",
+              "p"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-select",
+      "dataset": "plain",
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "index": 1
+          },
+          "expected": {
+            "order": [
+              "p",
+              "q",
+              "r"
+            ],
+            "page": 0,
+            "visible": [
+              "p",
+              "q",
+              "r"
+            ],
+            "selected": "q",
+            "shown": true
+          }
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "empty-query",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "   "
+            }
+          },
+          "expected": {
+            "order": [
+              "c",
+              "a",
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 0,
+            "visible": [
+              "c",
+              "a",
+              "b"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "accent-preserved",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "cafe"
+            }
+          },
+          "expected": {
+            "order": [
+              "a",
+              "b",
+              "d",
+              "g"
+            ],
+            "page": 0,
+            "visible": [
+              "a",
+              "b",
+              "d"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "accent-match",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "afé"
+            }
+          },
+          "expected": {
+            "order": [
+              "c"
+            ],
+            "page": 0,
+            "visible": [
+              "c"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "ascii-case-only",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "CAFÉ"
+            }
+          },
+          "expected": {
+            "order": [],
+            "page": 0,
+            "visible": [],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "no-canonical-normalization",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "café"
+            }
+          },
+          "expected": {
+            "order": [
+              "c"
+            ],
+            "page": 0,
+            "visible": [
+              "c"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "internal-spaces",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "Cafe  kit"
+            }
+          },
+          "expected": {
+            "order": [
+              "b"
+            ],
+            "page": 0,
+            "visible": [
+              "b"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "single-space",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "Cafe kit"
+            }
+          },
+          "expected": {
+            "order": [
+              "a",
+              "g"
+            ],
+            "page": 0,
+            "visible": [
+              "a",
+              "g"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "tab-not-trimmed",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "\tcafe\t"
+            }
+          },
+          "expected": {
+            "order": [],
+            "page": 0,
+            "visible": [],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "combined-and",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "cafe",
+              "kinds": [
+                "book"
+              ],
+              "active": true,
+              "maxPrice": 2
+            }
+          },
+          "expected": {
+            "order": [
+              "g"
+            ],
+            "page": 0,
+            "visible": [
+              "g"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "within-filter-or",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "kinds": [
+                "book",
+                "tool"
+              ],
+              "active": true
+            }
+          },
+          "expected": {
+            "order": [
+              "c",
+              "a",
+              "z",
+              "d",
+              "e",
+              "g"
+            ],
+            "page": 0,
+            "visible": [
+              "c",
+              "a",
+              "z"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "zero-not-missing",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "maxPrice": 0
+            }
+          },
+          "expected": {
+            "order": [
+              "d"
+            ],
+            "page": 0,
+            "visible": [
+              "d"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "numeric-ascending",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "sort": "priceAsc"
+            }
+          },
+          "expected": {
+            "order": [
+              "d",
+              "a",
+              "b",
+              "g",
+              "c",
+              "f",
+              "z",
+              "e"
+            ],
+            "page": 0,
+            "visible": [
+              "d",
+              "a",
+              "b"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "descending-stable-missing-last",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "sort": "priceDesc"
+            }
+          },
+          "expected": {
+            "order": [
+              "c",
+              "f",
+              "a",
+              "b",
+              "g",
+              "d",
+              "z",
+              "e"
+            ],
+            "page": 0,
+            "visible": [
+              "c",
+              "f",
+              "a"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "text-code-units",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "sort": "titleAsc"
+            }
+          },
+          "expected": {
+            "order": [
+              "e",
+              "f",
+              "b",
+              "a",
+              "g",
+              "c",
+              "z",
+              "d"
+            ],
+            "page": 0,
+            "visible": [
+              "e",
+              "f",
+              "b"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "query-resets-page",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "page",
+            "value": 2
+          },
+          "expected": {
+            "order": [
+              "c",
+              "a",
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 2,
+            "visible": [
+              "f",
+              "g"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "cafe"
+            }
+          },
+          "expected": {
+            "order": [
+              "a",
+              "b",
+              "d",
+              "g"
+            ],
+            "page": 0,
+            "visible": [
+              "a",
+              "b",
+              "d"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "filter-resets-page",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "page",
+            "value": 2
+          },
+          "expected": {
+            "order": [
+              "c",
+              "a",
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 2,
+            "visible": [
+              "f",
+              "g"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "active": false
+            }
+          },
+          "expected": {
+            "order": [
+              "b",
+              "f"
+            ],
+            "page": 0,
+            "visible": [
+              "b",
+              "f"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sort-resets-page",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "page",
+            "value": 2
+          },
+          "expected": {
+            "order": [
+              "c",
+              "a",
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 2,
+            "visible": [
+              "f",
+              "g"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "sort": "priceDesc"
+            }
+          },
+          "expected": {
+            "order": [
+              "c",
+              "f",
+              "a",
+              "b",
+              "g",
+              "d",
+              "z",
+              "e"
+            ],
+            "page": 0,
+            "visible": [
+              "c",
+              "f",
+              "a"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "selection-identity",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "index": 1
+          },
+          "expected": {
+            "order": [
+              "c",
+              "a",
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 0,
+            "visible": [
+              "c",
+              "a",
+              "b"
+            ],
+            "selected": "a",
+            "shown": true
+          }
+        },
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "sort": "priceDesc"
+            }
+          },
+          "expected": {
+            "order": [
+              "c",
+              "f",
+              "a",
+              "b",
+              "g",
+              "d",
+              "z",
+              "e"
+            ],
+            "page": 0,
+            "visible": [
+              "c",
+              "f",
+              "a"
+            ],
+            "selected": "a",
+            "shown": true
+          }
+        },
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "Zulu"
+            }
+          },
+          "expected": {
+            "order": [
+              "z"
+            ],
+            "page": 0,
+            "visible": [
+              "z"
+            ],
+            "selected": "a",
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": ""
+            }
+          },
+          "expected": {
+            "order": [
+              "c",
+              "f",
+              "a",
+              "b",
+              "g",
+              "d",
+              "z",
+              "e"
+            ],
+            "page": 0,
+            "visible": [
+              "c",
+              "f",
+              "a"
+            ],
+            "selected": "a",
+            "shown": true
+          }
+        },
+        {
+          "action": {
+            "type": "remove",
+            "id": "a"
+          },
+          "expected": {
+            "order": [
+              "c",
+              "f",
+              "b",
+              "g",
+              "d",
+              "z",
+              "e"
+            ],
+            "page": 0,
+            "visible": [
+              "c",
+              "f",
+              "b"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "deletion-clamps-page",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "page",
+            "value": 2
+          },
+          "expected": {
+            "order": [
+              "c",
+              "a",
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 2,
+            "visible": [
+              "f",
+              "g"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "remove",
+            "id": "c"
+          },
+          "expected": {
+            "order": [
+              "a",
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 2,
+            "visible": [
+              "g"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "remove",
+            "id": "a"
+          },
+          "expected": {
+            "order": [
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 1,
+            "visible": [
+              "e",
+              "f",
+              "g"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "remove",
+            "id": "b"
+          },
+          "expected": {
+            "order": [
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 1,
+            "visible": [
+              "f",
+              "g"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "addition-recomputes-page",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "sort": "priceAsc"
+            }
+          },
+          "expected": {
+            "order": [
+              "d",
+              "a",
+              "b",
+              "g",
+              "c",
+              "f",
+              "z",
+              "e"
+            ],
+            "page": 0,
+            "visible": [
+              "d",
+              "a",
+              "b"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "page",
+            "value": 1
+          },
+          "expected": {
+            "order": [
+              "d",
+              "a",
+              "b",
+              "g",
+              "c",
+              "f",
+              "z",
+              "e"
+            ],
+            "page": 1,
+            "visible": [
+              "g",
+              "c",
+              "f"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "add",
+            "row": {
+              "id": "h",
+              "title": "Cafe new",
+              "kind": "book",
+              "active": true,
+              "price": 1
+            }
+          },
+          "expected": {
+            "order": [
+              "d",
+              "h",
+              "a",
+              "b",
+              "g",
+              "c",
+              "f",
+              "z",
+              "e"
+            ],
+            "page": 1,
+            "visible": [
+              "b",
+              "g",
+              "c"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "empty-and-page-limits",
+      "dataset": "catalog",
+      "steps": [
+        {
+          "action": {
+            "type": "page",
+            "value": 99
+          },
+          "expected": {
+            "order": [
+              "c",
+              "a",
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 2,
+            "visible": [
+              "f",
+              "g"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": "absent"
+            }
+          },
+          "expected": {
+            "order": [],
+            "page": 0,
+            "visible": [],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "page",
+            "value": 99
+          },
+          "expected": {
+            "order": [],
+            "page": 0,
+            "visible": [],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "view",
+            "value": {
+              "query": ""
+            }
+          },
+          "expected": {
+            "order": [
+              "c",
+              "a",
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 0,
+            "visible": [
+              "c",
+              "a",
+              "b"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        },
+        {
+          "action": {
+            "type": "page",
+            "value": -1
+          },
+          "expected": {
+            "order": [
+              "c",
+              "a",
+              "b",
+              "z",
+              "d",
+              "e",
+              "f",
+              "g"
+            ],
+            "page": 0,
+            "visible": [
+              "c",
+              "a",
+              "b"
+            ],
+            "selected": null,
+            "shown": false
+          }
+        }
+      ]
+    }
+  ]
+}

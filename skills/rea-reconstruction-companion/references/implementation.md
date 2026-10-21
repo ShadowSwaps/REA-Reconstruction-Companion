@@ -73,6 +73,8 @@ or concurrent execution evidence.
 
 For [numeric contracts](numeric-contracts.md), exercise explicit input grammar, representation/range/scale, signed rounding ties and stage, unit conversion and literal storage/export/reopen. Keep display-only rounding separate from domain changes; reject invalid/nonfinite/absent data according to the selected contract and verify prior data on semantic rejection.
 
+For [search/filter/sort contracts](search-filter-sort.md#freeze-discriminating-checks), compare ordered identities and intermediate selection/page state through actual actions. Check relevant combined predicates, missing values and equal-key ordering; select then reorder/hide/delete items and recompute pages after data changes. Keep local snapshot checks separate from remote or asynchronous guarantees.
+
 ## Parity and completion
 
 Maintain a matrix linking each requirement to evidence, components, and tests, with these separate dimensions:
