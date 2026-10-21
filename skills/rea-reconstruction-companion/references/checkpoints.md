@@ -34,6 +34,8 @@ interpretation changes, reassess the dependent observations and sequence results
 before reuse; unchanged candidate bytes alone are insufficient. Keep untested
 transitions visible without invalidating unrelated evidence.
 
+When [numeric semantics](numeric-contracts.md) change, retain original grammar, representation, rounding mode/stage and unit/conversion basis with their evidence. Reassess dependent parse/value/storage/export checks; unchanged display strings do not establish unchanged canonical meaning.
+
 Reconcile the saved roadmap with current priorities and hard requirements. A changed first outcome can reorder enabling dependencies and invalidate a slice's acceptance scope even when files are unchanged. Revise the affected sequence and evidence/test applicability, retaining justified reuse and historical results. A saved plan does not override a current scope or mode correction.
 
 For a request-driven edit, use [safe changes](safe-changes.md) to account for custom/uncommitted implementation and retained contracts before applying the saved plan. A new reconstruction requirement is distinct from a changed reference version or runtime.

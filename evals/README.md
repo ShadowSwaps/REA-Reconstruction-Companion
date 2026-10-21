@@ -158,3 +158,10 @@ variants. It distinguishes stale values/errors/finalizers, abort requests and
 worker acknowledgements, and uncertain effects with scoped local receipts.
 Deterministic doubles do not establish real network, backend cancellation,
 concurrent delivery or original-app parity.
+
+## Numeric quantity contracts
+
+[One bounded length example](numeric-contracts/README.md) separates fixed input
+grammars, exact canonical values, display rounding and unit/storage/export
+contracts. Frozen literals and actual save/import/reopen reject selected faulty
+variants without decimal packages, host-locale changes or original-parity claims.

@@ -353,6 +353,8 @@ The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw ev
 
 </details>
 
+**Numeric quantities (v1.3.38):** [separate input, canonical values, rounding and units](evals/numeric-contracts/README.md). One offline fixed length profile uses frozen literal expectations, actual storage/import/reopen and value/state rejection of faulty variants. Same-author finite checks establish a proposed contract, not original parity or a general decimal/locale engine.
+
 ## Support the project
 
 If this project is useful to you, you can [support my work on Ko-fi](https://ko-fi.com/shadowswaps). Contributions are optional; the project remains freely available under its open-source licenses.

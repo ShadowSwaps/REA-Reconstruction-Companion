@@ -71,6 +71,8 @@ client tokens and successful doubles do not establish backend cancellation or
 duplicate prevention. Keep deterministic scheduling separate from real network
 or concurrent execution evidence.
 
+For [numeric contracts](numeric-contracts.md), exercise explicit input grammar, representation/range/scale, signed rounding ties and stage, unit conversion and literal storage/export/reopen. Keep display-only rounding separate from domain changes; reject invalid/nonfinite/absent data according to the selected contract and verify prior data on semantic rejection.
+
 ## Parity and completion
 
 Maintain a matrix linking each requirement to evidence, components, and tests, with these separate dimensions:
