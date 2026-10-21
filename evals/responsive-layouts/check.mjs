@@ -61,4 +61,3 @@ export function auditReport(report) {
   report.defects.forEach((d,i)=>{assert.equal(d.case,expectations.defects[d.variant]);assert.deepEqual(layoutFailures(d.ordinary,'ordinary'),[]);assert.deepEqual(layoutFailures(d.extreme,d.case),expectedFailures[i]);});
   return true;
 }
-
