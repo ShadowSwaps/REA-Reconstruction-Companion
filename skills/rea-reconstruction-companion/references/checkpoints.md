@@ -142,6 +142,12 @@ they are not new provider observations. Existing bounded checkers can reject
 specific invalid records or executions; they do not certify arbitrary prose,
 model compliance, runtime truth or a complete cause of failure.
 
+If an asynchronous operation may still finish or an effect may already have
+committed, preserve its identity, exact intent, owner and pending/unknown outcome
+in that checkpoint. Do not turn lost responses into failed effects or replay
+mutations blindly. Apply [completion and reconciliation guidance](asynchronous-results.md)
+to applicable readback, retained receipts and bounded retry decisions.
+
 ## Interrupted validation
 
 Retain the failed attempt and its outputs as history. A partial file, completion

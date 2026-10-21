@@ -47,6 +47,13 @@ retain unrelated scoped evidence and historical results. Use
 [sequence comparison](reconstruction-methods.md#selected-transition-checks) for
 bounded checks and explicit coverage limits.
 
+For [asynchronous operations](asynchronous-results.md), add operation identity,
+triggering input/context, owner/lifecycle and the component enforcing result
+acceptance to these same rows. Separate pending/outcome from applicability;
+include late errors and cleanup as well as values. Distinguish dismissal, abort
+request and confirmed cancellation; keep uncertain effects unresolved until
+applicable reconciliation supports a retry or known outcome.
+
 ## Findings and uncertainty
 
 For date-bearing workflows, extend these same records with the selected value's

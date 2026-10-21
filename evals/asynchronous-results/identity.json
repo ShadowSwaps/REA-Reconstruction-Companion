@@ -1,0 +1,4 @@
+{
+  "expectationsSha256": "c4fdb410281eb9900a41303e83d0ae665d610190da8c5122f937099099b827d1",
+  "basis": "Same-author proposed contract, authored literals frozen before candidate implementation and first execution; no original target"
+}

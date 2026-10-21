@@ -16,6 +16,10 @@ For state-dependent journeys, use [workflow state guidance](skills/rea-reconstru
 and the [bounded import-confirmation example](evals/workflow-edge-cases/README.md).
 Separate visible, pending and committed state; preserve untested transitions and
 distinguish local fault injection from original-target evidence.
+For delayed work, [trace asynchronous result applicability and uncertain effects](skills/rea-reconstruction-companion/references/asynchronous-results.md).
+The [controlled local example](evals/asynchronous-results/README.md) checks late
+values/errors/finalizers, cancellation distinctions and receipt reconciliation;
+its doubles do not establish real backend or concurrency guarantees.
 
 For conflicting recordings, runtime results, docs or recollections, use
 [evidence reconciliation](skills/rea-reconstruction-companion/references/reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior)

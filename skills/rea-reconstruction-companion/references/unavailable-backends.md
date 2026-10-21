@@ -59,6 +59,12 @@ and waits; do not retry an ambiguous remote write on assumed idempotency. No hid
 remote fallback. A local happy path alone cannot complete a required real-service
 journey.
 
+For delayed/overlapping completions, use [asynchronous results](asynchronous-results.md)
+to trace operation/context/owner and guard success, error and finalization at the
+relevant boundary. Dismissal, ignoring stale state and client abort do not prove
+provider cancellation. Retain unknown effects and establish applicable
+reconciliation/key retention before deciding a write can be repeated.
+
 ## Validate and resume honestly
 
 Freeze expectations before implementation, using supplied observations when

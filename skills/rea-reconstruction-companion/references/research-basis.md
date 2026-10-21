@@ -125,6 +125,18 @@ principles to the selected reconstruction, not as evidence about an unseen origi
 - OWASP, [HTML5 Security](https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html): treat untrusted text as data; browser local storage does not protect sensitive data from same-origin scripts. The example checks a text sink double, not a live browser or every output context.
 - OWASP, [Secrets Management](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html): minimize secret access and use established lifecycle/storage mechanisms where actually needed. No vault deployment, new service or cryptographic implementation is prescribed or authorized.
 
+## R23 Asynchronous completion and retry semantics
+
+Primary sources checked 21 October 2026 for the selected Node 24 local example:
+
+- [Node 24 AbortController](https://nodejs.org/download/release/v24.21.0/docs/api/globals.html#class-abortcontroller): abort notifies participating APIs. It does not acknowledge a remote effect rollback.
+- [WHATWG Fetch abort](https://fetch.spec.whatwg.org/#abort-fetch): specifies promise/body abort handling. Inference for this workflow: backend effects require their own evidence; a client rejection cannot establish that they never occurred. The example does not execute fetch or test this standard.
+- [RFC 9110 section 9.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2): non-idempotent retry needs applicable knowledge of idempotency or that the original was not applied. It supplies no application operation-ID retention or exactly-once guarantee.
+
+Latest-applicable guards, selected controlled orders and receipt reconciliation
+are proposed engineering choices, not recovered target behavior or universal
+policies. Double-specific key binding and retention remain explicitly local.
+
 ## Scope of the synthesis
 
 Evidence-dependency tracking, compatibility corpus design, held-out reference cases, and explicit optimization decision records are workflow recommendations combining these sources with the installed REA skill. They are not named capabilities guaranteed by the REA server. Inspect current schemas when invoking tools.
