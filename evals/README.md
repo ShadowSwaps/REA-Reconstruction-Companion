@@ -1,5 +1,13 @@
 # Behavioral evaluation kit
 
+The [undo/destructive-action example](undo-destructive/README.md) freezes a
+proposed synthetic editor profile before implementation. Literal intermediate
+states cover history branching/grouping, identity/order/view restoration and
+confirm/cancel/repeated/permanent-effect boundaries. Ten disposable faults pass
+six declared ordinary checkpoints before named state/effect assertions reject
+them. Same-author checks and an in-memory effect double do not verify original
+parity, persistence, concurrency or reversal of real external effects.
+
 The [search/filter/sort example](search-filter-sort/README.md) freezes one proposed
 offline catalog profile: literal ordered IDs and intermediate selection/page
 states, combined filters and meaningful matching/comparator boundaries. Eleven

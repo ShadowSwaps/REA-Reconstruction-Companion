@@ -1,0 +1,5 @@
+{
+  "profile": "list-history-v1-proposed",
+  "expectationsSha256": "bf867c06776ac25c837ddd3c445233e91c32c579ad0df2d3f3361fdd51d0994c",
+  "basis": "Same-author literal intermediate states reasoned before candidate implementation. Proposed synthetic profile; no original-app evidence; source-exposed."
+}

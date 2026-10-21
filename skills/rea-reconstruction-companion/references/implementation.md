@@ -27,6 +27,8 @@ Preserve independent reference fixtures before adjusting the implementation. Fol
 
 ## Validate at the right boundaries
 
+For [undo/redo and destructive workflows](undo-destructive.md#freeze-distinguishing-sequences), exercise actual edit/group/history and confirmation/cancel paths against frozen intermediate values, identities, order and relevant view/effect state. Test the selected redo-branch and irreversible boundary without using real-data destruction as a fixture. Local restoration and effect doubles do not establish external reversal.
+
 For untrusted inputs, sensitive data or restricted operations, apply [security boundaries](reconstruction-security.md). Exercise relevant parser/sink limits, storage/export/log leakage and direct unauthorized calls at the enforcing component; keep simulated identity and client-only limits explicit. A successful ordinary workflow alone does not validate these protections.
 
 For risky comparison logic or integration boundaries, use [focused validation methods](validation-methods.md): bounded differential fuzzing to find discrepancies, targeted mutation testing to challenge the tests, and executable interface contracts to verify real interactions. For cryptographic boundaries, use [independent vectors and rejection tests](cryptographic-compatibility.md#independent-vectors-and-rejection-tests). Apply the skill's no-additional-charges constraint before selecting a tool or running a workload.
