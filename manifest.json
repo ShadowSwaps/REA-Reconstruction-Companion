@@ -285,7 +285,7 @@
     "evals/search-filter-sort/candidate.mjs": "5be9a0460e8f99d2716f11a45ccebcc9c9e342cf7f6210ae8ac64e18764a3819",
     "evals/search-filter-sort/check.mjs": "8fd227a9f3a180e63e845bbed1c32ecf7f1401463b771c74ce05b2b98984907f",
     "evals/search-filter-sort/expectations.json": "1423fdc55eeac4a722c136aea929e8cc839ec3a0c807f4a806150a02a5d3a5fb",
-    "evals/search-filter-sort/identity.json": "842c55d6f2ad943ec092dbb46ae652faf725f6acabb2e8d6de858624a122cf81",
+    "evals/search-filter-sort/identity.json": "535d1cd4dd303a21b2795520ccd36081dfba5d05ecdc3bb1b79893d285c98349",
     "evals/selection-oracles.mjs": "8a445e78c46040989ceacd3fd5aaafc9778eb7b2bd01f6c3b576154824cb60f0",
     "evals/unavailable-backend/CONTRACT.md": "5da15bb142b3f6cd960167292f4485360a8aa3b9c621f4b27c1820f04d14b61e",
     "evals/unavailable-backend/README.md": "0e0b80a4d7e470b895b3f4da435670cc27e2dc178dd0615b31a2dafe5f99b55c",
