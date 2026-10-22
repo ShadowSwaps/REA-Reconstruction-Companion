@@ -61,6 +61,12 @@ policies and unavailable platform behavior.
 
 ## Findings and uncertainty
 
+For [forms and dependent fields](form-validation.md), extend these same rows with
+raw/normalized/submitted values, validation and error visibility timing,
+controlling-field applicability, inactive value/payload policy and actual
+submission effects. Recover failure/correction/resubmission and distinguish an
+accepted payload from newer draft edits; retain unknown target rules explicitly.
+
 For [settings and preferences](settings-preferences.md), retain applicable scope,
 default/override presence and precedence, effective value/source and pending,
 applied and persisted transitions in the same rows. Recover reset and compatibility

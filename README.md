@@ -192,6 +192,7 @@ original parity, real-service behavior or general host/model compatibility.
 | --- | --- | --- |
 | Copy, cut and paste | [Contract and boundaries](skills/rea-reconstruction-companion/references/clipboard.md) | [Example and limits](evals/clipboard/README.md) |
 | Settings, defaults and saved preferences | [Contract and boundaries](skills/rea-reconstruction-companion/references/settings-preferences.md) | [Example and limits](evals/settings-preferences/README.md) |
+| Form validation and dependent fields | [Contract and boundaries](skills/rea-reconstruction-companion/references/form-validation.md) | [Example and limits](evals/form-validation/README.md) |
 | Unsaved changes and navigation | [Contract and boundaries](skills/rea-reconstruction-companion/references/unsaved-navigation.md) | [Example and limits](evals/unsaved-navigation/README.md) |
 | Undo, redo and destructive actions | [Contract and boundaries](skills/rea-reconstruction-companion/references/undo-destructive.md) | [Example and limits](evals/undo-destructive/README.md) |
 | Search, filters and sorting | [Contract and boundaries](skills/rea-reconstruction-companion/references/search-filter-sort.md) | [Example and limits](evals/search-filter-sort/README.md) |

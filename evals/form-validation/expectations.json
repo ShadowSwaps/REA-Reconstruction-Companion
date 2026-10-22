@@ -1,0 +1,2948 @@
+{
+  "initial": {
+    "title": "Box",
+    "method": "pickup",
+    "address": "",
+    "low": "1",
+    "high": "3",
+    "coupon": false,
+    "code": ""
+  },
+  "ordinary": [
+    {
+      "id": "ordinary-success",
+      "family": "timing",
+      "steps": [
+        {
+          "action": {
+            "type": "blur",
+            "field": "title"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "title"
+            ],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "title"
+            ],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 0
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "accept"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "title"
+            ],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "accepted"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ordinary-known-failure-retry",
+      "family": "recovery",
+      "steps": [
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 0
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "reject"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": "Try again",
+            "pending": null,
+            "accepted": null,
+            "outcome": {
+              "id": 1,
+              "result": "reject"
+            },
+            "status": "failed"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 2,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 0
+            },
+            "accepted": null,
+            "outcome": {
+              "id": 1,
+              "result": "reject"
+            },
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            },
+            {
+              "id": 2,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "accept"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 2,
+              "result": "accept"
+            },
+            "status": "accepted"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            },
+            {
+              "id": 2,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "required-timing",
+      "family": "timing",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "field": "title",
+            "value": " "
+          },
+          "expected": {
+            "draft": {
+              "title": " ",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "blur",
+            "field": "title"
+          },
+          "expected": {
+            "draft": {
+              "title": " ",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "title"
+            ],
+            "attempted": false,
+            "errors": {
+              "title": "Required"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": " ",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "title"
+            ],
+            "attempted": true,
+            "errors": {
+              "title": "Required"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "invalid"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "title",
+            "value": "Box"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "title"
+            ],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "title"
+            ],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 2
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "format-not-empty",
+      "family": "timing",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "field": "low",
+            "value": "x"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "x",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "blur",
+            "field": "low"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "x",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "low"
+            ],
+            "attempted": false,
+            "errors": {
+              "low": "Use 1-9"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "x",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "low"
+            ],
+            "attempted": true,
+            "errors": {
+              "low": "Use 1-9"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "invalid"
+          },
+          "attempts": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "cross-field-edit",
+      "family": "timing",
+      "steps": [
+        {
+          "action": {
+            "type": "blur",
+            "field": "high"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "high"
+            ],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "low",
+            "value": "4"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "4",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "high"
+            ],
+            "attempted": false,
+            "errors": {
+              "high": "Must be >= low"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "4",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "high"
+            ],
+            "attempted": true,
+            "errors": {
+              "high": "Must be >= low"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "invalid"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "high",
+            "value": "5"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "4",
+              "high": "5",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "high"
+            ],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "4",
+              "high": "5",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "high"
+            ],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 4,
+                "high": 5
+              },
+              "revision": 2
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 4,
+                "high": 5
+              }
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "hidden-retain-omit",
+      "family": "dependencies",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "field": "method",
+            "value": "delivery"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "blur",
+            "field": "address"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "address"
+            ],
+            "attempted": false,
+            "errors": {
+              "address": "Required"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "address",
+            "value": "  Dock  "
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "  Dock  ",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [
+              "address"
+            ],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "method",
+            "value": "pickup"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "  Dock  ",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "  Dock  ",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 3
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "accept"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "  Dock  ",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "accepted"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "method",
+            "value": "delivery"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "  Dock  ",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "editing"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "  Dock  ",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 2,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              },
+              "revision": 4
+            },
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            },
+            {
+              "id": 2,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidden-error-clears-and-required-returns",
+      "family": "dependencies",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "field": "method",
+            "value": "delivery"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {
+              "address": "Required"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "invalid"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "method",
+            "value": "pickup"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 2
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "accept"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "accepted"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "method",
+            "value": "delivery"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {
+              "address": "Required"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "editing"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {
+              "address": "Required"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "invalid"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "disabled-clear",
+      "family": "dependencies",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "field": "coupon",
+            "value": true
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": true,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "code",
+            "value": "a!"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": true,
+              "code": "a!"
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "blur",
+            "field": "code"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": true,
+              "code": "a!"
+            },
+            "touched": [
+              "code"
+            ],
+            "attempted": false,
+            "errors": {
+              "code": "Use two letters"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "coupon",
+            "value": false
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 3
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "accept"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "accepted"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "coupon",
+            "value": true
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": true,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {
+              "code": "Required"
+            },
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "editing"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "normalization-captured",
+      "family": "timing",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "field": "title",
+            "value": "  Box  "
+          },
+          "expected": {
+            "draft": {
+              "title": "  Box  ",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "coupon",
+            "value": true
+          },
+          "expected": {
+            "draft": {
+              "title": "  Box  ",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": true,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "code",
+            "value": " ab "
+          },
+          "expected": {
+            "draft": {
+              "title": "  Box  ",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": true,
+              "code": " ab "
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "  Box  ",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": true,
+              "code": " ab "
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3,
+                "code": "AB"
+              },
+              "revision": 3
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3,
+                "code": "AB"
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "accept"
+          },
+          "expected": {
+            "draft": {
+              "title": "  Box  ",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": true,
+              "code": " ab "
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3,
+              "code": "AB"
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "accepted"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3,
+                "code": "AB"
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3,
+              "code": "AB"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "server-error-correction",
+      "family": "recovery",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "field": "method",
+            "value": "delivery"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "address",
+            "value": "Dock"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "Dock",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "Dock",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              },
+              "revision": 2
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "address-reject"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "Dock",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {
+              "address": "Unavailable address"
+            },
+            "formError": "Choose another address",
+            "pending": null,
+            "accepted": null,
+            "outcome": {
+              "id": 1,
+              "result": "address-reject"
+            },
+            "status": "failed"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "title",
+            "value": "Parcel"
+          },
+          "expected": {
+            "draft": {
+              "title": "Parcel",
+              "method": "delivery",
+              "address": "Dock",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {
+              "address": "Unavailable address"
+            },
+            "formError": "Choose another address",
+            "pending": null,
+            "accepted": null,
+            "outcome": {
+              "id": 1,
+              "result": "address-reject"
+            },
+            "status": "editing"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "address",
+            "value": "Pier"
+          },
+          "expected": {
+            "draft": {
+              "title": "Parcel",
+              "method": "delivery",
+              "address": "Pier",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": "Choose another address",
+            "pending": null,
+            "accepted": null,
+            "outcome": {
+              "id": 1,
+              "result": "address-reject"
+            },
+            "status": "editing"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Parcel",
+              "method": "delivery",
+              "address": "Pier",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 2,
+              "payload": {
+                "title": "Parcel",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Pier"
+              },
+              "revision": 4
+            },
+            "accepted": null,
+            "outcome": {
+              "id": 1,
+              "result": "address-reject"
+            },
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              }
+            },
+            {
+              "id": 2,
+              "payload": {
+                "title": "Parcel",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Pier"
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "accept"
+          },
+          "expected": {
+            "draft": {
+              "title": "Parcel",
+              "method": "delivery",
+              "address": "Pier",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Parcel",
+              "method": "delivery",
+              "low": 1,
+              "high": 3,
+              "address": "Pier"
+            },
+            "outcome": {
+              "id": 2,
+              "result": "accept"
+            },
+            "status": "accepted"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              }
+            },
+            {
+              "id": 2,
+              "payload": {
+                "title": "Parcel",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Pier"
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Parcel",
+              "method": "delivery",
+              "low": 1,
+              "high": 3,
+              "address": "Pier"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pending-edits-success",
+      "family": "recovery",
+      "steps": [
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 0
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "title",
+            "value": "New"
+          },
+          "expected": {
+            "draft": {
+              "title": "New",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 0
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "New",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 0
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "accept"
+          },
+          "expected": {
+            "draft": {
+              "title": "New",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "accepted-older-draft"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pending-edits-failure",
+      "family": "recovery",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "field": "method",
+            "value": "delivery"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "address",
+            "value": "Dock"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "Dock",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": false,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": null,
+            "status": "editing"
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "delivery",
+              "address": "Dock",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              },
+              "revision": 2
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "method",
+            "value": "pickup"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "Dock",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              },
+              "revision": 2
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "address-reject"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "Dock",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": null,
+            "outcome": {
+              "id": 1,
+              "result": "address-reject"
+            },
+            "status": "failed-older-draft"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "delivery",
+                "low": 1,
+                "high": 3,
+                "address": "Dock"
+              }
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "failure-after-success",
+      "family": "recovery",
+      "steps": [
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 0
+            },
+            "accepted": null,
+            "outcome": null,
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "accept"
+          },
+          "expected": {
+            "draft": {
+              "title": "Box",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "accepted"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "field": "title",
+            "value": "New"
+          },
+          "expected": {
+            "draft": {
+              "title": "New",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "editing"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "submit"
+          },
+          "expected": {
+            "draft": {
+              "title": "New",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": null,
+            "pending": {
+              "id": 2,
+              "payload": {
+                "title": "New",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              },
+              "revision": 1
+            },
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 1,
+              "result": "accept"
+            },
+            "status": "pending"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            },
+            {
+              "id": 2,
+              "payload": {
+                "title": "New",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "settle",
+            "result": "reject"
+          },
+          "expected": {
+            "draft": {
+              "title": "New",
+              "method": "pickup",
+              "address": "",
+              "low": "1",
+              "high": "3",
+              "coupon": false,
+              "code": ""
+            },
+            "touched": [],
+            "attempted": true,
+            "errors": {},
+            "formError": "Try again",
+            "pending": null,
+            "accepted": {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            },
+            "outcome": {
+              "id": 2,
+              "result": "reject"
+            },
+            "status": "failed"
+          },
+          "attempts": [
+            {
+              "id": 1,
+              "payload": {
+                "title": "Box",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            },
+            {
+              "id": 2,
+              "payload": {
+                "title": "New",
+                "method": "pickup",
+                "low": 1,
+                "high": 3
+              }
+            }
+          ],
+          "effects": [
+            {
+              "title": "Box",
+              "method": "pickup",
+              "low": 1,
+              "high": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
