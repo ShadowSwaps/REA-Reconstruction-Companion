@@ -207,6 +207,15 @@ worker acknowledgements, and uncertain effects with scoped local receipts.
 Deterministic doubles do not establish real network, backend cancellation,
 concurrent delivery or original-app parity.
 
+## Drag, drop and reordering
+
+[One bounded board example](drag-drop/README.md) compares literal stable
+identities/order, preview/applicability, cancel/failure, move/copy and undo
+conflicts against independently recorded local effects. Fifteen faulty variants
+pass ordinary controls before named assertions reject them. The explicit move
+operation shares the gesture contract; no actual browser/OS input or accessibility
+behavior, service concurrency or original parity is established.
+
 ## Numeric quantity contracts
 
 [One bounded length example](numeric-contracts/README.md) separates fixed input

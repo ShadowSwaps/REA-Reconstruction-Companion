@@ -59,6 +59,12 @@ selection and identity, representation, insertion/replacement, source-removal
 and clipboard effects. Keep original evidence separate from proposed cut/history
 policies and unavailable platform behavior.
 
+For [drag/drop and reordering](drag-drop.md), extend these rows with source owner
+and stable identity, displayed versus canonical order, destination/anchor and
+move/copy policy, tentative preview, commit applicability and actual effects.
+Recover cancel, unchanged placement and history conflicts; keep equivalent move
+controls distinct from unverified pointer/keyboard/accessibility behavior.
+
 ## Findings and uncertainty
 
 For [forms and dependent fields](form-validation.md), extend these same rows with

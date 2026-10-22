@@ -1,0 +1,6 @@
+{
+  "expectationsSha256": "edd4818560d69d24c3df01ec70f77901057aa3923b0a33bcf065ea3c0da26654",
+  "cases": 16,
+  "checkpoints": 81,
+  "authorship": "Same-author literal proposed policy, source-exposed; no original target captured."
+}

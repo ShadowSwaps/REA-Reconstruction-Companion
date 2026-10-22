@@ -1,0 +1,5274 @@
+{
+  "provenance": "Same-author literal proposed policy, source-exposed; no original target captured.",
+  "initial": {
+    "left": [
+      {
+        "id": "a",
+        "label": "Same"
+      },
+      {
+        "id": "b",
+        "label": "Same"
+      },
+      {
+        "id": "c",
+        "label": "Cedar"
+      }
+    ],
+    "right": [
+      {
+        "id": "x",
+        "label": "X"
+      }
+    ],
+    "empty": []
+  },
+  "ordinary": [
+    {
+      "id": "ordinary-move-undo",
+      "family": "identity-order",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "right",
+            "position": "before",
+            "anchor": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "undone",
+            "history": 0
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ordinary-copy-undo",
+      "family": "history-alternative",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "a",
+            "mode": "copy"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "a",
+              "mode": "copy"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "empty",
+            "position": "end",
+            "anchor": null
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "a",
+              "mode": "copy"
+            },
+            "preview": {
+              "dest": "empty",
+              "position": "end",
+              "anchor": null,
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": [
+                {
+                  "id": "copy-1",
+                  "label": "Same"
+                }
+              ]
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "copy",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": [
+                  {
+                    "id": "copy-1",
+                    "label": "Same"
+                  }
+                ]
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "copy",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": [
+                  {
+                    "id": "copy-1",
+                    "label": "Same"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "undone",
+            "history": 0
+          },
+          "attempts": [
+            {
+              "kind": "copy",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": [
+                  {
+                    "id": "copy-1",
+                    "label": "Same"
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "copy",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": [
+                  {
+                    "id": "copy-1",
+                    "label": "Same"
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "same-list-after-before",
+      "family": "identity-order",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "a",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "a",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "left",
+            "position": "after",
+            "anchor": "c"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "a",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "left",
+              "position": "after",
+              "anchor": "c",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                },
+                {
+                  "id": "a",
+                  "label": "Same"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "undone",
+            "history": 0
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "c",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "c",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "left",
+            "position": "before",
+            "anchor": "a"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "c",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "left",
+              "position": "before",
+              "anchor": "a",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                },
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "same-position-and-self",
+      "family": "applicability",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "left",
+            "position": "before",
+            "anchor": "c"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "left",
+              "position": "before",
+              "anchor": "c",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "unchanged",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "left",
+            "position": "after",
+            "anchor": "a"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "left",
+              "position": "after",
+              "anchor": "a",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "unchanged",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "left",
+            "position": "before",
+            "anchor": "b"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "left",
+              "position": "before",
+              "anchor": "b",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "unchanged",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "filtered-anchor-canonical",
+      "family": "identity-order",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "owner": "left",
+            "hidden": [
+              "b"
+            ],
+            "sorted": false
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {
+              "left": [
+                "a",
+                "c"
+              ]
+            },
+            "drag": null,
+            "preview": null,
+            "status": "idle",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "c",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {
+              "left": [
+                "a",
+                "c"
+              ]
+            },
+            "drag": {
+              "owner": "left",
+              "id": "c",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "left",
+            "position": "after",
+            "anchor": "a"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {
+              "left": [
+                "a",
+                "c"
+              ]
+            },
+            "drag": {
+              "owner": "left",
+              "id": "c",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "left",
+              "position": "after",
+              "anchor": "a",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {
+              "left": [
+                "a",
+                "c"
+              ]
+            },
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sorted-reject-reorder-allow-transfer",
+      "family": "identity-order",
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "owner": "left",
+            "hidden": [],
+            "sorted": true
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {
+              "left": [
+                "c",
+                "a",
+                "b"
+              ]
+            },
+            "drag": null,
+            "preview": null,
+            "status": "idle",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {
+              "left": [
+                "c",
+                "a",
+                "b"
+              ]
+            },
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "left",
+            "position": "before",
+            "anchor": "c"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {
+              "left": [
+                "c",
+                "a",
+                "b"
+              ]
+            },
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "left",
+              "position": "before",
+              "anchor": "c",
+              "valid": false
+            },
+            "status": "invalid",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {
+              "left": [
+                "c",
+                "a",
+                "b"
+              ]
+            },
+            "drag": null,
+            "preview": null,
+            "status": "rejected",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {
+              "left": [
+                "c",
+                "a",
+                "b"
+              ]
+            },
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "empty",
+            "position": "end",
+            "anchor": null
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {
+              "left": [
+                "c",
+                "a",
+                "b"
+              ]
+            },
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "empty",
+              "position": "end",
+              "anchor": null,
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": [
+                {
+                  "id": "b",
+                  "label": "Same"
+                }
+              ]
+            },
+            "views": {
+              "left": [
+                "c",
+                "a"
+              ]
+            },
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  }
+                ]
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stale-source",
+      "family": "applicability",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "right",
+            "position": "before",
+            "anchor": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "external",
+            "owner": "left",
+            "remove": "b"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "stale",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "stale-destination",
+      "family": "applicability",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "right",
+            "position": "before",
+            "anchor": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "external",
+            "owner": "right",
+            "append": {
+              "id": "y",
+              "label": "Added"
+            }
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                },
+                {
+                  "id": "y",
+                  "label": "Added"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                },
+                {
+                  "id": "y",
+                  "label": "Added"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "stale",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "removed-anchor",
+      "family": "applicability",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "right",
+            "position": "before",
+            "anchor": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "external",
+            "owner": "right",
+            "remove": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "stale",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "invalid-and-absent-drop",
+      "family": "applicability",
+      "steps": [
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "idle",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "missing",
+            "position": "end",
+            "anchor": null
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "missing",
+              "position": "end",
+              "anchor": null,
+              "valid": false
+            },
+            "status": "invalid",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "rejected",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "rejected",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "cancel-and-repeat",
+      "family": "applicability",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "right",
+            "position": "before",
+            "anchor": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "cancelled",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "cancelled",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "a",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "right",
+            "position": "before",
+            "anchor": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "known-failure-then-fresh-retry",
+      "family": "applicability",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "right",
+            "position": "before",
+            "anchor": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "fail-next"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "failed",
+            "history": 0
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "right",
+            "position": "before",
+            "anchor": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "undo-conflict",
+      "family": "history-alternative",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "right",
+            "position": "before",
+            "anchor": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "before",
+              "anchor": "x",
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "external",
+            "owner": "right",
+            "append": {
+              "id": "y",
+              "label": "Added"
+            }
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "x",
+                  "label": "X"
+                },
+                {
+                  "id": "y",
+                  "label": "Added"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "x",
+                  "label": "X"
+                },
+                {
+                  "id": "y",
+                  "label": "Added"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "undo-conflict",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "explicit-move-same-contract",
+      "family": "history-alternative",
+      "steps": [
+        {
+          "action": {
+            "type": "move",
+            "owner": "left",
+            "id": "b",
+            "mode": "move",
+            "dest": "right",
+            "position": "before",
+            "anchor": "x"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "undone",
+            "history": 0
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            },
+            {
+              "kind": "undo",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invalid-source-and-empty-history",
+      "family": "history-alternative",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "right",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "rejected",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "no-history",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "cross-list-nonempty-end",
+      "family": "identity-order",
+      "steps": [
+        {
+          "action": {
+            "type": "begin",
+            "owner": "left",
+            "id": "b",
+            "mode": "move"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": null,
+            "status": "dragging",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "dest": "right",
+            "position": "end",
+            "anchor": null
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": {
+              "owner": "left",
+              "id": "b",
+              "mode": "move"
+            },
+            "preview": {
+              "dest": "right",
+              "position": "end",
+              "anchor": null,
+              "valid": true
+            },
+            "status": "preview",
+            "history": 0
+          },
+          "attempts": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "drop"
+          },
+          "expected": {
+            "lists": {
+              "left": [
+                {
+                  "id": "a",
+                  "label": "Same"
+                },
+                {
+                  "id": "c",
+                  "label": "Cedar"
+                }
+              ],
+              "right": [
+                {
+                  "id": "x",
+                  "label": "X"
+                },
+                {
+                  "id": "b",
+                  "label": "Same"
+                }
+              ],
+              "empty": []
+            },
+            "views": {},
+            "drag": null,
+            "preview": null,
+            "status": "committed",
+            "history": 1
+          },
+          "attempts": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ],
+          "effects": [
+            {
+              "kind": "move",
+              "lists": {
+                "left": [
+                  {
+                    "id": "a",
+                    "label": "Same"
+                  },
+                  {
+                    "id": "c",
+                    "label": "Cedar"
+                  }
+                ],
+                "right": [
+                  {
+                    "id": "x",
+                    "label": "X"
+                  },
+                  {
+                    "id": "b",
+                    "label": "Same"
+                  }
+                ],
+                "empty": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
