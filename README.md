@@ -1,5 +1,19 @@
 # REA-Reconstruction-Companion
 
+For settings, defaults and saved preferences, use the focused
+[preference guidance](skills/rea-reconstruction-companion/references/settings-preferences.md)
+and [offline worked example](evals/settings-preferences/README.md). Distinguish
+unset values from explicit false, zero or empty; recover scope/precedence,
+effective value/source and pending versus applied/saved changes.
+
+Example: “Investigate only this app's display preferences. What do Apply, Cancel
+and Reset change, and what survives reopening this profile? Keep original
+observations separate from proposed improvements; stop after the contract.”
+For an authorized change: “Add this preference to my reconstruction; preserve
+unrelated settings, make its reset policy explicit, and test save/reopen and
+invalid or older data with disposable files.” The example's finite local policy
+does not establish original parity, crash recovery or concurrent-write safety.
+
 For unsaved drafts and document departure, use the focused
 [save and navigation guidance](skills/rea-reconstruction-companion/references/unsaved-navigation.md)
 and [offline worked example](evals/unsaved-navigation/README.md). Distinguish

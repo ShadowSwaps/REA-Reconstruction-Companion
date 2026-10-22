@@ -1,5 +1,13 @@
 # Behavioral evaluation kit
 
+The [settings/preferences example](settings-preferences/README.md) freezes a
+proposed finite profile with 36 literal intermediate states before candidate
+adaptation. Actual disposable local files and fresh instances exercise defaults,
+explicit overrides, Apply/Save/Cancel/reset and invalid/older data preservation.
+Twelve faults pass six ordinary checkpoints before named state/value/byte checks
+reject them. Same-author, source-exposed success does not establish original
+parity, crash recovery or concurrent-write safety.
+
 The [unsaved changes/navigation example](unsaved-navigation/README.md) checks a
 proposed offline document profile with 72 literal intermediate snapshots and
 controlled promise completions. Twelve faulty variants pass ordinary controls

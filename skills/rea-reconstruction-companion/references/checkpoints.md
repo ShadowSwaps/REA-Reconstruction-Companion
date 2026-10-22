@@ -36,6 +36,12 @@ transitions visible without invalidating unrelated evidence.
 
 When [numeric semantics](numeric-contracts.md) change, retain original grammar, representation, rounding mode/stage and unit/conversion basis with their evidence. Reassess dependent parse/value/storage/export checks; unchanged display strings do not establish unchanged canonical meaning.
 
+When [settings semantics](settings-preferences.md) change, retain the selected
+scope, default/override presence, precedence, draft/applied/saved boundaries and
+schema policy. Reassess dependent effective values, sources, reset and reopen
+checks; unchanged bytes or display can conceal changed inheritance. Preserve
+older oracles and unrelated applicable evidence.
+
 When [search/filter/sort semantics](search-filter-sort.md) change, retain original matching, filter composition, comparator/locale/runtime, identity and page policy with their evidence. Reassess dependent ordered results and state transitions; identical counts or labels do not establish identical item order or action targets.
 
 When [history or destructive-effect semantics](undo-destructive.md) change, retain the original restoration, grouping/lifetime, target identity and confirmation/cancel/effect evidence. Reassess dependent history entries and acceptance, including partially completed or unknown effects. A snapshot is not proof that an external effect can be reversed; preserve prior oracles separately from a changed policy.
