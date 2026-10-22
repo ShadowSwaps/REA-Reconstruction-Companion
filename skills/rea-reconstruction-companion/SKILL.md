@@ -106,6 +106,8 @@ For multi-selection or bulk actions, use [selection and batch contracts](referen
 
 For placing items, dragging between lists or changing their order, use [drag/drop contracts](references/drag-drop.md) to recover source identity, canonical versus displayed order, insertion anchors, move/copy applicability, preview versus effects and cancel/undo boundaries. Recover the target's policy; keep planning bounded and actual input/accessibility behavior separate from an operation model.
 
+For editing offline, reconnecting or synchronizing queued changes, use [offline and sync contracts](references/offline-sync.md) to distinguish draft, local persistence, captured intent, in-flight and server-confirmed state. Recover safe retry/reconciliation, revision conflicts and account/queue ordering policy; preserve unknown effects and newer edits without assuming reconnect or stable IDs guarantee replay safety.
+
 For undo/redo or destructive actions, use [history and destructive-effect contracts](references/undo-destructive.md) to recover restoration, identity/order/view state, grouping, history lifetime and redo branching. Trace confirmation/cancel/repetition and distinguish reversible deletion from permanent or uncertain effects. Keep one-operation requests bounded and planning requests in planning mode.
 
 For a request to modify an existing reconstruction, use [safe changes](references/safe-changes.md) to reconcile current intent and custom work, retained contracts, affected dependencies, acceptance and recovery before editing. Keep changed requirements separate from changes to the reference version or environment.

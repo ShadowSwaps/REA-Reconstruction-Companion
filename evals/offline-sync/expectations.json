@@ -1,0 +1,4240 @@
+{
+  "initial": {
+    "value": "A",
+    "revision": 0
+  },
+  "cases": [
+    {
+      "id": "ordinary-success",
+      "family": "state",
+      "ordinary": true,
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "value": "B"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 1,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ordinary-no-effect-retry",
+      "family": "reconnect",
+      "ordinary": true,
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "value": "B"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 1,
+            "mode": "no-effect"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 2
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 2,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "offline-single-slot",
+      "family": "state",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "value": "B"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "value": "C"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 1,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "C",
+              "edit": 2,
+              "base": 1,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "C",
+              "edit": 2,
+              "base": 1,
+              "state": "in-flight",
+              "ticket": 2
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "C",
+                "edit": 2,
+                "base": 1
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 2,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "C",
+              "revision": 2
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "C",
+                "edit": 2,
+                "base": 1
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              },
+              {
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "C",
+                "revision": 2
+              }
+            ],
+            "server": {
+              "value": "C",
+              "revision": 2
+            },
+            "lookups": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "lost-ack-reconcile",
+      "family": "reconnect",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "value": "B"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 1,
+            "mode": "lost-ack"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": false
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "reconcile"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "reconcile"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "unknown-without-receipt",
+      "family": "reconnect",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "value": "B"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 1,
+            "mode": "unknown-before"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "reconcile"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "discard"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "conflict-rebase",
+      "family": "conflict",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "value": "B"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "external",
+            "value": "R"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 1,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "conflicted",
+              "ticket": null
+            },
+            "remote": {
+              "value": "R",
+              "revision": 1
+            }
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "value": "C"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "conflicted",
+              "ticket": null
+            },
+            "remote": {
+              "value": "R",
+              "revision": 1
+            }
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "conflicted",
+              "ticket": null
+            },
+            "remote": {
+              "value": "R",
+              "revision": 1
+            }
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "rebase"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 1,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 1,
+              "state": "in-flight",
+              "ticket": 2
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 1
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 2,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 2
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 1
+              }
+            ],
+            "effects": [
+              {
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 2
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 2
+            },
+            "lookups": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "conflict-discard",
+      "family": "conflict",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "value": "B"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "external",
+            "value": "R"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 1,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "conflicted",
+              "ticket": null
+            },
+            "remote": {
+              "value": "R",
+              "revision": 1
+            }
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "discard"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "R",
+              "revision": 1
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "R",
+              "revision": 1
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "owner-changes-before-completion",
+      "family": "state",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "value": "B"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "owner",
+            "value": "bob"
+          },
+          "expected": {
+            "owner": "bob",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 1,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "bob",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "reconcile"
+          },
+          "expected": {
+            "owner": "bob",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "owner",
+            "value": "alice"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "unknown",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "reconcile"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "duplicate-old-reply",
+      "family": "reconnect",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "value": "B"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 1,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "value": "C"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "C",
+              "edit": 2,
+              "base": 1,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "C",
+              "edit": 2,
+              "base": 1,
+              "state": "in-flight",
+              "ticket": 2
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "C",
+                "edit": 2,
+                "base": 1
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "repeat-reply",
+            "ticket": 1
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "B",
+              "revision": 1
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "C",
+              "edit": 2,
+              "base": 1,
+              "state": "in-flight",
+              "ticket": 2
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "C",
+                "edit": 2,
+                "base": 1
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              }
+            ],
+            "server": {
+              "value": "B",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 2,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "C",
+              "edit": 2
+            },
+            "confirmed": {
+              "value": "C",
+              "revision": 2
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "C",
+                "edit": 2,
+                "base": 1
+              }
+            ],
+            "effects": [
+              {
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "revision": 1
+              },
+              {
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "C",
+                "revision": 2
+              }
+            ],
+            "server": {
+              "value": "C",
+              "revision": 2
+            },
+            "lookups": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "rebase-races-another-remote-edit",
+      "family": "conflict",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "value": "B"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": null,
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "accept"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": false,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "online",
+            "value": true
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "A",
+              "revision": 0
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "external",
+            "value": "R"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "in-flight",
+              "ticket": 1
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 1,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o1",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 0,
+              "state": "conflicted",
+              "ticket": null
+            },
+            "remote": {
+              "value": "R",
+              "revision": 1
+            }
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "rebase"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 1,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "R",
+              "revision": 1
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "external",
+            "value": "S"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 1,
+              "state": "queued",
+              "ticket": null
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "S",
+              "revision": 2
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "send"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 1,
+              "state": "in-flight",
+              "ticket": 2
+            },
+            "remote": null
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 1
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "S",
+              "revision": 2
+            },
+            "lookups": []
+          }
+        },
+        {
+          "action": {
+            "type": "finish",
+            "ticket": 2,
+            "mode": "ok"
+          },
+          "expected": {
+            "owner": "alice",
+            "online": true,
+            "draft": {
+              "value": "B",
+              "edit": 1
+            },
+            "confirmed": {
+              "value": "A",
+              "revision": 0
+            },
+            "pending": {
+              "id": "o2",
+              "owner": "alice",
+              "document": "note",
+              "value": "B",
+              "edit": 1,
+              "base": 1,
+              "state": "conflicted",
+              "ticket": null
+            },
+            "remote": {
+              "value": "S",
+              "revision": 2
+            }
+          },
+          "observed": {
+            "attempts": [
+              {
+                "ticket": 1,
+                "id": "o1",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 0
+              },
+              {
+                "ticket": 2,
+                "id": "o2",
+                "owner": "alice",
+                "document": "note",
+                "value": "B",
+                "edit": 1,
+                "base": 1
+              }
+            ],
+            "effects": [],
+            "server": {
+              "value": "S",
+              "revision": 2
+            },
+            "lookups": []
+          }
+        }
+      ]
+    }
+  ]
+}

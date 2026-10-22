@@ -67,6 +67,12 @@ controls distinct from unverified pointer/keyboard/accessibility behavior.
 
 ## Findings and uncertainty
 
+For [offline editing and synchronization](offline-sync.md), extend the workflow
+rows with account/document, draft and captured revisions, actual local persistence,
+queued/in-flight/confirmed/conflicted/unknown outcomes and attempts versus effects.
+Recover reconnect, reconciliation, retry/order and explicit resolution policies;
+do not infer durability or safe replay from a connection indicator or stable ID.
+
 For [forms and dependent fields](form-validation.md), extend these same rows with
 raw/normalized/submitted values, validation and error visibility timing,
 controlling-field applicability, inactive value/payload policy and actual
