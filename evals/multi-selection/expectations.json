@@ -1,0 +1,4683 @@
+{
+  "profile": "synthetic-increment-v2",
+  "initial": [
+    [
+      "a",
+      "x",
+      0,
+      1
+    ],
+    [
+      "b",
+      "y",
+      0,
+      1
+    ],
+    [
+      "c",
+      "x",
+      0,
+      1
+    ],
+    [
+      "d",
+      "x",
+      0,
+      1
+    ]
+  ],
+  "ordinary": [
+    {
+      "id": "ordinary-selected",
+      "family": "selection",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "complete"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ordinary-atomic",
+      "family": "outcomes",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "atomic",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "atomic",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "complete"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a"
+              ],
+              "mode": "atomic",
+              "outcomes": [
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "hidden-stable-selection",
+      "family": "selection",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "c",
+              "a"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "view",
+            "filter": "y",
+            "page": 0,
+            "order": "desc"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": "y",
+              "page": 0,
+              "order": "desc",
+              "visible": [
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": "y",
+              "page": 0,
+              "order": "desc",
+              "visible": [
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                1,
+                2
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": "y",
+              "page": 0,
+              "order": "desc",
+              "visible": [
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "c",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "complete"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "c"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page-not-filtered",
+      "family": "selection",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "filter": "x",
+            "page": 1,
+            "order": "asc"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [],
+            "view": {
+              "filter": "x",
+              "page": 1,
+              "order": "asc",
+              "visible": [
+                "d"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "select",
+            "scope": "page"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "d"
+            ],
+            "view": {
+              "filter": "x",
+              "page": 1,
+              "order": "asc",
+              "visible": [
+                "d"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "page",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "d"
+            ],
+            "view": {
+              "filter": "x",
+              "page": 1,
+              "order": "asc",
+              "visible": [
+                "d"
+              ]
+            },
+            "preview": {
+              "scope": "page",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "d",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                1,
+                2
+              ]
+            ],
+            "selection": [
+              "d"
+            ],
+            "view": {
+              "filter": "x",
+              "page": 1,
+              "order": "asc",
+              "visible": [
+                "d"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "d",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "complete"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "d"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "filtered-not-page",
+      "family": "selection",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "filter": "x",
+            "page": 0,
+            "order": "desc"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "desc",
+              "visible": [
+                "d",
+                "c"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "select",
+            "scope": "filtered"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c",
+              "d"
+            ],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "desc",
+              "visible": [
+                "d",
+                "c"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "filtered",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c",
+              "d"
+            ],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "desc",
+              "visible": [
+                "d",
+                "c"
+              ]
+            },
+            "preview": {
+              "scope": "filtered",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ],
+                [
+                  "d",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                1,
+                2
+              ],
+              [
+                "d",
+                "x",
+                1,
+                2
+              ]
+            ],
+            "selection": [
+              "a",
+              "c",
+              "d"
+            ],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "desc",
+              "visible": [
+                "d",
+                "c"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "c",
+                "success"
+              ],
+              [
+                "d",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "complete"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "c",
+                "d"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "success",
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "preview-freezes-intent",
+      "family": "selection",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "c"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "add",
+            "row": [
+              "e",
+              "x",
+              0,
+              1
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ],
+              [
+                "e",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "view",
+            "filter": "x",
+            "page": 0,
+            "order": "desc"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ],
+              [
+                "e",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "c"
+            ],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "desc",
+              "visible": [
+                "e",
+                "d"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ],
+              [
+                "e",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "c"
+            ],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "desc",
+              "visible": [
+                "e",
+                "d"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "complete"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ],
+              [
+                "e",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "c"
+            ],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "desc",
+              "visible": [
+                "e",
+                "d"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "no-preview"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "filtered-membership-frozen",
+      "family": "selection",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "view",
+            "filter": "x",
+            "page": 0,
+            "order": "asc"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "c"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "filtered",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "c"
+              ]
+            },
+            "preview": {
+              "scope": "filtered",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ],
+                [
+                  "d",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "add",
+            "row": [
+              "e",
+              "x",
+              0,
+              1
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ],
+              [
+                "e",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "c"
+              ]
+            },
+            "preview": {
+              "scope": "filtered",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ],
+                [
+                  "d",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                1,
+                2
+              ],
+              [
+                "d",
+                "x",
+                1,
+                2
+              ],
+              [
+                "e",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [],
+            "view": {
+              "filter": "x",
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "c"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "c",
+                "success"
+              ],
+              [
+                "d",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "complete"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "c",
+                "d"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "success",
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cancel-empty-invalid",
+      "family": "selection",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "empty"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "no-preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a",
+              "a"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "rejected"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "cancelled"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "no-preview"
+          },
+          "attempts": []
+        }
+      ]
+    },
+    {
+      "id": "partial-best-effort",
+      "family": "outcomes",
+      "responses": [
+        {
+          "c": "retryable"
+        }
+      ],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a",
+              "c"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "c",
+                "retryable"
+              ]
+            ],
+            "history": 1,
+            "status": "partial"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "c"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "retryable"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "partial-atomic",
+      "family": "outcomes",
+      "responses": [
+        {
+          "c": "retryable"
+        }
+      ],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a",
+              "c"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "atomic",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "atomic",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "rolled-back"
+              ],
+              [
+                "c",
+                "retryable"
+              ]
+            ],
+            "history": 0,
+            "status": "retained"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "c"
+              ],
+              "mode": "atomic",
+              "outcomes": [
+                "success",
+                "retryable"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stale-and-removed",
+      "family": "outcomes",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a",
+              "c"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "value": 8
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                8,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "remove",
+            "id": "c"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                8,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                8,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "stale"
+              ],
+              [
+                "c",
+                "missing"
+              ]
+            ],
+            "history": 0,
+            "status": "retained"
+          },
+          "attempts": []
+        }
+      ]
+    },
+    {
+      "id": "retry-only-eligible",
+      "family": "retry-undo",
+      "responses": [
+        {
+          "b": "refused",
+          "c": "retryable",
+          "d": "unknown"
+        },
+        {}
+      ],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "b",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ],
+                [
+                  "d",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "b",
+                "refused"
+              ],
+              [
+                "c",
+                "retryable"
+              ],
+              [
+                "d",
+                "unknown"
+              ]
+            ],
+            "history": 1,
+            "status": "partial"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "b",
+                "c",
+                "d"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "refused",
+                "retryable",
+                "unknown"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "retry"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                1,
+                2
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "b",
+                "refused"
+              ],
+              [
+                "c",
+                "success"
+              ],
+              [
+                "d",
+                "unknown"
+              ]
+            ],
+            "history": 2,
+            "status": "partial"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "b",
+                "c",
+                "d"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "refused",
+                "retryable",
+                "unknown"
+              ]
+            },
+            {
+              "ids": [
+                "c"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "retry"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                1,
+                2
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "b",
+                "refused"
+              ],
+              [
+                "c",
+                "success"
+              ],
+              [
+                "d",
+                "unknown"
+              ]
+            ],
+            "history": 2,
+            "status": "no-retry"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "b",
+                "c",
+                "d"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "refused",
+                "retryable",
+                "unknown"
+              ]
+            },
+            {
+              "ids": [
+                "c"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stale-retry",
+      "family": "retry-undo",
+      "responses": [
+        {
+          "a": "retryable"
+        }
+      ],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "retryable"
+              ]
+            ],
+            "history": 0,
+            "status": "retained"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "retryable"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "value": 8
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                8,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "retryable"
+              ]
+            ],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "retryable"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "retry"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                8,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "stale"
+              ]
+            ],
+            "history": 0,
+            "status": "retained"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "retryable"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "undo-grouped",
+      "family": "retry-undo",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a",
+              "c"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                1,
+                2
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "c",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "complete"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "c"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "success"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                3
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                3
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "c",
+                "success"
+              ]
+            ],
+            "history": 0,
+            "status": "undone"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "c"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "undo-per-item",
+      "family": "retry-undo",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a",
+              "c"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "per-item"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "per-item",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ],
+                [
+                  "c",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                1,
+                2
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "c",
+                "success"
+              ]
+            ],
+            "history": 2,
+            "status": "complete"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "c"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "success"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                3
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a",
+              "c"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ],
+              [
+                "c",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "undone"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a",
+                "c"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success",
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "undo-conflict",
+      "family": "retry-undo",
+      "responses": [],
+      "steps": [
+        {
+          "action": {
+            "type": "select",
+            "scope": "ids",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [],
+            "history": 0,
+            "status": "ok"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "preview",
+            "scope": "selected",
+            "mode": "best-effort",
+            "undo": "grouped"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                0,
+                1
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": {
+              "scope": "selected",
+              "mode": "best-effort",
+              "undo": "grouped",
+              "targets": [
+                [
+                  "a",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "report": [],
+            "history": 0,
+            "status": "preview"
+          },
+          "attempts": []
+        },
+        {
+          "action": {
+            "type": "confirm"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                1,
+                2
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "complete"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "id": "a",
+            "value": 8
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                8,
+                3
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "ok"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "rows": [
+              [
+                "a",
+                "x",
+                8,
+                3
+              ],
+              [
+                "b",
+                "y",
+                0,
+                1
+              ],
+              [
+                "c",
+                "x",
+                0,
+                1
+              ],
+              [
+                "d",
+                "x",
+                0,
+                1
+              ]
+            ],
+            "selection": [
+              "a"
+            ],
+            "view": {
+              "filter": null,
+              "page": 0,
+              "order": "asc",
+              "visible": [
+                "a",
+                "b"
+              ]
+            },
+            "preview": null,
+            "report": [
+              [
+                "a",
+                "success"
+              ]
+            ],
+            "history": 1,
+            "status": "undo-conflict"
+          },
+          "attempts": [
+            {
+              "ids": [
+                "a"
+              ],
+              "mode": "best-effort",
+              "outcomes": [
+                "success"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

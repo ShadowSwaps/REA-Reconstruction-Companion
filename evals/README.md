@@ -1,5 +1,11 @@
 # Behavioral evaluation kit
 
+The [multi-selection and bulk-action example](multi-selection/README.md) freezes
+one proposed local profile with 70 literal intermediate states/attempts covering
+scope/identity, partial outcomes and retry/undo. Seventeen faults pass ordinary
+controls before a distinguishing assertion rejects them. Same-author synthetic
+checks do not establish original parity, real transactions or external undo.
+
 The [offline clipboard example](clipboard/README.md) covers three proposed local
 families with synthetic documents and a recording/failure double: insertion or
 replacement, cut failure retention, and undo/identity boundaries. No real clipboard
