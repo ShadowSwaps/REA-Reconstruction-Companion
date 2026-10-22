@@ -200,6 +200,12 @@ Count a deliberate defect as caught by an assertion only when its targeted fixtu
 
 ## Controlled asynchronous results
 
+For offline editing, reconnect and conflicting revisions, the
+[single-slot synchronization example](offline-sync/README.md) freezes complete
+intermediate states and separates attempts, synthetic effects and acknowledgements.
+It exercises safe known-no-effect retry, unknown-outcome reconciliation and explicit
+rebase/discard, without persistent storage, real service access or exactly-once claims.
+
 [One bounded local example](asynchronous-results/README.md) executes actual
 promise callbacks with frozen intermediate expectations and selected faulty
 variants. It distinguishes stale values/errors/finalizers, abort requests and

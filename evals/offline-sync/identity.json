@@ -1,0 +1,8 @@
+{
+  "frozenUtc": "2026-10-22T23:26:55.817528+00:00",
+  "expectationsSha256": "d4a54dd38b772ac459c9b79ec8448de4cf195544020f81cfa768f29e8e19c597",
+  "cases": 10,
+  "checkpoints": 91,
+  "ordinaryCheckpoints": 12,
+  "provenance": "Same author separately reasoned complete literal states before candidate implementation; synthetic proposed policy, not captured candidate output or original evidence. Constructors only expand explicit literals; no transition implementation imported."
+}
