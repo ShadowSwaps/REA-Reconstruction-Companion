@@ -54,6 +54,11 @@ include late errors and cleanup as well as values. Distinguish dismissal, abort
 request and confirmed cancellation; keep uncertain effects unresolved until
 applicable reconciliation supports a retry or known outcome.
 
+For [copy/cut/paste](clipboard.md), extend these same rows with source/destination
+selection and identity, representation, insertion/replacement, source-removal
+and clipboard effects. Keep original evidence separate from proposed cut/history
+policies and unavailable platform behavior.
+
 ## Findings and uncertainty
 
 For [settings and preferences](settings-preferences.md), retain applicable scope,

@@ -1,5 +1,17 @@
 # REA-Reconstruction-Companion
 
+For copy/cut/paste, use the focused [transfer guidance](skills/rea-reconstruction-companion/references/clipboard.md)
+and [offline example](evals/clipboard/README.md). Recover source/destination,
+representation, insertion/replacement, cut retention and undo/identity effects.
+
+Investigation: “Explain only this editor's cut and paste behavior. Determine when
+the source is removed and what a rejected paste preserves. Keep unknowns explicit;
+do not implement or touch my clipboard or documents.”
+
+Implementation: “Implement the specified copy/cut/paste slice in my reconstruction.
+Use synthetic data and a recording/failure clipboard double. Verify replacement,
+cut failure retention and undo/identity boundaries without real clipboard access.”
+
 For settings, defaults and saved preferences, use the focused
 [preference guidance](skills/rea-reconstruction-companion/references/settings-preferences.md)
 and [offline worked example](evals/settings-preferences/README.md). Distinguish

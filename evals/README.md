@@ -1,5 +1,10 @@
 # Behavioral evaluation kit
 
+The [offline clipboard example](clipboard/README.md) covers three proposed local
+families with synthetic documents and a recording/failure double: insertion or
+replacement, cut failure retention, and undo/identity boundaries. No real clipboard
+or user data is touched; finite scripted checks do not establish platform behavior.
+
 The [settings/preferences example](settings-preferences/README.md) freezes a
 proposed finite profile with 36 literal intermediate states before candidate
 adaptation. Actual disposable local files and fresh instances exercise defaults,
