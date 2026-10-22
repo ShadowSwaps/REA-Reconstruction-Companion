@@ -56,6 +56,11 @@ applicable reconciliation supports a retry or known outcome.
 
 ## Findings and uncertainty
 
+For [settings and preferences](settings-preferences.md), retain applicable scope,
+default/override presence and precedence, effective value/source and pending,
+applied and persisted transitions in the same rows. Recover reset and compatibility
+policy without treating a displayed default or button name as storage evidence.
+
 For date-bearing workflows, extend these same records with the selected value's
 [date/time meaning and locale context](date-locale.md). Bind zone/offset and
 runtime data to observations; keep display, parsing and persisted/exported values

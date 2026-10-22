@@ -94,6 +94,8 @@ For date/time-zone or locale-dependent behavior, use [date and locale contracts]
 
 For numeric quantities, use [numeric contracts](references/numeric-contracts.md) to separate localized input/display from canonical values, recover representation and explicit rounding mode/stage, and preserve unit meaning through conversion, storage and export. Keep unresolved original rules explicit and validate values beyond formatted equality.
 
+For settings, defaults or saved preferences, use [preference contracts](references/settings-preferences.md) to recover presence versus explicit values, applicable scope/precedence, effective value and source, pending versus applied/saved changes, reset and reopen behavior. Preserve unrelated/unknown data under the selected compatibility policy; do not infer missing storage from a default-looking screen.
+
 For search, combined filters or sorted lists, use [search and ordering contracts](references/search-filter-sort.md) to recover matching/normalization, predicate composition, comparator/missing/tie rules and selection/page behavior. Keep original evidence separate from proposed improvements; choose discriminating ordered-ID and state checks for the selected slice.
 
 For undo/redo or destructive actions, use [history and destructive-effect contracts](references/undo-destructive.md) to recover restoration, identity/order/view state, grouping, history lifetime and redo branching. Trace confirmation/cancel/repetition and distinguish reversible deletion from permanent or uncertain effects. Keep one-operation requests bounded and planning requests in planning mode.

@@ -27,6 +27,12 @@ Preserve independent reference fixtures before adjusting the implementation. Fol
 
 ## Validate at the right boundaries
 
+For [settings and preferences](settings-preferences.md#freeze-distinguishing-checks),
+compare presence/value/source and pending/applied/saved state through selected
+Apply/Save/Cancel/reset, temporary override, invalid/older data and actual reopen.
+Verify retained unrelated data and relevant bytes; distinguish disposable local
+persistence from a double and from untested crash/concurrency guarantees.
+
 For [unsaved changes and navigation](unsaved-navigation.md#freeze-distinguishing-checks),
 compare intermediate draft/saved content, document/owner/revision, feedback and
 actual departure target through save/discard/cancel, delayed completion and

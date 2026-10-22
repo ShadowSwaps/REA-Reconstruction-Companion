@@ -1,0 +1,1074 @@
+{
+  "profile": "proposed-local-file-v1",
+  "ordinary": [
+    {
+      "id": "ordinary-save",
+      "initial": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n",
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "key": "label",
+            "value": "custom"
+          },
+          "expected": {
+            "draft": {
+              "label": "custom"
+            },
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": true,
+            "unsaved": true,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "draft": {
+              "label": "custom"
+            },
+            "applied": {
+              "label": "custom"
+            },
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "custom"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "saved",
+            "bytes": "{\"version\":1,\"prefs\":{\"label\":\"custom\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "reopen"
+          },
+          "expected": {
+            "draft": {
+              "label": "custom"
+            },
+            "applied": {
+              "label": "custom"
+            },
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "custom"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{\"label\":\"custom\"},\"other\":\"keep\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ordinary-cancel",
+      "initial": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "key": "label",
+            "value": "custom"
+          },
+          "expected": {
+            "draft": {
+              "label": "custom"
+            },
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": true,
+            "unsaved": true,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "false-zero-empty",
+      "initial": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n",
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "saved",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "reopen"
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "apply-cancel-reopen",
+      "initial": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "key": "label",
+            "value": "custom"
+          },
+          "expected": {
+            "draft": {
+              "label": "custom"
+            },
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": true,
+            "unsaved": true,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "apply"
+          },
+          "expected": {
+            "draft": {
+              "label": "custom"
+            },
+            "applied": {
+              "label": "custom"
+            },
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "custom"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": true,
+            "status": "applied",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "key": "label",
+            "value": "later"
+          },
+          "expected": {
+            "draft": {
+              "label": "later"
+            },
+            "applied": {
+              "label": "custom"
+            },
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "custom"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "profile"
+            },
+            "dirty": true,
+            "unsaved": true,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "draft": {
+              "label": "custom"
+            },
+            "applied": {
+              "label": "custom"
+            },
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "custom"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": true,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "reopen"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reset-pending-remove",
+      "initial": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n",
+      "steps": [
+        {
+          "action": {
+            "type": "reset"
+          },
+          "expected": {
+            "draft": {
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": true,
+            "unsaved": true,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "reset"
+          },
+          "expected": {
+            "draft": {
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": true,
+            "unsaved": true,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "draft": {
+              "future": "retain"
+            },
+            "applied": {
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "saved",
+            "bytes": "{\"version\":1,\"prefs\":{\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "reopen"
+          },
+          "expected": {
+            "draft": {
+              "future": "retain"
+            },
+            "applied": {
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "explicit-default-unset",
+      "initial": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "key": "limit",
+            "value": 3
+          },
+          "expected": {
+            "draft": {
+              "limit": 3
+            },
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": true,
+            "unsaved": true,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "apply"
+          },
+          "expected": {
+            "draft": {
+              "limit": 3
+            },
+            "applied": {
+              "limit": 3
+            },
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "profile",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": true,
+            "status": "applied",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "unset",
+            "key": "limit"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {
+              "limit": 3
+            },
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "profile",
+              "label": "default"
+            },
+            "dirty": true,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "saved",
+            "bytes": "{\"version\":1,\"prefs\":{},\"other\":\"keep\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "session-override",
+      "initial": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n",
+      "steps": [
+        {
+          "action": {
+            "type": "override",
+            "key": "limit",
+            "value": 7
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 7,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "session",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 7,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "session",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "saved",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "reopen"
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "older-read-save",
+      "initial": "{\"version\":0,\"prefs\":{\"on\":false,\"n\":0,\"caption\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n",
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "older",
+            "bytes": "{\"version\":0,\"prefs\":{\"on\":false,\"n\":0,\"caption\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "older",
+            "bytes": "{\"version\":0,\"prefs\":{\"on\":false,\"n\":0,\"caption\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "saved",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "reopen"
+          },
+          "expected": {
+            "draft": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "applied": {
+              "enabled": false,
+              "limit": 0,
+              "label": "",
+              "future": "retain"
+            },
+            "effective": {
+              "enabled": false,
+              "limit": 0,
+              "label": ""
+            },
+            "sources": {
+              "enabled": "profile",
+              "limit": "profile",
+              "label": "profile"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "ready",
+            "bytes": "{\"version\":1,\"prefs\":{\"enabled\":false,\"limit\":0,\"label\":\"\",\"future\":\"retain\"},\"other\":\"keep\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "invalid-preserved",
+      "initial": "{\"version\":1,\"prefs\":{\"limit\":\"bad\"},\"other\":\"keep\"}\n",
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "invalid",
+            "bytes": "{\"version\":1,\"prefs\":{\"limit\":\"bad\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "blocked",
+            "bytes": "{\"version\":1,\"prefs\":{\"limit\":\"bad\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "reopen"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "invalid",
+            "bytes": "{\"version\":1,\"prefs\":{\"limit\":\"bad\"},\"other\":\"keep\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "future-preserved",
+      "initial": "{\"version\":2,\"prefs\":{\"label\":\"next\"},\"other\":\"keep\"}\n",
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "unsupported",
+            "bytes": "{\"version\":2,\"prefs\":{\"label\":\"next\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "blocked",
+            "bytes": "{\"version\":2,\"prefs\":{\"label\":\"next\"},\"other\":\"keep\"}\n"
+          }
+        },
+        {
+          "action": {
+            "type": "reopen"
+          },
+          "expected": {
+            "draft": {},
+            "applied": {},
+            "effective": {
+              "enabled": true,
+              "limit": 3,
+              "label": "auto"
+            },
+            "sources": {
+              "enabled": "default",
+              "limit": "default",
+              "label": "default"
+            },
+            "dirty": false,
+            "unsaved": false,
+            "status": "unsupported",
+            "bytes": "{\"version\":2,\"prefs\":{\"label\":\"next\"},\"other\":\"keep\"}\n"
+          }
+        }
+      ]
+    }
+  ]
+}
