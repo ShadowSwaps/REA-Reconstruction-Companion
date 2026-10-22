@@ -197,7 +197,7 @@
     "evals/multi-selection/check.mjs": "792d1677a54d12e2cf96b11a76743f8561a5e915ef9cf203bb013ed1b04c12c8",
     "evals/multi-selection/double.mjs": "0c47da8a3a8642c708262fce82098f2fe6eef7f697ecfb79383db3194b3514e5",
     "evals/multi-selection/expectations.json": "7c7bf170eb919882c2b1fd9b53d0eab2b00de7e7df31908aab11ad6c64b33000",
-    "evals/multi-selection/identity.json": "1a941a0adf6c1051a655f47d343869ec9ba1bcba43400bfd66ddc6d51afe532e",
+    "evals/multi-selection/identity.json": "6c3ac4dbabcb04d25ec2bbaec1484897c705734278c19d6c54512b7519a32978",
     "evals/numeric-contracts/README.md": "0530726abd47afd522e7c730d0c0fea9f1dedae62b8f620b452c48ac01f2c568",
     "evals/numeric-contracts/candidate.mjs": "ec7eb5efe98ef9f2f06a455eeb96e2d13a8ed42b43e0af9356d802aabd454581",
     "evals/numeric-contracts/check.mjs": "c4ea5310022e85c319af790dac482ef2e7e62d2cf873b4145c6fff6a3c9e0ca0",
