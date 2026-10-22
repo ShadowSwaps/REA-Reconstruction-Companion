@@ -1,0 +1,6 @@
+{
+  "profile": "proposed-offline-v1-corrected",
+  "oracle": "Same author, source exposed. Initial 72 snapshots frozen before candidate; one final no-op expectation corrected after first execution; original retained privately.",
+  "expectationsSha256": "53bfd82368e7d2e71794ae8b32e1535ef4b22778aee3a48a3c5a95228955a997",
+  "correction": "repeat-save-and-choice step 5: no-op retains a1/revision 1 already committed at step 4; no candidate change."
+}

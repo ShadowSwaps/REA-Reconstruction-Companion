@@ -27,6 +27,12 @@ Preserve independent reference fixtures before adjusting the implementation. Fol
 
 ## Validate at the right boundaries
 
+For [unsaved changes and navigation](unsaved-navigation.md#freeze-distinguishing-checks),
+compare intermediate draft/saved content, document/owner/revision, feedback and
+actual departure target through save/discard/cancel, delayed completion and
+failure. Keep local state-machine checks separate from backend durability and
+platform-specific close behavior.
+
 For [undo/redo and destructive workflows](undo-destructive.md#freeze-distinguishing-sequences), exercise actual edit/group/history and confirmation/cancel paths against frozen intermediate values, identities, order and relevant view/effect state. Test the selected redo-branch and irreversible boundary without using real-data destruction as a fixture. Local restoration and effect doubles do not establish external reversal.
 
 For untrusted inputs, sensitive data or restricted operations, apply [security boundaries](reconstruction-security.md). Exercise relevant parser/sink limits, storage/export/log leakage and direct unauthorized calls at the enforcing component; keep simulated identity and client-only limits explicit. A successful ordinary workflow alone does not validate these protections.
