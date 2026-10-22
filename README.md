@@ -1,5 +1,219 @@
 # REA-Reconstruction-Companion
 
+![REA Reconstruction Companion — Understand. Rebuild. Validate.](assets/discord-banner.png)
+
+**Understand existing software. Plan a reconstruction. Build and validate when requested.**
+
+An open-source, model-independent Agent Skill that works with [REA](https://github.com/morluto/rea). Turn reverse-engineering evidence into requirements, architecture, an implementation roadmap and testable results—at the scope you choose.
+
+[Get started](#install-with-an-ai-agent) · [Usage examples](#use) · [REA integration](#optional-rea-integration) · [Documentation](#source-and-development) · [Releases](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/releases) · [Support on Ko-fi](https://ko-fi.com/shadowswaps)
+
+| Your goal | What the companion helps produce |
+| --- | --- |
+| Understand an app before rebuilding | Evidence-backed behavior, requirements, unknowns and a staged roadmap. |
+| Build a similar tool now | Scoped implementation in testable increments, with validation and reported differences. |
+| Investigate a feature, function or format | A focused contract and representative acceptance cases. |
+| Improve an existing reconstruction | Measurements, targeted changes and revalidation of affected behavior. |
+
+**Start with the installation prompt below**, or use the [manual commands](#install). The portable core has no model SDK or paid API requirement. [Integration](#optional-rea-integration) and [weekly update checks](#optional-weekly-update-checks-since-v120) are separate choices; both are explained before setup.
+
+## Install with an AI agent
+
+Give this prompt to an agent with local file and command access. It identifies your client and asks for your integration preference; you do not need to fill in any placeholders.
+
+```text
+Install REA-Reconstruction-Companion from:
+https://github.com/ShadowSwaps/REA-Reconstruction-Companion
+
+Read README.md and INSTALL.md, identify my AI client and its skills
+directory, and follow the documented installation workflow.
+
+Before making installation changes, explain the optional REA integration
+rule and ask me to choose:
+- Enable: relevant REA reconstruction requests also load the companion,
+  sharing evidence, requirements, and validation work.
+- Skip: install the companion without changing REA; I can invoke it
+  explicitly. This does not remove an integration rule already installed.
+
+Wait for my choice unless I have already provided it. Then install using
+that setting, preview changes with --dry-run, preserve existing work and
+backups, and verify with --check. Explain any missing prerequisites or
+access limitations. Report what was installed, where, and whether the
+integration was enabled. Do not claim success unless verified.
+Also explain the optional weekly update check (included since v1.2.0)
+and ask whether I want it enabled. Keep it off unless I choose it.
+This checks on skill use and still asks me before installing an update.
+Do not incur additional charges: use existing local tools and do not
+activate billing, paid services, metered APIs, or automatic paid usage.
+If a step could incur a charge and that cannot be ruled out, stop that
+step and explain a no-charge alternative.
+```
+
+You can include "Enable integration" or "Skip integration" with the prompt to choose upfront. The [integration explanation](#optional-rea-integration) describes its purpose and benefits. A chat-only assistant without local file and command access can guide you through installation but cannot perform it itself.
+
+Share the repository: [github.com/ShadowSwaps/REA-Reconstruction-Companion](https://github.com/ShadowSwaps/REA-Reconstruction-Companion).
+
+## Install
+
+Download and extract the ZIP from [Releases](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/releases), or clone this repository. Run commands from the extracted folder or repository root. On Windows, macOS, and Linux, the installer commands are the same.
+
+For automatic co-use, first install [REA for your client](https://github.com/morluto/rea#readme). Then choose a command:
+
+```sh
+# Claude Code, with the optional integration
+node install.mjs --client claude-code --integration on
+
+# Codex, with the optional integration
+node install.mjs --client codex --integration on
+
+# Companion only; no changes to REA
+node install.mjs --client claude-code --integration off
+```
+
+Use `--dry-run` on any installation command to inspect the paths and changes without writing files. The `companionChanges` lists identify added, modified, and removed files relative to the companion directory, including local files that a replacement would move into the backup. Use the same command with `--check` afterward to verify the selected installation mode. A missing REA skill or ambiguous choice stops integrated installation before the companion is installed. Differently cased paths to the same REA file are treated as one candidate; genuinely separate installations still require an explicit selection.
+
+`claude_code`, as used by REA, is accepted as an alias for `claude-code` by the installer and updater. Plans, receipts and newly saved update settings use `claude-code`.
+
+<details>
+<summary><strong>Client paths, custom profiles and advanced installation</strong></summary>
+
+Default user locations:
+
+- Claude Code: `~/.claude/skills/rea-reconstruction-companion/`, or `$CLAUDE_CONFIG_DIR/skills/rea-reconstruction-companion/` when a custom configuration directory is set in the installer's environment. See [Claude Code's environment-variable documentation](https://code.claude.com/docs/en/env-vars). REA lookup stays within that selected profile unless `--rea-skill` explicitly selects another location.
+- Codex: `~/.agents/skills/rea-reconstruction-companion/`, or `$CODEX_HOME/skills/rea-reconstruction-companion/` when `CODEX_HOME` is set. The installer also checks the older `~/.codex/skills/` location when locating REA.
+- Generic clients: specify their documented skills directory with `--skills-dir`.
+
+Override paths for an existing installation, a project-scoped skill, or another agent:
+
+```sh
+node install.mjs --client generic --integration on --skills-dir "/path/to/skills" --rea-skill "/path/to/reverse-engineer-anything/SKILL.md"
+```
+
+`--skills-dir` accepts the parent skills directory; the installer creates `rea-reconstruction-companion` beneath it. It takes precedence over client defaults and environment variables. The REA path must identify the skill actually loaded by that client. An override disables broad automatic lookup. Paths with spaces should be quoted. If the installer runs outside the agent's environment, supply that agent's actual directory explicitly.
+
+Keep the downloaded package or checkout separate from the installation destination. The installer rejects overlapping source/destination directories and a REA file inside the companion destination, including existing paths that differ only by casing on a filesystem that treats them as the same location.
+
+The optional `agents/openai.yaml` adapter is installed only for Codex. The portable core and Claude Code installation do not depend on it. Refresh the host's skills or start a fresh session if the new skill is not visible.
+
+</details>
+
+## Use
+
+You can explicitly invoke `$rea-reconstruction-companion` in Codex or `/rea-reconstruction-companion` in Claude Code. With integration enabled, a relevant request to REA also instructs the agent to load the companion.
+
+Describe the software and the outcome you want in ordinary language. The companion uses available REA tools or supplied evidence, identifies gaps, and keeps the work at your requested scope. These examples are illustrations, not required prompts: paraphrases, casual wording, minor typos and follow-ups should work in context. Say what you want to understand or build; you do not need to name a mode or reproduce a template. Explicit corrections and exclusions take precedence, and a possible future rebuild does not request implementation now.
+
+If the original has awkward behavior, say which compatibility matters and what you want improved—for example, “Keep exports readable by my existing tools, but make failed saves clear.” The companion separates observed behavior from intended changes, checks affected dependencies, and keeps unresolved or deferred work visible. See the [worked quirk decisions](evals/quirk-decisions.md).
+
+Screenshots, recordings and incomplete descriptions can also provide a starting point. The companion separates visible states and demonstrated transitions from assumptions, asks about gaps that change the result, and keeps visual similarity distinct from working behavior. See the [bounded visual-evidence example](evals/visual-evidence/README.md); supplied images do not require a whole-app rebuild or imply access to its server.
+
+For selected interfaces, the companion also separates keyboard operation, focus, labels, errors and status feedback from visual fidelity. The [accessibility worked slice](evals/interface-accessibility/README.md) demonstrates a small intentional improvement with live keyboard evidence and explicit unrun screen-reader checks.
+
+**Understand and plan a future reconstruction.** Expect evidence-backed behavior and workflow requirements, known unknowns, and a staged roadmap before implementation:
+
+```text
+Use REA and the companion to understand the desktop notes app I have open
+so I can plan a similar app later. Focus on creating, editing, searching,
+and saving notes. Link requirements to the evidence, separate observations
+from inferences, and list unanswered questions and a staged build roadmap.
+Stop after the specification and plan.
+```
+
+**Build a similar app now.** A build request authorizes implementation within the requested scope. Expect incremental code changes and validation against observed requirements, with gaps and differences reported:
+
+```text
+Use REA and the companion to investigate the desktop notes app I have open
+and build a local web app with similar note creation, editing, search,
+and save behavior in this workspace. I need to trust today's notes first:
+it must work offline and reopen my saved notes. Start with that working
+journey, including save failures, then add search and the remaining
+features in testable increments. Animations can wait. Validate against
+the evidence and report differences and anything you could not verify.
+```
+
+For a broad request, expect a compact plan around the first useful outcome, its
+essential dependencies and design-changing unknowns, with evidence-linked checks
+and deferred work kept visible. Explicit hard requirements remain binding. If
+finding existing notes matters most, that can lead instead of creating new ones;
+you do not need to use priority labels or complete a feature inventory. See the
+[worked prioritization example](evals/prioritization.md) for a plan and its limits.
+
+**Investigate one function or feature.** Expect a focused contract covering inputs, outputs, side effects, errors, and evidence gaps:
+
+```text
+Use REA and the companion to investigate the CSV import feature in the
+app I have open. Trace how it handles headers, quoted fields, duplicate
+rows, and malformed input. Document inputs, outputs, side effects, error
+behavior, and representative acceptance cases, citing the evidence.
+Keep this to an investigation; do not implement changes.
+```
+
+The agent must report missing tools or evidence instead of claiming live analysis or complete equivalence. A build request does not authorize deployment, releases, installation changes, paid tools, or additional charges. Those actions require their own authority; the no-additional-charges constraint below still applies.
+
+### Continue or optimize a scoped implementation
+
+> Continue implementing the app from this project's REA reconstruction specification.
+
+> Reimplement the decodeFrame function in this library and make it faster for large inputs. Recover its contract, then compare correctness and performance.
+
+### Resume earlier work
+
+> Pick up from this checkpoint. Keep the same scope, retain the passing evidence that still applies, and work on the next unfinished part.
+
+To change an existing reconstruction, describe the outcome and what must stay compatible, for example: “Let me mark an entry done; keep my title listing and old files.” The companion checks current code and custom work, selects affected/shared regression checks and proportional recovery before editing. See [safe-change guidance](skills/rea-reconstruction-companion/references/safe-changes.md) and the [bounded worked change](evals/safe-changes/README.md). Planning a change alone does not request implementation.
+
+Select the checkpoint or its path and identify any changed target or goal. The agent should read that record and the sources needed for the next step, check evidence applicability, and preserve historical results. Resuming a specification does not authorize building it. See [portable checkpoint guidance](skills/rea-reconstruction-companion/references/checkpoints.md) and the [worked resume example](evals/resume/WALKTHROUGH.md).
+
+For a small question, expect a compact evidence-linked answer or contract with limits and a useful next action. A feature build adds implementation and acceptance results; it need not produce a whole-app blueprint. If a consequential target or outcome is unclear, expect one focused clarification. Host activation and instruction following vary: explicit invocation can help select the skill, but examples and installation do not guarantee every host/model will interpret every phrasing correctly.
+
+**When a service is inaccessible.** “Build local editing now; keep actual sharing
+pending until I supply authorized service evidence.” Expect an explicitly labeled
+local substitute or finite replay where useful, with real-service requirements
+still pending. Client observations do not recover server internals, and a local
+demo cannot verify remote compatibility. The [runnable synthetic example](evals/unavailable-backend/README.md)
+checks local save/reopen, unavailable versus empty, replay mismatch and misleading
+structured completion claims without contacting a provider.
+
+Runnable results should include proportionate prerequisites, setup/run/stop,
+a principal walkthrough, data locations and safe reset/recovery steps exercised
+outside the checkout. The [standalone Pocket Tasks walkthrough](evals/reference/reconstruction/RUN.md)
+demonstrates this with existing Node and PowerShell; it is a same-agent fresh-folder
+check, not a clean OS or independent beginner test. See [handoff guidance](skills/rea-reconstruction-companion/references/runnable-handoffs.md).
+
+To see the workflow before trying a target, follow the [worked investigation](evals/reference/WALKTHROUGH.md), [reconstruction](evals/reference/reconstruction/README.md), or [resume](evals/resume/WALKTHROUGH.md) for your goal. These disclose answers and prior source exposure; they are teaching material, not prerequisites or evidence of a fresh agent trial. The [first-use review](evals/first-use.md) separates manual intent scenarios from executable checks.
+
+## Find guidance by topic
+
+Choose the topic for your selected slice. The examples are teaching material with
+finite coverage and disclosed source exposure; their local results do not establish
+original parity, real-service behavior or general host/model compatibility.
+
+| Topic | Guidance | Worked example |
+| --- | --- | --- |
+| Copy, cut and paste | [Contract and boundaries](skills/rea-reconstruction-companion/references/clipboard.md) | [Example and limits](evals/clipboard/README.md) |
+| Settings, defaults and saved preferences | [Contract and boundaries](skills/rea-reconstruction-companion/references/settings-preferences.md) | [Example and limits](evals/settings-preferences/README.md) |
+| Unsaved changes and navigation | [Contract and boundaries](skills/rea-reconstruction-companion/references/unsaved-navigation.md) | [Example and limits](evals/unsaved-navigation/README.md) |
+| Undo, redo and destructive actions | [Contract and boundaries](skills/rea-reconstruction-companion/references/undo-destructive.md) | [Example and limits](evals/undo-destructive/README.md) |
+| Search, filters and sorting | [Contract and boundaries](skills/rea-reconstruction-companion/references/search-filter-sort.md) | [Example and limits](evals/search-filter-sort/README.md) |
+| Dates, time zones and locale | [Contract and boundaries](skills/rea-reconstruction-companion/references/date-locale.md) | [Example and limits](evals/date-locale/README.md) |
+| Responsive layouts and content extremes | [Contract and boundaries](skills/rea-reconstruction-companion/references/visual-evidence.md#responsive-layouts-and-content-extremes) | [Example and limits](evals/responsive-layouts/README.md) |
+| Workflow states and confirmation | [Contract and boundaries](skills/rea-reconstruction-companion/references/blueprint.md#consequential-workflow-states) | [Example and limits](evals/workflow-edge-cases/README.md) |
+| Asynchronous results and cancellation | [Contract and boundaries](skills/rea-reconstruction-companion/references/asynchronous-results.md) | [Example and limits](evals/asynchronous-results/README.md) |
+| Conflicting evidence | [Contract and boundaries](skills/rea-reconstruction-companion/references/reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior) | [Example and limits](evals/conflicting-evidence/README.md) |
+| Security and privacy boundaries | [Contract and boundaries](skills/rea-reconstruction-companion/references/reconstruction-security.md) | [Example and limits](evals/reconstruction-security/README.md) |
+| Numeric quantities, rounding and units | [Contract and boundaries](skills/rea-reconstruction-companion/references/numeric-contracts.md) | [Example and limits](evals/numeric-contracts/README.md) |
+| File import and export | [Contract and boundaries](skills/rea-reconstruction-companion/references/file-compatibility.md) | [Example and limits](evals/import-export/README.md) |
+| Safe changes to an existing reconstruction | [Contract and boundaries](skills/rea-reconstruction-companion/references/safe-changes.md) | [Example and limits](evals/safe-changes/README.md) |
+| Target version changes | [Contract and boundaries](skills/rea-reconstruction-companion/references/version-changes.md) | [Example and limits](evals/version-change/README.md) |
+| Visual evidence | [Contract and boundaries](skills/rea-reconstruction-companion/references/visual-evidence.md) | [Example and limits](evals/visual-evidence/README.md) |
+| Keyboard, focus and accessibility | [Contract and boundaries](skills/rea-reconstruction-companion/references/interface-accessibility.md) | [Example and limits](evals/interface-accessibility/README.md) |
+
+For investigation, reconstruction, optimization and checkpoint/resume walkthroughs,
+see [Use](#use) and the [evaluation kit index](evals/README.md).
+
+<details>
+<summary><strong>Specialist request examples and boundaries</strong></summary>
+
 For copy/cut/paste, use the focused [transfer guidance](skills/rea-reconstruction-companion/references/clipboard.md)
 and [offline example](evals/clipboard/README.md). Recover source/destination,
 representation, insertion/replacement, cut retention and undo/identity effects.
@@ -98,143 +312,7 @@ and [small local worked example](evals/reconstruction-security/README.md). Keep
 original behavior, proposed controls and demonstrated protection distinct;
 simulated authentication does not establish real access protection.
 
-![REA Reconstruction Companion — Understand. Rebuild. Validate.](assets/discord-banner.png)
-
-**Understand existing software. Plan a reconstruction. Build and validate when requested.**
-
-An open-source, model-independent Agent Skill that works with [REA](https://github.com/morluto/rea). Turn reverse-engineering evidence into requirements, architecture, an implementation roadmap and testable results—at the scope you choose.
-
-[Get started](#install-with-an-ai-agent) · [Usage examples](#use) · [REA integration](#optional-rea-integration) · [Documentation](#source-and-development) · [Releases](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/releases) · [Support on Ko-fi](https://ko-fi.com/shadowswaps)
-
-| Your goal | What the companion helps produce |
-| --- | --- |
-| Understand an app before rebuilding | Evidence-backed behavior, requirements, unknowns and a staged roadmap. |
-| Build a similar tool now | Scoped implementation in testable increments, with validation and reported differences. |
-| Investigate a feature, function or format | A focused contract and representative acceptance cases. |
-| Improve an existing reconstruction | Measurements, targeted changes and revalidation of affected behavior. |
-
-**Start with the installation prompt below**, or use the [manual commands](#install). The portable core has no model SDK or paid API requirement. [Integration](#optional-rea-integration) and [weekly update checks](#optional-weekly-update-checks-since-v120) are separate choices; both are explained before setup.
-
-## Install with an AI agent
-
-Give this prompt to an agent with local file and command access. It identifies your client and asks for your integration preference; you do not need to fill in any placeholders.
-
-```text
-Install REA-Reconstruction-Companion from:
-https://github.com/ShadowSwaps/REA-Reconstruction-Companion
-
-Read README.md and INSTALL.md, identify my AI client and its skills
-directory, and follow the documented installation workflow.
-
-Before making installation changes, explain the optional REA integration
-rule and ask me to choose:
-- Enable: relevant REA reconstruction requests also load the companion,
-  sharing evidence, requirements, and validation work.
-- Skip: install the companion without changing REA; I can invoke it
-  explicitly. This does not remove an integration rule already installed.
-
-Wait for my choice unless I have already provided it. Then install using
-that setting, preview changes with --dry-run, preserve existing work and
-backups, and verify with --check. Explain any missing prerequisites or
-access limitations. Report what was installed, where, and whether the
-integration was enabled. Do not claim success unless verified.
-Also explain the optional weekly update check (included since v1.2.0)
-and ask whether I want it enabled. Keep it off unless I choose it.
-This checks on skill use and still asks me before installing an update.
-Do not incur additional charges: use existing local tools and do not
-activate billing, paid services, metered APIs, or automatic paid usage.
-If a step could incur a charge and that cannot be ruled out, stop that
-step and explain a no-charge alternative.
-```
-
-You can include "Enable integration" or "Skip integration" with the prompt to choose upfront. The [integration explanation](#optional-rea-integration) describes its purpose and benefits. A chat-only assistant without local file and command access can guide you through installation but cannot perform it itself.
-
-Share the repository: [github.com/ShadowSwaps/REA-Reconstruction-Companion](https://github.com/ShadowSwaps/REA-Reconstruction-Companion).
-
-## Use
-
-You can explicitly invoke `$rea-reconstruction-companion` in Codex or `/rea-reconstruction-companion` in Claude Code. With integration enabled, a relevant request to REA also instructs the agent to load the companion.
-
-Describe the software and the outcome you want in ordinary language. The companion uses available REA tools or supplied evidence, identifies gaps, and keeps the work at your requested scope. These examples are illustrations, not required prompts: paraphrases, casual wording, minor typos and follow-ups should work in context. Say what you want to understand or build; you do not need to name a mode or reproduce a template. Explicit corrections and exclusions take precedence, and a possible future rebuild does not request implementation now.
-
-If the original has awkward behavior, say which compatibility matters and what you want improved—for example, “Keep exports readable by my existing tools, but make failed saves clear.” The companion separates observed behavior from intended changes, checks affected dependencies, and keeps unresolved or deferred work visible. See the [worked quirk decisions](evals/quirk-decisions.md).
-
-Screenshots, recordings and incomplete descriptions can also provide a starting point. The companion separates visible states and demonstrated transitions from assumptions, asks about gaps that change the result, and keeps visual similarity distinct from working behavior. See the [bounded visual-evidence example](evals/visual-evidence/README.md); supplied images do not require a whole-app rebuild or imply access to its server.
-
-For selected interfaces, the companion also separates keyboard operation, focus, labels, errors and status feedback from visual fidelity. The [accessibility worked slice](evals/interface-accessibility/README.md) demonstrates a small intentional improvement with live keyboard evidence and explicit unrun screen-reader checks.
-
-**Understand and plan a future reconstruction.** Expect evidence-backed behavior and workflow requirements, known unknowns, and a staged roadmap before implementation:
-
-```text
-Use REA and the companion to understand the desktop notes app I have open
-so I can plan a similar app later. Focus on creating, editing, searching,
-and saving notes. Link requirements to the evidence, separate observations
-from inferences, and list unanswered questions and a staged build roadmap.
-Stop after the specification and plan.
-```
-
-**Build a similar app now.** A build request authorizes implementation within the requested scope. Expect incremental code changes and validation against observed requirements, with gaps and differences reported:
-
-```text
-Use REA and the companion to investigate the desktop notes app I have open
-and build a local web app with similar note creation, editing, search,
-and save behavior in this workspace. I need to trust today's notes first:
-it must work offline and reopen my saved notes. Start with that working
-journey, including save failures, then add search and the remaining
-features in testable increments. Animations can wait. Validate against
-the evidence and report differences and anything you could not verify.
-```
-
-For a broad request, expect a compact plan around the first useful outcome, its
-essential dependencies and design-changing unknowns, with evidence-linked checks
-and deferred work kept visible. Explicit hard requirements remain binding. If
-finding existing notes matters most, that can lead instead of creating new ones;
-you do not need to use priority labels or complete a feature inventory. See the
-[worked prioritization example](evals/prioritization.md) for a plan and its limits.
-
-**Investigate one function or feature.** Expect a focused contract covering inputs, outputs, side effects, errors, and evidence gaps:
-
-```text
-Use REA and the companion to investigate the CSV import feature in the
-app I have open. Trace how it handles headers, quoted fields, duplicate
-rows, and malformed input. Document inputs, outputs, side effects, error
-behavior, and representative acceptance cases, citing the evidence.
-Keep this to an investigation; do not implement changes.
-```
-
-The agent must report missing tools or evidence instead of claiming live analysis or complete equivalence. A build request does not authorize deployment, releases, installation changes, paid tools, or additional charges. Those actions require their own authority; the no-additional-charges constraint below still applies.
-
-### Continue or optimize a scoped implementation
-
-> Continue implementing the app from this project's REA reconstruction specification.
-
-> Reimplement the decodeFrame function in this library and make it faster for large inputs. Recover its contract, then compare correctness and performance.
-
-### Resume earlier work
-
-> Pick up from this checkpoint. Keep the same scope, retain the passing evidence that still applies, and work on the next unfinished part.
-
-To change an existing reconstruction, describe the outcome and what must stay compatible, for example: “Let me mark an entry done; keep my title listing and old files.” The companion checks current code and custom work, selects affected/shared regression checks and proportional recovery before editing. See [safe-change guidance](skills/rea-reconstruction-companion/references/safe-changes.md) and the [bounded worked change](evals/safe-changes/README.md). Planning a change alone does not request implementation.
-
-Select the checkpoint or its path and identify any changed target or goal. The agent should read that record and the sources needed for the next step, check evidence applicability, and preserve historical results. Resuming a specification does not authorize building it. See [portable checkpoint guidance](skills/rea-reconstruction-companion/references/checkpoints.md) and the [worked resume example](evals/resume/WALKTHROUGH.md).
-
-For a small question, expect a compact evidence-linked answer or contract with limits and a useful next action. A feature build adds implementation and acceptance results; it need not produce a whole-app blueprint. If a consequential target or outcome is unclear, expect one focused clarification. Host activation and instruction following vary: explicit invocation can help select the skill, but examples and installation do not guarantee every host/model will interpret every phrasing correctly.
-
-**When a service is inaccessible.** “Build local editing now; keep actual sharing
-pending until I supply authorized service evidence.” Expect an explicitly labeled
-local substitute or finite replay where useful, with real-service requirements
-still pending. Client observations do not recover server internals, and a local
-demo cannot verify remote compatibility. The [runnable synthetic example](evals/unavailable-backend/README.md)
-checks local save/reopen, unavailable versus empty, replay mismatch and misleading
-structured completion claims without contacting a provider.
-
-Runnable results should include proportionate prerequisites, setup/run/stop,
-a principal walkthrough, data locations and safe reset/recovery steps exercised
-outside the checkout. The [standalone Pocket Tasks walkthrough](evals/reference/reconstruction/RUN.md)
-demonstrates this with existing Node and PowerShell; it is a same-agent fresh-folder
-check, not a clean OS or independent beginner test. See [handoff guidance](skills/rea-reconstruction-companion/references/runnable-handoffs.md).
-
-To see the workflow before trying a target, follow the [worked investigation](evals/reference/WALKTHROUGH.md), [reconstruction](evals/reference/reconstruction/README.md), or [resume](evals/resume/WALKTHROUGH.md) for your goal. These disclose answers and prior source exposure; they are teaching material, not prerequisites or evidence of a fresh agent trial. The [first-use review](evals/first-use.md) separates manual intent scenarios from executable checks.
+</details>
 
 ## What it does
 
@@ -265,50 +343,6 @@ flowchart LR
 ```
 
 For the method and its sources, see the [skill instructions](skills/rea-reconstruction-companion/SKILL.md) and [research basis](skills/rea-reconstruction-companion/references/research-basis.md).
-
-## Install
-
-Download and extract the ZIP from [Releases](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/releases), or clone this repository. Run commands from the extracted folder or repository root. On Windows, macOS, and Linux, the installer commands are the same.
-
-For automatic co-use, first install [REA for your client](https://github.com/morluto/rea#readme). Then choose a command:
-
-```sh
-# Claude Code, with the optional integration
-node install.mjs --client claude-code --integration on
-
-# Codex, with the optional integration
-node install.mjs --client codex --integration on
-
-# Companion only; no changes to REA
-node install.mjs --client claude-code --integration off
-```
-
-Use `--dry-run` on any installation command to inspect the paths and changes without writing files. The `companionChanges` lists identify added, modified, and removed files relative to the companion directory, including local files that a replacement would move into the backup. Use the same command with `--check` afterward to verify the selected installation mode. A missing REA skill or ambiguous choice stops integrated installation before the companion is installed. Differently cased paths to the same REA file are treated as one candidate; genuinely separate installations still require an explicit selection.
-
-`claude_code`, as used by REA, is accepted as an alias for `claude-code` by the installer and updater. Plans, receipts and newly saved update settings use `claude-code`.
-
-<details>
-<summary><strong>Client paths, custom profiles and advanced installation</strong></summary>
-
-Default user locations:
-
-- Claude Code: `~/.claude/skills/rea-reconstruction-companion/`, or `$CLAUDE_CONFIG_DIR/skills/rea-reconstruction-companion/` when a custom configuration directory is set in the installer's environment. See [Claude Code's environment-variable documentation](https://code.claude.com/docs/en/env-vars). REA lookup stays within that selected profile unless `--rea-skill` explicitly selects another location.
-- Codex: `~/.agents/skills/rea-reconstruction-companion/`, or `$CODEX_HOME/skills/rea-reconstruction-companion/` when `CODEX_HOME` is set. The installer also checks the older `~/.codex/skills/` location when locating REA.
-- Generic clients: specify their documented skills directory with `--skills-dir`.
-
-Override paths for an existing installation, a project-scoped skill, or another agent:
-
-```sh
-node install.mjs --client generic --integration on --skills-dir "/path/to/skills" --rea-skill "/path/to/reverse-engineer-anything/SKILL.md"
-```
-
-`--skills-dir` accepts the parent skills directory; the installer creates `rea-reconstruction-companion` beneath it. It takes precedence over client defaults and environment variables. The REA path must identify the skill actually loaded by that client. An override disables broad automatic lookup. Paths with spaces should be quoted. If the installer runs outside the agent's environment, supply that agent's actual directory explicitly.
-
-Keep the downloaded package or checkout separate from the installation destination. The installer rejects overlapping source/destination directories and a REA file inside the companion destination, including existing paths that differ only by casing on a filesystem that treats them as the same location.
-
-The optional `agents/openai.yaml` adapter is installed only for Codex. The portable core and Claude Code installation do not depend on it. Refresh the host's skills or start a fresh session if the new skill is not visible.
-
-</details>
 
 ## Optional REA integration
 

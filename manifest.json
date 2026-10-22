@@ -1,12 +1,12 @@
 {
   "name": "rea-reconstruction-companion",
-  "version": "1.3.43",
+  "version": "1.3.44",
   "files": {
-    "README.md": "f588f4003e8258346b5724a864e62a6d98bbe07071454cd2dbd1acaf9b37e68f",
+    "README.md": "972e4ed8ae0d408b78337ef29fcb7602c7f9433b14e66f605a634e499704f994",
     "INSTALL.md": "cdfea3d199ec9036b36334b9e939aef4102d67297f5963c35273494f17315b9d",
     "LICENSE": "aca900183741df5c9b3db981bd48aba202474218f758c8b194548178a22c93bd",
     "CONTRIBUTING.md": "16bdbd75d8a98b4afcd77497f7755f583e9f1730d8040a50307e2471f47b00f1",
-    "package.json": "81e21377f2668aa42ac6c83f9e97d61d95ec2e8581ef53f1e60bb7001e06cf68",
+    "package.json": "a589be6f5a6ca79e1ea24065b3b47797002171bc30241ccfea1dc0ae18adb8ea",
     "install.mjs": "b84191c1d008f49695fb96d51a7a93a40c9f42947d79532ce31814328e0b8842",
     ".gitignore": "cc60841f3ff7c8e1ed628e84bc839c0c8de88d917da3d06763a535229a7c8802",
     ".gitattributes": "b63d17c7728e265ddc3c2f0399bfcfd4ceb616ed8887bf425ce53653b3af9ec7",
