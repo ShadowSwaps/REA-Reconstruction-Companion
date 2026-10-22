@@ -128,6 +128,9 @@ For experiments, uncertain decompilation, state recovery, or compatibility work,
 
 For a stateful journey, use [consequential workflow states](references/blueprint.md#consequential-workflow-states)
 to separate displayed, session/pending and persisted state in the existing records.
+For unsaved drafts, save feedback or leaving/closing/switching documents, use
+[unsaved changes and navigation](references/unsaved-navigation.md) to recover
+document/revision ownership and the selected save/discard/cancel destination policy.
 For work that can finish after inputs or owners change, use
 [asynchronous results](references/asynchronous-results.md) to trace applicability,
 late success/error/finalizer effects, cancellation scope and uncertain-write

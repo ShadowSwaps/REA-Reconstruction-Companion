@@ -1,5 +1,12 @@
 # Behavioral evaluation kit
 
+The [unsaved changes/navigation example](unsaved-navigation/README.md) checks a
+proposed offline document profile with 72 literal intermediate snapshots and
+controlled promise completions. Twelve faulty variants pass ordinary controls
+before draft/saved/owner/intent state rejects them. One initial no-op oracle
+transcription correction is disclosed; source exposure and in-memory doubles
+leave original parity, durability and actual leave/close behavior unverified.
+
 The [undo/destructive-action example](undo-destructive/README.md) freezes a
 proposed synthetic editor profile before implementation. Literal intermediate
 states cover history branching/grouping, identity/order/view restoration and

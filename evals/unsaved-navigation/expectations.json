@@ -1,0 +1,2416 @@
+{
+  "initial": {
+    "doc": "a",
+    "owner": 1,
+    "draft": "a0",
+    "revision": 0,
+    "dirty": false,
+    "feedback": "saved",
+    "pending": null,
+    "intent": null,
+    "saved": {
+      "a": {
+        "text": "a0",
+        "revision": 0
+      },
+      "b": {
+        "text": "b0",
+        "revision": 0
+      },
+      "c": {
+        "text": "c0",
+        "revision": 0
+      }
+    }
+  },
+  "ordinary": [
+    {
+      "id": "edit-save",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "clean-switch",
+      "steps": [
+        {
+          "action": {
+            "type": "leave",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "b",
+            "owner": 2,
+            "draft": "b0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cancel-dirty",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "cancel"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "edit-during-save",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "a2"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a2",
+            "revision": 2,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a2",
+            "revision": 2,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "save-before-leave",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": "b",
+            "owner": 2,
+            "draft": "b0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "save-navigation",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": "b",
+            "owner": 2,
+            "draft": "b0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "discard-navigation",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "discard"
+          },
+          "expected": {
+            "doc": "b",
+            "owner": 2,
+            "draft": "b0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "a"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 3,
+            "draft": "a0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "replace-repeat-intent",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "c"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "c",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "c"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "c",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": "c",
+            "owner": 2,
+            "draft": "c0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cancel-pending-navigation",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "cancel"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "new-edit-blocks-navigation",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "a2"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a2",
+            "revision": 2,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a2",
+            "revision": 2,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "failure-retains-retry",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "a2"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a2",
+            "revision": 2,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a2",
+            "revision": 2,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a2",
+            "revision": 2,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 2,
+              "doc": "a",
+              "owner": 1,
+              "text": "a2",
+              "revision": 2
+            },
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 2,
+            "ok": false
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a2",
+            "revision": 2,
+            "dirty": true,
+            "feedback": "failed",
+            "pending": null,
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a2",
+            "revision": 2,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 3,
+              "doc": "a",
+              "owner": 1,
+              "text": "a2",
+              "revision": 2
+            },
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 3,
+            "ok": true
+          },
+          "expected": {
+            "doc": "b",
+            "owner": 2,
+            "draft": "b0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a2",
+                "revision": 2
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "stale-owner-success",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "replaceOwner",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "b",
+            "owner": 2,
+            "draft": "b0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": "b",
+            "owner": 2,
+            "draft": "b0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "same-document-new-owner-old-error",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "replaceOwner",
+            "target": "a"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 2,
+            "draft": "a0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 2,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 2,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 2,
+              "doc": "a",
+              "owner": 2,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": false
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 2,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 2,
+              "doc": "a",
+              "owner": 2,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 2,
+            "ok": true
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 2,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "close-save",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "closed"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "closed",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "closed",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": null,
+            "owner": 2,
+            "draft": null,
+            "revision": null,
+            "dirty": false,
+            "feedback": "closed",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "close-discard",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "closed"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "closed",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "discard"
+          },
+          "expected": {
+            "doc": null,
+            "owner": 2,
+            "draft": null,
+            "revision": null,
+            "dirty": false,
+            "feedback": "closed",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "repeat-save-and-choice",
+      "steps": [
+        {
+          "action": {
+            "type": "edit",
+            "text": "a1"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "leave",
+            "target": "b"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "edited",
+            "pending": null,
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "save"
+          },
+          "expected": {
+            "doc": "a",
+            "owner": 1,
+            "draft": "a1",
+            "revision": 1,
+            "dirty": true,
+            "feedback": "saving",
+            "pending": {
+              "op": 1,
+              "doc": "a",
+              "owner": 1,
+              "text": "a1",
+              "revision": 1
+            },
+            "intent": "b",
+            "saved": {
+              "a": {
+                "text": "a0",
+                "revision": 0
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "ok": true
+          },
+          "expected": {
+            "doc": "b",
+            "owner": 2,
+            "draft": "b0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "type": "choose",
+            "choice": "save"
+          },
+          "expected": {
+            "doc": "b",
+            "owner": 2,
+            "draft": "b0",
+            "revision": 0,
+            "dirty": false,
+            "feedback": "saved",
+            "pending": null,
+            "intent": null,
+            "saved": {
+              "a": {
+                "text": "a1",
+                "revision": 1
+              },
+              "b": {
+                "text": "b0",
+                "revision": 0
+              },
+              "c": {
+                "text": "c0",
+                "revision": 0
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

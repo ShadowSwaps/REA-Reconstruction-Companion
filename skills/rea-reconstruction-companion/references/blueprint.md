@@ -67,6 +67,11 @@ For [search/filter/sort workflows](search-filter-sort.md), retain the selected m
 
 For [undo/redo and destructive actions](undo-destructive.md), add the selected restoration/grouping/history contract and confirmation/cancel/effect boundary to these rows. Separate data, identity/order and relevant view restoration from irreversible or unresolved effects; retain original evidence separately from proposed policies.
 
+For [unsaved changes and navigation](unsaved-navigation.md), retain document/owner,
+draft versus saved revision, save feedback and the exact departure destination in
+these rows. Resolve consequential save/discard/cancel, pending-edit and failure
+semantics from evidence or label the selected policy as proposed.
+
 Keep a finding ledger containing:
 
 - Local finding ID, claim, classification, and rationale.

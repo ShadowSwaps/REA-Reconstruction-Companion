@@ -1,5 +1,18 @@
 # REA-Reconstruction-Companion
 
+For unsaved drafts and document departure, use the focused
+[save and navigation guidance](skills/rea-reconstruction-companion/references/unsaved-navigation.md)
+and [offline worked example](evals/unsaved-navigation/README.md). Distinguish
+draft/saved content and feedback; bind save completion to document/revision and
+check the actual save/discard/cancel destination.
+
+Example: “Investigate only this editor's unsaved changes when switching notes.
+What survives save failure or another edit during save, and where does Cancel
+leave me? Keep unobserved behavior unresolved.” For an authorized implementation:
+“Add save/discard/cancel before leaving my reconstruction's edited note; retain
+the draft on failure and verify the selected destination with synthetic data.”
+The local example does not establish backend durability or browser-close safety.
+
 For undo/redo, deletion or other destructive actions, use the focused
 [history and effect guidance](skills/rea-reconstruction-companion/references/undo-destructive.md)
 and [offline worked example](evals/undo-destructive/README.md). Recover values,
