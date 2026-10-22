@@ -104,6 +104,8 @@ For search, combined filters or sorted lists, use [search and ordering contracts
 
 For multi-selection or bulk actions, use [selection and batch contracts](references/multi-selection.md) to recover selected/page/all-filtered scope, stable identities, preview applicability, partial outcomes and safe retry/undo boundaries. Scale to the requested operation; keep observed behavior, unknowns and proposed policies distinct.
 
+For placing items, dragging between lists or changing their order, use [drag/drop contracts](references/drag-drop.md) to recover source identity, canonical versus displayed order, insertion anchors, move/copy applicability, preview versus effects and cancel/undo boundaries. Recover the target's policy; keep planning bounded and actual input/accessibility behavior separate from an operation model.
+
 For undo/redo or destructive actions, use [history and destructive-effect contracts](references/undo-destructive.md) to recover restoration, identity/order/view state, grouping, history lifetime and redo branching. Trace confirmation/cancel/repetition and distinguish reversible deletion from permanent or uncertain effects. Keep one-operation requests bounded and planning requests in planning mode.
 
 For a request to modify an existing reconstruction, use [safe changes](references/safe-changes.md) to reconcile current intent and custom work, retained contracts, affected dependencies, acceptance and recovery before editing. Keep changed requirements separate from changes to the reference version or environment.
