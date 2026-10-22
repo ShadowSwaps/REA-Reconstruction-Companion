@@ -1,0 +1,2235 @@
+{
+  "profile": "proposed-offline-clipboard-v1",
+  "ordinary": [
+    {
+      "id": "ordinary-copy",
+      "family": "copy/paste",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "copy",
+            "owner": "src",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "copied"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ]
+            },
+            "events": [
+              "write:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "n1",
+                  "Alpha"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "pasted"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ]
+            },
+            "events": [
+              "write:ok",
+              "read:ok"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ordinary-cut",
+      "family": "cut retention",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "cut",
+            "owner": "src",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "cut-pending"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "moved"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok",
+              "read:ok"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "replacement-repeat",
+      "family": "copy/paste",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "copy",
+            "owner": "src",
+            "ids": [
+              "b",
+              "a"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "copied"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ]
+            },
+            "events": [
+              "write:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": [
+              "y"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "n1",
+                  "Alpha"
+                ],
+                [
+                  "n2",
+                  "Beta"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "pasted"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ]
+            },
+            "events": [
+              "write:ok",
+              "read:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 4,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "n1",
+                  "Alpha"
+                ],
+                [
+                  "n2",
+                  "Beta"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ],
+                [
+                  "n3",
+                  "Alpha"
+                ],
+                [
+                  "n4",
+                  "Beta"
+                ]
+              ]
+            },
+            "history": [
+              2,
+              0
+            ],
+            "status": "pasted"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ]
+            },
+            "events": [
+              "write:ok",
+              "read:ok",
+              "read:ok"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "write-rejected",
+      "family": "cut retention",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "cut",
+            "owner": "src",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "clipboard-rejected"
+          },
+          "clipboard": {
+            "value": {
+              "format": "text",
+              "text": "<b>literal</b>"
+            },
+            "events": [
+              "write:rejected"
+            ]
+          }
+        }
+      ],
+      "clipboard": {
+        "format": "text",
+        "text": "<b>literal</b>"
+      },
+      "failWrite": true
+    },
+    {
+      "id": "read-rejected",
+      "family": "cut retention",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "cut",
+            "owner": "src",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "cut-pending"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "clipboard-rejected"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok",
+              "read:rejected"
+            ]
+          }
+        }
+      ],
+      "failRead": true
+    },
+    {
+      "id": "late-invalid",
+      "family": "copy/paste",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "rejected"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  7
+                ]
+              ]
+            },
+            "events": [
+              "read:ok"
+            ]
+          }
+        }
+      ],
+      "clipboard": {
+        "format": "items",
+        "version": 1,
+        "items": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "id": "plain-text",
+      "family": "copy/paste",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": [
+              "y"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "n1",
+                  "<b>literal</b>"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "pasted"
+          },
+          "clipboard": {
+            "value": {
+              "format": "text",
+              "text": "<b>literal</b>"
+            },
+            "events": [
+              "read:ok"
+            ]
+          }
+        }
+      ],
+      "clipboard": {
+        "format": "text",
+        "text": "<b>literal</b>"
+      }
+    },
+    {
+      "id": "source-changed",
+      "family": "cut retention",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "cut",
+            "owner": "src",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "cut-pending"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "owner": "src",
+            "id": "a",
+            "text": "Changed"
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Changed"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "edited"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Changed"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "rejected"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok",
+              "read:ok"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "destination-rejected",
+      "family": "cut retention",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "cut",
+            "owner": "src",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "cut-pending"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": [
+              "z"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "rejected"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok",
+              "read:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "moved"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok",
+              "read:ok",
+              "read:ok"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "undo-move",
+      "family": "undo/identity",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "cut",
+            "owner": "src",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "cut-pending"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "moved"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok",
+              "read:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              1
+            ],
+            "status": "undone"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok",
+              "read:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              1
+            ],
+            "status": "rejected"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok",
+              "read:ok",
+              "read:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "redone"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok",
+              "read:ok",
+              "read:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "rejected"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "write:ok",
+              "read:ok",
+              "read:ok",
+              "read:ok"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "copy-snapshot-undo",
+      "family": "undo/identity",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "copy",
+            "owner": "src",
+            "ids": [
+              "a"
+            ]
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "copied"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ]
+            },
+            "events": [
+              "write:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "edit",
+            "owner": "src",
+            "id": "a",
+            "text": "Changed"
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Changed"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              0
+            ],
+            "status": "edited"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ]
+            },
+            "events": [
+              "write:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Changed"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "n1",
+                  "Alpha"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              2,
+              0
+            ],
+            "status": "pasted"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ]
+            },
+            "events": [
+              "write:ok",
+              "read:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "undo"
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Changed"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              1,
+              1
+            ],
+            "status": "undone"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ]
+            },
+            "events": [
+              "write:ok",
+              "read:ok"
+            ]
+          }
+        },
+        {
+          "action": {
+            "type": "redo"
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Changed"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "n1",
+                  "Alpha"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              2,
+              0
+            ],
+            "status": "redone"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ]
+            },
+            "events": [
+              "write:ok",
+              "read:ok"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "foreign-move",
+      "family": "cut retention",
+      "initial": {
+        "src": [
+          [
+            "a",
+            "Alpha"
+          ],
+          [
+            "b",
+            "Beta"
+          ]
+        ],
+        "dst": [
+          [
+            "x",
+            "Ex"
+          ],
+          [
+            "y",
+            "Why"
+          ],
+          [
+            "z",
+            "Zed"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "paste",
+            "owner": "dst",
+            "at": 1,
+            "replace": []
+          },
+          "expected": {
+            "docs": {
+              "src": [
+                [
+                  "a",
+                  "Alpha"
+                ],
+                [
+                  "b",
+                  "Beta"
+                ]
+              ],
+              "dst": [
+                [
+                  "x",
+                  "Ex"
+                ],
+                [
+                  "y",
+                  "Why"
+                ],
+                [
+                  "z",
+                  "Zed"
+                ]
+              ]
+            },
+            "history": [
+              0,
+              0
+            ],
+            "status": "rejected"
+          },
+          "clipboard": {
+            "value": {
+              "format": "items",
+              "version": 1,
+              "items": [
+                [
+                  "a",
+                  "Alpha"
+                ]
+              ],
+              "move": {
+                "token": 1,
+                "source": "src"
+              }
+            },
+            "events": [
+              "read:ok"
+            ]
+          }
+        }
+      ],
+      "clipboard": {
+        "format": "items",
+        "version": 1,
+        "items": [
+          [
+            "a",
+            "Alpha"
+          ]
+        ],
+        "move": {
+          "token": 1,
+          "source": "src"
+        }
+      }
+    }
+  ]
+}

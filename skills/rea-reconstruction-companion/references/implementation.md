@@ -27,6 +27,11 @@ Preserve independent reference fixtures before adjusting the implementation. Fol
 
 ## Validate at the right boundaries
 
+For [copy/cut/paste](clipboard.md), compare actual transferred values, IDs/order,
+selection/replacement, source retention on rejection and relevant history/effects.
+Use authorized disposable inputs; a recording/failure clipboard double does not
+establish real platform permissions, formats or external-effect recovery.
+
 For [settings and preferences](settings-preferences.md#freeze-distinguishing-checks),
 compare presence/value/source and pending/applied/saved state through selected
 Apply/Save/Cancel/reset, temporary override, invalid/older data and actual reopen.

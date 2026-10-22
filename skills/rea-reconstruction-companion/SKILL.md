@@ -72,6 +72,8 @@ Show the resolved brief concisely, then proceed. Do not make its approval a mand
 
 Interpret the whole request in context, including casual phrasing, minor typos, negation, follow-up references and explicit corrections. The examples below illustrate intent; they are not required wording or keyword triggers. "Can you make just that part work here?" can request a scoped build when the preceding conversation identifies the part and destination. "I might build it someday; explain it first" stays investigative. A correction such as "actually, only the decoder, and no code yet" supersedes the earlier build scope. Do not let a word such as "build" override a negation or future aspiration. If "make it better" could mean either a proposal or changing an installed reference, ask which outcome and target the user wants before making that consequential change.
 
+For copy, cut or paste, use [transfer contracts](references/clipboard.md) to recover source/destination selection, representations, insertion/replacement, cut retention and undo/identity boundaries. Keep one-operation requests bounded and planning-only requests in planning mode; use authorized disposable evidence and disclose clipboard doubles.
+
 ## Choose the mode
 
 - **Understand and specify**: requests to understand, analyze, map, document, plan, or investigate an app for a possible future rebuild. This is the default when implementation intent is absent. Deliver the scoped explanation, contract or blueprint the question needs; do not start product implementation.
