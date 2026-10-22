@@ -211,7 +211,7 @@ concurrent delivery or original-app parity.
 
 [One bounded board example](drag-drop/README.md) compares literal stable
 identities/order, preview/applicability, cancel/failure, move/copy and undo
-conflicts against independently recorded local effects. Fourteen faulty variants
+conflicts against independently recorded local effects. Fifteen faulty variants
 pass ordinary controls before named assertions reject them. The explicit move
 operation shares the gesture contract; no actual browser/OS input or accessibility
 behavior, service concurrency or original parity is established.

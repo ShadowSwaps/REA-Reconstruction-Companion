@@ -9,6 +9,12 @@ export function frozen() {
   if (createHash('sha256').update(bytes).digest('hex') !== identity.expectationsSha256) throw Error('Changed frozen oracle');
   return JSON.parse(bytes);
 }
+export function applicability() {
+  const bytes = fs.readFileSync(new URL('./applicability-expectations.json',import.meta.url));
+  const identity = JSON.parse(fs.readFileSync(new URL('./applicability-identity.json',import.meta.url)));
+  if (createHash('sha256').update(bytes).digest('hex') !== identity.expectationsSha256) throw Error('Changed frozen applicability oracle');
+  return JSON.parse(bytes);
+}
 export function compare(factory = createBoard,cases = null) {
   const oracle = frozen(), rows = [];
   for (const scenario of cases ?? [...oracle.ordinary,...oracle.boundaries]) {

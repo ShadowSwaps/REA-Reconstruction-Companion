@@ -31,7 +31,9 @@ export function createBoard(initial, recorder) {
   function drop() {
     if (!drag) return;
     const captured = drag, target = preview; drag = null; preview = null;
-    if (!target?.valid) { status = 'rejected'; return; }
+    // A view change does not change canonical revisions. Recheck its current
+    // placement rule at the effect boundary without invalidating filter anchors.
+    if (!target?.valid || (target.dest === captured.owner && views[target.dest]?.sorted)) { status = 'rejected'; return; }
     if (revisions[captured.owner] !== captured.revision || revisions[target.dest] !== target.revision) { status = 'stale'; return; }
     const before = structuredClone(lists), after = structuredClone(lists);
     const item = after[captured.owner].find(item => item.id === captured.id);

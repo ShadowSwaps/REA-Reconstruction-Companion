@@ -6,13 +6,42 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createBoard} from '../evals/drag-drop/candidate.mjs';
 import {recordingEffects} from '../evals/drag-drop/double.mjs';
-import {frozen,compare} from '../evals/drag-drop/check.mjs';
+import {frozen,applicability,compare} from '../evals/drag-drop/check.mjs';
 const oracle = frozen();
 const source = fs.readFileSync(new URL('../evals/drag-drop/candidate.mjs',import.meta.url),'utf8');
 test('three drag/drop families match 81 frozen intermediate identity/order/effect states', () => {
   assert.equal(new Set([...oracle.ordinary,...oracle.boundaries].map(row => row.family)).size,3);
   const rows = compare(); assert.equal(rows.length,81);
   assert.deepEqual(rows.filter(row => !row.passed),[]);
+});
+test('current view applicability matches 39 independently reasoned frozen checkpoints', () => {
+  const rows = compare(createBoard,applicability().cases);
+  assert.equal(rows.length,39);
+  assert.deepEqual(rows.filter(row => !row.passed),[]);
+});
+test('cached-only drop validity passes historical controls but fails sorted-at-drop assertion', async t => {
+  const from = '!target?.valid || (target.dest === captured.owner && views[target.dest]?.sorted)';
+  assert.equal(source.split(from).length,2,'one mutation site');
+  const parent = fs.realpathSync.native(os.tmpdir()), directory = fs.mkdtempSync(path.join(parent,'rea-drag-applicability-'));
+  t.after(() => {
+    assert.equal(path.dirname(path.resolve(directory)),parent);
+    assert.ok(path.basename(directory).startsWith('rea-drag-applicability-'));
+    assert.equal(fs.lstatSync(directory).isSymbolicLink(),false);
+    fs.rmSync(directory,{recursive:true,force:true});
+  });
+  const file = path.join(directory,'mutant.mjs'); fs.writeFileSync(file,source.replace(from,'!target?.valid'));
+  const mutant = await import(pathToFileURL(file));
+  const ordinary = compare(mutant.createBoard,oracle.ordinary), historical = compare(mutant.createBoard);
+  assert.equal(ordinary.length,8); assert.ok(ordinary.every(row => row.passed));
+  assert.equal(historical.length,81); assert.ok(historical.every(row => row.passed));
+  const scenario = applicability().cases.find(row => row.id === 'preview-then-sort-refuses-and-consumes');
+  const rows = compare(mutant.createBoard,[{...scenario,steps:scenario.steps.slice(0,4)}]);
+  assert.ok(rows.slice(0,3).every(row => row.passed));
+  assert.equal(rows[3].passed,false,'actual state/effect mismatch, not exception');
+  assert.deepEqual(rows[3].expected.lists,oracle.initial);
+  assert.equal(rows[3].expected.history,0); assert.equal(rows[3].expected.drag,null); assert.equal(rows[3].expected.preview,null);
+  assert.deepEqual(rows[3].expectedAttempts,[]); assert.deepEqual(rows[3].expectedEffects,[]);
+  t.diagnostic(JSON.stringify({fault:'cached-only-drop-validity',ordinaryPassed:8,historicalPassed:81,distinguishing:rows[3]}));
 });
 const faults = [
   {id:'visible-index-source',target:'filtered-anchor-canonical',step:1,

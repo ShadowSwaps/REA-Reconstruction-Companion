@@ -36,6 +36,11 @@ Recover invalid/absent drop targets, empty sources, empty destinations, unchange
 positions and repeated activation. Whether a no-op consumes history or changes
 feedback is target policy. Check actual effects and history, not only the marker
 or success text; repeated input must not silently duplicate or lose items.
+If view rules affect eligibility, check them again at the effect boundary or
+invalidate the affected preview. Include view changes after preview in selected
+checks; a filter-only change need not invalidate stable canonical anchors under
+the chosen policy. Specify whether refusal consumes the gesture and whether a
+new preview or new gesture is needed before another attempt.
 Cancel before commit, aborting pending work and undoing a completed move have
 different guarantees. Do not claim cancellation reversed an already committed
 or remote effect. A known rejected commit can support a fresh attempt; an unknown

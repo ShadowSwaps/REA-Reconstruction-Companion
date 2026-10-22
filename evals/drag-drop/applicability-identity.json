@@ -1,0 +1,7 @@
+{
+  "expectationsSha256": "f3c0d2d788d2634c54711a658cba7873d4a80082a8bae07670e3b384a2964aa9",
+  "cases": 6,
+  "checkpoints": 39,
+  "originalExpectationsSha256": "edd4818560d69d24c3df01ec70f77901057aa3923b0a33bcf065ea3c0da26654",
+  "authorship": "Same-author source-exposed literal regression policy, reasoned before candidate adaptation; no candidate output capture. DD-NAR-001."
+}
