@@ -195,6 +195,7 @@ original parity, real-service behavior or general host/model compatibility.
 | Unsaved changes and navigation | [Contract and boundaries](skills/rea-reconstruction-companion/references/unsaved-navigation.md) | [Example and limits](evals/unsaved-navigation/README.md) |
 | Undo, redo and destructive actions | [Contract and boundaries](skills/rea-reconstruction-companion/references/undo-destructive.md) | [Example and limits](evals/undo-destructive/README.md) |
 | Search, filters and sorting | [Contract and boundaries](skills/rea-reconstruction-companion/references/search-filter-sort.md) | [Example and limits](evals/search-filter-sort/README.md) |
+| Multi-selection and bulk actions | [Contract and boundaries](skills/rea-reconstruction-companion/references/multi-selection.md) | [Example and limits](evals/multi-selection/README.md) |
 | Dates, time zones and locale | [Contract and boundaries](skills/rea-reconstruction-companion/references/date-locale.md) | [Example and limits](evals/date-locale/README.md) |
 | Responsive layouts and content extremes | [Contract and boundaries](skills/rea-reconstruction-companion/references/visual-evidence.md#responsive-layouts-and-content-extremes) | [Example and limits](evals/responsive-layouts/README.md) |
 | Workflow states and confirmation | [Contract and boundaries](skills/rea-reconstruction-companion/references/blueprint.md#consequential-workflow-states) | [Example and limits](evals/workflow-edge-cases/README.md) |
