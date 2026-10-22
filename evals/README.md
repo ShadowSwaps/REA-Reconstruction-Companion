@@ -1,5 +1,12 @@
 # Behavioral evaluation kit
 
+The [form-validation example](form-validation/README.md) freezes 69 literal
+intermediate checkpoints for validation timing, dependent-field policies and
+submission recovery. Eighteen faults pass ordinary controls before actual
+state/payload/effect assertions reject them. This proposed offline policy uses a
+submission double; it establishes neither original parity nor browser or backend
+behavior.
+
 The [multi-selection and bulk-action example](multi-selection/README.md) freezes
 one proposed local profile with 70 literal intermediate states/attempts covering
 scope/identity, partial outcomes and retry/undo. Seventeen faults pass ordinary

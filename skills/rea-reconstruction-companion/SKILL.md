@@ -98,6 +98,8 @@ For numeric quantities, use [numeric contracts](references/numeric-contracts.md)
 
 For settings, defaults or saved preferences, use [preference contracts](references/settings-preferences.md) to recover presence versus explicit values, applicable scope/precedence, effective value and source, pending versus applied/saved changes, reset and reopen behavior. Preserve unrelated/unknown data under the selected compatibility policy; do not infer missing storage from a default-looking screen.
 
+For forms with dependent inputs, changing validation messages or correction/resubmission, use [form contracts](references/form-validation.md) to recover edit/blur/submit timing, draft versus canonical values, applicable rules, hidden/disabled retention and payload policy. Verify invalid submission has no effects and keep accepted payload/outcome distinct from newer edits; preserve unresolved target rules and intentional design choices separately.
+
 For search, combined filters or sorted lists, use [search and ordering contracts](references/search-filter-sort.md) to recover matching/normalization, predicate composition, comparator/missing/tie rules and selection/page behavior. Keep original evidence separate from proposed improvements; choose discriminating ordered-ID and state checks for the selected slice.
 
 For multi-selection or bulk actions, use [selection and batch contracts](references/multi-selection.md) to recover selected/page/all-filtered scope, stable identities, preview applicability, partial outcomes and safe retry/undo boundaries. Scale to the requested operation; keep observed behavior, unknowns and proposed policies distinct.
