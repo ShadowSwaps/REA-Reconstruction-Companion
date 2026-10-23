@@ -6,6 +6,11 @@ one operation may need only a short contract. Planning remains planning, and a
 request to recover one editor's behavior does not authorize a navigation framework
 or destructive trials on real user data.
 
+For direct links, route/filter state and Back/Forward entries, use
+[navigation and history](navigation-history.md) alongside this departure policy.
+Bind the destination to its navigation kind/entry; a browser traversal notification
+does not imply the app can veto a history movement that already occurred.
+
 ## Recover the saved boundary
 
 Bind evidence to document identity, owner/session, starting saved content, draft,

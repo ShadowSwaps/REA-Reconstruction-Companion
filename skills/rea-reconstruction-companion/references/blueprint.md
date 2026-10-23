@@ -67,6 +67,8 @@ controls distinct from unverified pointer/keyboard/accessibility behavior.
 
 For [keyboard shortcuts and commands](keyboard-commands.md), extend these rows with input target/composition/modifiers, focused/dialog scope, selected command, consumption/default decision and independently observed effects. Recover repeat, cancellation and changed-context applicability at the effect boundary; a model event does not establish native dispatch.
 
+For [navigation, deep links and history](navigation-history.md), extend these rows with parsed destination, selected item/filter, entry identity/position, transient versus persistent state, loading owner and exact dirty-departure intent. Recover push/replace/traversal and the actual restoration boundary; a model or fresh instance does not establish browser history or reload behavior.
+
 ## Findings and uncertainty
 
 For [offline editing and synchronization](offline-sync.md), extend the workflow
