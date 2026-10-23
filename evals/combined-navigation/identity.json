@@ -1,0 +1,20 @@
+{
+  "kind": "proposed-composition-not-original-behavior",
+  "author": "Same task agent; self-review only",
+  "oracleMethod": "Explicit expected checkpoint patches expanded to full literal state/call/effect JSON before candidate adaptation; no transition simulator or candidate output",
+  "expectationsSha256": "ac0f2402c11d3c9469c80f52ea4d430d163f0da0f5abd6e8230e70835e187c71",
+  "scenarios": 20,
+  "checkpoints": 189,
+  "ordinaryCheckpoints": 15,
+  "amendments": [
+    {
+      "originalSha256": "029f6a28cf4986dbf8421d18c6b69a291158a3405d68f680f02f6ed5b87a5ff1",
+      "reason": "Two login checkpoints omitted immediately readable same-owner outcomes; the existing proposed visibility rule applies on context change, without waiting for read.",
+      "checkpoints": [
+        "expiry-recovery-and-late-commit:7",
+        "committed-response-loss-stays-unresolved:8"
+      ],
+      "evidence": "Initial freeze and failed run retained privately; explicit literal correction, no candidate-output capture; candidate unchanged."
+    }
+  ]
+}

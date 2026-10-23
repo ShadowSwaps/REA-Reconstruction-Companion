@@ -193,6 +193,7 @@ original parity, real-service behavior or general host/model compatibility.
 | Keyboard shortcuts and command context | [Contract and boundaries](skills/rea-reconstruction-companion/references/keyboard-commands.md) | [Example and limits](evals/keyboard-commands/README.md) |
 | Navigation, deep links and history | [Contract and boundaries](skills/rea-reconstruction-companion/references/navigation-history.md) | [Example and limits](evals/navigation-history/README.md) |
 | Account, session and permission changes | [Contract and boundaries](skills/rea-reconstruction-companion/references/session-permissions.md) | [Example and limits](evals/session-permissions/README.md) |
+| Combined navigation, edits and session recovery | [Shared departure guidance](skills/rea-reconstruction-companion/references/unsaved-navigation.md) | [Integrated example and limits](evals/combined-navigation/README.md) |
 | Offline editing, reconnect and sync | [Contract and boundaries](skills/rea-reconstruction-companion/references/offline-sync.md) | [Example and limits](evals/offline-sync/README.md) |
 | Drag, drop and reordering | [Contract and boundaries](skills/rea-reconstruction-companion/references/drag-drop.md) | [Example and limits](evals/drag-drop/README.md) |
 | Copy, cut and paste | [Contract and boundaries](skills/rea-reconstruction-companion/references/clipboard.md) | [Example and limits](evals/clipboard/README.md) |
@@ -464,6 +465,8 @@ The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw ev
 **Navigation and history (v1.3.50):** [recover destination, entry restoration and departure ownership](evals/navigation-history/README.md). The bounded offline profile freezes 94 literal checkpoints across 33 scenarios and challenges 18 faults after ordinary controls. Same-author model checks establish no real browser history/reload, storage, native deep-link dispatch, original parity or model quality.
 
 **Session and permissions (v1.3.51):** [recover identity/lifetime, retained work and access changes](evals/session-permissions/README.md). The bounded proposed policy checks 140 literal checkpoints across 23 sequences and challenges 16 faults after ordinary controls. Same-author checks establish no real authentication, authorization, revocation, durable storage, original parity or model quality.
+
+**Combined navigation recovery (v1.3.52):** [compose departure, save and session ownership](evals/combined-navigation/README.md) in one proposed lifecycle. Twenty sequences check 189 literal state/effect checkpoints; 22 faults pass ordinary controls before a named mismatch. Guidance makes destination approval, captured revision, late receipts and conservative recovery stops explicit. This source-exposed synthetic trial establishes no real browser, service, storage, original parity or model quality.
 
 **Numeric quantities (v1.3.38):** [separate input, canonical values, rounding and units](evals/numeric-contracts/README.md). One offline fixed length profile uses frozen literal expectations, actual storage/import/reopen and value/state rejection of faulty variants. Same-author finite checks establish a proposed contract, not original parity or a general decimal/locale engine.
 

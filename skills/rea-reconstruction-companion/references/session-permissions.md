@@ -64,6 +64,17 @@ receipt may inform the original operation without certifying newer edits or the
 new session's current display. Preserve unavailable service checks as pending
 under [backend limits](unavailable-backends.md).
 
+When recovery overlaps route departure and saving, retain the original resource,
+remote base revision and exact departure approval separately. Session invalidation
+may supersede a local navigation decision while the service still commits its
+captured write. Re-login must not resurrect that approval or send a retained draft
+automatically. A fresh read and explicit same-owner restore do not reconcile an
+unknown operation; a known late receipt also need not validate a restored older
+base. Freeze these precedence and stop conditions across a shared lifecycle,
+including independent history/write effects. The repository-only proposed
+`evals/combined-navigation/README.md` illustrates this composition without changing
+the independent examples or establishing browser/service enforcement.
+
 ## Freeze distinguishing ordered checks
 
 Freeze literal intermediate identity/lifetime/grants, displayed/cache data,
