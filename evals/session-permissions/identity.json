@@ -1,0 +1,8 @@
+{
+  "kind": "literal-proposed-contract-before-candidate",
+  "expectationsSha256": "a1589349fca76837043d4140b9b374c7cf0a56ae3abb573fa210c4a448fbbabd",
+  "authorship": "same author; source exposed; not independent acceptance",
+  "coverage": "finite synthetic identity/grants, volatile drafts, controlled promises; no real auth/service/storage",
+  "initialExpectationsSha256": "03adb99f304f86999d72cc2679e5f95af4e1432de5ccdb6352d532d241faa78e",
+  "amendment": "Same-author review: four denied/expired outcome displays redacted after initial candidate, not independent or held-out evidence."
+}
