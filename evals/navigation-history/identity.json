@@ -1,0 +1,8 @@
+{
+  "frozenUtc": "2026-10-23T01:18:06.158137+00:00",
+  "expectationsSha256": "d34dc41b4b583c80725b2d6146c76f12dd231bd9c23622c4c69ba81b527cc93e",
+  "cases": 33,
+  "checkpoints": 94,
+  "ordinaryCheckpoints": 5,
+  "provenance": "Same-author separately reasoned literal full states and adapter effects frozen before candidate implementation; no candidate output or transition simulator used."
+}

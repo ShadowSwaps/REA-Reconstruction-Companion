@@ -1,0 +1,4716 @@
+{
+  "kind": "same-author-proposed-policy",
+  "cases": [
+    {
+      "id": "ordinary-list",
+      "family": "route",
+      "initial": "/items",
+      "ordinary": true,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "list:all"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": null,
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "list:all",
+            "draft": null,
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ordinary-item",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": true,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ordinary-push",
+      "family": "history",
+      "initial": "/items/a",
+      "ordinary": true,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 2,
+            "value": "Beta"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Beta",
+            "draft": {
+              "item": "b",
+              "text": "Beta",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "filter-and-selection",
+      "family": "route",
+      "initial": "/items/b?filter=open",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Beta"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/b?filter=open",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "b",
+              "filter": "open"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Beta",
+            "draft": {
+              "item": "b",
+              "text": "Beta",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/b?filter=open"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "canonical-default",
+      "family": "route",
+      "initial": "/items/a?filter=all",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "encoded-id",
+      "family": "route",
+      "initial": "/items/%61",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unknown-filter",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/a?filter=bogus",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duplicate-query",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/a?filter=open&filter=closed",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unknown-query",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/a?draft=secret",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "absolute-url",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "https://example.invalid/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scheme-relative",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "//example.invalid/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fragment",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b#x",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "malformed-escape",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/%GG",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "encoded-separator",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/a%2Fb",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dot-segment",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/../items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unknown-path",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/other",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trailing-slash",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/a/",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "invalid"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "missing-item-back",
+      "family": "route",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/z",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/z",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "z",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/z",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/z"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 2,
+            "value": null
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/z",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "z",
+              "filter": "all"
+            },
+            "status": "not-found",
+            "loading": false,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/z",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/z"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "traverse",
+            "delta": -1
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/z",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 3,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/z",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/z"
+            },
+            {
+              "kind": "traverse",
+              "key": 1,
+              "url": "/items/a",
+              "index": 0
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "same-url-noop",
+      "family": "history",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/a?filter=all",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "unchanged"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "replace-entry",
+      "family": "history",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "replace"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "replace",
+              "key": 1,
+              "url": "/items/b",
+              "index": 0
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "back-forward-scroll",
+      "family": "history",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "scroll",
+            "value": 120
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 120
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "scrolled"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 120
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "scroll",
+            "value": 20
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 120
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 20
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "scrolled"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "traverse",
+            "delta": -1
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 120
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 20
+              }
+            ],
+            "index": 0,
+            "epoch": 3,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "traverse",
+              "key": 1,
+              "url": "/items/a",
+              "index": 0
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 3,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 120
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 20
+              }
+            ],
+            "index": 0,
+            "epoch": 3,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "traverse",
+              "key": 1,
+              "url": "/items/a",
+              "index": 0
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "traverse",
+            "delta": 1
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 120
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 20
+              }
+            ],
+            "index": 1,
+            "epoch": 4,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "traverse",
+              "key": 1,
+              "url": "/items/a",
+              "index": 0
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            },
+            {
+              "kind": "traverse",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 4,
+              "url": "/items/b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "branch-truncates-forward",
+      "family": "history",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "traverse",
+            "delta": -1
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 3,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "traverse",
+              "key": 1,
+              "url": "/items/a",
+              "index": 0
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/c",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 3,
+                "url": "/items/c",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 4,
+            "route": {
+              "item": "c",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "traverse",
+              "key": 1,
+              "url": "/items/a",
+              "index": 0
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 3,
+              "url": "/items/c",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 4,
+              "url": "/items/c"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "traverse",
+            "delta": 1
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 3,
+                "url": "/items/c",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 4,
+            "route": {
+              "item": "c",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "boundary"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "traverse",
+              "key": 1,
+              "url": "/items/a",
+              "index": 0
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 3,
+              "url": "/items/c",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 4,
+              "url": "/items/c"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "same-url-distinct-entry",
+      "family": "history",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/a",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              },
+              {
+                "key": 3,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 2,
+            "epoch": 3,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "push",
+              "key": 3,
+              "url": "/items/a",
+              "index": 2
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "scroll",
+            "value": 90
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              },
+              {
+                "key": 3,
+                "url": "/items/a",
+                "scroll": 90
+              }
+            ],
+            "index": 2,
+            "epoch": 3,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "scrolled"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "push",
+              "key": 3,
+              "url": "/items/a",
+              "index": 2
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "traverse",
+            "delta": -2
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              },
+              {
+                "key": 3,
+                "url": "/items/a",
+                "scroll": 90
+              }
+            ],
+            "index": 0,
+            "epoch": 4,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "push",
+              "key": 3,
+              "url": "/items/a",
+              "index": 2
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            },
+            {
+              "kind": "traverse",
+              "key": 1,
+              "url": "/items/a",
+              "index": 0
+            },
+            {
+              "kind": "read",
+              "op": 4,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instance-recreation",
+      "family": "history",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "changed"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "edited"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "scroll",
+            "value": 120
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 120
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "scrolled"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "recreate"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stale-success",
+      "family": "lifecycle",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "OLD"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 2,
+            "value": "Beta"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Beta",
+            "draft": {
+              "item": "b",
+              "text": "Beta",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stale-error",
+      "family": "lifecycle",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "fail",
+            "op": 1
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 2,
+            "value": "Beta"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Beta",
+            "draft": {
+              "item": "b",
+              "text": "Beta",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "return-same-route-new-epoch",
+      "family": "lifecycle",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/a",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              },
+              {
+                "key": 3,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 2,
+            "epoch": 3,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "push",
+              "key": 3,
+              "url": "/items/a",
+              "index": 2
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "OLD"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              },
+              {
+                "key": 3,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 2,
+            "epoch": 3,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "push",
+              "key": 3,
+              "url": "/items/a",
+              "index": 2
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 3,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              },
+              {
+                "key": 3,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 2,
+            "epoch": 3,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "push",
+              "key": 3,
+              "url": "/items/a",
+              "index": 2
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "current-error",
+      "family": "lifecycle",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "fail",
+            "op": 1
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "error",
+            "loading": false,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dirty-cancel-push",
+      "family": "lifecycle",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "changed"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "edited"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": {
+              "kind": "push",
+              "url": "/items/b",
+              "index": null,
+              "sourceEpoch": 1,
+              "sourceRevision": 1
+            },
+            "notice": "blocked"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "cancelled"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dirty-cancel-replace",
+      "family": "lifecycle",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "changed"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "edited"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "replace"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": {
+              "kind": "replace",
+              "url": "/items/b",
+              "index": null,
+              "sourceEpoch": 1,
+              "sourceRevision": 1
+            },
+            "notice": "blocked"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "cancelled"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dirty-discard-once",
+      "family": "lifecycle",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "changed"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "edited"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": {
+              "kind": "push",
+              "url": "/items/b",
+              "index": null,
+              "sourceEpoch": 1,
+              "sourceRevision": 1
+            },
+            "notice": "blocked"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/c",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": {
+              "kind": "push",
+              "url": "/items/b",
+              "index": null,
+              "sourceEpoch": 1,
+              "sourceRevision": 1
+            },
+            "notice": "pending"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "discard"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "discard"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "no-pending"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "edit-invalidates-leave",
+      "family": "lifecycle",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "Alpha"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "Alpha",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "boot"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "changed"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "edited"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": {
+              "kind": "push",
+              "url": "/items/b",
+              "index": null,
+              "sourceEpoch": 1,
+              "sourceRevision": 1
+            },
+            "notice": "blocked"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "newer"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "newer",
+              "revision": 2,
+              "dirty": true
+            },
+            "pending": {
+              "kind": "push",
+              "url": "/items/b",
+              "index": null,
+              "sourceEpoch": 1,
+              "sourceRevision": 1
+            },
+            "notice": "edited"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "discard"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 1,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Alpha",
+            "draft": {
+              "item": "a",
+              "text": "newer",
+              "revision": 2,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "stale"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dirty-back-cancel-discard",
+      "family": "lifecycle",
+      "initial": "/items/a",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "navigate",
+            "url": "/items/b",
+            "kind": "push"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 2,
+            "value": "Beta"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Beta",
+            "draft": {
+              "item": "b",
+              "text": "Beta",
+              "revision": 0,
+              "dirty": false
+            },
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "changed"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Beta",
+            "draft": {
+              "item": "b",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "edited"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "traverse",
+            "delta": -1
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Beta",
+            "draft": {
+              "item": "b",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": {
+              "kind": "traverse",
+              "url": "/items/a",
+              "index": 0,
+              "sourceEpoch": 2,
+              "sourceRevision": 1
+            },
+            "notice": "blocked"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "cancel"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Beta",
+            "draft": {
+              "item": "b",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": null,
+            "notice": "cancelled"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "traverse",
+            "delta": -1
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 1,
+            "epoch": 2,
+            "route": {
+              "item": "b",
+              "filter": "all"
+            },
+            "status": "ready",
+            "loading": false,
+            "data": "Beta",
+            "draft": {
+              "item": "b",
+              "text": "changed",
+              "revision": 1,
+              "dirty": true
+            },
+            "pending": {
+              "kind": "traverse",
+              "url": "/items/a",
+              "index": 0,
+              "sourceEpoch": 2,
+              "sourceRevision": 1
+            },
+            "notice": "blocked"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "discard"
+          },
+          "expected": {
+            "entries": [
+              {
+                "key": 1,
+                "url": "/items/a",
+                "scroll": 0
+              },
+              {
+                "key": 2,
+                "url": "/items/b",
+                "scroll": 0
+              }
+            ],
+            "index": 0,
+            "epoch": 3,
+            "route": {
+              "item": "a",
+              "filter": "all"
+            },
+            "status": "loading",
+            "loading": true,
+            "data": null,
+            "draft": null,
+            "pending": null,
+            "notice": "committed"
+          },
+          "effects": [
+            {
+              "kind": "read",
+              "op": 1,
+              "url": "/items/a"
+            },
+            {
+              "kind": "push",
+              "key": 2,
+              "url": "/items/b",
+              "index": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "url": "/items/b"
+            },
+            {
+              "kind": "traverse",
+              "key": 1,
+              "url": "/items/a",
+              "index": 0
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "url": "/items/a"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

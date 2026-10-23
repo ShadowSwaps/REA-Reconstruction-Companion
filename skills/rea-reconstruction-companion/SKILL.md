@@ -110,6 +110,8 @@ For editing offline, reconnecting or synchronizing queued changes, use [offline 
 
 For keyboard shortcuts, command conflicts or context-dependent activation, use [keyboard and command contracts](references/keyboard-commands.md) to distinguish text/composition from commands, logical key from physical position, focused/dialog scope, disabled applicability and event consumption. Recover repeat/cancel and effect-boundary guards; keep model records separate from native input and accessibility evidence.
 
+For direct links, selected routes/filters, refresh or Back/Forward restoration, use [navigation and history contracts](references/navigation-history.md) to recover destination and entry identity, URL versus transient/persisted state, malformed/missing destinations and delayed-load ownership. Reuse unsaved departure policy for dirty drafts; distinguish model traversal and fresh-instance checks from real browser history/reload evidence.
+
 For undo/redo or destructive actions, use [history and destructive-effect contracts](references/undo-destructive.md) to recover restoration, identity/order/view state, grouping, history lifetime and redo branching. Trace confirmation/cancel/repetition and distinguish reversible deletion from permanent or uncertain effects. Keep one-operation requests bounded and planning requests in planning mode.
 
 For a request to modify an existing reconstruction, use [safe changes](references/safe-changes.md) to reconcile current intent and custom work, retained contracts, affected dependencies, acceptance and recovery before editing. Keep changed requirements separate from changes to the reference version or environment.

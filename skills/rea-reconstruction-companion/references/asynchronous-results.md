@@ -18,6 +18,8 @@ background jobs can require different contracts.
 
 Check acceptance before every consequential effect: values, errors, status,
 loading cleanup/finalizers, notifications, cache/store changes and navigation.
+For route changes and Back/Forward, use [navigation ownership](navigation-history.md)
+to distinguish a destination URL from an entry or a new lifetime at that same URL.
 An old failure or `finally` can damage newer state even when successful values
 are guarded. State who owns the guard and when it is checked; checking only at
 dispatch, disabling a button or using a request token in the UI cannot enforce
