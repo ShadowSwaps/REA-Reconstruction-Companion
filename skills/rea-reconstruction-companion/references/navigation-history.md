@@ -64,6 +64,16 @@ and URL/view reconciliation; a pre-commit in-memory guard does not demonstrate a
 browser traversal veto. For unload/native close, retain the platform limitations
 in the unsaved guide rather than promise asynchronous save completion.
 
+When saves and session changes overlap departure, recover one precedence contract
+across them. Bind approval to an exact departure ID, source revision/lifetime and
+destination kind/entry; replacing a destination need not transfer approval. Check
+the actual target's rule for a manual save already in progress, cancellation and
+new edits. A late save acknowledgement must not release a different proposal.
+Session invalidation can supersede departure without cancelling the external write.
+Test the shared lifecycle and independently recorded history/service effects; three
+passing isolated examples do not establish their composition. The repository-only
+`evals/combined-navigation/README.md` freezes one proposed policy and its limits.
+
 ## Freeze distinguishing ordered checks
 
 Before adaptation, freeze literal intermediate expected destination/entry, URL,

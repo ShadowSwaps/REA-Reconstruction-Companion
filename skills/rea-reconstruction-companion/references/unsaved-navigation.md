@@ -60,6 +60,17 @@ Do not promise that a closing page can finish an asynchronous save. Exercise
 the actual supported lifecycle in an authorized disposable environment where
 required; a local model or prompt cannot establish real browser-close behavior.
 
+For a departure crossing route and account/session boundaries, recover which
+event wins and which approval survives. Bind save payload/revision separately
+from the exact departure choice; a replacement destination or newer edit may need
+a fresh choice even when an older write succeeds. Cancellation of departure must
+not be reported as cancellation of storage. On recovery, compare the retained
+base against an applicable remote revision and known operation receipts; equal
+text alone need not establish the same version. Keep unresolved writes blocking
+consequential replay until reconciliation supports it. Exercise these interactions
+in one lifecycle, as illustrated by the proposed repository-only
+`evals/combined-navigation/README.md`, without silently changing isolated policies.
+
 ## Freeze distinguishing checks
 
 Before adapting code, freeze literal intermediate draft/saved values, document
