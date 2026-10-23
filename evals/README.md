@@ -228,3 +228,5 @@ behavior, service concurrency or original parity is established.
 grammars, exact canonical values, display rounding and unit/storage/export
 contracts. Frozen literals and actual save/import/reopen reject selected faulty
 variants without decimal packages, host-locale changes or original-parity claims.
+
+For keyboard shortcuts and command scope, the [bounded command example](keyboard-commands/README.md) freezes 72 literal intermediate contexts, routing/consumption decisions and independent effects in 36 proposed-policy scenarios. Sixteen faulty variants pass five ordinary checkpoints before a named mismatch. No native dispatch, IME, actual layout, focus traversal or assistive behavior is established.

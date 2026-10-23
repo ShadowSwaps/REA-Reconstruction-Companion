@@ -190,6 +190,7 @@ original parity, real-service behavior or general host/model compatibility.
 
 | Topic | Guidance | Worked example |
 | --- | --- | --- |
+| Keyboard shortcuts and command context | [Contract and boundaries](skills/rea-reconstruction-companion/references/keyboard-commands.md) | [Example and limits](evals/keyboard-commands/README.md) |
 | Offline editing, reconnect and sync | [Contract and boundaries](skills/rea-reconstruction-companion/references/offline-sync.md) | [Example and limits](evals/offline-sync/README.md) |
 | Drag, drop and reordering | [Contract and boundaries](skills/rea-reconstruction-companion/references/drag-drop.md) | [Example and limits](evals/drag-drop/README.md) |
 | Copy, cut and paste | [Contract and boundaries](skills/rea-reconstruction-companion/references/clipboard.md) | [Example and limits](evals/clipboard/README.md) |
@@ -455,6 +456,8 @@ The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw ev
 **Measured environment example:** [revalidate behavior after a relevant setting changes](evals/resume/environment/README.md). Identical fixture bytes run under two controlled cap settings with a minimal local Node probe. Reports retain unaffected formatter evidence and recheck score/integration behavior. Cross-version drift and cross-host compatibility remain unverified.
 
 </details>
+
+**Keyboard commands (v1.3.49):** [recover input, command scope and guarded consequences](evals/keyboard-commands/README.md). The bounded offline profile freezes 72 literal context/routing/effect checkpoints and challenges 16 plausible faults after ordinary controls. Same-author model checks leave native input, IME, layouts, default actions and assistive behavior unrun.
 
 **Numeric quantities (v1.3.38):** [separate input, canonical values, rounding and units](evals/numeric-contracts/README.md). One offline fixed length profile uses frozen literal expectations, actual storage/import/reopen and value/state rejection of faulty variants. Same-author finite checks establish a proposed contract, not original parity or a general decimal/locale engine.
 
