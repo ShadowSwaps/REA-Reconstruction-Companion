@@ -358,7 +358,7 @@
     "evals/session-permissions/check.mjs": "bb3e96a9a5d0eb07c8a0f58bf69dd6a907448d62d7daea1b90e49dd5681805de",
     "evals/session-permissions/double.mjs": "e338dece487e2fe5a300a32094ec37e30ac811ec9f09381c87cfe7a9c9d51454",
     "evals/session-permissions/expectations.json": "a1589349fca76837043d4140b9b374c7cf0a56ae3abb573fa210c4a448fbbabd",
-    "evals/session-permissions/identity.json": "9b364c1aaf1d39ffe0ccf35ef46239939a8672a87f0ad2f53dfdf56224667c23",
+    "evals/session-permissions/identity.json": "53ea9fdff6e688ecc6c46f2da59f04f7e3c3e312ec0e844207e559fc2039d9ca",
     "evals/settings-preferences/README.md": "951298b7e5b3de064a27d89f078c39f0cd6b33f0f80f09d6c476139eabb77abe",
     "evals/settings-preferences/candidate.mjs": "1b9a869f3c343711ee8a1b9bb66499f903d4d4760202212193fd653f424a402f",
     "evals/settings-preferences/check.mjs": "5bdcb88616e263478708ad30e4dad1d312a7fb2270deb61f710f078644fb9d25",
