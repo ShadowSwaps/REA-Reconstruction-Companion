@@ -69,6 +69,8 @@ For [keyboard shortcuts and commands](keyboard-commands.md), extend these rows w
 
 For [navigation, deep links and history](navigation-history.md), extend these rows with parsed destination, selected item/filter, entry identity/position, transient versus persistent state, loading owner and exact dirty-departure intent. Recover push/replace/traversal and the actual restoration boundary; a model or fresh instance does not establish browser history or reload behavior.
 
+For [account, session and permission changes](session-permissions.md), retain account/workspace/resource, session lifetime and grants alongside display/cache, retained drafts, captured operations and recovery choices. Recover invalidation and authoritative enforcement separately; logout/revocation feedback does not establish external cancellation or rollback. Check same-owner re-login and different-owner restoration without exposing retained work.
+
 ## Findings and uncertainty
 
 For [offline editing and synchronization](offline-sync.md), extend the workflow

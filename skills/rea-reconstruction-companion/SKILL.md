@@ -112,6 +112,8 @@ For keyboard shortcuts, command conflicts or context-dependent activation, use [
 
 For direct links, selected routes/filters, refresh or Back/Forward restoration, use [navigation and history contracts](references/navigation-history.md) to recover destination and entry identity, URL versus transient/persisted state, malformed/missing destinations and delayed-load ownership. Reuse unsaved departure policy for dirty drafts; distinguish model traversal and fresh-instance checks from real browser history/reload evidence.
 
+For account/workspace switches, logout, session expiry, re-authentication or changed permissions, use [session and access transitions](references/session-permissions.md) to recover identity/lifetime, displayed/cache data, owner-bound draft recovery and pending outcomes. Separate local invalidation from service enforcement; preserve uncertain effects without sending another owner's work or assuming revocation rolls back a write.
+
 For undo/redo or destructive actions, use [history and destructive-effect contracts](references/undo-destructive.md) to recover restoration, identity/order/view state, grouping, history lifetime and redo branching. Trace confirmation/cancel/repetition and distinguish reversible deletion from permanent or uncertain effects. Keep one-operation requests bounded and planning requests in planning mode.
 
 For a request to modify an existing reconstruction, use [safe changes](references/safe-changes.md) to reconcile current intent and custom work, retained contracts, affected dependencies, acceptance and recovery before editing. Keep changed requirements separate from changes to the reference version or environment.

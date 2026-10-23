@@ -137,6 +137,20 @@ Latest-applicable guards, selected controlled orders and receipt reconciliation
 are proposed engineering choices, not recovered target behavior or universal
 policies. Double-specific key binding and retention remain explicitly local.
 
+## R24 Session and permission boundaries
+
+OWASP, [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
+and [Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html),
+checked 23 October 2026. Applied: distinguish client state from server-enforced
+session expiry/logout and validate access at the trusted operation boundary,
+including denied and missing grants. These sources inform security boundaries;
+they do not establish a target's current session/grant behavior.
+
+Owner-bound volatile retention, new local lifetimes, explicit draft restoration,
+controlled late outcomes and the example's conservative resend/conflict stops
+are proposed teaching choices. They are not an OWASP-prescribed recovery protocol,
+real authentication/revocation, durable storage or evidence of original parity.
+
 ## Scope of the synthesis
 
 Evidence-dependency tracking, compatibility corpus design, held-out reference cases, and explicit optimization decision records are workflow recommendations combining these sources with the installed REA skill. They are not named capabilities guaranteed by the REA server. Inspect current schemas when invoking tools.

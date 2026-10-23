@@ -28,6 +28,11 @@ current UI state. Identify persistence or authorization boundaries separately.
 
 ## Cancellation has a scope
 
+For identity, session or grant changes, use [session and access transitions](session-permissions.md)
+to bind applicability to account/workspace/resource and a fresh lifetime, hide
+inaccessible retained state and recover drafts under the verified owner. Account
+equality after re-login alone cannot accept an earlier session's callback.
+
 Distinguish dismissing a view, invalidating/ignoring its result, requesting an
 abort and confirming cancellation at the relevant worker/service. Record which
 occurred, what can still complete, and whether side effects are known. Closing

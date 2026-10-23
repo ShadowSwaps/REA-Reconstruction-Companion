@@ -90,6 +90,12 @@ complete a local slice without the relevant scope and authority.
 
 ## Validate and report proportionally
 
+For account/workspace switching, expiry/logout, re-authentication or live grant
+changes, use [session and permission transitions](session-permissions.md) for
+display/cache invalidation, owner-bound draft recovery and outstanding effects.
+Local lifecycle guards complement the trusted authorization boundary; they do
+not implement revocation or undo previously committed writes.
+
 Freeze literal allowed and denied outcomes before implementation. Cover useful
 valid input alongside representative malformed/oversized content, dangerous sink
 usage, synthetic sensitive-field leakage and unauthorized operations at the

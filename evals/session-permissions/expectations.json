@@ -1,0 +1,5129 @@
+{
+  "kind": "same-author-proposed-policy",
+  "cases": [
+    {
+      "id": "ordinary-save",
+      "ordinary": true,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "ack",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "edit",
+            "cache": "edit",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "edit"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "saved",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "saved"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ordinary-read-failure",
+      "ordinary": true,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "fail",
+            "op": 1
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "read-error",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "ordinary-service-denial",
+      "ordinary": true,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "service",
+            "scope": "a/x",
+            "allowed": false
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "ack",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "denied",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "denied"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "account-switch",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "scope": "b/x"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "workspace-switch",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "scope": "a/y"
+          },
+          "expected": {
+            "scope": "a/y",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/y",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "logout",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "active": false
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": false,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": false,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "expiry",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "active": false,
+            "reason": "expired"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": false,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": false,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "read-revoked",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "read": false,
+            "write": false
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": false,
+            "write": false,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": false,
+            "write": false,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "unknown-grants",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "read": null,
+            "write": null
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": null,
+            "write": null,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": null,
+            "write": null,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "write-downgrade",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "write": false
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": false,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": false,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 2,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": false,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "restore"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": false,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "restored",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": false,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "same-owner-recovery",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "active": false
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": false,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "restore"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 3
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 2,
+            "value": "new-remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "new-remote",
+            "cache": "new-remote",
+            "draft": {
+              "text": "new-remote",
+              "revision": 0,
+              "saved": "new-remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 3
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "restore"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "new-remote",
+            "cache": "new-remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "restored",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 3
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "other-owner-no-restore",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "scope": "b/x"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "b/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 2,
+            "value": "other"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "other",
+            "cache": "other",
+            "draft": {
+              "text": "other",
+              "revision": 0,
+              "saved": "other"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "b/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "restore"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "other",
+            "cache": "other",
+            "draft": {
+              "text": "other",
+              "revision": 0,
+              "saved": "other"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "no-draft",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "b/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "stale-read-success",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "scope": "b/x"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "b/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "private"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "b/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "stale-read-error",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "scope": "b/x"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "b/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "fail",
+            "op": 1
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "b/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "same-scope-new-lifetime",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "active": false
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": false,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 3
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "old"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "read",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 3
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "newer-edit-after-save",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "newer"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "newer",
+              "revision": 2,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "edited",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "newer",
+              "revision": 2,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "edited",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "ack",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "newer",
+              "revision": 2,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "older-save",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "saved"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loss-blocks-retry",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "fail",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "unknown",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "unresolved",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "switch-write-outcome",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "scope": "b/x"
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit",
+            "op": 2
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "ack",
+            "op": 2
+          },
+          "expected": {
+            "scope": "b/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "context"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "saved"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "client-revocation-not-rollback",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "read": false,
+            "write": false
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": false,
+            "write": false,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": false,
+            "write": false,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "ack",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": false,
+            "write": false,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": [
+            {
+              "op": 2,
+              "scope": "a/x",
+              "text": "edit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "service-revoked-before-effect",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "service",
+            "scope": "a/x",
+            "allowed": false
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "write": false
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": false,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": false,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "ack",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": false,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "denied"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "stale-write-failure",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "scope": "a/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "fail",
+            "op": 2
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "scope": "a/x",
+              "epoch": 2
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "no-unresolved-replay-after-login",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 1,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "edited",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 1,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": true,
+            "notice": "saving",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "pending"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "active": false
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": false,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": true,
+            "saving": false,
+            "notice": "loading",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "scope": "a/x",
+              "epoch": 3
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "complete",
+            "op": 3,
+            "value": "remote"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "remote",
+              "revision": 0,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "loaded",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "scope": "a/x",
+              "epoch": 3
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "restore"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "restored",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "scope": "a/x",
+              "epoch": 3
+            }
+          ],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "save"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 3,
+            "active": true,
+            "read": true,
+            "write": true,
+            "data": "remote",
+            "cache": "remote",
+            "draft": {
+              "text": "edit",
+              "revision": 1,
+              "saved": "remote"
+            },
+            "loading": false,
+            "saving": false,
+            "notice": "unresolved",
+            "outcomes": [
+              {
+                "op": 2,
+                "text": "edit",
+                "revision": 1,
+                "status": "unknown"
+              }
+            ]
+          },
+          "calls": [
+            {
+              "kind": "read",
+              "op": 1,
+              "scope": "a/x",
+              "epoch": 1
+            },
+            {
+              "kind": "write",
+              "op": 2,
+              "scope": "a/x",
+              "epoch": 1,
+              "text": "edit"
+            },
+            {
+              "kind": "read",
+              "op": 3,
+              "scope": "a/x",
+              "epoch": 3
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "direct-read-denied",
+      "ordinary": false,
+      "steps": [
+        {
+          "action": {
+            "type": "context",
+            "read": null,
+            "write": null
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": null,
+            "write": null,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "context-changed",
+            "outcomes": []
+          },
+          "calls": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "read"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": null,
+            "write": null,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "edit",
+            "text": "edit"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": null,
+            "write": null,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [],
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "restore"
+          },
+          "expected": {
+            "scope": "a/x",
+            "epoch": 2,
+            "active": true,
+            "read": null,
+            "write": null,
+            "data": null,
+            "cache": null,
+            "draft": null,
+            "loading": false,
+            "saving": false,
+            "notice": "blocked",
+            "outcomes": []
+          },
+          "calls": [],
+          "effects": []
+        }
+      ]
+    }
+  ]
+}
