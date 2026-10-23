@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Simulated browser workflow lab</title>
+<style>
+body{font:16px system-ui;max-width:1000px;margin:24px auto;padding:0 20px;background:#f5f7fa;color:#17263b}h1{font-size:26px}section{background:white;border:1px solid #bccada;border-radius:8px;padding:16px;margin:12px 0}button{font:inherit;padding:8px;margin:4px;border-radius:5px;border:1px solid #687c94;background:#eef3f9;color:#17263b}button:focus-visible,textarea:focus-visible{outline:3px solid #ac3b00;outline-offset:2px}textarea{display:block;width:95%;min-height:70px;font:inherit}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}#review{border:3px solid #ac3b00}#identity{font-weight:bold}small{display:block}code{overflow-wrap:anywhere}
+</style>
+<h1>Simulated browser workflow lab</h1>
+<p><strong>Authentication and service are visibly simulated.</strong> All accounts, grants, data and commits below are synthetic and volatile. Use one disposable tab per case. No reload/unload, secure retention or real service guarantee.</p>
+<section><div id="identity"></div><p id="route"></p><p id="status" role="status" aria-live="polite"></p>
+<nav aria-label="Fixture destinations"><button id="a">Push A</button><button id="b">Push B</button><button id="c">Replace C</button><button id="push-c">Push C</button><button id="back">Native Back</button><button id="forward">Native Forward</button></nav>
+<div id="editor-panel"><label for="editor">Current owner's editor</label><textarea id="editor"></textarea><p id="revision"></p><button id="save">Save current draft</button><button id="restore">Restore retained draft</button></div>
+<p id="hidden" hidden>Editor hidden while URL and view reconcile or access is inactive.</p>
+<button id="resume" hidden>Resume URL reconciliation</button>
+<section id="review" role="dialog" aria-labelledby="review-title" hidden><h2 id="review-title">Departure review (nonmodal)</h2><p id="proposal"></p><button id="choose-save">Save and leave</button><button id="discard">Discard and leave</button><button id="cancel">Cancel departure</button></section>
+<button id="stale" disabled>Replay prior Cancel choice</button></section>
+<section><h2>Simulated session controls</h2><button id="expire">Simulate expiry</button><button id="owner-a">Simulate login A / X</button><button id="owner-b">Simulate switch B / X</button></section>
+<section><h2>Fixture operator: controlled responses</h2><small>Operator instrumentation deliberately shows synthetic old operations/effects. This is separate from the current owner's editor; it is not an authentication boundary.</small><div id="operations"></div><pre id="effects"></pre></section>
+<details><summary>Rendered observation record</summary><pre id="observation"></pre></details>
+<script type="module" src="/evals/browser-workflow/app.mjs"></script></html>
