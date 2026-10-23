@@ -1,0 +1,8 @@
+{
+  "frozenUtc": "2026-10-23T00:24:19.525322+00:00",
+  "expectationsSha256": "357058e88b5c5e7522ced4cdca30991387602ac0c8ae76a77c14c066fcafe986",
+  "cases": 36,
+  "checkpoints": 72,
+  "ordinaryCheckpoints": 5,
+  "provenance": "Same-author separately reasoned literal complete contexts, routing, pending/held/seen state and external effects before candidate implementation. No candidate output or transition simulator used."
+}

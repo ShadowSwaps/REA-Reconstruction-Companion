@@ -1,0 +1,3512 @@
+{
+  "kind": "synthetic-proposed-policy",
+  "cases": [
+    {
+      "id": "ordinary-save",
+      "family": "input",
+      "ordinary": true,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "release",
+            "code": "KeyS"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ordinary-menu",
+      "family": "context",
+      "ordinary": true,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "command",
+            "command": "save"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "editable-delete",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "input",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "Delete",
+            "code": "Delete",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "input",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "Delete"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "inapplicable"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "rich-edit-delete",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "contenteditable",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "Delete",
+            "code": "Delete",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "contenteditable",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "Delete"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "inapplicable"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "composition-save",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": true,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "composition"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "composition-cancel",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "confirm",
+        "dialog": true,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "Escape",
+            "code": "Escape",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": true,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "Escape"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "composition"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "wrong-logical-key",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "x",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "unmapped"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "logical-key-other-position",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyQ",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyQ"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "meta-is-not-control-profile",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": false,
+            "meta": true,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "unmapped"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "extra-shift",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": true,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "unmapped"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "altgraph",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": true,
+            "shift": false,
+            "altGraph": true,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "unmapped"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "extra-alt",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": true,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "unmapped"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "claimed-event",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": true
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "already-consumed"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "native-text",
+      "family": "input",
+      "ordinary": false,
+      "initial": {
+        "focus": "input",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "z",
+            "code": "KeyZ",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "input",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyZ"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "unmapped"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "disabled-shortcut",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": false
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "inapplicable"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "disabled-menu",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "command",
+            "command": "save"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": false
+            },
+            "pending": null,
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "inapplicable"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "modal-blocks-save",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "confirm",
+        "dialog": true,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "inapplicable"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "modal-menu-blocks-save",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "confirm",
+        "dialog": true,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "command",
+            "command": "save"
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "inapplicable"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "modal-enter-precedence",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "confirm",
+        "dialog": true,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "Enter",
+            "code": "Enter",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "confirm-delete",
+              "context": {
+                "focus": "confirm",
+                "dialog": true,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "Enter"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "confirm-delete",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "background-enter",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "Enter",
+            "code": "Enter",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "Enter"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "unmapped"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "empty-delete",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "Delete",
+            "code": "Delete",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "Delete"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "inapplicable"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "editable-save-explicit",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "input",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "input",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "input",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "modal-cancel",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "confirm",
+        "dialog": true,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "Escape",
+            "code": "Escape",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "cancel",
+              "context": {
+                "focus": "confirm",
+                "dialog": true,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "Escape"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "cancel",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "unknown-menu",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "command",
+            "command": "unknown"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "inapplicable"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "repeat-save",
+      "family": "repeat",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": true,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "repeat"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "stale-selection",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "patch": {
+              "selection": [
+                "b"
+              ]
+            }
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "b"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "b"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": false,
+              "reason": "stale"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "stale-revision",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "patch": {
+              "revision": 1
+            }
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 1,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 1,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": false,
+              "reason": "stale"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "stale-focus",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "patch": {
+              "focus": "input"
+            }
+          },
+          "expected": {
+            "context": {
+              "focus": "input",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "input",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": false,
+              "reason": "stale"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "stale-dialog",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "patch": {
+              "dialog": true
+            }
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": false,
+              "reason": "stale"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "stale-saveEnabled",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "context",
+            "patch": {
+              "saveEnabled": false
+            }
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": false
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": false
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": false,
+              "reason": "stale"
+            }
+          },
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "navigation-repeat",
+      "family": "repeat",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "next",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "ArrowDown"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "next",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "b"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "ArrowDown"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "next",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "navigate",
+              "selection": [
+                "b"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "key",
+            "id": 2,
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": true,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "b"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "next",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "b"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "ArrowDown"
+            ],
+            "seen": [
+              1,
+              2
+            ],
+            "decision": {
+              "command": "next",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": [
+            {
+              "kind": "navigate",
+              "selection": [
+                "b"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "c"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "ArrowDown"
+            ],
+            "seen": [
+              1,
+              2
+            ],
+            "decision": {
+              "command": "next",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "navigate",
+              "selection": [
+                "b"
+              ]
+            },
+            {
+              "kind": "navigate",
+              "selection": [
+                "c"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duplicate-and-held-save",
+      "family": "repeat",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "duplicate"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "key",
+            "id": 2,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1,
+              2
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "repeat"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "release",
+            "code": "KeyS"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [],
+            "seen": [
+              1,
+              2
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "repeat"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "key",
+            "id": 3,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1,
+              2,
+              3
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1,
+              2,
+              3
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            },
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1,
+              2,
+              3
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            },
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "delete-confirm-repeat",
+      "family": "repeat",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "Delete",
+            "code": "Delete",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "request-delete",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "Delete"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "request-delete",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "Delete"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "request-delete",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "open-confirm",
+              "selection": [
+                "a"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "key",
+            "id": 2,
+            "key": "Delete",
+            "code": "Delete",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": true,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "Delete"
+            ],
+            "seen": [
+              1,
+              2
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "inapplicable"
+            }
+          },
+          "effects": [
+            {
+              "kind": "open-confirm",
+              "selection": [
+                "a"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "key",
+            "id": 3,
+            "key": "Enter",
+            "code": "Enter",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "confirm-delete",
+              "context": {
+                "focus": "confirm",
+                "dialog": true,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "Delete",
+              "Enter"
+            ],
+            "seen": [
+              1,
+              2,
+              3
+            ],
+            "decision": {
+              "command": "confirm-delete",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": [
+            {
+              "kind": "open-confirm",
+              "selection": [
+                "a"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [],
+              "revision": 1,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "Delete",
+              "Enter"
+            ],
+            "seen": [
+              1,
+              2,
+              3
+            ],
+            "decision": {
+              "command": "confirm-delete",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "open-confirm",
+              "selection": [
+                "a"
+              ]
+            },
+            {
+              "kind": "delete",
+              "selection": [
+                "a"
+              ]
+            }
+          ]
+        },
+        {
+          "action": {
+            "type": "key",
+            "id": 4,
+            "key": "Enter",
+            "code": "Enter",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": true,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [],
+              "revision": 1,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "Delete",
+              "Enter"
+            ],
+            "seen": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "unmapped"
+            }
+          },
+          "effects": [
+            {
+              "kind": "open-confirm",
+              "selection": [
+                "a"
+              ]
+            },
+            {
+              "kind": "delete",
+              "selection": [
+                "a"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cancel-clears-intent",
+      "family": "repeat",
+      "ordinary": false,
+      "initial": {
+        "focus": "confirm",
+        "dialog": true,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "command",
+            "command": "confirm-delete"
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "confirm-delete",
+              "context": {
+                "focus": "confirm",
+                "dialog": true,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": "confirm-delete",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "cancel-pending"
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "cancelled"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "cancelled"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "Escape",
+            "code": "Escape",
+            "ctrl": false,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "confirm",
+              "dialog": true,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "cancel",
+              "context": {
+                "focus": "confirm",
+                "dialog": true,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "Escape"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "cancel",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [
+              "Escape"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "cancel",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "close-confirm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pending-not-replaced",
+      "family": "context",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "command",
+            "command": "save"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "command",
+            "command": "request-delete"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "pending"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [],
+            "seen": [],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "applied"
+            }
+          },
+          "effects": [
+            {
+              "kind": "save",
+              "revision": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blur-cancels-and-releases",
+      "family": "repeat",
+      "ordinary": false,
+      "initial": {
+        "focus": "list",
+        "dialog": false,
+        "selection": [
+          "a"
+        ],
+        "revision": 0,
+        "saveEnabled": true
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "key",
+            "id": 1,
+            "key": "s",
+            "code": "KeyS",
+            "ctrl": true,
+            "meta": false,
+            "alt": false,
+            "shift": false,
+            "altGraph": false,
+            "composing": false,
+            "repeat": false,
+            "defaultPrevented": false
+          },
+          "expected": {
+            "context": {
+              "focus": "list",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": {
+              "command": "save",
+              "context": {
+                "focus": "list",
+                "dialog": false,
+                "selection": [
+                  "a"
+                ],
+                "revision": 0,
+                "saveEnabled": true
+              }
+            },
+            "held": [
+              "KeyS"
+            ],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": "save",
+              "consumed": true,
+              "reason": "routed"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "blur"
+          },
+          "expected": {
+            "context": {
+              "focus": "none",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "blur"
+            }
+          },
+          "effects": []
+        },
+        {
+          "action": {
+            "type": "commit"
+          },
+          "expected": {
+            "context": {
+              "focus": "none",
+              "dialog": false,
+              "selection": [
+                "a"
+              ],
+              "revision": 0,
+              "saveEnabled": true
+            },
+            "pending": null,
+            "held": [],
+            "seen": [
+              1
+            ],
+            "decision": {
+              "command": null,
+              "consumed": false,
+              "reason": "blur"
+            }
+          },
+          "effects": []
+        }
+      ]
+    }
+  ]
+}
