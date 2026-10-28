@@ -149,6 +149,9 @@ to separate displayed, session/pending and persisted state in the existing recor
 For unsaved drafts, save feedback or leaving/closing/switching documents, use
 [unsaved changes and navigation](references/unsaved-navigation.md) to recover
 document/revision ownership and the selected save/discard/cancel destination policy.
+For reload/reopen or retained drafts after interrupted saving, use
+[draft recovery](references/draft-recovery.md) to distinguish saved records,
+checkpointed drafts and editor memory, with explicit scoped restore and revision checks.
 For work that can finish after inputs or owners change, use
 [asynchronous results](references/asynchronous-results.md) to trace applicability,
 late success/error/finalizer effects, cancellation scope and uncertain-write

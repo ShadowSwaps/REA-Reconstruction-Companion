@@ -56,6 +56,8 @@ cancelling a save and discarding a draft are separate effects; use
 [undo and destructive boundaries](undo-destructive.md) for restoration claims.
 
 Browser unload/page lifecycle and native close hooks are platform-specific.
+For retained drafts across reload/reopen, use [draft recovery](draft-recovery.md)
+to define checkpoint eligibility, explicit restore and current-revision validation.
 Do not promise that a closing page can finish an asynchronous save. Exercise
 the actual supported lifecycle in an authorized disposable environment where
 required; a local model or prompt cannot establish real browser-close behavior.
