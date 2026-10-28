@@ -232,3 +232,8 @@ variants without decimal packages, host-locale changes or original-parity claims
 For keyboard shortcuts and command scope, the [bounded command example](keyboard-commands/README.md) freezes 72 literal intermediate contexts, routing/consumption decisions and independent effects in 36 proposed-policy scenarios. Sixteen faulty variants pass five ordinary checkpoints before a named mismatch. No native dispatch, IME, actual layout, focus traversal or assistive behavior is established.
 
 For direct links and history restoration, the [bounded navigation example](navigation-history/README.md) freezes 94 literal intermediate states and separate adapter effects in 33 proposed-policy scenarios. Eighteen faulty variants pass five ordinary checkpoints before a named mismatch. Real browser history, reload, storage, native deep-link dispatch and original parity remain unverified.
+
+For reload/reopen and persistent draft recovery, the separate
+[browser draft lab](draft-recovery/README.md) distinguishes native saved records,
+checkpointed drafts and memory. Its finite browser observations and controlled
+faults remain separate from source doubles, simulated identity and release review.
