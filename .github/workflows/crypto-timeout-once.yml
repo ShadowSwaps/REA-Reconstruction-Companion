@@ -1,0 +1,48 @@
+name: One-shot crypto timeout comparison
+
+on:
+  push:
+    branches: [diagnostics/crypto-timeout-macos20-20261028]
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    # Only the first creation push; subsequent pushes and reruns cannot execute it.
+    if: >-
+      github.repository == 'ShadowSwaps/REA-Reconstruction-Companion' &&
+      github.repository_id == '1420261569' &&
+      github.event.repository.visibility == 'public' &&
+      github.event.repository.private == false &&
+      github.event.repository.archived == false &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/diagnostics/crypto-timeout-macos20-20261028' &&
+      github.event.created == true && github.event.deleted == false &&
+      github.event.forced == false && github.run_attempt == 1
+    runs-on: macos-26
+    timeout-minutes: 45
+    steps:
+      - name: Check out reviewed diagnostic harness
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          path: diagnostic
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Check out frozen evaluated baseline
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30af803 # v6
+        with:
+          ref: 48004fbcfd4566d5f89e7cb2b6d9f5ce04302221
+          path: baseline
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Select historical Node runtime
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '20.20.2'
+          package-manager-cache: false
+      - name: Run the finite comparison
+        timeout-minutes: 38
+        env:
+          CRYPTO_RUNNER_LABEL: macos-26
+        run: node diagnostic/scripts/diagnostics/crypto-timeout.mjs

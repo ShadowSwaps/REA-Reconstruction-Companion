@@ -52,6 +52,7 @@
     "integration/legacy-rea-companion.md": "13029d4afd31328f1ae33ad5efec5785e3dc08c315dcb1427210c85db9d73fcc",
     "integration/rea-companion.md": "1d99a273ab57c20d149bff63ab70e9c3811bd5cc0389d5aae59c1caa3b91a120",
     "scripts/build_release.py": "6cf91979bd4083ea6d6699d21cd2955434c946c2a6c9490e2b2b7c89283de1be",
+    "scripts/diagnostics/crypto-timeout.mjs": "75cd630f981893286851cf5ac2707cccea611ca1501c949c6e23ae410f484316",
     "scripts/fixture-environment.mjs": "82d86baed169092bb615e84f365de558e10aa11f9dda92360b77b5c61f87da07",
     "scripts/manifest.mjs": "889022c637d6ae5f40166a0118120e7cef85768e6a588aa9bed9665cdf798238",
     "scripts/run-checks.mjs": "fdf64d2f995c50d1da9e188e92f19f46e5a6752ac37e3b810c1731851a3972e0",
@@ -427,6 +428,7 @@
     ".github/CODEOWNERS": "08930e27734909873f10f6f513e44e9dafcfdf768ff00c389589bddf93c6a884",
     ".github/ISSUE_TEMPLATE/release-request.md": "574bd6c1d9004b3a959e7ba6fb77f3f89c727133a1a99c7cba7bbe142c254c5d",
     ".github/workflows/codeql.yml": "af99491df9b57052a57d08035d028fd926201ce24155e144fab24f7d8b969f82",
+    ".github/workflows/crypto-timeout-once.yml": "443fb991a5bc5751a3b2184a6b32a274734e209202b06ebb22b54229900a828e",
     ".github/workflows/test.yml": "eeef3a578ed650472c771c9dc773c2ed9ff74225a085398953864231df490d1f",
     "assets/discord-banner.png": "4f25d6a75a9b0203ca9ebc217f815e46fb1783a244d81b763b5681173c24a1f6",
     "assets/kofi-support.png": "31d0947770098a2efbf31033331d4284df3f127d71608f2e3f45e53f2abeb736"
