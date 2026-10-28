@@ -30,7 +30,7 @@ function render() {
   if (s.departure) {
     const p=s.departure;
     $('proposal').textContent=`Proposal ${p.id}: ${p.kind} ${p.url}, entry ${p.key ?? 'new/current'}, source revision ${p.sourceRevision}, lifetime ${p.sourceLifetime}`;
-    if (lastId !== p.id) {
+    if (lastId !== p.id && !blocked) {
       if (lastId !== null) previous=lastId;
       lastId=p.id;$('cancel').focus();
     }

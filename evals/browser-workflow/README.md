@@ -9,7 +9,7 @@ Standalone skill installations omit evals and tests.
 Run `node evals/browser-workflow/server.mjs` using the existing Node >=20 runtime.
 Open the printed `http://127.0.0.1:PORT/items/a` in a fresh disposable tab/profile
 that contains no private user data. The server binds only loopback, accepts only
-GET with its loopback Host, serves five named modules and the fixture page, and
+GET with its loopback Host, serves four named modules and the fixture page, and
 sets no cookies or persistent storage. Close task-owned tabs and stop only this
 server with Ctrl+C after recording evidence. No install, external service, model
 call, network API, telemetry or authentication credential is needed.
@@ -26,7 +26,13 @@ has moved. For a dirty or unresolved departure the fixture records that movement
 hides/disables the editor and pauses at **Resume URL reconciliation**. This
 operator gate makes the intermediate DOM inspectable without timing sleeps. It
 controls when `history.go` is issued; it does not synthesize a popstate event.
-Resume restores the exact source entry before presenting its departure proposal.
+The exact native departure is registered with a fresh proposal ID at popstate,
+before restoration. Its dialog stays hidden until Resume restores the source
+entry. This supersedes any older save-and-leave approval immediately: an old save
+acknowledgement can certify only its captured revision, without navigating from
+the already-moved native entry. Resume does not register the proposal a second
+time. Even if that acknowledgement leaves a clean draft, the new native proposal
+still requires its own exact choice after restoration.
 An approved traversal pauses again before issuing the native move to its exact
 destination. Clean traversals accept the already-moved native entry directly.
 This is a bounded lab procedure, not a production navigation framework or a
@@ -93,13 +99,26 @@ from a fresh tab, not a reload/persistence assumption. Buttons Native Back/Forwa
 also call the real History API; an automation API may instead reject a boundary
 traversal before issuing it. Record that distinction.
 
+For the acknowledgement/restoration interleaving, use a fresh tab: complete1,
+Push B/complete2, edit B1, Push C, Save and leave (write3/proposal1), then actual
+Back to A. Before Resume, observe native A but committed B/key2, hidden editor
+and dialog, with new traversal proposal2 targeting A/key1. Commit3/Complete3
+must save B1/version2 while native A and entries A,B remain untouched; no C read
+or entry is created. Resume restores B/key2 and shows proposal2. Replay prior
+Cancel cannot cancel it. Save and leave on that fresh clean proposal stages a
+traversal; Resume/complete4 opens A/key1. Repeat proportionately with the older
+departure as Replace C or a traversal to A, and with acknowledgement after
+restoration is issued but before its pop, or after restoration. A newer B2 edit
+before Back stays dirty after the B1 acknowledgement and needs its own save.
+
 ## Regression and limits
 
 Run `node --test tests/browser-workflow.test.mjs tests/combined-navigation.test.mjs`.
 The history port in Node tests is explicitly a transport **double**, not browser
-evidence. Four disposable controller faults must pass ordinary controls before
+evidence. Five disposable controller faults must pass ordinary controls before
 named state/effect mismatches reject wrong restoration direction, edits during
-reconciliation, revived obsolete proposals and unchecked restored-entry keys.
+reconciliation, revived obsolete proposals, unchecked restored-entry keys and
+acknowledgement navigation before native source restoration.
 The existing integrated model's regressions remain separate.
 
 For a meaningful browser distinction, make a disposable copy of the fixture and

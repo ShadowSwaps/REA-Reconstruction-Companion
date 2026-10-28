@@ -40,7 +40,6 @@ export function createBrowserWorkflow(port, changed=()=>{}, run='disposable-run'
       if (native.state.pos !== pending.target.pos || native.state.epoch !== pending.target.epoch || native.state.key !== pending.target.key || native.url !== pending.url) return fail('unexpected-pop-during-reconciliation');
       reconciliation=null;pos=native.state.pos;
       event('reconciled',{kind:pending.kind,...native});
-      if (pending.kind === 'restore' && pending.proposal) model.dispatch(pending.proposal);
       changed();return;
     }
     const s=current(),entry=s.entries[s.index],source={...stamp(s)};
@@ -50,6 +49,10 @@ export function createBrowserWorkflow(port, changed=()=>{}, run='disposable-run'
     const proposal={type:'traverse',delta:native.state.index-s.index};
     if (obsolete || s.dirty || s.saving !== null || s.outcomes.some(r=>['pending','unknown'].includes(r.status)) || !s.active) {
       reconciliation={kind:'restore',target:source,url:entry.url,proposal:obsolete ? null : proposal};
+      // Register this exact native request before any pending acknowledgement can
+      // release an older approval. The model guards it; the dialog stays hidden
+      // until the source entry is restored. Do not request it again on Resume.
+      if (reconciliation.proposal) model.dispatch(reconciliation.proposal);
       event('restoration-issued',{delta:pos-native.state.pos,obsolete,source,observed:native.state});
       // A visible operator gate freezes this real intermediate DOM state. It
       // controls when history.go runs; it does not emulate the browser's pop.

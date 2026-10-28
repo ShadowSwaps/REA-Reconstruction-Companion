@@ -49,7 +49,7 @@ test('ordinary manual save and clean traversal with a transport double',()=>ordi
 test('dirty native movement is recorded before restoration, approval and final traversal',async()=>{
   const {h,w}=setup();await w.finish(1);nav(w,'b');await w.finish(2);edit(w,'B1');
   h.back();assert.equal(w.snapshot().native.url,'/items/a');assert.equal(m(w).entries[m(w).index].url,'/items/b');
-  assert.equal(w.snapshot().reconciliation.kind,'restore');assert.equal(m(w).departure,null);
+  assert.equal(w.snapshot().reconciliation.kind,'restore');assert.equal(m(w).departure.key,1);
   assert.equal(w.act({type:'edit',text:'wrong'}),false);w.resume();h.flush();
   assert.equal(w.snapshot().native.url,'/items/b');assert.equal(m(w).departure.key,1);choice(w,'cancel');
   assert.equal(m(w).draft.text,'B1');h.back();w.resume();h.flush();choice(w,'discard');
@@ -95,10 +95,64 @@ test('foreign, unexpected and corrupt entries stop without inventing an accepted
   const next=setup();await next.w.finish(1);nav(next.w,'b');await next.w.finish(2);edit(next.w,'B1');next.h.back();
   next.w.resume();next.h.flush(row=>{row.state.key=999;});assert.equal(next.w.snapshot().stopped,true);
 });
+
+async function acknowledgedDuringRestoration(factory,{kind='push',moment='before-resume'}={}) {
+  const {h,w}=setup(factory);await w.finish(1);nav(w,'b');await w.finish(2);edit(w,'B1');
+  if (kind === 'traverse') w.act({type:'traverse',delta:-1});else nav(w,'c',kind);
+  choice(w,'save');h.back();
+  if (moment !== 'before-resume') w.resume();
+  if (moment === 'after-restored-pop') h.flush();
+  const beforeEntries=structuredClone(h.entries);w.commit(3);await w.finish(3);
+  // The acknowledgement saves the captured revision but cannot carry the older
+  // departure across a newer native request, even while its dialog is hidden.
+  assert.deepEqual(h.entries,beforeEntries,'ack does not mutate native entries');
+  assert.deepEqual(m(w).entries,[{key:1,url:'/items/a'},{key:2,url:'/items/b'}]);
+  assert.equal(m(w).index,1);assert.equal(m(w).draft.text,'B1');assert.equal(m(w).dirty,false);
+  assert.equal(m(w).departure.id,2);assert.equal(m(w).departure.key,1);assert.equal(m(w).departure.url,'/items/a');
+  assert.equal(w.snapshot().service.calls.length,3);assert.equal(w.snapshot().stopped,false);
+  if (moment === 'before-resume') w.resume();
+  h.flush();assert.equal(w.snapshot().native.url,'/items/b');assert.equal(w.snapshot().native.state.key,2);
+  assert.equal(w.snapshot().reconciliation,null);assert.equal(m(w).departure.id,2);
+  w.act({type:'choose',id:1,choice:'cancel'});assert.equal(m(w).departure.id,2);
+  choice(w,'save');assert.equal(w.snapshot().reconciliation.kind,'commit');w.resume();h.flush();await w.finish(4);
+  assert.equal(w.snapshot().native.url,'/items/a');assert.equal(w.snapshot().native.state.key,1);
+  assert.equal(m(w).index,0);assert.equal(m(w).draft.text,'A0');assert.equal(w.snapshot().stopped,false);
+  assert.deepEqual(h.entries.map(e=>[e.url,e.state.key]),[['/items/a',1],['/items/b',2]]);
+  assert.deepEqual(w.snapshot().service.effects,[{kind:'write',op:3,scope:'a/x',url:'/items/b',text:'B1',version:2}]);
+}
+for (const kind of ['push','replace','traverse']) for (const moment of ['before-resume','after-issued-before-pop','after-restored-pop']) {
+  test(`native Back supersedes ${kind} save approval; acknowledgement ${moment}`,()=>acknowledgedDuringRestoration(createBrowserWorkflow,{kind,moment}));
+}
+test('newer revision before native Back stays dirty and needs its own exact save choice',async()=>{
+  const {h,w}=setup();await w.finish(1);nav(w,'b');await w.finish(2);edit(w,'B1');nav(w,'c');choice(w,'save');
+  edit(w,'B2');h.back();w.commit(3);await w.finish(3);
+  assert.equal(m(w).draft.text,'B2');assert.equal(m(w).draft.savedRevision,1);assert.equal(m(w).departure.sourceRevision,2);
+  assert.equal(m(w).dirty,true);w.resume();h.flush();choice(w,'save');w.commit(4);await w.finish(4);
+  w.resume();h.flush();await w.finish(5);assert.equal(w.snapshot().native.url,'/items/a');
+  assert.deepEqual(w.snapshot().service.effects.map(e=>[e.text,e.version]),[['B1',2],['B2',3]]);
+});
+test('unknown acknowledgement during restoration neither navigates nor enables replay',async()=>{
+  const {h,w}=setup();await w.finish(1);nav(w,'b');await w.finish(2);edit(w,'B1');nav(w,'c');choice(w,'save');h.back();
+  await w.finish(3,true);w.resume();h.flush();choice(w,'save');assert.equal(m(w).notice,'unresolved');
+  assert.equal(w.snapshot().native.url,'/items/b');assert.equal(m(w).departure.key,1);assert.equal(w.snapshot().service.calls.length,3);
+  w.commit(3);assert.equal(w.snapshot().service.effects.length,1);assert.equal(m(w).outcomes[0].status,'unknown');
+});
+test('a new session after source restoration supersedes intent and scopes late acknowledgement',async()=>{
+  const {h,w}=setup();await w.finish(1);nav(w,'b');await w.finish(2);edit(w,'B1');nav(w,'c');choice(w,'save');h.back();
+  w.resume();h.flush();context(w);const before=m(w);w.commit(3);await w.finish(3);assert.deepEqual(m(w),before);
+  assert.equal(m(w).loading,4);assert.equal(m(w).departure,null);await w.finish(4);
+  assert.equal(m(w).draft.text,'Q0');assert.equal(w.snapshot().native.state.epoch,2);assert.equal(w.snapshot().stopped,false);
+});
 const source=fs.readFileSync(new URL('../evals/browser-workflow/controller.mjs',import.meta.url),'utf8');
 const faults=[
+  {id:'ack-navigation-before-source-restoration',from:'if (reconciliation.proposal) model.dispatch(reconciliation.proposal);',to:'// Missing early native proposal registration.',
+    async distinguish(factory) {
+      const {h,w}=setup(factory);await w.finish(1);nav(w,'b');await w.finish(2);edit(w,'B1');nav(w,'c');choice(w,'save');h.back();
+      w.commit(3);await w.finish(3);
+      return h.entries.length === 2 && w.snapshot().native.url === '/items/a' && m(w).index === 1 && m(w).departure?.key === 1;
+    }},
   {id:'wrong-restoration-direction',from:'const delta=reconciliation.target.pos-port.read().state.pos;',to:'const delta=port.read().state.pos-reconciliation.target.pos;',
-    async distinguish(factory) {const {h,w}=setup(factory);await w.finish(1);nav(w,'b');await w.finish(2);edit(w,'B1');h.back();w.resume();h.flush();return m(w).departure?.key === 1;}},
+    async distinguish(factory) {const {h,w}=setup(factory);await w.finish(1);nav(w,'b');await w.finish(2);edit(w,'B1');h.back();w.resume();h.flush();return m(w).departure?.key === 1 && w.snapshot().native.url === '/items/b' && w.snapshot().reconciliation === null;}},
   {id:'edit-during-url-mismatch',from:'if (stopped || reconciliation) return false;',to:'if (stopped) return false;',
     async distinguish(factory) {const {h,w}=setup(factory);await w.finish(1);nav(w,'b');await w.finish(2);edit(w,'B1');h.back();return w.act({type:'edit',text:'B2'}) === false && m(w).draft.text === 'B1';}},
   {id:'obsolete-entry-recreates-proposal',from:'proposal:obsolete ? null : proposal',to:'proposal:proposal',
