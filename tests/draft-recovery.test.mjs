@@ -34,6 +34,40 @@ test('new edit while held blocks old effect and retains newer checkpoint',async(
   const f=fixture(),e=f.make();await e.edit('Old');let release;const saving=e.save({beforeDispatch:()=>new Promise(r=>{release=r;})});await new Promise(setImmediate);
   await e.edit('New');release();await saving;assert.equal(f.db().records['A/X'].revision,1);assert.equal(f.db().drafts['A/X/1'].text,'New');assert.equal(e.state.dirty,true);assert.match(e.state.status,/Superseded save/);
 });
+function heldSaveReceipt(Type=Editor) {
+  const f=fixture(Type);let armed=false,release,arrived;
+  const reached=new Promise(resolve=>{arrived=resolve;});
+  const lock=(name,fn)=>f.lock(name,fn).then(async result=>{
+    if(armed && f.db().records['A/X'].revision===2){armed=false;await new Promise(resolve=>{release=resolve;arrived();});}
+    return result;
+  });
+  let token=0;const e=new Type({storage:f.storage,lock,now:()=>100000000,token:()=>`receipt-${++token}`});e.open(A);
+  return {f,e,arm:()=>{armed=true;},reached,release:()=>release()};
+}
+test('DR-NAR-001: newer input after native commit stays dirty and checkpointed after old receipt',async()=>{
+  const h=heldSaveReceipt(),{f,e}=h;await e.edit('Captured save');h.arm();const saving=e.save();await h.reached;
+  assert.deepEqual(f.db().records['A/X'],{revision:2,text:'Captured save'});
+  await e.edit('Newer unsaved edit');assert.equal(e.state.dirty,true);assert.match(e.state.status,/Checkpoint failed; memory only/);
+  h.release();await saving;
+  assert.equal(e.state.text,'Newer unsaved edit');assert.equal(e.state.saved,'Captured save');assert.equal(e.state.base,2);assert.equal(e.state.dirty,true);assert.equal(e.state.status,'Draft checkpointed; not saved');
+  assert.equal(f.db().drafts['A/X/1'].text,'Newer unsaved edit');assert.equal(f.db().drafts['A/X/1'].base,2);
+  await e.save();assert.equal(e.state.status,'Saved');assert.deepEqual(f.db().records['A/X'],{revision:3,text:'Newer unsaved edit'});
+});
+test('post-commit receipt cannot alter another owner editor or its checkpoint',async()=>{
+  const h=heldSaveReceipt(),{f,e}=h;await e.edit('A captured');h.arm();const saving=e.save();await h.reached;
+  e.open({...A,account:'B'});await e.edit('B newer');const before={...e.state},slot=JSON.stringify(f.db().drafts['B/X/1']);
+  h.release();await saving;assert.deepEqual(e.state,before);assert.equal(JSON.stringify(f.db().drafts['B/X/1']),slot);await e.save();assert.equal(f.db().records['B/X'].text,'B newer');assert.equal(f.db().records['A/X'].text,'A captured');
+});
+test('receipt reconciliation preserves another writer slot and reports newer memory-only failure',async()=>{
+  const h=heldSaveReceipt(),{f,e}=h;await e.edit('Captured save');h.arm();const saving=e.save();await h.reached;
+  await e.edit('My newer memory');const peer=f.make();await peer.edit('Peer checkpoint');const before=JSON.stringify(f.db().drafts['A/X/1']);
+  h.release();await saving;assert.equal(e.state.text,'My newer memory');assert.equal(e.state.dirty,true);assert.match(e.state.status,/Checkpoint failed; memory only/);assert.equal(JSON.stringify(f.db().drafts['A/X/1']),before);assert.equal(f.db().records['A/X'].text,'Captured save');
+});
+test('controlled after-commit acknowledgement gate holds receipt while native bytes are observable',async()=>{
+  const f=fixture(),e=f.make();await e.edit('Native accepted');let release,arrived;const reached=new Promise(resolve=>{arrived=resolve;});
+  const saving=e.save({afterCommit:()=>new Promise(resolve=>{release=resolve;arrived();})});await reached;
+  assert.equal(e.state.status,'Saving');assert.equal(f.db().records['A/X'].text,'Native accepted');await e.edit('Later');release();await saving;assert.equal(e.state.dirty,true);assert.equal(f.db().drafts['A/X/1'].text,'Later');assert.equal(f.db().drafts['A/X/1'].base,2);
+});
 test('newer saved revision blocks stale recovered draft, preserving both',async()=>{
   const f=fixture(),old=f.make(),newer=f.make();await old.edit('Old draft');
   // Setup represents another cooperative revision after a different writer resolved its slot.
@@ -91,7 +125,8 @@ test('disposable faults pass ordinary control then fail named boundary assertion
   const faults=[
     {id:'missing-base',from:"if(db.records[recordKey(scope)].revision!==base)",to:'if(false)',probe:async Type=>{const f=fixture(Type),e=f.make();await e.edit('Stale');const d=f.db();d.records['A/X']={revision:2,text:'Newer'};f.set(JSON.stringify(d));e.open(A);e.restore();await e.save();assert.equal(f.db().records['A/X'].text,'Newer','newer-record-preserved');}},
     {id:'missing-scope',from:'export const slotKey = c => recordKey(c) + \'/\' + c.lifetime;',to:"export const slotKey = c => 'A/X/1';",probe:async Type=>{const f=fixture(Type),e=f.make();await e.edit('Private synthetic A');e.open({...A,account:'B'});assert.equal(e.offered,null,'other-owner-no-offer');}},
-    {id:'restore-certifies',from:"dirty:true,status:'Draft restored; not saved'",to:"dirty:false,status:'Saved'",probe:async Type=>{const f=fixture(Type),e=f.make();await e.edit('Unsaved');e.open(A);e.restore();assert.equal(e.state.dirty,true,'restore-remains-unsaved');}}
+    {id:'restore-certifies',from:"dirty:true,status:'Draft restored; not saved'",to:"dirty:false,status:'Saved'",probe:async Type=>{const f=fixture(Type),e=f.make();await e.edit('Unsaved');e.open(A);e.restore();assert.equal(e.state.dirty,true,'restore-remains-unsaved');}},
+    {id:'old-receipt-certifies-newer',from:'if(sequence!==this.sequence) {',to:'if(false) {',probe:async Type=>{const h=heldSaveReceipt(Type);await h.e.edit('Captured');h.arm();const saving=h.e.save();await h.reached;await h.e.edit('Newer');h.release();await saving;assert.equal(h.e.state.dirty,true,'older-receipt-preserves-newer-draft');}}
   ];
-  for(const fault of faults){assert.ok(source.includes(fault.from),fault.id);const {Editor:Type}=await import('data:text/javascript;base64,'+Buffer.from(source.replace(fault.from,fault.to)).toString('base64'));await ordinary(Type);await assert.rejects(fault.probe(Type),e=>e.code==='ERR_ASSERTION' && /newer-record-preserved|other-owner-no-offer|restore-remains-unsaved/.test(e.message),fault.id);}
+  for(const fault of faults){assert.ok(source.includes(fault.from),fault.id);const {Editor:Type}=await import('data:text/javascript;base64,'+Buffer.from(source.replace(fault.from,fault.to)).toString('base64'));await ordinary(Type);await assert.rejects(fault.probe(Type),e=>e.code==='ERR_ASSERTION' && /newer-record-preserved|other-owner-no-offer|restore-remains-unsaved|older-receipt-preserves-newer-draft/.test(e.message),fault.id);}
 });

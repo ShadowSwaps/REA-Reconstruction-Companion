@@ -97,7 +97,7 @@ export class Editor {
       if (epoch===this.epoch && sequence===this.sequence) {this.open(scope);this.state.status='Draft discarded';}
     } catch(e) {if(epoch===this.epoch && sequence===this.sequence)this.state.status='Discard blocked: '+e.message;}
   }
-  async save({beforeDispatch=async()=>{},reject=false,loseAck=false}={}) {
+  async save({beforeDispatch=async()=>{},afterCommit=async()=>{},reject=false,loseAck=false}={}) {
     if (!this.state.scope || this.pending || this.state.uncertain || !this.state.dirty) return;
     const epoch=this.epoch, sequence=this.sequence, operation={}; this.pending=operation;
     try {
@@ -113,8 +113,18 @@ export class Editor {
         if(base>=1000000) throw new Error('Revision limit');
         db.records[recordKey(scope)]={revision:base+1,text:payload}; delete db.drafts[slotKey(scope)]; return base+1;
       },reject);
+      await afterCommit();
       if(epoch!==this.epoch) return;
       if(loseAck) {this.state.uncertain=true;this.state.status='Unknown acknowledgement; read latest before retry';return;}
+      // A committed effect and its caller's receipt are separate boundaries.
+      // Reconcile the saved base without certifying a newer edit as saved.
+      Object.assign(this.state,{saved:payload,base:revision});
+      if(sequence!==this.sequence) {
+        if(this.expected===expected)this.expected=null;
+        if(bytes(this.offered)===expected)this.offered=null;
+        await this.edit(this.state.text);
+        return;
+      }
       this.expected=null;this.offered=null;
       Object.assign(this.state,{saved:payload,base:revision,dirty:false,status:'Saved'});
     } catch(e) {if(epoch===this.epoch)this.state.status='Not saved: '+e.message;}

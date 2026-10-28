@@ -29,6 +29,11 @@ offered draft** is explicit and remains unsaved. Save compares the captured base
 revision and exact checkpoint at the write effect; stale recovery cannot overwrite
 a newer record. Another tab may resolve/save the shared slot first, so a conflict
 can leave the old tab's text only in memory. There is no automatic merge or retry.
+The editor remains editable during saving. If a newer edit arrives after the native
+write but before acknowledgement, the receipt reconciles the confirmed saved base
+and checkpoints the newer text through the same slot comparison. It keeps that text
+unsaved; another writer's checkpoint still blocks replacement. A failed new checkpoint
+reports memory-only recovery rather than certifying the newer text as saved.
 **Read latest** explicitly replaces this editor's memory with saved content and a
 fresh offer; checkpointed drafts remain separate. **Discard selected draft** removes
 only the unchanged selected slot and reads the saved record.
@@ -61,6 +66,15 @@ and clock trust are proposed choices, not recovered original behavior.
 4. Setup a timestamp of 1 or 9999999999999 on a real checkpoint: restore is blocked
    without deleting it. Apply `{` or 65537 raw ASCII characters: editor stays hidden
    and native bytes remain unchanged. Explicit seed setup recovers the lab only.
+5. **Hold next acknowledgement after native commit**, then Save `Captured save`.
+   Read store must show that actual committed record while feedback stays Saving.
+   Edit `Newer unsaved edit` before releasing the acknowledgement. Release must keep
+   that editor dirty and create its checkpoint against the confirmed revision2,
+   without saving the newer record. Actual reload/explicit restore retains it;
+   normal Save then writes revision3. Repeat with a different simulated account
+   active before release: its editor/checkpoint must stay unchanged. This is an
+   explicit local acknowledgement gate around real native storage, not evidence
+   of a particular uninstrumented browser schedule or external service timing.
 
 The Read store control performs a fresh native `getItem` and renders exact bytes.
 Record that plus actual DOM values/visibility, revision, scope, pending flag, URL
@@ -68,11 +82,17 @@ and native reload/close/reopen actions. Diagnostic labels alone are insufficient
 
 ## Evidence and limits
 
-The 28 October 2026 author trial captured 41 candidate DOM/native-store checkpoints
-and 14 checkpoints on three disposable faulty copies. Each copy passed seed,
+The initial 28 October 2026 proposal captured 41 candidate DOM/native-store checkpoints
+and 14 checkpoints on three disposable faulty copies. Independent review found a
+missing post-commit/pre-acknowledgement sequence guard; those results remain historical
+and do not accept that rejected proposal. The corrected trial captured **52 candidate
+checkpoints and 20 on four faulty copies**, retaining the three families and adding
+the acknowledgement regression and another-owner control. Each copy passed seed,
 ordinary save and actual reload controls before a named mismatch: missing base
 guard overwrote a newer native record; missing slot scope offered A's draft to B;
-restore falsely said Saved with unchanged native saved content. The 24 Node tests
+restore falsely said Saved with unchanged native saved content; and a missing
+receipt-sequence guard marked newer unsaved text clean after an older commit.
+The **28 Node tests**
 include matching faults and injected storage/lock ports; they do not establish
 browser behavior. A sandbox server timed out; normal-context loopback worked.
 One browser capture timeout was preserved and recaptured after inspecting the
