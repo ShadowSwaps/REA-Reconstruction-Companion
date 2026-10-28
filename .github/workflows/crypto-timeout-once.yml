@@ -30,7 +30,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
       - name: Check out frozen evaluated baseline
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30af803 # v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           ref: 48004fbcfd4566d5f89e7cb2b6d9f5ce04302221
           path: baseline
