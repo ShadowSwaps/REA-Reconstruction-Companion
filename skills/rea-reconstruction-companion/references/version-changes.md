@@ -1,5 +1,7 @@
 # Adapt to a selected version change
 
+For adapting a saved reconstruction to another selected version, use the [version-change procedure](version-changes.md) to establish actual behavioral changes, select dependent revalidation and verify migration/recovery against frozen expectations.
+
 Use this with [checkpoints](checkpoints.md) and, for changed saved data,
 [file compatibility](file-compatibility.md). Keep the work scoped to change
 detection, selective revalidation and migration/recovery. Ordinary complete-

@@ -1,5 +1,7 @@
 # Drag, drop and reordering
 
+For placing items, dragging between lists or changing their order, use [drag/drop contracts](drag-drop.md) to recover source identity, canonical versus displayed order, insertion anchors, move/copy applicability, preview versus effects and cancel/undo boundaries. Recover the target's policy; keep planning bounded and actual input/accessibility behavior separate from an operation model.
+
 Use for the selected placement or transfer workflow, including natural requests
 such as “put this above that” or “move a card to the other column.” Extend the
 existing [workflow and acceptance rows](blueprint.md#consequential-workflow-states);

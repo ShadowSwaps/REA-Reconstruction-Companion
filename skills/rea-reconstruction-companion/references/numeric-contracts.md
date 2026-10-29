@@ -1,5 +1,7 @@
 # Numeric values, rounding and units
 
+For numeric quantities, use [numeric contracts](numeric-contracts.md) to separate localized input/display from canonical values, recover representation and explicit rounding mode/stage, and preserve unit meaning through conversion, storage and export. Keep unresolved original rules explicit and validate values beyond formatted equality.
+
 Use this when a selected field or transformation depends on numeric meaning.
 Extend the existing finding/requirement/acceptance rows, rather than create a
 parallel arithmetic framework. Recover the original's supported rules and the

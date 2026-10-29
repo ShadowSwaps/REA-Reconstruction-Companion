@@ -1,5 +1,7 @@
 # Undo, redo and destructive actions
 
+For undo/redo or destructive actions, use [history and destructive-effect contracts](undo-destructive.md) to recover restoration, identity/order/view state, grouping, history lifetime and redo branching. Trace confirmation/cancel/repetition and distinguish reversible deletion from permanent or uncertain effects. Keep one-operation requests bounded and planning requests in planning mode.
+
 Use for the selected editing or destructive workflow. Extend the existing
 [finding/requirement/transition rows](blueprint.md#consequential-workflow-states);
 one operation can need only a compact contract. A plan stays a plan, and a

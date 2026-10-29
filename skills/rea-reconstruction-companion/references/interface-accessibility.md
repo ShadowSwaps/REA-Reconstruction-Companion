@@ -1,5 +1,7 @@
 # Accessibility of reconstructed interfaces
 
+For selected UI workflows, use [interface accessibility](interface-accessibility.md) to specify keyboard operation, focus, labels, errors and status feedback separately from visual/functional fidelity. Distinguish original observations from proposed improvements and keyboard/assistive-technology evidence from markup alone; keep the checks proportional to the requested interface.
+
 Use for selected UI workflows when interaction or accessibility matters to the
 user's outcome. A decoder, protocol explanation or non-UI change does not require
 a broad accessibility audit. Extend the existing requirement/evidence rows rather

@@ -1,5 +1,7 @@
 # Artifact-based reconstruction trials
 
+For a bounded reconstruction trial from packaged or compiled bytes, use the [artifact trial procedure](artifact-trials.md) to freeze identity/oracles, disclose source exposure, connect actual REA findings to runtime checks, and challenge wrong candidates without inventing canonical evidence.
+
 Use this procedure when the selected evidence carrier is a shipped, packaged or
 compiled artifact. Keep the requested behavior count and scope fixed. It is a
 bounded application of [reconstruction methods](reconstruction-methods.md), not

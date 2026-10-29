@@ -1,5 +1,7 @@
 # Keyboard shortcuts and command context
 
+For keyboard shortcuts, command conflicts or context-dependent activation, use [keyboard and command contracts](keyboard-commands.md) to distinguish text/composition from commands, logical key from physical position, focused/dialog scope, disabled applicability and event consumption. Recover repeat/cancel and effect-boundary guards; keep model records separate from native input and accessibility evidence.
+
 Use for a selected shortcut, keyboard-operated journey or competing command
 scope. Infer relevance from the whole request, including negation and planning
 intent; example key names are not required user wording. Extend the existing

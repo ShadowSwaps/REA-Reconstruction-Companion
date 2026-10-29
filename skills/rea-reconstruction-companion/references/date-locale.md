@@ -1,5 +1,7 @@
 # Date, time-zone and locale contracts
 
+For date/time-zone or locale-dependent behavior, use [date and locale contracts](date-locale.md) to distinguish calendar dates, instants and wall time, select consequential zone boundaries and separate localized display from parsing, sorting and stored/exported values. Preserve unresolved original semantics and explicit gap/overlap policies.
+
 Use this when a selected field or workflow depends on dates, clocks or localized
 text. Extend the existing finding/requirement/acceptance rows; do not create a
 parallel time framework or infer a calendar system from a product name.

@@ -1,5 +1,7 @@
 # Change an existing reconstruction
 
+For a request to modify an existing reconstruction, use [safe changes](safe-changes.md) to reconcile current intent and custom work, retained contracts, affected dependencies, acceptance and recovery before editing. Keep changed requirements separate from changes to the reference version or environment.
+
 Use for a request to modify the selected reconstruction, including a small fix,
 changed priority, new workflow or intentional difference from the original. Use
 the current project and [implementation workflow](implementation.md); this is not

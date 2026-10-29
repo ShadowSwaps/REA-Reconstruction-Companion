@@ -1,5 +1,7 @@
 # Cryptographic compatibility
 
+For encrypted formats or interfaces, read [cryptographic compatibility](cryptographic-compatibility.md) to recover an explicit interoperability profile and select independent acceptance/rejection vectors. A known algorithm does not imply available keys or a decryption capability.
+
 Use for an encrypted format, database field, message, or protocol within the selected target. This is compatibility and validation guidance, not a universal decryptor or authorization to acquire secrets. Distinguish encryption from encoding, compression, hashing, authentication, and signatures before choosing a method. Prefer the platform's established cryptographic library; do not invent or reimplement a cipher to reconstruct an application.
 
 ## Interoperability profile

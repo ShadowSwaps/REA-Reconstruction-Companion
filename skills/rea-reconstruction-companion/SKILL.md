@@ -26,7 +26,7 @@ On activation, if existing Node.js 20+ and local command access are available, r
 
 When the user wants to understand a target for reconstruction, plan a similar implementation, or rebuild selected functionality, apply this skill and `reverse-engineer-anything` together throughout the task. Loading one from the other continues the same investigation; do not recursively reload either skill or start duplicate investigations.
 
-Maintain one resolved brief, question checklist, and evidence ledger. Use REA findings to refine requirements and design. When planning, implementation, or validation exposes an evidence gap, return to a focused REA investigation and reconcile its findings with the affected requirements, design choices, and tests. Share existing evidence and preserve observations, inferences, and unknowns.
+Maintain one resolved brief, prioritized question checklist and evidence ledger for the exact selected target. Use REA summaries and focused follow-ups to trace priority workflows from trigger through state/data changes to results and refine requirements/design. When planning, implementation or validation exposes an evidence gap, return to a focused REA investigation and reconcile findings with affected requirements, design choices and tests. Share existing evidence; preserve observations, inferences and unknowns. Read the base skill's target-specific references only when needed. Reuse matching evidence; a new target or version must not silently inherit another app's conclusions.
 
 Keep the combined workflow proportional to the user's target and objective. A request to explain a function, compare versions, or diagnose a problem does not by itself require reconstruction planning or implementation. If the base skill is unavailable, report the missing dependency and continue supported work without inventing REA results or installing anything implicitly.
 
@@ -72,8 +72,6 @@ Show the resolved brief concisely, then proceed. Do not make its approval a mand
 
 Interpret the whole request in context, including casual phrasing, minor typos, negation, follow-up references and explicit corrections. The examples below illustrate intent; they are not required wording or keyword triggers. "Can you make just that part work here?" can request a scoped build when the preceding conversation identifies the part and destination. "I might build it someday; explain it first" stays investigative. A correction such as "actually, only the decoder, and no code yet" supersedes the earlier build scope. Do not let a word such as "build" override a negation or future aspiration. If "make it better" could mean either a proposal or changing an installed reference, ask which outcome and target the user wants before making that consequential change.
 
-For copy, cut or paste, use [transfer contracts](references/clipboard.md) to recover source/destination selection, representations, insertion/replacement, cut retention and undo/identity boundaries. Keep one-operation requests bounded and planning-only requests in planning mode; use authorized disposable evidence and disclose clipboard doubles.
-
 ## Choose the mode
 
 - **Understand and specify**: requests to understand, analyze, map, document, plan, or investigate an app for a possible future rebuild. This is the default when implementation intent is absent. Deliver the scoped explanation, contract or blueprint the question needs; do not start product implementation.
@@ -82,59 +80,47 @@ For copy, cut or paste, use [transfer contracts](references/clipboard.md) to rec
 
 A later user request can change mode or scope; record the change and preserve useful prior work. Mode controls whether implementation is requested; scope controls its size. Optimizing the reconstruction uses the build workflow; explaining the reference's optimization stays investigative.
 
+## Select references for the next action
+
+Select guidance from the whole request, chosen target, current mode and next consequential action. Read the applicable references below before investigating, explaining, specifying, implementing or validating that boundary. These are semantic applicability cues, not exact-word or keyword triggers. Combine overlapping concerns: a retained draft restored after account expiry can require recovery, session, unsaved-navigation and asynchronous guidance together. Respect corrections and exclusions; selecting a reference never authorizes an effect or changes mode.
+
+Load only applicable sections and their necessary dependencies, then expand when a consequential gap appears. A link inside a reference is a conditional dependency, not a request to preload its entire catalogue. Do not omit an applicable obligation to save context. Checkpoint guidance and selected records are required on resume; contract/oracle guidance for a narrow reconstruction; implementation guidance for either build mode. Add format, cryptography, browser, performance or version guidance when the selected boundary involves it. Do not preload worked answers or research sources. Resume alone does not expand scope or authorize a specification-only task to build.
+
+| Boundary involved in the next action | Required guidance when applicable |
+| --- | --- |
+| Copy, cut or paste; source/destination, retention and undo | [clipboard](references/clipboard.md) |
+| Bounded reconstruction trial from packaged or compiled bytes | [artifact-trials](references/artifact-trials.md) |
+| File import/export and its schema, encoding or failed-persistence boundaries | [file-compatibility](references/file-compatibility.md) |
+| Date, time-zone, locale-dependent parsing or calendar boundaries | [date-locale](references/date-locale.md) |
+| Numeric representation, rounding, quantities or unit conversion | [numeric-contracts](references/numeric-contracts.md) |
+| Settings, defaults, saved preferences or reset/reopen | [settings-preferences](references/settings-preferences.md) |
+| Dependent form inputs, validation timing or correction/resubmission | [form-validation](references/form-validation.md) |
+| Search, combined filters, sorting or list selection/page effects | [search-filter-sort](references/search-filter-sort.md) |
+| Multi-selection, bulk action scope or partial batch outcomes | [multi-selection](references/multi-selection.md) |
+| Placement, drag/drop, moving/copying or reordering | [drag-drop](references/drag-drop.md) |
+| Offline editing, reconnect or queued synchronization | [offline-sync](references/offline-sync.md) |
+| Shortcuts, command conflicts, focus or composition | [keyboard-commands](references/keyboard-commands.md) |
+| Direct links, routes/filters, refresh or Back/Forward restoration | [navigation-history](references/navigation-history.md) |
+| Account/workspace switch, logout, expiry, re-authentication or changed access | [session-permissions](references/session-permissions.md) |
+| Undo/redo, destructive actions, confirmation or uncertain effects | [undo-destructive](references/undo-destructive.md) |
+| Modification of an existing reconstruction; retained contracts/custom work | [safe-changes](references/safe-changes.md) |
+| Untrusted inputs, sensitive data or restricted operations in the selected slice | [reconstruction-security](references/reconstruction-security.md) |
+| Adapting a saved reconstruction to another selected version | [version-changes](references/version-changes.md) |
+| Unavailable backend/service; authorized substitute, finite replay or deferral | [unavailable-backends](references/unavailable-backends.md) |
+| Selected UI workflow: keyboard, focus, labels, errors and status | [interface-accessibility](references/interface-accessibility.md) |
+| Changing UI content/space; responsive layouts and content extremes | [visual-evidence](references/visual-evidence.md) |
+| Screenshots, recordings or sparse/conflicting descriptions | [visual-evidence](references/visual-evidence.md) |
+| Encrypted format/interface; interoperability profile and independent vectors | [cryptographic-compatibility](references/cryptographic-compatibility.md) |
+
 ## Investigate and specify
 
 For product or feature specifications, read the applicable sections of [the blueprint workflow](references/blueprint.md). It defines the product map, requirements, architecture, evidence ledger, and implementation roadmap. For a broad reconstruction, use its [first useful slice guidance](references/blueprint.md#choose-the-first-useful-slice) to separate essentials, enabling dependencies, consequential unknowns and deferred work. A selected feature needs its behavior and relevant boundaries, not a mandatory whole-product inventory. For a bounded explanation, answer the selected question with evidence and limits before adding design or roadmap work that the user did not request.
 
 For a function, interface, or format, start with a compact contract: inputs and outputs, types/encoding, preconditions, side effects/state, failure behavior, dependencies, and evidence gaps. Define acceptance cases with an independent source of expected results using [comparison and test oracles](references/reconstruction-methods.md#comparison-and-test-oracles). Read only the applicable blueprint sections if this contract exposes a wider design question; a missing function specification does not require a product map.
 
-For a bounded reconstruction trial from packaged or compiled bytes, use the [artifact trial procedure](references/artifact-trials.md) to freeze identity/oracles, disclose source exposure, connect actual REA findings to runtime checks, and challenge wrong candidates without inventing canonical evidence.
-
-For file import/export reconstruction, use the [file compatibility procedure](references/file-compatibility.md) to freeze version/schema and encoding decisions, test both interoperability directions beyond round trips, and verify that rejection or failed persistence preserves prior state. Keep caught-write recovery separate from crash durability and concurrency claims.
-
-For date/time-zone or locale-dependent behavior, use [date and locale contracts](references/date-locale.md) to distinguish calendar dates, instants and wall time, select consequential zone boundaries and separate localized display from parsing, sorting and stored/exported values. Preserve unresolved original semantics and explicit gap/overlap policies.
-
-For numeric quantities, use [numeric contracts](references/numeric-contracts.md) to separate localized input/display from canonical values, recover representation and explicit rounding mode/stage, and preserve unit meaning through conversion, storage and export. Keep unresolved original rules explicit and validate values beyond formatted equality.
-
-For settings, defaults or saved preferences, use [preference contracts](references/settings-preferences.md) to recover presence versus explicit values, applicable scope/precedence, effective value and source, pending versus applied/saved changes, reset and reopen behavior. Preserve unrelated/unknown data under the selected compatibility policy; do not infer missing storage from a default-looking screen.
-
-For forms with dependent inputs, changing validation messages or correction/resubmission, use [form contracts](references/form-validation.md) to recover edit/blur/submit timing, draft versus canonical values, applicable rules, hidden/disabled retention and payload policy. Verify invalid submission has no effects and keep accepted payload/outcome distinct from newer edits; preserve unresolved target rules and intentional design choices separately.
-
-For search, combined filters or sorted lists, use [search and ordering contracts](references/search-filter-sort.md) to recover matching/normalization, predicate composition, comparator/missing/tie rules and selection/page behavior. Keep original evidence separate from proposed improvements; choose discriminating ordered-ID and state checks for the selected slice.
-
-For multi-selection or bulk actions, use [selection and batch contracts](references/multi-selection.md) to recover selected/page/all-filtered scope, stable identities, preview applicability, partial outcomes and safe retry/undo boundaries. Scale to the requested operation; keep observed behavior, unknowns and proposed policies distinct.
-
-For placing items, dragging between lists or changing their order, use [drag/drop contracts](references/drag-drop.md) to recover source identity, canonical versus displayed order, insertion anchors, move/copy applicability, preview versus effects and cancel/undo boundaries. Recover the target's policy; keep planning bounded and actual input/accessibility behavior separate from an operation model.
-
-For editing offline, reconnecting or synchronizing queued changes, use [offline and sync contracts](references/offline-sync.md) to distinguish draft, local persistence, captured intent, in-flight and server-confirmed state. Recover safe retry/reconciliation, revision conflicts and account/queue ordering policy; preserve unknown effects and newer edits without assuming reconnect or stable IDs guarantee replay safety.
-
-For keyboard shortcuts, command conflicts or context-dependent activation, use [keyboard and command contracts](references/keyboard-commands.md) to distinguish text/composition from commands, logical key from physical position, focused/dialog scope, disabled applicability and event consumption. Recover repeat/cancel and effect-boundary guards; keep model records separate from native input and accessibility evidence.
-
-For direct links, selected routes/filters, refresh or Back/Forward restoration, use [navigation and history contracts](references/navigation-history.md) to recover destination and entry identity, URL versus transient/persisted state, malformed/missing destinations and delayed-load ownership. Reuse unsaved departure policy for dirty drafts; distinguish model traversal and fresh-instance checks from real browser history/reload evidence.
-
-For account/workspace switches, logout, session expiry, re-authentication or changed permissions, use [session and access transitions](references/session-permissions.md) to recover identity/lifetime, displayed/cache data, owner-bound draft recovery and pending outcomes. Separate local invalidation from service enforcement; preserve uncertain effects without sending another owner's work or assuming revocation rolls back a write.
-
-For undo/redo or destructive actions, use [history and destructive-effect contracts](references/undo-destructive.md) to recover restoration, identity/order/view state, grouping, history lifetime and redo branching. Trace confirmation/cancel/repetition and distinguish reversible deletion from permanent or uncertain effects. Keep one-operation requests bounded and planning requests in planning mode.
-
-For a request to modify an existing reconstruction, use [safe changes](references/safe-changes.md) to reconcile current intent and custom work, retained contracts, affected dependencies, acceptance and recovery before editing. Keep changed requirements separate from changes to the reference version or environment.
-
-When the selected slice handles untrusted content, sensitive data or restricted operations, use [reconstruction security boundaries](references/reconstruction-security.md). Separate original observations, desired requirements, proposed controls and demonstrated protection; cover applicable parsing/sink limits, data handling and actual authorization without expanding planning into implementation.
-
-For adapting a saved reconstruction to another selected version, use the [version-change procedure](references/version-changes.md) to establish actual behavioral changes, select dependent revalidation and verify migration/recovery against frozen expectations.
-
-Start from the exact target and a prioritized question checklist. Use REA summaries and focused follow-ups to trace priority workflows from trigger through state/data changes to results. Read the base skill's target-specific references only when needed. Reuse matching evidence; a new target or version must not silently inherit another app's conclusions.
-
 Distinguish **observed facts**, **inferences**, **unknowns**, and **proposed design choices** throughout. Static analysis does not establish runtime behavior, strings do not establish active features, and client/network evidence does not reveal an inaccessible backend's complete implementation. Use bounded experiments to resolve uncertainties that could change the design.
 
 For conflicting sources or ambiguous behavior, use [evidence reconciliation](references/reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior) within the existing ledger: compare applicability, retain competing explanations, choose a distinguishing authorized check and leave consequential gaps unresolved. Newer or repeated evidence alone does not decide correctness or permit stale validation reuse.
-
-For an unavailable backend or external service, use [inaccessible backend handling](references/unavailable-backends.md) to choose an authorized local substitute, supplied finite replay or deferred integration. Preserve hard real-service requirements and keep local/replayed success distinct from remote verification.
-
-For selected UI workflows, use [interface accessibility](references/interface-accessibility.md) to specify keyboard operation, focus, labels, errors and status feedback separately from visual/functional fidelity. Distinguish original observations from proposed improvements and keyboard/assistive-technology evidence from markup alone; keep the checks proportional to the requested interface.
-
-When UI content or available space can change, use the [responsive evidence guidance](references/visual-evidence.md#responsive-layouts-and-content-extremes) to select a small viewport/content matrix and check wrapping, scrolling and reachable actions. Keep text-size simulation separate from native zoom and preserve untested conditions; one screenshot or a CSS breakpoint does not establish responsive behavior.
-
-For screenshots, recordings or sparse/conflicting descriptions, use [visual and partial evidence](references/visual-evidence.md) to recover a proportionate brief, visible states and supported transitions. Preserve source/frame/crop and actual timing limits; separate presentation, interaction and functional compatibility. Continue useful specification or an authorized proposed slice without demanding unavailable binaries or live access. Images and narration do not establish unseen behavior or authorize implementation by themselves.
 
 When an original behavior is awkward or surprising, use [preserve, improve or defer](references/reconstruction-methods.md#preserve-improve-or-defer) to choose deliberately from the user's goals and affected compatibility contracts. Keep the original observation separate from inferred intent and the reconstruction decision; a reproducible quirk alone establishes neither a defect nor a requirement to copy it.
 
@@ -160,8 +146,6 @@ reconciliation in those same rows.
 Select meaningful ordered checks and retain untested transitions; a happy path or
 an injected local failure does not establish unseen original behavior.
 
-For encrypted formats or interfaces, read [cryptographic compatibility](references/cryptographic-compatibility.md) to recover an explicit interoperability profile and select independent acceptance/rejection vectors. A known algorithm does not imply available keys or a decryption capability.
-
 ## Assess performance and quality
 
 For a broad product investigation, identify the quality attributes that matter to its principal workflows and capture a practical baseline when runtime access permits. For performance questions or consequential performance requirements, read [profiling and optimization](references/performance.md). Adapt measurements and external research to the actual platform, stack, workload, and bottleneck. A static inspection may suggest an optimization mechanism but cannot establish its measured benefit.
@@ -171,8 +155,6 @@ Record successful reference techniques and observed weaknesses separately. In sp
 ## Implement and validate when requested
 
 For either build mode, read [the implementation workflow](references/implementation.md). Use ordinary coding tools to implement the proposed design. Build coherent vertical slices, integrate continuously, and link requirements to meaningful tests and actual outcomes.
-
-Load references as the next action requires them: checkpoint guidance and selected records for a resume; contract/oracle guidance for a narrow reconstruction; implementation guidance when building. Add format, cryptography, browser, performance or version-change guidance only when that boundary is involved. Follow necessary dependencies without preloading every reference, worked answer or research source. A resume does not itself expand scope or turn a specification-only task into a build.
 
 Keep the evidence-derived model of the original separate from choices for the new app. Original architecture and stack are inputs to a decision, not automatic requirements. A mock or passing isolated component test is insufficient evidence that a real end-to-end workflow works.
 

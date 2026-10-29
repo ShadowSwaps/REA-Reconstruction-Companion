@@ -1,5 +1,7 @@
 # Copy, cut and paste
 
+For copy, cut or paste, use [transfer contracts](clipboard.md) to recover source/destination selection, representations, insertion/replacement, cut retention and undo/identity boundaries. Keep one-operation requests bounded and planning-only requests in planning mode; use authorized disposable evidence and disclose clipboard doubles.
+
 Use for the selected transfer or editing operation. Extend existing
 [workflow/acceptance rows](blueprint.md#consequential-workflow-states); one paste
 may need only a short contract. Planning remains planning. Do not trial a real

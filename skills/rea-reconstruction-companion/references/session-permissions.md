@@ -1,5 +1,7 @@
 # Account, session and permission changes
 
+For account/workspace switches, logout, session expiry, re-authentication or changed permissions, use [session and access transitions](session-permissions.md) to recover identity/lifetime, displayed/cache data, owner-bound draft recovery and pending outcomes. Separate local invalidation from service enforcement; preserve uncertain effects without sending another owner's work or assuming revocation rolls back a write.
+
 Use for the selected account/workspace switch, logout, expiry, re-authentication
 or changed-access journey. Extend the existing [workflow rows](blueprint.md#consequential-workflow-states)
 proportionally. Planning stays planning; recovering one boundary does not authorize

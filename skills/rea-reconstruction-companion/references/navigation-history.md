@@ -1,5 +1,7 @@
 # Navigation, deep links and history restoration
 
+For direct links, selected routes/filters, refresh or Back/Forward restoration, use [navigation and history contracts](navigation-history.md) to recover destination and entry identity, URL versus transient/persisted state, malformed/missing destinations and delayed-load ownership. Reuse unsaved departure policy for dirty drafts; distinguish model traversal and fresh-instance checks from real browser history/reload evidence.
+
 Use for a selected item's direct link, route/filter state, refresh or Back/Forward
 journey. Extend the existing [workflow rows](blueprint.md#consequential-workflow-states)
 proportionally; recovering one destination does not require a routing framework.
