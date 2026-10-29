@@ -1,5 +1,7 @@
 # Search, combined filters and sorting
 
+For search, combined filters or sorted lists, use [search and ordering contracts](search-filter-sort.md) to recover matching/normalization, predicate composition, comparator/missing/tie rules and selection/page behavior. Keep original evidence separate from proposed improvements; choose discriminating ordered-ID and state checks for the selected slice.
+
 Use this for a selected list/search workflow. Extend the existing
 [finding and workflow rows](blueprint.md#consequential-workflow-states); a small
 contract and a few distinguishing sequences can suffice. Recover observable

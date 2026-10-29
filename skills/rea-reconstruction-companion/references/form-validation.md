@@ -1,5 +1,7 @@
 # Form validation and dependent fields
 
+For forms with dependent inputs, changing validation messages or correction/resubmission, use [form contracts](form-validation.md) to recover edit/blur/submit timing, draft versus canonical values, applicable rules, hidden/disabled retention and payload policy. Verify invalid submission has no effects and keep accepted payload/outcome distinct from newer edits; preserve unresolved target rules and intentional design choices separately.
+
 Use for a selected journey such as “the address becomes mandatory when I choose
 shipping”, “fix the dates and try again” or “explain why this field keeps its
 error”. Infer relevance from the request and context, including negation and

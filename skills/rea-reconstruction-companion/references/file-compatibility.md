@@ -1,5 +1,7 @@
 # File import, export and recovery
 
+For file import/export reconstruction, use the [file compatibility procedure](file-compatibility.md) to freeze version/schema and encoding decisions, test both interoperability directions beyond round trips, and verify that rejection or failed persistence preserves prior state. Keep caught-write recovery separate from crash durability and concurrency claims.
+
 Use this focused procedure when reconstructing a file boundary; it does not
 require a product-wide blueprint or a new parser dependency. Keep the selected
 format/version and approved workflows explicit. A fully exposed source fixture

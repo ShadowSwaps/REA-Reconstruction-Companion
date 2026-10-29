@@ -1,5 +1,7 @@
 # Multi-selection and bulk actions
 
+For multi-selection or bulk actions, use [selection and batch contracts](multi-selection.md) to recover selected/page/all-filtered scope, stable identities, preview applicability, partial outcomes and safe retry/undo boundaries. Scale to the requested operation; keep observed behavior, unknowns and proposed policies distinct.
+
 Use for the selected multi-item workflow, including natural requests such as
 “apply this to everything matching” or “try only the ones that failed.” Extend
 the relevant [workflow contract](blueprint.md#consequential-workflow-states);

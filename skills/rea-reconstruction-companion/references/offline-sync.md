@@ -1,5 +1,7 @@
 # Offline editing, reconnect and synchronization
 
+For editing offline, reconnecting or synchronizing queued changes, use [offline and sync contracts](offline-sync.md) to distinguish draft, local persistence, captured intent, in-flight and server-confirmed state. Recover safe retry/reconciliation, revision conflicts and account/queue ordering policy; preserve unknown effects and newer edits without assuming reconnect or stable IDs guarantee replay safety.
+
 Use for a selected journey such as editing without a connection, pending changes
 after reconnect, repeated uploads or conflicting versions. Infer relevance from
 the whole request and context; planning remains planning. Extend the existing

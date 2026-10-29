@@ -1,5 +1,9 @@
 # Screenshots, recordings and incomplete descriptions
 
+When UI content or available space can change, use the [responsive evidence guidance](visual-evidence.md#responsive-layouts-and-content-extremes) to select a small viewport/content matrix and check wrapping, scrolling and reachable actions. Keep text-size simulation separate from native zoom and preserve untested conditions; one screenshot or a CSS breakpoint does not establish responsive behavior.
+
+For screenshots, recordings or sparse/conflicting descriptions, use [visual and partial evidence](visual-evidence.md) to recover a proportionate brief, visible states and supported transitions. Preserve source/frame/crop and actual timing limits; separate presentation, interaction and functional compatibility. Continue useful specification or an authorized proposed slice without demanding unavailable binaries or live access. Images and narration do not establish unseen behavior or authorize implementation by themselves.
+
 Use when visual material or a sparse description is the available evidence for
 the selected task. Infer subject, scope and mode from the whole conversation as
 in the main skill. “Something like this” can mean visual inspiration, a workflow

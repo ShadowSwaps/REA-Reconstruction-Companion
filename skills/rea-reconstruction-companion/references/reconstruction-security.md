@@ -1,5 +1,7 @@
 # Security boundaries in a reconstruction
 
+When the selected slice handles untrusted content, sensitive data or restricted operations, use [reconstruction security boundaries](reconstruction-security.md). Separate original observations, desired requirements, proposed controls and demonstrated protection; cover applicable parsing/sink limits, data handling and actual authorization without expanding planning into implementation.
+
 Use when the selected slice handles untrusted content, sensitive data or
 restricted operations. Keep the user's mode and scope: planning alone does not
 authorize implementation, account access or a security audit of the original.

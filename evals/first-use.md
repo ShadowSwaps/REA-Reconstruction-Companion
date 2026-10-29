@@ -1,5 +1,9 @@
 # First-use workflow review
 
+The later [core-loading review](core-loading.md) records a separate finite,
+source-exposed before/after reference-loading assessment. It preserves these
+historical judgments without relabelling them as fresh model executions.
+
 This is a bounded manual review by the same agent that edited the guidance, with source and worked-answer exposure. Each row below was read in its stated context and assessed for subject, objective, authority, next action and output size. The decisions are reviewer judgments, not captured responses from isolated candidate runs. No model API, second agent, service, dependency or automatic evaluator was used. A table of plausible interpretations cannot establish arbitrary models' understanding or host activation.
 
 ## Three paths through existing examples

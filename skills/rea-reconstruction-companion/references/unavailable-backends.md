@@ -1,5 +1,7 @@
 # Inaccessible backends and external services
 
+For an unavailable backend or external service, use [inaccessible backend handling](unavailable-backends.md) to choose an authorized local substitute, supplied finite replay or deferred integration. Preserve hard real-service requirements and keep local/replayed success distinct from remote verification.
+
 Use this when the selected workflow depends on an unavailable service. Retain the
 user's mode, scope, hard requirements and useful first-slice decisions. A failed
 connection or inaccessible account establishes an access limitation, not absent

@@ -1,5 +1,7 @@
 # Settings, defaults and preference persistence
 
+For settings, defaults or saved preferences, use [preference contracts](settings-preferences.md) to recover presence versus explicit values, applicable scope/precedence, effective value and source, pending versus applied/saved changes, reset and reopen behavior. Preserve unrelated/unknown data under the selected compatibility policy; do not infer missing storage from a default-looking screen.
+
 Use this when a selected reconstruction depends on configurable behavior. Scale
 to the consequential fields and transitions; extend existing finding/requirement/
 acceptance rows rather than build a configuration framework. Planning remains
