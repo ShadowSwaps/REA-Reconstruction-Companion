@@ -48,6 +48,61 @@ and clock trust are proposed choices, not recovered original behavior.
 
 ## Distinguishing procedures
 
+### Explicit conflicting-draft recovery (29 October 2026 proposal)
+
+**Compare current editor** selects dirty live text; **Compare offered checkpoint**
+selects the unchanged eligible checkpoint offered by the last context read. Both
+read the latest saved record without replacing editor text, saved record or draft.
+The comparison shows exact text/base/latest revision, scope, source/read time and
+whether editor text is checkpointed or only in memory. It is a last-known snapshot.
+
+**Confirm keep both as separate copy** explicitly appends the selected text to an
+optional validated `copies` map in the same schema1 envelope. Legacy envelopes
+without this field remain readable and are not changed on read. Earlier lab
+versions reject extended envelopes without repair; this is a proposed local
+format extension, not a production migration or downgrade guarantee. IDs1..8
+are allocated from the highest existing ID under the same exclusive Web Lock.
+At most eight copies total are retained; full capacity fails without eviction,
+replacement or ID reuse. Copies are scoped to the same account/document/lifetime,
+2048-unit text and 64KiB total UTF-8 limits. Same-scope copies can be inspected
+after explicit read latest/reload; the editor remains separate. Eligibility is
+24hours with no future timestamp, then quarantine without automatic deletion.
+This example adds no copy editing, deletion, automatic merge or retention purge.
+
+Confirmation consumes one decision before dispatch and rechecks input sequence,
+context, clock, saved-record snapshot and selected draft slot at the locked effect.
+Retained checkpoints also retain their original expiry. Input/restore/context
+changes and observed storage events invalidate pending choices. Events are an
+early UI signal; effect checks still apply without them. A peer's newer original
+or draft requires a fresh comparison. Other-copy additions allocate a fresh ID
+under the lock; an observed event may conservatively require re-comparison.
+Repeated confirmation cannot replay a consumed decision. Unknown acknowledgement
+blocks further decisions until explicit readback/reopen; no automatic retry occurs.
+Copy receipts never mark editor text saved or replace a newer/other-owner editor.
+
+Finite same-author browser observations on29October captured35 DOM/native-store
+checkpoints: ordinary save/reload, exact retained comparison/copy, peer original
+preservation with memory-only recovery, new input/storage-event invalidation,
+held decision with peer changes, account/document/lifetime/expiry boundaries,
+unknown acknowledgement and actual reload/close/reopen copy inspection, eight-copy
+capacity with no eviction, quarantine/malformed input and the preserved DR-NAR-001
+post-commit receipt regression. Timing/acknowledgement loss used explicit local
+controls; native storage writes/readback and reload were real. Final failure-feedback
+readback is recorded separately. A sandbox loopback timeout and selector/binding
+capture errors remain private evidence; already-completed effects were not replayed.
+Node conflict tests include three source-exposed mutations that pass ordinary
+save/copy controls before named stale-revision, changed-slot and newer-input
+assertions reject them. These are deterministic doubles, not extra browser trials.
+
+To reproduce: checkpoint text, reload, compare the offered checkpoint, confirm
+and reload again. Inspect exact copy text while the original/slot remain unchanged.
+In a peer tab restore/edit/save a newer original; compare the old editor memory
+and explicitly keep it separately. Hold a copy before dispatch, change input,
+scope or the peer's record/slot, then release: no copy may be written. Use the
+controlled copy acknowledgement loss, reload and inspect the accepted copy once.
+No native quota/denial, process restart/crash, real service/auth or parity claim
+follows. Run `node --test tests/draft-conflicts.test.mjs tests/draft-recovery.test.mjs`.
+
 1. Save `Confirmed`, reload and observe that saved text. Edit `  Draft Ω <tag>  `,
    wait for **Draft checkpointed; not saved**, reload, and observe `Confirmed` plus
    **Recovery available**. Restore: exact whitespace/text survives, saved record

@@ -31,6 +31,40 @@ alone does not serialize concurrent writers. Reconcile uncertain effects using
 supported readback/receipts before retry; a local pre-effect cancellation guard
 does not roll back or cancel a dispatched service operation.
 
+## Explicit choices when retained and latest content conflict
+
+Inspect the exact retained checkpoint or current editor text alongside a fresh
+read of the latest saved content and revision, without replacing either. Identify
+the selected source, account/document/lifetime, base revision and read time.
+Label last-known snapshots and memory-only text honestly; comparing is not
+restoring, checkpointing or saving. A successful native read does not make the
+display permanently current.
+
+Recover the target's explicit resolution policy. For a proposed keep-both choice,
+define the separate destination, copy identity allocation, retention/eligibility,
+capacity, malformed-state and failure behavior before implementation. Preserve
+the original and other writers' draft slots. Never silently merge, overwrite,
+discard, evict retained data or transfer a draft across identities. A recovered
+copy is distinct from saving the original or marking the live editor clean.
+
+Capture the selected payload/source/base, destination, current saved revision,
+draft snapshot and decision identity. New input, another writer, account/document/
+lifetime changes or expiry while comparison/confirmation is pending must
+invalidate the choice or require a fresh applicable decision. Revalidate at the
+actual effect under the supported transaction/cooperation mechanism; a disabled
+button or storage notification alone is insufficient. Allocate copy identities
+there too. Distinguish repeated confirmation from a new deliberate copy request;
+unknown acknowledgement requires authoritative readback before another decision,
+not automatic replay. Keep newer editor text unsaved when an older copy receipt
+arrives. Failure must disclose what remains only in memory.
+
+Verify ordinary copy and readback, then the distinguishing boundaries: exact
+whitespace/text, latest original and peer-slot preservation, changes after
+comparison and during confirmation, concurrent identity allocation, full/invalid/
+unavailable storage, acknowledgement loss and actual reload recovery. Keep
+deterministic doubles, controlled timing and native DOM/storage observations
+separate; finite observations cannot establish distributed exactly-once behavior.
+
 For the bounded proposed local policy and disclosed browser observations, see
 repository-only `evals/draft-recovery/README.md`. Its Web Locks/localStorage lab
 has synthetic identity and a 24-hour draft eligibility policy, separate from the

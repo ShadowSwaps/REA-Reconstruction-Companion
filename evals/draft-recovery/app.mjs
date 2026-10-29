@@ -4,7 +4,7 @@ const $=id=>document.getElementById(id);
 const storage={getItem:key=>localStorage.getItem(key),setItem:(key,value)=>localStorage.setItem(key,value)};
 const lock=navigator.locks ? (name,fn)=>navigator.locks.request(name,{mode:'exclusive'},fn) : null;
 const editor=new Editor({storage,lock});
-let reject=false,hold=false,loseAck=false,release=null,holdAck=false,releaseAck=null;
+let reject=false,hold=false,loseAck=false,release=null,holdAck=false,releaseAck=null,holdCopy=false,releaseCopy=null,loseCopyAck=false;
 const selected=()=>({account:$('account').value,document:$('document').value,lifetime:Number($('lifetime').value)});
 function render() {
   const s=editor.state;
@@ -18,6 +18,12 @@ function render() {
   $('discard').disabled=!s.scope || !!editor.pending || s.uncertain;
   $('release').disabled=!release;
   $('ackrelease').disabled=!releaseAck;
+  $('compare-memory').disabled=!s.scope || !!editor.pending || s.uncertain || !s.dirty;
+  $('compare-retained').disabled=!s.scope || !!editor.pending || s.uncertain || !editor.offered;
+  $('keep-both').disabled=!editor.choice || !!editor.pending || s.uncertain;
+  $('copyrelease').disabled=!releaseCopy;
+  $('comparison').textContent=editor.choice?JSON.stringify(editor.choice,null,2):'No applicable comparison. Compare again after changes.';
+  $('copies').textContent=JSON.stringify(editor.copies?.map(c=>c.eligible?c:{id:c.id,scope:c.scope,time:c.time,quarantined:true})??[],null,2);
   $('state').textContent=JSON.stringify({...s,pending:!!editor.pending,offered:editor.offered?{scope:editor.offered.scope,base:editor.offered.base,time:editor.offered.time}:null},null,2);
 }
 $('open').onclick=()=>{editor.open(selected());render();};
@@ -25,6 +31,18 @@ $('latest').onclick=()=>{editor.open(editor.state.scope);render();};
 $('expire').onclick=()=>{editor.open(null);render();};
 $('text').oninput=()=>{const done=editor.edit($('text').value);render();done.finally(render);};
 $('restore').onclick=()=>{editor.restore();render();};
+for(const id of ['account','document','lifetime'])$(id).onchange=()=>{editor.invalidateChoice();render();};
+window.addEventListener('storage',event=>{if(event.key===KEY || event.key===null){editor.invalidateChoice();render();}});
+$('compare-memory').onclick=()=>{editor.compare('memory');render();};
+$('compare-retained').onclick=()=>{editor.compare('retained');render();};
+$('copyhold').onclick=()=>{holdCopy=true;$('status').textContent='Next copy: controlled hold before dispatch';};
+$('copylose').onclick=()=>{loseCopyAck=true;$('status').textContent='Next copy: controlled acknowledgement loss';};
+$('copyrelease').onclick=()=>{const done=releaseCopy;releaseCopy=null;done?.();render();};
+$('keep-both').onclick=async()=>{
+  const options={loseAck:loseCopyAck};loseCopyAck=false;
+  if(holdCopy){holdCopy=false;options.beforeDispatch=()=>new Promise(resolve=>{releaseCopy=resolve;render();});}
+  const done=editor.keepBoth(options);render();await done;render();
+};
 $('discard').onclick=async()=>{await editor.discard();render();};
 $('reject').onclick=()=>{reject=true;$('status').textContent='Next save: injected rejection';};
 $('hold').onclick=()=>{hold=true;$('status').textContent='Next save: controlled hold before dispatch';};
