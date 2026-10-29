@@ -237,3 +237,6 @@ For reload/reopen and persistent draft recovery, the separate
 [browser draft lab](draft-recovery/README.md) distinguishes native saved records,
 checkpointed drafts and memory. Its finite browser observations and controlled
 faults remain separate from source doubles, simulated identity and release review.
+Its explicit conflict controls compare retained/latest values without replacing
+them, retain a scoped separate copy and revalidate pending choices at the locked
+effect. Copy retention/capacity and acknowledgement limits are proposed policies.
