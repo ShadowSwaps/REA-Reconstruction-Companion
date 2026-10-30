@@ -4,22 +4,95 @@
 
 **Understand existing software. Plan a reconstruction. Build and validate when requested.**
 
-An open-source, model-independent Agent Skill that works with [REA](https://github.com/morluto/rea). Turn reverse-engineering evidence into requirements, architecture, an implementation roadmap and testable results—at the scope you choose.
+An open-source skill for AI agents, designed to work with [REA](https://github.com/morluto/rea). A skill is a set of instructions and reference guides that an agent reads while working. This one helps you understand existing software and turn what you learn into a plan, a working reconstruction when requested, and checks of the result. It does not require a particular model or AI provider.
 
-[Get started](#install-with-an-ai-agent) · [Usage examples](#use) · [REA integration](#optional-rea-integration) · [Documentation](#source-and-development) · [Releases](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/releases) · [Support on Ko-fi](https://ko-fi.com/shadowswaps)
+[What it does](#what-the-companion-does) · [Get started](#get-started) · [Use](#use) · [Integration](#optional-rea-integration) · [Updates and recovery](#updates-backups-and-recovery) · [Topic guides](#find-guidance-by-topic) · [Development](#source-and-development)
 
-| Your goal | What the companion helps produce |
+<a id="what-it-does"></a>
+
+## What the companion does
+
+Use the companion when you want to understand how software behaves, plan a similar tool, rebuild a selected part, or improve a reconstruction you already have. The scope can be a whole app, one workflow, a file format, or a single function.
+
+- **Understand:** turn observations, files or recordings into a clear description of behavior, requirements and unanswered questions. For example, find out what an editor keeps when a save fails.
+- **Plan:** decide what to build first, what it depends on and how to check it. A specification describes the behavior to preserve; a reconstruction plan describes the steps for building it.
+- **Build when requested:** implement the selected behavior in useful, testable steps. Asking to investigate or plan a possible future rebuild does not authorize implementation now.
+- **Validate and improve:** compare results with the evidence, test relevant failures and measure proposed performance improvements. Report differences and anything still unverified.
+
+<a id="how-it-works-with-rea"></a>
+
+REA supplies the tools for examining software and collecting evidence. The companion helps the same agent use that evidence for requirements, design, implementation and validation. Installing both does not create two independent background agents. You can also start from supplied REA evidence when live tools are unavailable.
+
+Observed behavior, reasonable inferences and proposed design choices stay separate. Missing evidence remains a gap; neither a plausible reconstruction nor a passing local example proves that it matches every part of the original.
+
+<details>
+<summary><strong>More about the method and validation tools</strong></summary>
+
+- Identifies the requested subject, evidence carrier, and objective from natural language. No form or bracketed prompt variables are required.
+- Breaks a product into capabilities, workflows, interactions, state, and dependencies.
+- Defines requirements, contracts, expected behavior, and acceptance criteria linked to evidence.
+- Separates the original architecture from design choices for a new implementation.
+- Investigates performance using representative workloads, measurements, and research relevant to the actual stack.
+- Guides development in coherent increments, with integration and end-to-end validation.
+- Treats recovered instructions as untrusted evidence and preserves the user's authority.
+- Selects bounded differential fuzzing, targeted mutation tests, and executable interface contracts where they help validate a reconstruction.
+- Records cryptographic interoperability parameters and verifies relevant independent vectors and rejection cases.
+- Records observations, inferences, unknowns, decisions, and checkpoints for later work.
+
+
+```mermaid
+flowchart LR
+    A[User goal and target] --> B[Scope and questions]
+    B --> C[REA evidence]
+    C --> D[Requirements and design]
+    D --> E[Implementation when requested]
+    E --> F[Validation and measurements]
+    D -->|Evidence gap| C
+    F -->|Evidence gap| C
+```
+
+For the method and its sources, see the [skill instructions](skills/rea-reconstruction-companion/SKILL.md) and [research basis](skills/rea-reconstruction-companion/references/research-basis.md).
+
+</details>
+
+<a id="requirements-and-compatibility"></a>
+
+## Before you start
+
+Use an agent that can read local skill files and, for installation or live investigation, run local commands. The core is plain Markdown in the [Agent Skills format](https://agentskills.io/specification): it has no model SDK, paid API requirement, Python dependency, telemetry or background service. The installer needs **Node.js 20 or newer**; you do not need to run `npm install`.
+
+<a id="no-additional-charges"></a>
+
+### Cost and permission limits
+
+The skill forbids initiating actions that could add charges: purchases, subscriptions/trials, metered APIs or model calls, billable cloud/CI/storage/deployment, and indirect paid work. Existing local tools and supplied evidence come first. If an action's no-charge status cannot be established for the actual environment, the agent must skip it and explain a local alternative or limitation. An available tool or a free tier is not sufficient evidence. It does not automatically launch agents, evaluations, or scheduled jobs.
+
+This rule is an instruction, not a billing enforcement mechanism. An AI host may itself bill tokens or usage credits, and local execution consumes resources such as electricity. The skill cannot guarantee zero total cost or control another product's billing or model compliance. It must not enable extra paid usage or alter billing settings; use host/account spending controls for an absolute spending limit. No paid exception is part of this skill's workflow.
+
+| Component | Requirement |
 | --- | --- |
-| Understand an app before rebuilding | Evidence-backed behavior, requirements, unknowns and a staged roadmap. |
-| Build a similar tool now | Scoped implementation in testable increments, with validation and reported differences. |
-| Investigate a feature, function or format | A focused contract and representative acceptance cases. |
-| Improve an existing reconstruction | Measurements, targeted changes and revalidation of affected behavior. |
+| Skill workflow | A capable agent that can read the skill and its references; REA tools or supplied REA evidence for actual investigation. |
+| Included installer | Node.js 20 or newer. Uses only Node's standard library; no `npm install`, PyYAML, or network access. |
+| Optional update helper (v1.2.0+) | Existing Node.js 20+. Uses the standard library and opt-in public GitHub requests; no packages, tokens, model calls or scheduler. |
+| REA | Installed and configured separately for your client. REA and target-specific engines have their own requirements. |
+| Release building | Python 3.10+ standard library, for maintainers only. Not needed to install or use the skill. |
 
-**Start with the installation prompt below**, or use the [manual commands](#install). The portable core has no model SDK or paid API requirement. [Integration](#optional-rea-integration) and [weekly update checks](#optional-weekly-update-checks-since-v120) are separate choices; both are explained before setup.
+Codex and Claude Code both support filesystem skills. Their discovery locations and invocation syntax differ; the installer handles those differences. Other agents can use the same core files through an explicit skills directory. Compatibility depends on the host's file/tool access, not just the model name. See the official [Codex skill documentation](https://learn.chatgpt.com/docs/build-skills) and [Claude Code skill documentation](https://code.claude.com/docs/en/skills).
 
-## Install with an AI agent
+Hosted uploads and chat-only clients are different: an uploaded skill ZIP cannot generally edit a separate local REA installation. Supply both skills and evidence through that host's supported mechanisms, or use a local agent for installation and live analysis. No live-model compatibility certification is implied by the installer tests.
 
-Give this prompt to an agent with local file and command access. It identifies your client and asks for your integration preference; you do not need to fill in any placeholders.
+### Two separate setup choices
+
+- **REA integration:** choose whether relevant REA reconstruction requests should also load the companion. Integration adds a small marked rule to the selected REA skill. You can leave it off and invoke the companion yourself. “Off” leaves REA untouched; it does not remove an earlier rule. See [integration and its recovery limits](#optional-rea-integration).
+- **Weekly update checks:** off by default. If you opt in, checks happen on skill use, at most once every seven days; an idle skill runs nothing. Finding an update still requires your approval before installation. This choice is independent of integration. See [weekly update checks](#optional-weekly-update-checks-since-v120).
+
+Install REA separately for your client if you want live REA tools or automatic co-use. The companion does not install or configure REA for you.
+
+## Get started
+
+### Install with an AI agent
+
+Copy the prompt below into an agent with local file and command access. It asks the agent to identify your client, explain the choices, preview the changes and verify the result. There are no placeholders to fill in. If you prefer to run commands yourself, use [manual installation](#install).
 
 ```text
 Install REA-Reconstruction-Companion from:
@@ -53,11 +126,11 @@ You can include "Enable integration" or "Skip integration" with the prompt to ch
 
 Share the repository: [github.com/ShadowSwaps/REA-Reconstruction-Companion](https://github.com/ShadowSwaps/REA-Reconstruction-Companion).
 
-## Install
+### Install
 
 Download and extract the ZIP from [Releases](https://github.com/ShadowSwaps/REA-Reconstruction-Companion/releases), or clone this repository. Run commands from the extracted folder or repository root. On Windows, macOS, and Linux, the installer commands are the same.
 
-For automatic co-use, first install [REA for your client](https://github.com/morluto/rea#readme). Then choose a command:
+For automatic co-use, first install [REA for your client](https://github.com/morluto/rea#readme). Choose the command for your client and integration preference:
 
 ```sh
 # Claude Code, with the optional integration
@@ -70,7 +143,7 @@ node install.mjs --client codex --integration on
 node install.mjs --client claude-code --integration off
 ```
 
-Use `--dry-run` on any installation command to inspect the paths and changes without writing files. The `companionChanges` lists identify added, modified, and removed files relative to the companion directory, including local files that a replacement would move into the backup. Use the same command with `--check` afterward to verify the selected installation mode. A missing REA skill or ambiguous choice stops integrated installation before the companion is installed. Differently cased paths to the same REA file are treated as one candidate; genuinely separate installations still require an explicit selection.
+Before installing, add `--dry-run` to your chosen command to inspect the paths and changes without writing files. For example: `node install.mjs --client codex --integration on --dry-run`. In the preview, `companionChanges` lists files to add, modify or remove, with paths relative to the companion directory. It also lists local files that replacement would move into the backup. When the preview is right, run the command without `--dry-run`, then add `--check` to verify the installation. For example: `node install.mjs --client codex --integration on --check`. A missing REA skill or ambiguous choice stops integrated installation before the companion is installed. Differently cased paths to the same REA file are treated as one candidate; genuinely separate installations still require an explicit selection.
 
 `claude_code`, as used by REA, is accepted as an alias for `claude-code` by the installer and updater. Plans, receipts and newly saved update settings use `claude-code`.
 
@@ -101,7 +174,9 @@ The optional `agents/openai.yaml` adapter is installed only for Codex. The porta
 
 You can explicitly invoke `$rea-reconstruction-companion` in Codex or `/rea-reconstruction-companion` in Claude Code. With integration enabled, a relevant request to REA also instructs the agent to load the companion.
 
-Describe the software and the outcome you want in ordinary language. The companion uses available REA tools or supplied evidence, identifies gaps, and keeps the work at your requested scope. These examples are illustrations, not required prompts: paraphrases, casual wording, minor typos and follow-ups should work in context. Say what you want to understand or build; you do not need to name a mode or reproduce a template. Explicit corrections and exclusions take precedence, and a possible future rebuild does not request implementation now.
+Describe the software and what you want to achieve in ordinary language. The companion uses available REA tools or supplied evidence, points out missing information, and keeps the work at your requested scope. These examples are illustrations, not required prompts: paraphrases, casual wording, minor typos and follow-ups should work in context. Say what you want to understand or build; you do not need to name a mode or reproduce a template. Explicit corrections and exclusions take precedence, and a possible future rebuild does not request implementation now.
+
+The agent must report missing tools or evidence instead of claiming live analysis or complete equivalence. A build request does not authorize deployment, releases, installation changes, paid tools, or additional charges. Those actions require their own authority; the [cost and permission limits](#cost-and-permission-limits) still apply.
 
 If the original has awkward behavior, say which compatibility matters and what you want improved—for example, “Keep exports readable by my existing tools, but make failed saves clear.” The companion separates observed behavior from intended changes, checks affected dependencies, and keeps unresolved or deferred work visible. See the [worked quirk decisions](evals/quirk-decisions.md).
 
@@ -109,7 +184,9 @@ Screenshots, recordings and incomplete descriptions can also provide a starting 
 
 For selected interfaces, the companion also separates keyboard operation, focus, labels, errors and status feedback from visual fidelity. The [accessibility worked slice](evals/interface-accessibility/README.md) demonstrates a small intentional improvement with live keyboard evidence and explicit unrun screen-reader checks.
 
-**Understand and plan a future reconstruction.** Expect evidence-backed behavior and workflow requirements, known unknowns, and a staged roadmap before implementation:
+### Understand and plan
+
+Ask for a description of the behavior, requirements linked to evidence, unanswered questions and a staged roadmap. To stop before implementation, say so:
 
 ```text
 Use REA and the companion to understand the desktop notes app I have open
@@ -119,7 +196,9 @@ from inferences, and list unanswered questions and a staged build roadmap.
 Stop after the specification and plan.
 ```
 
-**Build a similar app now.** A build request authorizes implementation within the requested scope. Expect incremental code changes and validation against observed requirements, with gaps and differences reported:
+### Build a similar app
+
+A build request authorizes implementation within the requested scope. Expect code in testable steps, checked against observed requirements, with gaps and differences reported:
 
 ```text
 Use REA and the companion to investigate the desktop notes app I have open
@@ -138,7 +217,9 @@ finding existing notes matters most, that can lead instead of creating new ones;
 you do not need to use priority labels or complete a feature inventory. See the
 [worked prioritization example](evals/prioritization.md) for a plan and its limits.
 
-**Investigate one function or feature.** Expect a focused contract covering inputs, outputs, side effects, errors, and evidence gaps:
+### Investigate one function or feature
+
+Keep a narrow investigation narrow. Expect a contract: what inputs it accepts, what it returns or changes, how it fails, and what remains unknown. Ask for representative cases that can later check an implementation:
 
 ```text
 Use REA and the companion to investigate the CSV import feature in the
@@ -148,7 +229,8 @@ behavior, and representative acceptance cases, citing the evidence.
 Keep this to an investigation; do not implement changes.
 ```
 
-The agent must report missing tools or evidence instead of claiming live analysis or complete equivalence. A build request does not authorize deployment, releases, installation changes, paid tools, or additional charges. Those actions require their own authority; the no-additional-charges constraint below still applies.
+<details>
+<summary><strong>Continue, change or resume an existing reconstruction</strong></summary>
 
 ### Continue or optimize a scoped implementation
 
@@ -164,7 +246,12 @@ To change an existing reconstruction, describe the outcome and what must stay co
 
 Select the checkpoint or its path and identify any changed target or goal. The agent should read that record and the sources needed for the next step, check evidence applicability, and preserve historical results. Resuming a specification does not authorize building it. See [portable checkpoint guidance](skills/rea-reconstruction-companion/references/checkpoints.md) and the [worked resume example](evals/resume/WALKTHROUGH.md).
 
-For a small question, expect a compact evidence-linked answer or contract with limits and a useful next action. A feature build adds implementation and acceptance results; it need not produce a whole-app blueprint. If a consequential target or outcome is unclear, expect one focused clarification. Host activation and instruction following vary: explicit invocation can help select the skill, but examples and installation do not guarantee every host/model will interpret every phrasing correctly.
+For a small question, expect a short answer or behavior contract with supporting evidence, limits and a useful next step. Building one feature adds code and results showing whether it meets the requirements; it does not need a plan for the whole app. If uncertainty about the target or goal would materially change the work, expect one focused clarification. Host activation and instruction following vary: explicit invocation can help select the skill, but examples and installation do not guarantee every host/model will interpret every phrasing correctly.
+
+</details>
+
+<details>
+<summary><strong>Limited evidence, inaccessible services and runnable handoffs</strong></summary>
 
 **When a service is inaccessible.** “Build local editing now; keep actual sharing
 pending until I supply authorized service evidence.” Expect an explicitly labeled
@@ -182,43 +269,106 @@ check, not a clean OS or independent beginner test. See [handoff guidance](skill
 
 To see the workflow before trying a target, follow the [worked investigation](evals/reference/WALKTHROUGH.md), [reconstruction](evals/reference/reconstruction/README.md), or [resume](evals/resume/WALKTHROUGH.md) for your goal. These disclose answers and prior source exposure; they are teaching material, not prerequisites or evidence of a fresh agent trial. The [first-use review](evals/first-use.md) separates manual intent scenarios from executable checks.
 
+</details>
+
+## Optional REA integration
+
+Choose one during installation:
+
+- **On — `--integration on`:** adds a marked instruction block to your selected REA `SKILL.md`. Relevant REA reconstruction requests then ask the agent to load the companion without you naming it separately.
+- **Off — `--integration off`:** installs only the companion and leaves REA untouched. Choose this to invoke the companion yourself or manage your own routing rules.
+
+The rule applies when you want to understand software **for reconstruction**, plan a similar implementation, or rebuild selected behavior. It helps the agent reuse evidence, connect each requirement to a test, and return to REA when design or testing reveals an unanswered question. An ordinary explanation, comparison or diagnostic question stays at that scope.
+
+This is an instruction-based integration. It does not override client policies, grant tool permissions, connect MCP servers, guarantee model compliance, or force parallel execution. Without the rule, invoking the companion still tells the agent to use REA. The rule supplies the reverse direction: relevant REA work also loads the companion.
+
+**REA skill refreshes can remove this rule.** After a refresh, check the integration before relying on automatic loading. The known canonical-file warning below is specific to the inspected REA version; do not dismiss other doctor errors.
+
+<details>
+<summary><strong>Why REA 6.5.0 can report a stale skill after integration</strong></summary>
+
+In REA 6.5.0 (skill version 42), `rea doctor` requires byte-for-byte canonical skill files, so adding our block can produce `skill:identity` / `config_drift` with “Installed REA skill identity is stale” even when version and tool count match. This is a known cause, not a reason to ignore all stale or doctor diagnostics: other managed files or settings may also differ. The pinned [identity check](https://github.com/morluto/rea/blob/3b79af28e80785afce9f5998d8f03289402a1847/src/application/Doctor.ts) and [skill installer](https://github.com/morluto/rea/blob/3b79af28e80785afce9f5998d8f03289402a1847/src/application/SetupSkill.ts) show why `rea setup` restores canonical files and preserves edited originals in backups, removing the active companion block. An REA update that refreshes the skill can do the same; other upstream versions may differ.
+
+</details>
+
+After `rea setup`, `rea update`, or another REA skill refresh, recheck the selected integration and, if needed, restore only its block using the matching verified companion package; see [verification and scoped recovery](INSTALL.md#verify-and-report). Do not restore an entire old REA backup over newer instructions. If routing disappeared, explicitly invoke the companion or run the manual check. The optional on-use warning cannot run if the companion/helper is never invoked.
+
+`off` means **do not manage REA**, not “remove a rule already installed.” To disable an earlier integration, remove only the block between `<!-- rea-reconstruction-companion:begin -->` and `<!-- rea-reconstruction-companion:end -->` in the selected REA `SKILL.md`, including the markers. Keep the rest of REA intact.
+
+## Updates, backups, and recovery
+
+Choose between optional update notifications and a manual reinstall. Both preserve the documented consent, backup and recovery boundaries. Review the printed paths and receipts before any recovery.
+
+### Manual updates and backups
+
+- Repeating the same installation is safe and does not duplicate the integration block.
+- Differing companion files require `--replace`; the installer backs up the entire prior companion directory before replacing it.
+- REA edits preserve everything outside the marked integration block. The exact earlier pre-release rule can also be migrated; customized unmarked rules require review.
+- Backups and a receipt are stored in `.rea-reconstruction-companion-installer/` next to the parent skills directory. The installer prints the exact transaction path.
+- Failed commits attempt REA and companion recovery independently, so an unreadable or missing REA file does not prevent restoring the prior companion. Backups remain available; a detected concurrent edit is retained and reported rather than overwritten.
+- Updating REA may replace its skill instructions. Follow [verification and scoped recovery](INSTALL.md#verify-and-report) after a refresh. Nothing monitors or rewrites REA in the background.
+
+For manual recovery, use the printed receipt to locate the selected paths. Restore `companion-before` to the companion's former location if appropriate. Restore `rea-before.md` only when REA has no later changes you need to retain; otherwise remove or repair just the integration block. If a process was killed and left an `install.lock`, make sure no installer is running before removing that exact lock file and retrying.
+
+### Optional weekly update checks (since v1.2.0)
+
+Starting with **v1.2.0**, the updater is bundled inside the skill, including installations for Codex, Claude Code and generic clients. Enable it once after installation if you want release notifications. The host calls a small local helper when the skill is used; it contacts GitHub only when seven days have elapsed. An idle skill runs nothing. Earlier versions do not gain this automatically: manually install a published v1.2.0-or-later package first.
+
+With checks enabled and recorded integration on, the current helper also inspects the recorded REA rule locally before cooldown or network decisions. Missing, changed/malformed, or unreadable/unsafe rules return `integration-needs-attention` without repair, state changes or networking. Disabled checks and integration off do not inspect REA. This warning is available only in versions containing this change and only when the companion/helper is invoked; it is not a background monitor or a full `rea doctor` check.
+
+When a newer stable release is found, the agent offers **Update now / Remind me next week / Skip this version / Disable checks**. No answer means no update. Approval is tied to the offered release and asset; changed assets require a new offer. Local customizations stop automatic replacement. Successful updates retain backups, verify the result and preserve your selected client and REA integration setting.
+
+Checks are **off by default**, independent of integration, and require existing Node.js 20+. There is no npm dependency, model/API key, paid service, extra model call, background daemon or scheduled AI task. Online operations also require confirmation that the actual network/tool environment cannot add charges. Unknown-cost or unavailable access is skipped; this is not an unconditional zero-resource-cost or billing-enforcement guarantee.
+
+Read the [setup, commands, state location and recovery guide](skills/rea-reconstruction-companion/references/updates.md). Host instruction-following and local command access are required; the helper cannot force every AI host to invoke it or authenticate a human response. Installation refresh behavior depends on the host. The project owner's release approval process remains unchanged.
+
 ## Find guidance by topic
 
-Choose the topic for your selected slice. The examples are teaching material with
-finite coverage and disclosed source exposure; their local results do not establish
-original parity, real-service behavior or general host/model compatibility.
+Choose guidance for the part you are investigating or building. Each entry links to the method and a worked example. These examples have finite coverage and disclose prior source exposure; local results do not establish a match with the original, real-service behavior or general host/model compatibility.
 
-| Topic | Guidance | Worked example |
-| --- | --- | --- |
-| Keyboard shortcuts and command context | [Contract and boundaries](skills/rea-reconstruction-companion/references/keyboard-commands.md) | [Example and limits](evals/keyboard-commands/README.md) |
-| Navigation, deep links and history | [Contract and boundaries](skills/rea-reconstruction-companion/references/navigation-history.md) | [Example and limits](evals/navigation-history/README.md) |
-| Account, session and permission changes | [Contract and boundaries](skills/rea-reconstruction-companion/references/session-permissions.md) | [Example and limits](evals/session-permissions/README.md) |
-| Combined navigation, edits and session recovery | [Shared departure guidance](skills/rea-reconstruction-companion/references/unsaved-navigation.md) | [Integrated example and limits](evals/combined-navigation/README.md) |
-| Browser-backed combined workflow trial | [Native history and departure boundaries](skills/rea-reconstruction-companion/references/navigation-history.md) | [Disposable browser lab and procedure](evals/browser-workflow/README.md) |
-| Offline editing, reconnect and sync | [Contract and boundaries](skills/rea-reconstruction-companion/references/offline-sync.md) | [Example and limits](evals/offline-sync/README.md) |
-| Drag, drop and reordering | [Contract and boundaries](skills/rea-reconstruction-companion/references/drag-drop.md) | [Example and limits](evals/drag-drop/README.md) |
-| Copy, cut and paste | [Contract and boundaries](skills/rea-reconstruction-companion/references/clipboard.md) | [Example and limits](evals/clipboard/README.md) |
-| Settings, defaults and saved preferences | [Contract and boundaries](skills/rea-reconstruction-companion/references/settings-preferences.md) | [Example and limits](evals/settings-preferences/README.md) |
-| Form validation and dependent fields | [Contract and boundaries](skills/rea-reconstruction-companion/references/form-validation.md) | [Example and limits](evals/form-validation/README.md) |
-| Unsaved changes and navigation | [Contract and boundaries](skills/rea-reconstruction-companion/references/unsaved-navigation.md) | [Example and limits](evals/unsaved-navigation/README.md) |
-| Undo, redo and destructive actions | [Contract and boundaries](skills/rea-reconstruction-companion/references/undo-destructive.md) | [Example and limits](evals/undo-destructive/README.md) |
-| Search, filters and sorting | [Contract and boundaries](skills/rea-reconstruction-companion/references/search-filter-sort.md) | [Example and limits](evals/search-filter-sort/README.md) |
-| Multi-selection and bulk actions | [Contract and boundaries](skills/rea-reconstruction-companion/references/multi-selection.md) | [Example and limits](evals/multi-selection/README.md) |
-| Dates, time zones and locale | [Contract and boundaries](skills/rea-reconstruction-companion/references/date-locale.md) | [Example and limits](evals/date-locale/README.md) |
-| Responsive layouts and content extremes | [Contract and boundaries](skills/rea-reconstruction-companion/references/visual-evidence.md#responsive-layouts-and-content-extremes) | [Example and limits](evals/responsive-layouts/README.md) |
-| Workflow states and confirmation | [Contract and boundaries](skills/rea-reconstruction-companion/references/blueprint.md#consequential-workflow-states) | [Example and limits](evals/workflow-edge-cases/README.md) |
-| Asynchronous results and cancellation | [Contract and boundaries](skills/rea-reconstruction-companion/references/asynchronous-results.md) | [Example and limits](evals/asynchronous-results/README.md) |
-| Conflicting evidence | [Contract and boundaries](skills/rea-reconstruction-companion/references/reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior) | [Example and limits](evals/conflicting-evidence/README.md) |
-| Security and privacy boundaries | [Contract and boundaries](skills/rea-reconstruction-companion/references/reconstruction-security.md) | [Example and limits](evals/reconstruction-security/README.md) |
-| Numeric quantities, rounding and units | [Contract and boundaries](skills/rea-reconstruction-companion/references/numeric-contracts.md) | [Example and limits](evals/numeric-contracts/README.md) |
-| File import and export | [Contract and boundaries](skills/rea-reconstruction-companion/references/file-compatibility.md) | [Example and limits](evals/import-export/README.md) |
-| Safe changes to an existing reconstruction | [Contract and boundaries](skills/rea-reconstruction-companion/references/safe-changes.md) | [Example and limits](evals/safe-changes/README.md) |
-| Target version changes | [Contract and boundaries](skills/rea-reconstruction-companion/references/version-changes.md) | [Example and limits](evals/version-change/README.md) |
-| Visual evidence | [Contract and boundaries](skills/rea-reconstruction-companion/references/visual-evidence.md) | [Example and limits](evals/visual-evidence/README.md) |
-| Keyboard, focus and accessibility | [Contract and boundaries](skills/rea-reconstruction-companion/references/interface-accessibility.md) | [Example and limits](evals/interface-accessibility/README.md) |
+<details>
+<summary><strong>Input, editing and saved data</strong></summary>
 
-For investigation, reconstruction, optimization and checkpoint/resume walkthroughs,
-see [Use](#use) and the [evaluation kit index](evals/README.md).
+- **Keyboard shortcuts and command context:** [Contract and boundaries](skills/rea-reconstruction-companion/references/keyboard-commands.md) · [Example and limits](evals/keyboard-commands/README.md)
+- **Drag, drop and reordering:** [Contract and boundaries](skills/rea-reconstruction-companion/references/drag-drop.md) · [Example and limits](evals/drag-drop/README.md)
+- **Copy, cut and paste:** [Contract and boundaries](skills/rea-reconstruction-companion/references/clipboard.md) · [Example and limits](evals/clipboard/README.md)
+- **Settings, defaults and saved preferences:** [Contract and boundaries](skills/rea-reconstruction-companion/references/settings-preferences.md) · [Example and limits](evals/settings-preferences/README.md)
+- **Form validation and dependent fields:** [Contract and boundaries](skills/rea-reconstruction-companion/references/form-validation.md) · [Example and limits](evals/form-validation/README.md)
+- **Unsaved changes and navigation:** [Contract and boundaries](skills/rea-reconstruction-companion/references/unsaved-navigation.md) · [Example and limits](evals/unsaved-navigation/README.md)
+- **Undo, redo and destructive actions:** [Contract and boundaries](skills/rea-reconstruction-companion/references/undo-destructive.md) · [Example and limits](evals/undo-destructive/README.md)
+- **Search, filters and sorting:** [Contract and boundaries](skills/rea-reconstruction-companion/references/search-filter-sort.md) · [Example and limits](evals/search-filter-sort/README.md)
+- **Multi-selection and bulk actions:** [Contract and boundaries](skills/rea-reconstruction-companion/references/multi-selection.md) · [Example and limits](evals/multi-selection/README.md)
+- **Dates, time zones and locale:** [Contract and boundaries](skills/rea-reconstruction-companion/references/date-locale.md) · [Example and limits](evals/date-locale/README.md)
+- **File import and export:** [Contract and boundaries](skills/rea-reconstruction-companion/references/file-compatibility.md) · [Example and limits](evals/import-export/README.md)
+- **Safe changes to an existing reconstruction:** [Contract and boundaries](skills/rea-reconstruction-companion/references/safe-changes.md) · [Example and limits](evals/safe-changes/README.md)
+
+</details>
+
+<details>
+<summary><strong>Navigation, sessions and connected workflows</strong></summary>
+
+- **Navigation, deep links and history:** [Contract and boundaries](skills/rea-reconstruction-companion/references/navigation-history.md) · [Example and limits](evals/navigation-history/README.md)
+- **Account, session and permission changes:** [Contract and boundaries](skills/rea-reconstruction-companion/references/session-permissions.md) · [Example and limits](evals/session-permissions/README.md)
+- **Combined navigation, edits and session recovery:** [Shared departure guidance](skills/rea-reconstruction-companion/references/unsaved-navigation.md) · [Integrated example and limits](evals/combined-navigation/README.md)
+- **Browser-backed combined workflow trial:** [Native history and departure boundaries](skills/rea-reconstruction-companion/references/navigation-history.md) · [Disposable browser lab and procedure](evals/browser-workflow/README.md)
+- **Offline editing, reconnect and sync:** [Contract and boundaries](skills/rea-reconstruction-companion/references/offline-sync.md) · [Example and limits](evals/offline-sync/README.md)
+- **Workflow states and confirmation:** [Contract and boundaries](skills/rea-reconstruction-companion/references/blueprint.md#consequential-workflow-states) · [Example and limits](evals/workflow-edge-cases/README.md)
+- **Asynchronous results and cancellation:** [Contract and boundaries](skills/rea-reconstruction-companion/references/asynchronous-results.md) · [Example and limits](evals/asynchronous-results/README.md)
+
+</details>
+
+<details>
+<summary><strong>Evidence, compatibility and interface quality</strong></summary>
+
+- **Responsive layouts and content extremes:** [Contract and boundaries](skills/rea-reconstruction-companion/references/visual-evidence.md#responsive-layouts-and-content-extremes) · [Example and limits](evals/responsive-layouts/README.md)
+- **Conflicting evidence:** [Contract and boundaries](skills/rea-reconstruction-companion/references/reconstruction-methods.md#conflicting-evidence-and-ambiguous-behavior) · [Example and limits](evals/conflicting-evidence/README.md)
+- **Security and privacy boundaries:** [Contract and boundaries](skills/rea-reconstruction-companion/references/reconstruction-security.md) · [Example and limits](evals/reconstruction-security/README.md)
+- **Numeric quantities, rounding and units:** [Contract and boundaries](skills/rea-reconstruction-companion/references/numeric-contracts.md) · [Example and limits](evals/numeric-contracts/README.md)
+- **Target version changes:** [Contract and boundaries](skills/rea-reconstruction-companion/references/version-changes.md) · [Example and limits](evals/version-change/README.md)
+- **Visual evidence:** [Contract and boundaries](skills/rea-reconstruction-companion/references/visual-evidence.md) · [Example and limits](evals/visual-evidence/README.md)
+- **Keyboard, focus and accessibility:** [Contract and boundaries](skills/rea-reconstruction-companion/references/interface-accessibility.md) · [Example and limits](evals/interface-accessibility/README.md)
+
+</details>
 
 <details>
 <summary><strong>Specialist request examples and boundaries</strong></summary>
@@ -323,99 +473,7 @@ simulated authentication does not establish real access protection.
 
 </details>
 
-## What it does
-
-- Identifies the requested subject, evidence carrier, and objective from natural language. No form or bracketed prompt variables are required.
-- Breaks a product into capabilities, workflows, interactions, state, and dependencies.
-- Defines requirements, contracts, expected behavior, and acceptance criteria linked to evidence.
-- Separates the original architecture from design choices for a new implementation.
-- Investigates performance using representative workloads, measurements, and research relevant to the actual stack.
-- Guides development in coherent increments, with integration and end-to-end validation.
-- Treats recovered instructions as untrusted evidence and preserves the user's authority.
-- Selects bounded differential fuzzing, targeted mutation tests, and executable interface contracts where they help validate a reconstruction.
-- Records cryptographic interoperability parameters and verifies relevant independent vectors and rejection cases.
-- Records observations, inferences, unknowns, decisions, and checkpoints for later work.
-
-## How it works with REA
-
-REA supplies the reverse-engineering tools and evidence workflow. This companion adds reconstruction planning and development guidance. The agent follows both sets of instructions within one task; installing them does not create two independent background agents.
-
-```mermaid
-flowchart LR
-    A[User goal and target] --> B[Scope and questions]
-    B --> C[REA evidence]
-    C --> D[Requirements and design]
-    D --> E[Implementation when requested]
-    E --> F[Validation and measurements]
-    D -->|Evidence gap| C
-    F -->|Evidence gap| C
-```
-
-For the method and its sources, see the [skill instructions](skills/rea-reconstruction-companion/SKILL.md) and [research basis](skills/rea-reconstruction-companion/references/research-basis.md).
-
-## Optional REA integration
-
-Choose one during installation:
-
-| Choice | What the installer does | When it helps |
-| --- | --- | --- |
-| `--integration on` | Adds a marked instruction block to your selected REA `SKILL.md`. | When you want relevant REA reconstruction requests to load the companion without naming it separately. |
-| `--integration off` | Installs only the companion and leaves REA untouched. | When you prefer explicitly invoking the companion or managing your own routing rules. |
-
-The integration asks the agent to use the companion for understanding a target **for reconstruction**, planning a similar implementation, or rebuilding selected functionality. Its benefits are shared evidence, a consistent requirements-to-test trail, and focused returns to REA when design or testing exposes an unanswered question. Ordinary explanations, comparisons, and diagnostics stay narrow.
-
-This is an instruction-based integration. It does not override client policies, grant tool permissions, connect MCP servers, guarantee model compliance, or force parallel execution. Without the rule, invoking the companion still tells the agent to use REA. The rule supplies the reverse direction: relevant REA work also loads the companion.
-
-**REA skill refreshes can remove this rule.** In REA 6.5.0 (skill version 42), `rea doctor` requires byte-for-byte canonical skill files, so adding our block can produce `skill:identity` / `config_drift` with “Installed REA skill identity is stale” even when version and tool count match. This is a known cause, not a reason to ignore all stale or doctor diagnostics: other managed files or settings may also differ. The pinned [identity check](https://github.com/morluto/rea/blob/3b79af28e80785afce9f5998d8f03289402a1847/src/application/Doctor.ts) and [skill installer](https://github.com/morluto/rea/blob/3b79af28e80785afce9f5998d8f03289402a1847/src/application/SetupSkill.ts) show why `rea setup` restores canonical files and preserves edited originals in backups, removing the active companion block. An REA update that refreshes the skill can do the same; other upstream versions may differ.
-
-After `rea setup`, `rea update`, or another REA skill refresh, recheck the selected integration and, if needed, restore only its block using the matching verified companion package; see [verification and scoped recovery](INSTALL.md#verify-and-report). Do not restore an entire old REA backup over newer instructions. If routing disappeared, explicitly invoke the companion or run the manual check. The optional on-use warning cannot run if the companion/helper is never invoked.
-
-`off` means **do not manage REA**, not “remove a rule already installed.” To disable an earlier integration, remove only the block between `<!-- rea-reconstruction-companion:begin -->` and `<!-- rea-reconstruction-companion:end -->` in the selected REA `SKILL.md`, including the markers. Keep the rest of REA intact.
-
-## Requirements and compatibility
-
-The core skill is plain Markdown in the [Agent Skills format](https://agentskills.io/specification). It has no model SDK, paid API requirement, Python dependency, telemetry, or background service.
-
-### No additional charges
-
-The skill forbids initiating actions that could add charges: purchases, subscriptions/trials, metered APIs or model calls, billable cloud/CI/storage/deployment, and indirect paid work. Existing local tools and supplied evidence come first. If an action's no-charge status cannot be established for the actual environment, the agent must skip it and explain a local alternative or limitation. An available tool or a free tier is not sufficient evidence. It does not automatically launch agents, evaluations, or scheduled jobs.
-
-This rule is an instruction, not a billing enforcement mechanism. An AI host may itself bill tokens or usage credits, and local execution consumes resources such as electricity. The skill cannot guarantee zero total cost or control another product's billing or model compliance. It must not enable extra paid usage or alter billing settings; use host/account spending controls for an absolute spending limit. No paid exception is part of this skill's workflow.
-
-| Component | Requirement |
-| --- | --- |
-| Skill workflow | A capable agent that can read the skill and its references; REA tools or supplied REA evidence for actual investigation. |
-| Included installer | Node.js 20 or newer. Uses only Node's standard library; no `npm install`, PyYAML, or network access. |
-| Optional update helper (v1.2.0+) | Existing Node.js 20+. Uses the standard library and opt-in public GitHub requests; no packages, tokens, model calls or scheduler. |
-| REA | Installed and configured separately for your client. REA and target-specific engines have their own requirements. |
-| Release building | Python 3.10+ standard library, for maintainers only. Not needed to install or use the skill. |
-
-Codex and Claude Code both support filesystem skills. Their discovery locations and invocation syntax differ; the installer handles those differences. Other agents can use the same core files through an explicit skills directory. Compatibility depends on the host's file/tool access, not just the model name. See the official [Codex skill documentation](https://learn.chatgpt.com/docs/build-skills) and [Claude Code skill documentation](https://code.claude.com/docs/en/skills).
-
-Hosted uploads and chat-only clients are different: an uploaded skill ZIP cannot generally edit a separate local REA installation. Supply both skills and evidence through that host's supported mechanisms, or use a local agent for installation and live analysis. No live-model compatibility certification is implied by the installer tests.
-
-## Optional weekly update checks (since v1.2.0)
-
-Starting with **v1.2.0**, the updater is bundled inside the skill, including installations for Codex, Claude Code and generic clients. Enable it once after installation if you want release notifications. The host calls a small local helper when the skill is used; it contacts GitHub only when seven days have elapsed. An idle skill runs nothing. Earlier versions do not gain this automatically: manually install a published v1.2.0-or-later package first.
-
-With checks enabled and recorded integration on, the current helper also inspects the recorded REA rule locally before cooldown or network decisions. Missing, changed/malformed, or unreadable/unsafe rules return `integration-needs-attention` without repair, state changes or networking. Disabled checks and integration off do not inspect REA. This warning is available only in versions containing this change and only when the companion/helper is invoked; it is not a background monitor or a full `rea doctor` check.
-
-When a newer stable release is found, the agent offers **Update now / Remind me next week / Skip this version / Disable checks**. No answer means no update. Approval is tied to the offered release and asset; changed assets require a new offer. Local customizations stop automatic replacement. Successful updates retain backups, verify the result and preserve your selected client and REA integration setting.
-
-Checks are **off by default**, independent of integration, and require existing Node.js 20+. There is no npm dependency, model/API key, paid service, extra model call, background daemon or scheduled AI task. Online operations also require confirmation that the actual network/tool environment cannot add charges. Unknown-cost or unavailable access is skipped; this is not an unconditional zero-resource-cost or billing-enforcement guarantee.
-
-Read the [setup, commands, state location and recovery guide](skills/rea-reconstruction-companion/references/updates.md). Host instruction-following and local command access are required; the helper cannot force every AI host to invoke it or authenticate a human response. Installation refresh behavior depends on the host. The project owner's release approval process remains unchanged.
-
-## Updates, backups, and recovery
-
-- Repeating the same installation is safe and does not duplicate the integration block.
-- Differing companion files require `--replace`; the installer backs up the entire prior companion directory before replacing it.
-- REA edits preserve everything outside the marked integration block. The exact earlier pre-release rule can also be migrated; customized unmarked rules require review.
-- Backups and a receipt are stored in `.rea-reconstruction-companion-installer/` next to the parent skills directory. The installer prints the exact transaction path.
-- Failed commits attempt REA and companion recovery independently, so an unreadable or missing REA file does not prevent restoring the prior companion. Backups remain available; a detected concurrent edit is retained and reported rather than overwritten.
-- Updating REA may replace its skill instructions. Follow [verification and scoped recovery](INSTALL.md#verify-and-report) after a refresh. Nothing monitors or rewrites REA in the background.
-
-For manual recovery, use the printed receipt to locate the selected paths. Restore `companion-before` to the companion's former location if appropriate. Restore `rea-before.md` only when REA has no later changes you need to retain; otherwise remove or repair just the integration block. If a process was killed and left an `install.lock`, make sure no installer is running before removing that exact lock file and retrying.
+For investigation, reconstruction, optimization and checkpoint/resume walkthroughs, see [Use](#use) and the [evaluation kit index](evals/README.md).
 
 ## Source and development
 
@@ -459,8 +517,6 @@ The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw ev
 
 **Measured environment example:** [revalidate behavior after a relevant setting changes](evals/resume/environment/README.md). Identical fixture bytes run under two controlled cap settings with a minimal local Node probe. Reports retain unaffected formatter evidence and recheck score/integration behavior. Cross-version drift and cross-host compatibility remain unverified.
 
-</details>
-
 **Keyboard commands (v1.3.49):** [recover input, command scope and guarded consequences](evals/keyboard-commands/README.md). The bounded offline profile freezes 72 literal context/routing/effect checkpoints and challenges 16 plausible faults after ordinary controls. Same-author model checks leave native input, IME, layouts, default actions and assistive behavior unrun.
 
 **Navigation and history (v1.3.50):** [recover destination, entry restoration and departure ownership](evals/navigation-history/README.md). The bounded offline profile freezes 94 literal checkpoints across 33 scenarios and challenges 18 faults after ordinary controls. Same-author model checks establish no real browser history/reload, storage, native deep-link dispatch, original parity or model quality.
@@ -474,6 +530,8 @@ The [behavioral evaluation kit](evals/README.md) supplies portable tasks, raw ev
 **Numeric quantities (v1.3.38):** [separate input, canonical values, rounding and units](evals/numeric-contracts/README.md). One offline fixed length profile uses frozen literal expectations, actual storage/import/reopen and value/state rejection of faulty variants. Same-author finite checks establish a proposed contract, not original parity or a general decimal/locale engine.
 
 **Search, filters and sorting (v1.3.39):** [exercise one proposed catalog profile](evals/search-filter-sort/README.md). Frozen literal orders and intermediate states cover matching, combined filters, missing/numeric values, stable ties, selection identity and page/data changes. Eleven faulty variants pass ordinary checks before selected assertions reject them; finite same-author checks establish neither original parity nor general locale/backend behavior.
+
+</details>
 
 ## Support the project
 
